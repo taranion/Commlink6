@@ -1297,13 +1297,11 @@ public class SR6ArchetypeTest {
 		assertTrue(drone1.wasSuccessful());
 		container = drone1.get();
 		Possible poss = equip.canBeEmbedded(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
-				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")
 				);
 		assertTrue(poss.toString(), poss.get());
 		OperationResult<CarriedItem<ItemTemplate>> embed =  equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
-				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "chrysler-nissan_pursuit_v")
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")
 				);
 		assertTrue(embed.getError(), embed.wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
@@ -1317,8 +1315,7 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone2.get()).wasSuccessful() );
 		container = drone2.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
-				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
 				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")
@@ -1330,8 +1327,7 @@ public class SR6ArchetypeTest {
 		assertTrue( equip.increase(drone3.get()).wasSuccessful() );
 		container = drone3.get();
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "evasion"), null,
-				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
-				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")).wasSuccessful() );
+				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5")).wasSuccessful() );
 		assertTrue( equip.embed(container, ItemHook.SOFTWARE, Shadowrun6Core.getItem(ItemTemplate.class, "maneuvering"), null,
 				new Decision(UUID.fromString("c2d17c87-1cfe-4355-9877-a20fe09c170d"), "5"),
 				new Decision(UUID.fromString("355a3a45-39fc-4376-8667-661c9873dfdb"), "cyberspace_designs_dalmatian")

@@ -36,6 +36,10 @@ public class SR6FocusGenerator extends SR6CommonFocusController {
 			int karma = focus.getCostKarma();
 			logger.log(Level.INFO,"Pay "+karma+" Karma for force "+focus.getLevel()+" focus "+focus);
 			model.setKarmaFree(model.getKarmaFree()-karma);
+			
+			int nuyen = focus.getCostNuyen();
+			logger.log(Level.INFO,"Pay {0} Nuyen for force {1} {2} focus", nuyen, focus.getLevel(), focus.getKey());
+			model.setNuyen( model.getNuyen() -nuyen );
 		}
 
 		return unprocessed;

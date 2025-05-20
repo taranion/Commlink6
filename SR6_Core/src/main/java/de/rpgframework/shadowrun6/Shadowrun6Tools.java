@@ -2650,6 +2650,8 @@ public class Shadowrun6Tools {
 				continue;
 			// ID matches - now compare decisions
 			T resolved = value.getResolved();
+			if (resolved.getChoices().isEmpty())
+				return value;
 			for (Choice choice : resolved.getChoices()) {
 				Decision haystackDecision = value.getDecision(choice.getUUID());
 				Decision needleDecision = decisions.stream().filter(d -> d.getChoiceUUID().equals(choice.getUUID())).findFirst().orElse(null);
