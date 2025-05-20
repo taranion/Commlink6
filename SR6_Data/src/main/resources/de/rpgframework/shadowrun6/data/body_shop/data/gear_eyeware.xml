@@ -28,7 +28,7 @@
  		<flags><flag>AUGMENTATION</flag></flags>
       	<modifications>
         	<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="$RATING" table="0,2,4,6,8"/>
-         	<embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="INTERNAL" included="true" apply="DATA_ITEM"/>
+         	<embed  type="GEAR" ref="image_link" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" included="true" apply="DATA_ITEM"/>
       	</modifications>
    	</item>
 	<item id="spider_eyes" avail="3" price="2000" type="CYBERWARE" subtype="CYBER_EYEWARE">
