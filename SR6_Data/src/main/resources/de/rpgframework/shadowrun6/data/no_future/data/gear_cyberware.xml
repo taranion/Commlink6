@@ -4,6 +4,7 @@
     <!-- Eyeware --> 
    <item id="cybereye6" avail="4" price="18000" type="CYBERWARE" subtype="CYBER_EYEWARE">
 		<usage mode="IMPLANTED" value="0.6"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
 			<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="20"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="image_link" included="true"/>
@@ -13,6 +14,7 @@
 
    <item id="cybereye7" avail="5" price="22000" type="CYBERWARE" subtype="CYBER_EYEWARE">
 		<usage mode="IMPLANTED" value="0.7"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
 			<valmod type="HOOK" ref="CYBEREYE_IMPLANT" value="24"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREYE_IMPLANT" ref="image_link" included="true"/>
@@ -25,6 +27,7 @@
 
    <item id="cyberears6" avail="4" price="15500" type="CYBERWARE" subtype="CYBER_EARWARE">
 		<usage mode="IMPLANTED" value="0.6"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
 			<valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="20"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="soundlink" included="true"/>
@@ -33,6 +36,7 @@
 
    <item id="cyberears7" avail="5" price="21000" type="CYBERWARE" subtype="CYBER_EARWARE">
 		<usage mode="IMPLANTED" value="0.7"/>
+ 		<flags><flag>AUGMENTATION</flag></flags>
 		<modifications>
 			<valmod type="HOOK" ref="CYBEREAR_IMPLANT" value="24"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="CYBEREAR_IMPLANT" ref="soundlink" included="true"/>
