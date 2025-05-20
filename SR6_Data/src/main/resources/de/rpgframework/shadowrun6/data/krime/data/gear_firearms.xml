@@ -26,8 +26,8 @@
         <itemmod type="HOOK" ref="TOP"/>
         <itemmod type="HOOK" ref="STOCK"/>
         <embed type="GEAR" intoType="HOOK" intoRef="STOCK" ref="folding_stock" included="true"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" included="true"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" included="true"/>
         <itemmod type="GEARMOD" ref="metahuman_adaption"/>
       </modifications>
    </item>

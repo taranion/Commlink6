@@ -200,10 +200,16 @@
 		  	</modifications>
 		</mode>
 	</item>
-   <item avail="2" price="5" id="spare_clip"  type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y">
+   <item avail="2" price="5" id="spare_clip"  type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y" modonly="true">
    	<choices>
    		<choice uuid="82e2d01d-002c-4af8-be85-cf33368e0a96" type="GEAR" ref="CARRIED"/>
    	</choices>
+      <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
+      <requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
+      </requires>
+   </item>
+   <item avail="2" price="5" id="spare_clip_new"  type="ACCESSORY" subtype="WEAPON_ACCESSORY" count="y">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
@@ -221,7 +227,7 @@
     	</selreq>
       </requires>
    </item>
-   <item id="variable_ammo" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item id="variable_ammo" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true">
 		<usage mode="EMBEDDED" slot="INTERNAL"/>
    </item>
    <item avail="1" price="25" id="speed_loader" type="ACCESSORY" subtype="WEAPON_ACCESSORY">

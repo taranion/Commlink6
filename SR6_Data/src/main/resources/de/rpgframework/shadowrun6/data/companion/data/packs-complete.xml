@@ -255,7 +255,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" />
              <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
-             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -268,7 +268,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_light_fire_75" id="5e485857-314c-4ec8-894a-977041abb904" />
              <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
-             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -276,7 +276,7 @@
              <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -286,7 +286,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cavalier_arms_crocket_ebr" id="8b3d153f-5236-4da0-8fef-7ed952c0890e" />
              <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="12">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -441,7 +441,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" />
              <embed  type="GEAR" intoId="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="ad6f8c28-cf11-4ef9-ae80-5be0118a518c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="19">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -622,7 +622,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="d579e371-1208-4c2a-a37d-b717bde0c8e3" />
              <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
-             <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -638,7 +638,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ak_97" id="369848de-714d-4e90-afcf-cf1d8ea82aa6" />
              <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -758,7 +758,7 @@
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ingram_smartgun_xi" id="102c4319-0fc3-488f-b348-c54d4c712ec9" />
-             <embed  type="GEAR" intoId="102c4319-0fc3-488f-b348-c54d4c712ec9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="102c4319-0fc3-488f-b348-c54d4c712ec9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="apds"/>
                 </valmod>
@@ -769,7 +769,7 @@
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -779,7 +779,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_alpha" id="e3916b40-0974-4c9a-94e9-6c4298c56d48" />
              <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -845,7 +845,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_manhunter" id="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" />
              <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -856,7 +856,7 @@
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -976,7 +976,7 @@
                 </valmod>
              <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="STOCK" ref="hk_227" />
              <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="shock_pad" />
-             <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -993,7 +993,7 @@
              <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="shock_pad" />
-             <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" variant="caseless" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="stick_n_shock"/>
                 </valmod>
@@ -1004,7 +1004,7 @@
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="shock_pad" />
-             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="25">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1012,7 +1012,7 @@
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="shock_pad" />
-             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="gas_grenade" variant="mini" value="3">
                 <decision choice="c50abe3b-2ba9-4b91-8509-e46605adf82c" value="neuro_stun_x"/>
                 </valmod>
@@ -1148,7 +1148,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="09125728-b9ad-4a89-81c2-3a81d9bd8608" />
              <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -1354,13 +1354,13 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="808fd6d8-e8ad-4108-b015-4ebe316253ef" />
              <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" />
              <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -1554,7 +1554,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_light_fire_75" id="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" />
              <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
-             <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -1563,7 +1563,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="streetline_special" id="93c1e8e4-16fc-461d-a9c0-f5d56185f122" />
              <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="2" />
+             <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="2">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1823,7 +1823,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_predator_vi" id="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" />
              <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="quick_draw_holster" />
-             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="608b0edf-a4a5-4de9-bb19-f2ae1aa33708" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -1836,14 +1836,14 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_light_fire_75" id="5e485857-314c-4ec8-894a-977041abb904" />
              <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
-             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="5e485857-314c-4ec8-894a-977041abb904" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="mossberg_cmdt" id="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" />
              <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="2a586e3b-3e30-4f75-9aa8-52a3f7d859d0" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1853,7 +1853,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cavalier_arms_crocket_ebr" id="8b3d153f-5236-4da0-8fef-7ed952c0890e" />
              <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="8b3d153f-5236-4da0-8fef-7ed952c0890e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -2001,7 +2001,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="shock_gloves" />
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_cobra_tz100" id="dd49e01b-334b-489e-893a-f81cd9c0ce82" />
              <embed  type="GEAR" intoId="dd49e01b-334b-489e-893a-f81cd9c0ce82" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="dd49e01b-334b-489e-893a-f81cd9c0ce82" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="6" />
+             <embed  type="GEAR" intoId="dd49e01b-334b-489e-893a-f81cd9c0ce82" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="6" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="7">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -2185,7 +2185,7 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="d579e371-1208-4c2a-a37d-b717bde0c8e3" />
              <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
-             <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="d579e371-1208-4c2a-a37d-b717bde0c8e3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -2202,7 +2202,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ak_97" id="369848de-714d-4e90-afcf-cf1d8ea82aa6" />
              <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="BARREL" ref="silencer" />
-             <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="369848de-714d-4e90-afcf-cf1d8ea82aa6" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -2317,7 +2317,7 @@
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ingram_smartgun_xi" id="102c4319-0fc3-488f-b348-c54d4c712ec9" />
-             <embed  type="GEAR" intoId="102c4319-0fc3-488f-b348-c54d4c712ec9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="102c4319-0fc3-488f-b348-c54d4c712ec9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="apds"/>
                 </valmod>
@@ -2328,7 +2328,7 @@
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="945f2f0e-c6b3-40af-b394-fec275ddef88" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -2338,7 +2338,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_alpha" id="e3916b40-0974-4c9a-94e9-6c4298c56d48" />
              <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="e3916b40-0974-4c9a-94e9-6c4298c56d48" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -2402,7 +2402,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="colt_manhunter" id="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" />
              <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="2" />
+             <embed  type="GEAR" intoId="fa9afa59-10f9-4adc-ba3b-6ef5cd2c7374" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -2413,7 +2413,7 @@
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="BARREL" ref="silencer" />
              <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
-             <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="af08b716-926d-4021-9c1f-f81013e1b600" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -2521,7 +2521,7 @@
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
              <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="STOCK" ref="hk_227" />
-             <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="0a98bf9d-a48b-43bc-b145-3059e9fde08c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -2535,7 +2535,7 @@
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ranger_arms_sm6" id="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" />
-             <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="27d79ac8-d910-4e8d-ac1e-59a6d32857ed" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" variant="caseless" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="stick_n_shock"/>
                 </valmod>
@@ -2546,14 +2546,14 @@
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="shock_pad" />
-             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="6" />
+             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="6" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="30">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="armtech_mgl6" id="410ad542-431f-43e0-b4c0-da33acb39c22" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="5" />
+             <embed  type="GEAR" intoId="95136b5d-cd78-43ab-8037-155b234fac98" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="gas_grenade" variant="mini" value="3">
                 <decision choice="c50abe3b-2ba9-4b91-8509-e46605adf82c" value="neuro_stun_x"/>
                 </valmod>
@@ -2687,7 +2687,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="09125728-b9ad-4a89-81c2-3a81d9bd8608" />
              <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="09125728-b9ad-4a89-81c2-3a81d9bd8608" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -2906,13 +2906,13 @@
                 </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="808fd6d8-e8ad-4108-b015-4ebe316253ef" />
              <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="4" />
+             <embed  type="GEAR" intoId="808fd6d8-e8ad-4108-b015-4ebe316253ef" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="5">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_crusader_ii" id="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" />
              <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="8421d4b7-08ad-4cdb-aeee-1a4c8af8d59b" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
@@ -3112,7 +3112,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_light_fire_75" id="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" />
              <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="BARREL" ref="ares_lf_silencer" />
-             <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" count="3" />
+             <embed  type="GEAR" intoId="62f8f590-aa24-4ee4-a604-9a25a1e18c4a" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="3" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="regular"/>
                 </valmod>
@@ -3121,7 +3121,7 @@
                 </valmod>
          <itemmod type="GEAR" apply="CHARACTER" ref="streetline_special" id="93c1e8e4-16fc-461d-a9c0-f5d56185f122" />
              <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
-             <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip" />
+             <embed  type="GEAR" intoId="93c1e8e4-16fc-461d-a9c0-f5d56185f122" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="2">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
