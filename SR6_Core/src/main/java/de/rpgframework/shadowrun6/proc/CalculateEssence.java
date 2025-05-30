@@ -2,31 +2,23 @@ package de.rpgframework.shadowrun6.proc;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
-import java.math.BigDecimal;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
-import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.modification.Modification;
-import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.items.AugmentationQuality;
-import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
-import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemType;
-import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
-import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -101,6 +93,29 @@ public class CalculateEssence implements ProcessingStep {
 //	}
 
 	//-------------------------------------------------------------------
+	private void makeSureAllGearRecorded() {
+		Map<UUID, CarriedItem<ItemTemplate>> essenceGear = new HashMap<>();
+		// Store all items with essence cost in the map
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(SR6ItemAttribute.ESSENCECOST))
+				continue;
+			essenceGear.put(item.getUuid(), item);
+		}
+		// Remove those already recorded
+		model.getEssenceChanges().forEach(mod -> essenceGear.remove(mod.getId()));
+		
+		// If there is anything left, it likely has been forgotten to 
+		// be recorded. Add it now
+		for (Entry<UUID, CarriedItem<ItemTemplate>> entry : essenceGear.entrySet()) {
+			float essenceCost = entry.getValue().getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
+			ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, entry.getValue().getKey(), (int)(essenceCost*1000));
+			mod.setId(entry.getKey());
+			mod.setSet(ValueType.AUGMENTED);
+			model.getEssenceChanges().add(mod);
+		}
+	}
+
+	//-------------------------------------------------------------------
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 
@@ -111,6 +126,8 @@ public class CalculateEssence implements ProcessingStep {
 			double holeTotal = 0;
 			double hole    = 0;
 			double essenceCostTotal = 0;
+			makeSureAllGearRecorded();
+			
 			logger.log(Level.WARNING, "Essence changes: "+model.getEssenceChanges());
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
