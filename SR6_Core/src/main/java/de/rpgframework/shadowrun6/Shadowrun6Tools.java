@@ -277,7 +277,7 @@ public class Shadowrun6Tools {
 			List<Modification> unprocessed = new ArrayList<>();
 			for (ProcessingStep processor : processChain) {
 				unprocessed = processor.process(unprocessed);
-				logger.log(Level.DEBUG, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
+				logger.log(Level.INFO, "------ after {0}     {1}|{2}",processor.getClass().getSimpleName(),model.getKarmaFree(), unprocessed);
 			}
 			logger.log(Level.DEBUG, "Remaining mods  = "+unprocessed);
 			logger.log(Level.DEBUG, "STOP : runProcessors: "+processChain.size()+"-------------------------------------------------------");
@@ -1244,8 +1244,11 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static Modification instantiateModification(Modification tmp, ComplexDataItemValue<?> value, int multiplier, Shadowrun6Character model) {
 		logger.log(Level.DEBUG, "instantiate {0} with multiplier {1}",tmp,multiplier);
-		if (tmp instanceof ValueModification) {
-			ValueModification clone = ((ValueModification)tmp).clone();
+		if (tmp instanceof ValueModification vMod) {
+			if (vMod.isInstantiated()) {
+				return vMod;
+			}
+			ValueModification clone = ((ValueModification)tmp).clone();			
 			clone.setApplyTo(tmp.getApplyTo());
 			int modVal = 0;
 			if (clone.hasFormula()) {
