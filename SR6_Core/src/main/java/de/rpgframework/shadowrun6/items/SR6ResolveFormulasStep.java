@@ -11,6 +11,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Lifeform;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.IItemAttribute;
 import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
@@ -124,7 +125,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 
 		// Copy attributes from <usage>
 		Usage usage = template.getUsage(model.getCarryMode());
-//		logger.log(Level.ERROR, "Main usage for mode "+model.getCarryMode()+" is "+usage);
+		logger.log(Level.ERROR, "Main usage for mode "+model.getCarryMode()+" is "+usage);
 //		logger.log(Level.ERROR, "variant is "+model.getVariant());
 		if (model.getVariant()!=null && model.getVariant().getUsage(model.getCarryMode())!=null)
 			usage = model.getVariant().getUsage(model.getCarryMode());
@@ -135,6 +136,8 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 			if (model.hasFlag(SR6ItemFlag.AUGMENTATION)) {
 				val = new ItemAttributeDefinition(SR6ItemAttribute.ESSENCECOST, usage.getFormula());
 				doMagic(user, model, (FormulaImpl) usage.getFormula(), val);
+			} else if (usage.getMode()==CarryMode.IMPLANTED && (usage.getRawValue()!=null && !usage.getRawValue().equals("0"))) {
+				logger.log(Level.ERROR, "Item {0} has usage cost but is not marked as an AUGEMNTATION", template.getId());
 			}
 		}
 
