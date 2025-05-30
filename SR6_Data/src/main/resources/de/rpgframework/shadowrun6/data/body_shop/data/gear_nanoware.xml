@@ -4,6 +4,9 @@
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
    	</choices>
+      <flags>
+          <flag>AUGMENTATION</flag>
+      </flags>
 		<usage mode="IMPLANTED" value="$RATING*0.2" />
 		<attrdef id="PRICE" value="$RATING*15000"/>
 		<modifications>
