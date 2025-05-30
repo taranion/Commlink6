@@ -115,7 +115,7 @@ public class GetModificationsStep implements CarriedItemProcessor {
 				try { index = Integer.parseInt(result); } catch (NumberFormatException nfe) {
 					logger.log(Level.ERROR, "Found a table in {1}, but index is not a number: {0}/{2}",result, mod, mod.getFormula());
 				}
-				if (index>=mod.getLookupTable().length) {
+				if (index>mod.getLookupTable().length) {
 					logger.log(Level.ERROR, "Found a table in {1}, but index {0} is outside table",index, mod);
 					index = mod.getLookupTable().length;
 				}
@@ -141,6 +141,8 @@ public class GetModificationsStep implements CarriedItemProcessor {
 			case ATTRIBUTE:
 			case ACTION:
 			case SKILL:
+			case SKILLSPECIALIZATION:
+			case RULE:
 				return ApplyTo.CHARACTER;
 			case ITEM_ATTRIBUTE:
 			case GEAR:
