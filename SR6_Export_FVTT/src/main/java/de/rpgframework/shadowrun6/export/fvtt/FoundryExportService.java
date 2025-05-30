@@ -573,18 +573,18 @@ public class FoundryExportService {
 			FVTTSpell spell = new FVTTSpell();
 
 			spell.genesisID = item.getModifyable().getId();
-			spell.data.category  = item.getModifyable().getCategory().name().toLowerCase();
-			spell.data.duration  = item.getModifyable().getDuration().name().toLowerCase();
-			spell.data.drain     = item.getModifyable().getDrain();
-			spell.data.range     = item.getModifyable().getRange().name().toLowerCase();
-			spell.data.type      = item.getModifyable().getType().name().toLowerCase();
+			spell.category  = item.getModifyable().getCategory().name().toLowerCase();
+			spell.duration  = item.getModifyable().getDuration().name().toLowerCase();
+			spell.drain     = item.getModifyable().getDrain();
+			spell.range     = item.getModifyable().getRange().name().toLowerCase();
+			spell.type      = item.getModifyable().getType().name().toLowerCase();
 			if (item.getModifyable().getDamage()!=null)
-				spell.data.damage    = item.getModifyable().getDamage().name().toLowerCase();
-			spell.data.isOpposed = item.getModifyable().isOpposed();
-			spell.data.withEssence = item.getModifyable().isEssence();
+				spell.damage    = item.getModifyable().getDamage().name().toLowerCase();
+			spell.isOpposed = item.getModifyable().isOpposed();
+			spell.withEssence = item.getModifyable().isEssence();
 			for (SpellFeatureReference ref : item.getModifyable().getFeatures()) {
 				switch (ref.getFeature().getId()) {
-				case "sense_multi": spell.data.multiSense=true; break;
+				case "sense_multi": spell.multiSense=true; break;
 				}
 			}
 
