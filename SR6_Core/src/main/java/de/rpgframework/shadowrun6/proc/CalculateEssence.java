@@ -128,7 +128,7 @@ public class CalculateEssence implements ProcessingStep {
 			double essenceCostTotal = 0;
 			makeSureAllGearRecorded();
 			
-			logger.log(Level.WARNING, "Essence changes: "+model.getEssenceChanges());
+			logger.log(Level.INFO, "Essence changes: "+model.getEssenceChanges());
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
 				String name = mod.getKey();
@@ -171,23 +171,23 @@ public class CalculateEssence implements ProcessingStep {
 				if (change<0) {
 					hole -= change;
 					holeTotal += change;
-					logger.log(Level.INFO, "{0}: Increase essence hole by {1} to {2}", name, change, hole);
+					logger.log(Level.DEBUG, "{0}: Increase essence hole by {1} to {2}", name, change, hole);
 				} else {
 					essenceCostTotal += change;
 					if (hole>0) {
 						if (change>hole) {
-							logger.log(Level.INFO, "{0}: Partially pay essence with hole {1}", name, hole);
+							logger.log(Level.DEBUG, "{0}: Partially pay essence with hole {1}", name, hole);
 							change -= hole;
 							hole=0;
 						} else {
 							// Change <= hole
-							logger.log(Level.INFO, "{0}: Fully pay essence with hole {1}", name, hole);
+							logger.log(Level.DEBUG, "{0}: Fully pay essence with hole {1}", name, hole);
 							hole -= change;
 							change=0;
 						}
 					}
 					if (change>0) {
-						logger.log(Level.INFO, "{0}: Pay essence {1}", name, change);
+						logger.log(Level.DEBUG, "{0}: Pay essence {1}", name, change);
 						essence -= change;
 					}
 				}

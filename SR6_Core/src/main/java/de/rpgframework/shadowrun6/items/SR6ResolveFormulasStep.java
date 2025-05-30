@@ -125,7 +125,7 @@ public class SR6ResolveFormulasStep implements CarriedItemProcessor {
 
 		// Copy attributes from <usage>
 		Usage usage = template.getUsage(model.getCarryMode());
-		logger.log(Level.ERROR, "Main usage for mode "+model.getCarryMode()+" is "+usage);
+//		logger.log(Level.ERROR, "Main usage for mode "+model.getCarryMode()+" is "+usage);
 //		logger.log(Level.ERROR, "variant is "+model.getVariant());
 		if (model.getVariant()!=null && model.getVariant().getUsage(model.getCarryMode())!=null)
 			usage = model.getVariant().getUsage(model.getCarryMode());
