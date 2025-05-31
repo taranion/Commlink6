@@ -284,19 +284,19 @@ public class Converter {
 		FVTTSpell spell = new FVTTSpell();
 
 		spell.genesisID = item.getId();
-		spell.data.category  = item.getCategory().name().toLowerCase();
-		spell.data.duration  = item.getDuration().name().toLowerCase();
-		spell.data.drain     = item.getDrain();
-		spell.data.range     = item.getRange().name().toLowerCase();
-		spell.data.type      = item.getType().name().toLowerCase();
+		spell.category  = item.getCategory().name().toLowerCase();
+		spell.duration  = item.getDuration().name().toLowerCase();
+		spell.drain     = item.getDrain();
+		spell.range     = item.getRange().name().toLowerCase();
+		spell.type      = item.getType().name().toLowerCase();
 		if (item.getDamage()!=null)
-			spell.data.damage    = item.getDamage().name().toLowerCase();
-		spell.data.isOpposed = item.isOpposed();
-		spell.data.withEssence = item.isEssence();
-		spell.data.wild      = item.isWild();
+			spell.damage    = item.getDamage().name().toLowerCase();
+		spell.isOpposed = item.isOpposed();
+		spell.withEssence = item.isEssence();
+		spell.wild      = item.isWild();
 		for (SpellFeatureReference ref : item.getFeatures()) {
 			switch (ref.getFeature().getId()) {
-			case "sense_multi": spell.data.multiSense=true; break;
+			case "sense_multi": spell.multiSense=true; break;
 			}
 		}
 

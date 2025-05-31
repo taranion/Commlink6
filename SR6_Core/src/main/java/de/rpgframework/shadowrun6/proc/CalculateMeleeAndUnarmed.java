@@ -9,6 +9,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Pool;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -71,7 +72,7 @@ public class CalculateMeleeAndUnarmed implements ProcessingStep {
 			model.removeCarriedItem(unarmed);
 		}
 
-		logger.log(Level.INFO, "Before recalc: "+unarmed.getAttributeRaw(SR6ItemAttribute.DAMAGE));
+		logger.log(Level.DEBUG, "Before recalc: "+unarmed.getAttributeRaw(SR6ItemAttribute.DAMAGE));
 		SR6GearTool.recalculate("", model, unarmed);
 		logger.log(Level.INFO, "After recalc: "+unarmed.getAttributeRaw(SR6ItemAttribute.DAMAGE));
 		checkUnarmedIsPhysical(model, unarmed);
