@@ -239,6 +239,11 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			validateWeaponSize();
 		}
 
+		// If it is an armor, add fashion slots (Smooth Operations)
+		if (this.getItemType(CarryMode.CARRIED)==ItemType.ARMOR) {
+			validateFashionSlots();
+		}
+
 		validateVehicleWeaponMountSlots();
 		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
 			// Auto-detect ammunition class, if necessary
@@ -547,6 +552,20 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		if (ItemType.isVehicle(type) && getAttribute(SR6ItemAttribute.SOFTWARE_TYPES)==null) {
 			setAttribute(SR6ItemAttribute.SOFTWARE_TYPES, SoftwareTypes.AUTOSOFT);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	private void validateFashionSlots() {
+		if (subtype!=ItemSubType.ARMOR_BODY) 
+			return;
+		
+		int social = getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL).getDistributed();
+		if (social<0) {
+			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.FASHION.name(), 1));
+		} else if (social>0) {
+			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.FASHION.name(), 3));
+		} else
+			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.FASHION.name(), 2));
 	}
 
 //	//-------------------------------------------------------------------
