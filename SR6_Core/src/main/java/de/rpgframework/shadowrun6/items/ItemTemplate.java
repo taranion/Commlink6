@@ -556,9 +556,11 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 	//-------------------------------------------------------------------
 	private void validateFashionSlots() {
-		if (subtype!=ItemSubType.ARMOR_BODY) 
+		if (subtype!=ItemSubType.ARMOR_BODY && subtype!=ItemSubType.ARMOR_CLOTHES) 
 			return;
 		
+		if (getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL)==null)
+			return;
 		int social = getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL).getDistributed();
 		if (social<0) {
 			modifications.add(new ValueModification(ShadowrunReference.HOOK, ItemHook.FASHION.name(), 1));
