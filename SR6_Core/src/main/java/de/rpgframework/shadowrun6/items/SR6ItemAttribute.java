@@ -32,8 +32,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	ACCELERATION(new OnRoadOffRoadConverter()),
 	AMMUNITION(new AmmunitionConverter()),
 	AMMUNITION_CLASS( new EnumConverter(AmmunitionClass.class)),
-	// Vehicle Armor
-	ARMOR,
+	ARMOR, //note that this is only vehicle armor, not body armor, see DEFENCE_PHYSICAL for that
 	ATTACK_RATING(new AttackRatingArrayConverter()),
 	/** Boolean: is this item subject to augmentation grade changes */
 	AUGMENTATION,
@@ -50,7 +49,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),
 	DEFENSE_MATRIX,
-	// Defense Rating against physical attacks
+	// Defense Rating against physical attacks, this is body armor rating, not to confuse with 'armor' which is vehicle armor
 	DEFENSE_PHYSICAL,
 	// Defense Rating against social attacks
 	DEFENSE_SOCIAL,
