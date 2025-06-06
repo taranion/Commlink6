@@ -315,6 +315,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		if (variants!=null) {
 			for (SR6PieceOfGearVariant variant : variants) {
 				variant.setParentItem(this);
+				variant.validate();
 				// Validate flags
 				for (String flag : variant.getFlags()) {
 					try {
