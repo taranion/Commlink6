@@ -65,6 +65,9 @@ public class HandleAugmentationGradeStep implements CarriedItemProcessor {
 				if (availAttr==null) {
 					logger.log(Level.ERROR, "Item "+model+" has no AVAILABILITY");
 				}
+				if (priceAttr==null) {
+					logger.log(Level.ERROR, "Item "+model+" has no PRICE");
+				}
 				switch (quality) {
 				case EXO:
 					if (essenceAttr!=null)
