@@ -12,7 +12,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.9.2-SNAPSHOT</version>
+	<version>1.10.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -108,21 +108,6 @@
 			<version>1.18.34</version>
 			<scope>provided</scope>
 		</dependency>
-      <dependency>
-         <groupId>org.bouncycastle</groupId>
-         <artifactId>bcmail-jdk15on</artifactId>
-         <version>1.46</version>
-      </dependency>
-      <dependency>
-         <groupId>org.bouncycastle</groupId>
-         <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.46</version>
-      </dependency>
-      <dependency>
-         <groupId>org.bouncycastle</groupId>
-         <artifactId>bctsp-jdk15on</artifactId>
-         <version>1.46</version>
-      </dependency>
 		<dependency>
 			<groupId>org.prelle</groupId>
 			<artifactId>javafx-extensions</artifactId>
@@ -141,8 +126,8 @@
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
-			<artifactId>eden-client-jfx</artifactId>
-			<version>0.0.6-SNAPSHOT</version>
+         <artifactId>eden-client-jfx</artifactId>
+         <version>0.0.7-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.bouncycastle</groupId>
@@ -189,7 +174,7 @@
 		<dependency>
 			<groupId>org.prelle.rpgframework</groupId>
 			<artifactId>shadowrun6-export-pdf</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+			<version>2.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>

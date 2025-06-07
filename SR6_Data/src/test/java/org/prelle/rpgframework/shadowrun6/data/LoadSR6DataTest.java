@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6AlternateUsage;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -364,7 +365,18 @@ public class LoadSR6DataTest {
 		Optional<ItemTemplate> result = list.stream().filter(item -> item.getId().equals("cyberarm")).findFirst();
 		assertTrue("Cyberarm not found",result.isPresent());
 		assertNotNull("Cyberarm not found",result.get());
+	}
 
+	//-------------------------------------------------------------------
+	@Test
+	public void testVariantsWithShortcuts() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "mil_spec_armor");
+		assertNotNull("Armor not found",item);
+		
+		CarriedItem<ItemTemplate> gear = SR6GearTool.buildItem(item, CarryMode.CARRIED, item.getVariant("light"), null, false).get();
+		assertNotNull(gear);
+		assertTrue("social attribute not read",gear.hasAttribute(SR6ItemAttribute.DEFENSE_SOCIAL));
+		assertEquals(-6, gear.getAsValue(SR6ItemAttribute.DEFENSE_SOCIAL).getModifiedValue());
 	}
 
 }

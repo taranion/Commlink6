@@ -58,6 +58,10 @@ public class GetModificationsFromGear implements ProcessingStep {
 							multiplier=1;
 						// Calls ShadowrunTools.instantiateModification
 						logger.log(Level.TRACE, "--item {0}: preMod={1} ", item.getKey(), mod);
+						if (mod.getReferenceType()==null) {
+							unprocessed.add(mod);
+							continue;
+						}
 						Modification realMod = mod.getReferenceType().instantiateModification(mod, item, multiplier, model);
 						logger.log(Level.TRACE, "--item {0}: realMod={1} ", item.getKey(), realMod);
 

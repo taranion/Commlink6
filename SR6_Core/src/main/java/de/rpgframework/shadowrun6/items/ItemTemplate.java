@@ -557,7 +557,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 	//-------------------------------------------------------------------
 	private void validateFashionSlots() {
-		if (subtype!=ItemSubType.ARMOR_BODY && subtype!=ItemSubType.ARMOR_CLOTHES) 
+		if (subtype!=ItemSubType.ARMOR_BODY && subtype!=ItemSubType.ARMOR_CLOTHES && subtype!=ItemSubType.ARMOR_SOCIAL) 
 			return;
 		
 		if (getAttribute(SR6ItemAttribute.DEFENSE_SOCIAL)==null)
