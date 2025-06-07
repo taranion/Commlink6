@@ -41,12 +41,6 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	public SR6PieceOfGearVariant() {
 	}
 
-//	//-------------------------------------------------------------------
-//	public SR6PieceOfGearVariant(String id, String globalI18NKey) {
-//		this.id = id;
-//		setGlobalI18NKey(globalI18NKey);
-//	}
-
 	//-------------------------------------------------------------------
 	public SR6PieceOfGearVariant(SR6VariantMode mode) {
 		this.mode = mode;
@@ -58,8 +52,7 @@ public class SR6PieceOfGearVariant extends PieceOfGearVariant<SR6VariantMode> {
 	 */
 	@Override
 	public List<? extends IGearTypeData> getTypeData() {
-		// TODO Auto-generated method stub
-		return new ArrayList<>();
+		return shortcuts;
 	}
 
 	//-------------------------------------------------------------------
