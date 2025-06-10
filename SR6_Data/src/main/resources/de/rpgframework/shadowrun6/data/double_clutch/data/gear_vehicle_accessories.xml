@@ -1094,7 +1094,7 @@
 
 <!-- Electronics Mods - Miscellaneous -->
 
-   <item id="anti_theft" avail="0" price="500" type="MOD_ELEC" subtype="MOD_MISC" >
+   <item id="anti_theft" avail="0" price="500" type="MOD_ELEC" subtype="MOD_MISC" reqVariant="true">
    	<variant id="rating1">
      		<usage mode="EMBEDDED" slot="VEHICLE_ELECTRONICS" value="0"/>
      		<attrdef id="PRICE" value="500"/>
