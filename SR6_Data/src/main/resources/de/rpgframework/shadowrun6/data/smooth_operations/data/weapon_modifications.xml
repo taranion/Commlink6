@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+
+	<itemenhancement id="fancy_weapon" avail="4" price="500"/>
+	<itemenhancement id="brutal_weapon" avail="4" price="250"/>
+
+</itemenhancements>
