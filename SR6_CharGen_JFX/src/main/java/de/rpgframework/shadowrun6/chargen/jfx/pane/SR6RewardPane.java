@@ -31,7 +31,8 @@ public class SR6RewardPane extends RewardPane {
 
 	//-------------------------------------------------------------------
 	public SR6RewardPane(Reward data) {
-		super(data);		
+		super();
+		setReward(data);
 	}
 
 	//-------------------------------------------------------------------
