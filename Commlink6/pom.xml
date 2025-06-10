@@ -128,16 +128,6 @@
 			<groupId>de.rpgframework</groupId>
          <artifactId>eden-client-jfx</artifactId>
          <version>0.0.7-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bctsp-jdk15on</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.bouncycastle</groupId>
-					<artifactId>bcmail-jdk15on</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>
@@ -186,6 +176,12 @@
 			<artifactId>shadowrun6-export-json</artifactId>
 			<version>0.0.3-SNAPSHOT</version>
 		</dependency>
+      <dependency>
+         <groupId>org.bouncycastle</groupId>
+         <artifactId>bcutil-jdk18on</artifactId>
+         <version>1.80</version>
+         <scope>runtime</scope>
+      </dependency>
 	</dependencies>
 
 	<build>
