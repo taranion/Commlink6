@@ -1011,7 +1011,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------Smooth_Operations------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.LOCATION);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"smooth_operations/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities from 'Smooth Operations'", list.size());
@@ -1035,6 +1035,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded {0} gear items 'Smooth Operations'", list.size());
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "smooth_operations/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded {0} edge actions 'Smooth Operations'", list.size());
+		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"smooth_operations/data/weapon_modifications.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
 
 //		System.exit(1);
 	}

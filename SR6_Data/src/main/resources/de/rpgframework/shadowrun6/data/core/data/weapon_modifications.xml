@@ -1,3 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <itemenhancements>
+
+	<itemenhancement id="smartgun_system_mod" avail="1L" price="500" size="0" >
+	  <requires>
+	    <selreq>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
+	    </selreq>
+	  </requires>
+	  <modifications>
+			<valmod type="HOOK" ref="OPTICAL" value="1"/>
+	  </modifications>
+
+<!-- "mode" feature currently not supported
+		<mode id="SMARTGUN">
+			<requires>
+		    	<datareq apply="ACTIVE_GEAR" type="GEAR" ref="smartlink" />
+		  	</requires>
+			<modifications>
+		  		<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"                      value="2,2,2,2,2" />
+		  		<valmod type="ITEM_ATTRIBUTE" ref="DICEPOOL"           mode="WIRELESS" value="1" />
+		      <valmod type="ACTION_BONUS"   ref="reload"             mode="WIRELESS" value="MINOR"/>
+		      <valmod type="ACTION_BONUS"   ref="change_device_mode" mode="WIRELESS" value="MINOR"/>
+		  	</modifications>
+		</mode> -->		
+		
+	</itemenhancement>
+
 </itemenhancements>

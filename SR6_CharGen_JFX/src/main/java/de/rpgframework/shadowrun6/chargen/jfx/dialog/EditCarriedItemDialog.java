@@ -121,7 +121,8 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case ARMOR_ADDITION    : index= 4; break;
 		case ARMOR_MEMS        : index= 8; break;
 		case HELMET_ACCESSORY  : index= 9; break;
-
+		case FASHION		   : index= 10; break;
+		
 		// Cyberware
 		case HEADWARE_IMPLANT   : index= 2; break;
 		case SKILLJACK          : index= 3; break;

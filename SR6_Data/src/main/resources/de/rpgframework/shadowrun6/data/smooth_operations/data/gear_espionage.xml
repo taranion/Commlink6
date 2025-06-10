@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="blur_mask" avail="4" price="500" type="ELECTRONICS" subtype="SECURITY">
+
+   <item id="perfume_aurelian_eau" avail="4" price="750" type="CHEMICALS" subtype="PERFUME" count="y"/>
+   <item id="perfume_aurelian_purple" avail="2" price="500" type="CHEMICALS" subtype="PERFUME" count="y"/>
+   <item id="perfume_epoch_dragon" avail="4" price="400" type="CHEMICALS" subtype="PERFUME" count="y"/>
+   <item id="perfume_epoch_tigre" avail="2" price="350" type="CHEMICALS" subtype="PERFUME" count="y"/>
+   <item id="perfume_hart_pack" avail="6" price="100" type="CHEMICALS" subtype="PERFUME" count="y"/>
+   <item id="perfume_hart_sunglass" avail="5" price="250" type="CHEMICALS" subtype="PERFUME" count="y"/>
+
+   <item id="blur_mask" avail="4" price="500" type="ELECTRONICS" subtype="BREAKING">
       <choices>
          <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
       </choices>
       <attrdef id="PRICE" value="$RATING*500"/>
    </item>
-   <item id="explosive_lipstick" avail="6I" price="1000" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item id="explosive_eyeliner" avail="6I" price="100" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item id="explosive_finishing_power" avail="6I" price="100" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item id="explosive_nail_polish_remover" avail="6I" price="50" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item id="injector_pen" avail="4I" price="250" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item id="lip_guard" avail="4" price="50" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS">
+   <item id="explosive_lipstick" avail="6I" price="800" type="AMMUNITION" subtype="EXPLOSIVES" count="y"/>
+   <item id="explosive_eyeliner" avail="6I" price="100" type="AMMUNITION" subtype="EXPLOSIVES" count="y"/>
+   <item id="explosive_finishing_power" avail="6I" price="100" type="AMMUNITION" subtype="EXPLOSIVES" count="y"/>
+   <item id="explosive_nail_polish_remover" avail="6I" price="50" type="AMMUNITION" subtype="EXPLOSIVES" count="y"/>
+   <item id="injector_pen" avail="4I" price="250" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+   <item id="lip_guard" avail="4" price="50" type="BIOLOGY" subtype="BIOTECH" count="y">
       <choices>
          <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
       </choices>
@@ -24,26 +32,28 @@
       <attrdef id="DEVICE_RATING" value="1"/>
      <attrdef id="PRICE" value="$RATING*100"/>
    </item>
-   <item id="nanopaste_disguise" avail="4I" price="2000" type="CHEMICALS" subtype="BIOTECH"/>
+   <item id="nanopaste_disguise" avail="4I" price="2000" lang="en" type="NANOWARE" subtype="NANOTECH_KIT"/> <!-- DE version uses avail and cost for nanopaste disguse kit from bodyshop also for smooth operations, thus not showing US priced variant for DE -->
    <item id="pixel_tags"    avail="3" price="50" type="ELECTRONICS" subtype="OPTICAL"/>
+   <item id="pixel_tags"    avail="3" price="5" type="ELECTRONICS" lang="de" subtype="OPTICAL"/>
    <item id="pixel_tags_recovery_kit"  avail="3" price="500" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags_ctrl_personal" avail="3" price="750" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags_ctrl_prof"     avail="3" price="750" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags_sprayer_handheld" avail="3" price="50" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags_sprayer_mounted"  avail="3" price="1000" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="poser_props"      avail="4" price="500" type="TOOLS" subtype="SECURITY"/>
-   <item id="smart_cosmetics"  avail="4" price="850" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS"/>
-   <item avail="1" price="255"    id="swindler_credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="1" price="270"   id="swindler_credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="2" price="350"  id="swindler_credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="3" price="750"  id="swindler_credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS"/>
-   <item avail="5" price="1250" id="swindler_credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS"/>
+   <item id="smart_cosmetics"  avail="4" price="850" type="NANOWARE" subtype="NANOTECH_KIT"/>
+   <item avail="1" price="255"    id="swindler_credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="1" price="270"   id="swindler_credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="2" price="350"  id="swindler_credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="3" price="750"  id="swindler_credstick_platin"   subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+   <item avail="5" price="1250" id="swindler_credstick_ebony"    subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
+
    <item id="emotional_analyzer"  avail="8" price="15000" type="ELECTRONICS" subtype="SECURITY"/>
-   <item id="concealable_surveillance_gear" avail="4" price="300"   subtype="SECURITY" type="ELECTRONICS">
-      <choices>
-         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8"/>
-      </choices>
-      <attrdef id="DEVICE_RATING" value="1"/>
-     <attrdef id="PRICE" value="$RATING*100"/>
-   </item>
+	<item id="concealable_surveillance_gear" avail="4" price="300" type="ELECTRONICS" subtype="SENSOR" count="y"> <!-- rating in US table has no effect and not mentioned in text, thus not implementing a rating. -->
+		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated in US, thus using data from DE -->
+		<modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
+		</modifications>
+	</item>
+   
 </items>

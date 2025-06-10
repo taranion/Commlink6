@@ -26,5 +26,10 @@
       <usage mode="EMBEDDED" slot="SOFTWARE"/>
       <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
    </item>
+
+   <item avail="4L" price="700" id="nanomask" type="SOFTWARE" subtype="COMMLINK_APP">
+      <usage mode="EMBEDDED" slot="SOFTWARE"/>
+      <requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="COMMLINK_APP" apply="DATA_ITEM"/></requires>
+   </item>
    
 </items>

@@ -1,28 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
+
     <item id="scavanged_rags" avail="1" price="0" type="ARMOR" subtype="ARMOR_CLOTHES">
         <armor rating="0" social="-8"/>
     </item>
     <item id="cheap_clothes" avail="1" price="10" type="ARMOR" subtype="ARMOR_CLOTHES">
         <armor rating="0" social="-4"/>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="blue_collar" avail="1" price="50" type="ARMOR" subtype="ARMOR_CLOTHES">
         <armor rating="0" social="-2"/>
         <modifications>
             <valmod type="HOOK" value="1" ref="FASHION"/>
         </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="casual_wear" avail="1" price="50" type="ARMOR" subtype="ARMOR_CLOTHES">
         <armor rating="0" social="0"/>
         <modifications>
             <valmod type="HOOK" value="2" ref="FASHION"/>
         </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="business_casual" avail="1" price="100" type="ARMOR" subtype="ARMOR_CLOTHES">
         <armor rating="0" social="0"/>
         <modifications>
             <valmod type="HOOK" value="2" ref="FASHION"/>
         </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="PRICE" value="500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="uniform" avail="4" price="50" type="ARMOR" subtype="ARMOR_CLOTHES">
       <choices>
@@ -34,6 +67,13 @@
       <modifications>
           <valmod type="HOOK" value="2" ref="FASHION"/>
       </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="PRICE" value="$RATING*50+500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="power_suit" avail="1" price="500" type="ARMOR" subtype="ARMOR_CLOTHES">
       <choices>
@@ -45,6 +85,13 @@
       <modifications>
           <valmod type="HOOK" value="3" ref="FASHION"/>
       </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="PRICE" value="$RATING*500+500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     <item id="tres_chic" avail="1" price="1000" type="ARMOR" subtype="ARMOR_CLOTHES">
       <choices>
@@ -56,12 +103,22 @@
       <modifications>
           <valmod type="HOOK" value="$RATING/2" ref="FASHION"/>
       </modifications>
+		<variant id="armored"> <!-- variant based on armor clothing -->
+			<attrdef id="PRICE" value="$RATING*500+500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="4" />
+			</modifications>
+		</variant>
     </item>
     
-    <item id="faceblind_truckers_cap" avail="2" price="50" type="ARMOR" subtype="ARMOR_CLOTHES">
+    <item id="faceblind_truckers_cap" avail="2" price="50" type="ARMOR" subtype="ARMOR_CLOTHES" >
+		<!-- not clear what is meant by 'capacity 2', as armor accessory capacity makes no sense in glasses and vision capacity makes no sense in the cap -->
     </item>
     <item id="faceblind_glasses" avail="2" price="100" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<!-- not clear what is meant by 'capacity 2', as armor accessory capacity makes no sense in glasses and vision capacity makes no sense in the cap -->
     </item>
+
     <item id="krime_rave_complete" avail="2" price="1050" type="ARMOR" subtype="ARMOR_CLOTHES">
       <armor rating="0" social="4"/>
     </item>
@@ -72,4 +129,35 @@
     <item id="krime_rave_cane"   avail="2" price="300" type="ARMOR" subtype="ARMOR_CLOTHES" />
     <item id="krime_rave_hat"    avail="2" price="150" type="ARMOR" subtype="ARMOR_CLOTHES" />
     <item id="krime_rave_boots"  avail="2" price="100" type="ARMOR" subtype="ARMOR_CLOTHES" />
+	
+	<item id="fashion_statement" avail="3" type="ACCESSORY" subtype="ARMOR_BODY">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/> 
+		</choices>
+		<attrdef id="DEFENSE_SOCIAL" value="$RATING"/>
+		<usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
+		<attrdef id="PRICE" value="$RATING*500"/>
+	</item>
+
+	<item id="fashion_accessory_standard" avail="2" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="1" />
+		<attrdef id="DEFENSE_SOCIAL" value="1"/>
+	</item>
+	<item id="fashion_accessory_specialized" avail="3" price="200" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<attrdef id="DEFENSE_SOCIAL" value="1"/>
+	</item>
+	<item id="fashion_accessory_tres_chic" avail="4" price="500" type="ACCESSORY" subtype="ARMOR_BODY"> <!-- not in US data table, thus using DE values -->
+		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<attrdef id="DEFENSE_SOCIAL" value="1"/>
+	</item>
+	
+	<item id="transforming_garment" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING" table="1000,2000,7500,10000,25000,30000"/>
+		<attrdef id="AVAILABILITY" value="$RATING" table="5,5,6,6,7,7"/>
+   </item>
+	
 </items>
