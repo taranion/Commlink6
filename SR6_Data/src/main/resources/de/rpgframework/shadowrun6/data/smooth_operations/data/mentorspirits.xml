@@ -48,5 +48,71 @@
          <itemmod type="ADEPT_POWER" ref="enhanced_perception" />
       </adept>
   </mentorspirit>
+
+<!-- DE only mentor spirits -->
+
+   <mentorspirit id="erlkoenig" lang="de">
+      <modifications>
+         <checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+			<valmod type="ADEPT_POWER" ref="improved_ability" value="1">
+				<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="influence"/>
+			</valmod>
+      </adept>
+  </mentorspirit>
+
+   <mentorspirit id="loreley" lang="de">
+      <modifications>
+         <checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+         <itemmod type="ADEPT_POWER" ref="vocal_control" />
+      </adept>
+  </mentorspirit>
+
+   <mentorspirit id="schwindler" lang="de">
+      <modifications>
+         <checkmod type="SKILL" ref="con" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+			<valmod type="ADEPT_POWER" ref="improved_ability" value="1">
+				<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="con"/>
+			</valmod>
+      </adept>
+  </mentorspirit>
+  
+   <mentorspirit id="wasserfrau" lang="de">
+      <modifications>
+         <checkmod type="SKILL" ref="influence" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+         <itemmod type="ADEPT_POWER" ref="traceless_walk" />
+      </adept>
+  </mentorspirit>
+  
+   <mentorspirit id="winselmutter" lang="de">
+      <modifications>
+         <checkmod type="SKILL" ref="perception" value="-1" what="EDGE_BOOST" />
+      </modifications>
+      <magician>
+         <checkmod type="SPELL" ref="PERCEPTION" value="-1" what="EDGE_BOOST" />
+      </magician>
+      <adept>
+         <itemmod type="ADEPT_POWER" ref="danger_sense" />
+      </adept>
+  </mentorspirit>
   
 </mentorspirits>
