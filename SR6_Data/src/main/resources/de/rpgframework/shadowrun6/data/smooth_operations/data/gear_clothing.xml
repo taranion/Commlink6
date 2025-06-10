@@ -159,5 +159,207 @@
 		<attrdef id="PRICE" value="$RATING" table="1000,2000,7500,10000,25000,30000"/>
 		<attrdef id="AVAILABILITY" value="$RATING" table="5,5,6,6,7,7"/>
    </item>
-	
+   
+<!-- DE only clothing -->   
+
+	<item id="elitist_business_suit" lang="de" avail="2" price="2000" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="3" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+	</item>
+	<item id="elitist_evening_suit" lang="de" avail="2" price="2000" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="3" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+	</item>
+	<item id="elitist_venus" lang="de" avail="2" price="1500" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="2" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="elitist_freya" lang="de" avail="2" price="1500" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="2" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+
+	<item id="franzinger_trouser" lang="de" avail="2" price="500" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+	</item>
+	<item id="franzinger_shirt" lang="de" avail="2" price="500" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+	</item>
+	<item id="franzinger_suit" lang="de" avail="2" price="1100" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="franzinger_blazer" lang="de" avail="2" price="550" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+	</item>
+
+	<item id="gothic_frockcoat" lang="de" avail="2" price="1500" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="4" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="8" />
+		</modifications>
+	</item>
+	<item id="gothic_casual" lang="de" avail="2" price="1000" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="2" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="gothic_business" lang="de" avail="2" price="1200" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="2" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+	</item>
+	<item id="gothic_evening" lang="de" avail="2" price="1500" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="3" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+
+	<item id="swarovski_mercurial" lang="de" avail="2" price="1000" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="swarovski_kombatmage" lang="de" avail="2" price="1300" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+	</item>
+	<item id="swarovski_grey" lang="de" avail="3" price="1400" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+	</item>
+	<item id="swarovski_eternity" lang="de" avail="2" price="800" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="1"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="3" />
+		</modifications>
+	</item>
+
+	<item id="swarovski_eternity_ring" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="1" />
+		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
+		<modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
+		</modifications>
+	</item>
+	<item id="swarovski_eternity_necklace" avail="2" price="50" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
+		<modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
+		</modifications>
+	</item>
+	<item id="swarovski_eternity_belt" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
+		<modifications>
+			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
+		</modifications>
+	</item>
+	<item id="swarovski_eternity_bag" avail="2" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+	</item>
+
+	<item id="party83_night" lang="de" avail="3" price="500" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="electrochromic_feature" included="true"/>
+		</modifications>
+	</item>
+	<item id="party83_avenger" lang="de" avail="3" price="600" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="electrochromic_feature" included="true"/>
+		</modifications>
+	</item>
+	<item id="party83_star" lang="de" avail="3" price="500" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="2"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="electrochromic_feature" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="tailored_trouser" lang="de" avail="3" price="700" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="4" />
+		</modifications>
+	</item>
+	<item id="tailored_shirt" lang="de" avail="3" price="400" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+	</item>
+	<item id="tailored_blazer" lang="de" avail="3" price="900" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="6" />
+		</modifications>
+		<variant id="armored1">
+			<attrdef id="PRICE" value="1400"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="1"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="-1" />
+			</modifications>
+		</variant>
+		<variant id="armored2">
+			<attrdef id="PRICE" value="1900"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="-2" />
+			</modifications>
+		</variant>
+	</item>
+	<item id="tailored_suit" lang="de" avail="3" price="2000" type="ARMOR" subtype="ARMOR_CLOTHES">
+		<armor rating="0" social="3"/>
+		<modifications>
+			<valmod type="HOOK" ref="ARMOR" value="2" />
+		</modifications>
+		<variant id="armored1">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="1"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="-1" />
+			</modifications>
+		</variant>
+		<variant id="armored2">
+			<attrdef id="PRICE" value="3000"/>
+			<attrdef id="DEFENSE_PHYSICAL" value="2"/>
+			<modifications>
+				<valmod type="HOOK" ref="ARMOR" value="-2" />
+			</modifications>
+		</variant>
+	</item>
+
 </items>
