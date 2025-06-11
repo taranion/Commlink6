@@ -49,6 +49,7 @@ import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ModificationChoice;
@@ -432,10 +433,12 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		addLabel(ResourceI18N.get(RES, "label.variant"));
 		ChoiceBox<SR6PieceOfGearVariant> cbVariants = new ChoiceBox<>();
 		// If no item is required, add a "regular item"
-		if (!template.requiresVariant()) {
+		List<Usage> mainUsages = template.getUsages().stream().filter(us -> us.getMode()==carry && us.getSlot()==hook).toList();
+//		logger.log(Level.INFO, "TODO: template usages "+template.getUsages()+" and carrymode "+carry+" and hook "+hook+" --> main usages "+mainUsages);
+		if (!template.requiresVariant() && !mainUsages.isEmpty()) {			
 			cbVariants.getItems().add(null);
 		}
-		logger.log(Level.INFO, "TODO: Check if variants are suitable for "+context+" and carrymode "+carry);
+//		logger.log(Level.INFO, "TODO: Check if variants are suitable for "+context+" and carrymode "+carry);
 		List<SR6PieceOfGearVariant> filtered = template.getVariants().stream()
 				.filter(var -> var.getUsage(carry)!=null)
 				.toList();
