@@ -435,7 +435,14 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		if (!template.requiresVariant()) {
 			cbVariants.getItems().add(null);
 		}
-		cbVariants.getItems().addAll(template.getVariants());
+		logger.log(Level.INFO, "TODO: Check if variants are suitable for "+context+" and carrymode "+carry);
+		List<SR6PieceOfGearVariant> filtered = template.getVariants().stream()
+				.filter(var -> var.getUsage(carry)!=null)
+				.toList();
+		if (filtered.size()!=template.getVariants().size()) {
+			logger.log(Level.INFO, "Filtered variants for carry mode {0} down to {1}", carry, filtered);
+		}
+		cbVariants.getItems().addAll(filtered);
 		cbVariants.setConverter(new StringConverter<SR6PieceOfGearVariant>() {
 			public SR6PieceOfGearVariant fromString(String value) { return null;}
 			public String toString(SR6PieceOfGearVariant value) {
