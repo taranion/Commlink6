@@ -316,7 +316,7 @@ public enum ItemType {
     }
 
     public static ItemType[] gearTypes() {
-    	return new ItemType[]{ARMOR,ELECTRONICS,BIOLOGY,CHEMICALS,SURVIVAL,AMMUNITION,TOOLS};
+    	return new ItemType[]{ARMOR,ELECTRONICS,BIOLOGY,CHEMICALS,SURVIVAL,AMMUNITION,TOOLS,NANOWARE};
     }
 
     public static ItemType[] vehicleTypes() {
