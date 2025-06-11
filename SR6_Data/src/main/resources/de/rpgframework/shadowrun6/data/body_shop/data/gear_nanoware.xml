@@ -344,7 +344,7 @@
 	</item>
 	<item id="toughskin" avail="3" price="1200" type="NANOWARE" subtype="NANITES_UTILITIES" reqVariant="y">
 		<modifications>
-         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$VOLUME"/>
+         <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$NANITE_VOLUME"/>
 		</modifications>
 		<variant id="prebuilt">
 			<usage mode="IMPLANTED" value="0"/>
