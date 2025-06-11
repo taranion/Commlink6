@@ -378,10 +378,13 @@
       <modifications>
       </modifications>
    </item>
-   <item avail="3" price="7500" id="smuggling_compartment" type="CYBERWARE" subtype="CYBER_BODYWARE">
-		<usage mode="IMPLANTED" value="0.2"/>
-      <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT" />
- 		<flags><flag>AUGMENTATION</flag></flags>
+   <item avail="3" price="7500" id="smuggling_compartment" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="true">
+		<flags><flag>AUGMENTATION</flag></flags>
+      <variant id="implanted">
+			<usage mode="IMPLANTED" value="0.2"/>
+			<attrdef id="PRICE" value="7500"/>
+			<attrdef id="AVAILABILITY" value="3"/>
+      </variant>
       <variant id="cyberlimb">
 			<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="5"/>
 			<attrdef id="PRICE" value="6000"/>
