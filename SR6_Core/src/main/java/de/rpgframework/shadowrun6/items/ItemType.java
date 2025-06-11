@@ -69,7 +69,8 @@ public enum ItemType {
 			),
 	TOOLS(
 			ItemSubType.TOOLS,
-			ItemSubType.SPARE_PARTS
+			ItemSubType.SPARE_PARTS,
+			ItemSubType.NANOTECH_KIT
 			),
 	ELECTRONICS(
 			ItemSubType.COMMLINK,
@@ -114,8 +115,7 @@ public enum ItemType {
 			ItemSubType.NANITES_BIOAMP,
 			ItemSubType.NANITES_UTILITIES,
 			ItemSubType.NANITES_TRANSIENT,
-			ItemSubType.NANO_CYBERWARE,
-			ItemSubType.NANOTECH_KIT
+			ItemSubType.NANO_CYBERWARE
 			),
 	GENEWARE(
 			ItemSubType.THERAPEUTIC,

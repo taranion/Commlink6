@@ -32,7 +32,7 @@
       <attrdef id="DEVICE_RATING" value="1"/>
      <attrdef id="PRICE" value="$RATING*100"/>
    </item>
-   <item id="nanopaste_disguise" avail="4I" price="2000" lang="en" type="NANOWARE" subtype="NANOTECH_KIT"/> <!-- DE version uses avail and cost for nanopaste disguse kit from bodyshop also for smooth operations, thus not showing US priced variant for DE -->
+   <item id="nanopaste_disguise" avail="4I" price="2000" lang="en" type="TOOLS" subtype="NANOTECH_KIT"/> <!-- DE version uses avail and cost for nanopaste disguse kit from bodyshop also for smooth operations, thus not showing US priced variant for DE -->
    <item id="pixel_tags"    avail="3" price="50" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags"    avail="3" price="5" type="ELECTRONICS" lang="de" subtype="OPTICAL"/>
    <item id="pixel_tags_recovery_kit"  avail="3" price="500" type="ELECTRONICS" subtype="OPTICAL"/>
@@ -41,7 +41,7 @@
    <item id="pixel_tags_sprayer_handheld" avail="3" price="50" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="pixel_tags_sprayer_mounted"  avail="3" price="1000" type="ELECTRONICS" subtype="OPTICAL"/>
    <item id="poser_props"      avail="4" price="500" type="TOOLS" subtype="SECURITY"/>
-   <item id="smart_cosmetics"  avail="4" price="850" type="NANOWARE" subtype="NANOTECH_KIT"/>
+   <item id="smart_cosmetics"  avail="4" price="850" type="TOOLS" subtype="NANOTECH_KIT"/>
    <item avail="1" price="255"    id="swindler_credstick_standard" subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
    <item avail="1" price="270"   id="swindler_credstick_silver"   subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
    <item avail="2" price="350"  id="swindler_credstick_gold"     subtype="ID_CREDIT" type="ELECTRONICS" count="y"/>
