@@ -171,7 +171,6 @@ public enum ItemType {
 			ItemSubType.CROSSBOWS,
 			ItemSubType.BALLISTAS,
 			ItemSubType.ROCKETS,
-			ItemSubType.MISSILES,
 			ItemSubType.EXPLOSIVES,
 			ItemSubType.GRENADES
 			),
