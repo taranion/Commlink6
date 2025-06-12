@@ -3,7 +3,35 @@
 
 <!-- Ammo: Net Missiles for Krupp KD447 -->
 
-    <item id="krupp_AD1" avail="4L" price="3000" count="y" type="AMMUNITION" subtype="MISSILES" >
+    <item id="krupp_ad" avail="4L" price="3000" count="y" type="AMMUNITION" subtype="ROCKETS" reqVariant="true">
+        <ammo gz="0P" close="0P" near="0P" blast="3" />
+        <modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING"  value="2" />
+        </modifications>
+		<variant id="ad1">
+			<attrdef id="AVAILABILITY" value="4L"/>
+			<attrdef id="PRICE" value="3000"/>
+			<modifications>
+				<checkmod type="SKILL" ref="firearms" value="1" what="DICE"/>
+			</modifications>
+		</variant>
+		<variant id="ad2">
+			<attrdef id="AVAILABILITY" value="6L"/>
+			<attrdef id="PRICE" value="4200"/>
+			<modifications>
+				<checkmod type="SKILL" ref="firearms" value="2" what="DICE"/>
+			</modifications>
+		</variant>
+		<variant id="ad3">
+			<attrdef id="AVAILABILITY" value="5I"/>
+			<attrdef id="PRICE" value="4500"/>
+			<modifications>
+				<checkmod type="SKILL" ref="firearms" value="3" what="DICE"/>
+			</modifications>
+		</variant>
+    </item>
+
+    <item id="krupp_AD1" avail="4L" price="3000" count="y" type="AMMUNITION" subtype="ROCKETS" modonly="true"> <!-- depreciated item -->
         <ammo gz="0P" close="0P" near="0P" blast="3" />
         <modifications>
     		<checkmod type="SKILL" ref="firearms" value="1" what="DICE"/>
@@ -11,7 +39,7 @@
         </modifications>
     </item>
     
-    <item id="krupp_AD2" avail="6L" price="4200" count="y" type="AMMUNITION" subtype="MISSILES" >
+    <item id="krupp_AD2" avail="6L" price="4200" count="y" type="AMMUNITION" subtype="ROCKETS" modonly="true"> <!-- depreciated item -->
         <ammo gz="0P" close="0P" near="0P" blast="3" />
         <modifications>
     		<checkmod type="SKILL" ref="firearms" value="2" what="DICE"/>
@@ -19,7 +47,7 @@
         </modifications>
     </item>
     
-    <item id="krupp_AD3" avail="5I" price="4500" count="y" type="AMMUNITION" subtype="MISSILES" >
+    <item id="krupp_AD3" avail="5I" price="4500" count="y" type="AMMUNITION" subtype="ROCKETS" modonly="true"> <!-- depreciated item -->
         <ammo gz="0P" close="0P" near="0P" blast="3" />
         <modifications>
     		<checkmod type="SKILL" ref="firearms" value="3" what="DICE"/>

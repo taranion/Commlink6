@@ -48,7 +48,7 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="CHEMICAL"/>
 			</embed>
 		</modifications>
-		<variant id="tamodachi">
+		<variant id="tamodachi" noBase="true">
 			<vehicle han="3/3" acc="10" spdi="20" tspd="20" bod="2" arm="0" pil="1" sen="1" />
 			<attrdef id="PRICE" value="4000" />
 			<modifications>
