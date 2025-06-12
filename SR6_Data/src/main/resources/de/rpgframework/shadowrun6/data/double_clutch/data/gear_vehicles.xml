@@ -112,7 +112,7 @@
 
 	<item id="ford_dasher" avail="3" price="28000" type="VEHICLES" subtype="CARS" >
 		<vehicle han="3/4" acc="20" spdi="22" tspd="210" bod="10" arm="6" pil="2" sen="4" sea="4"/>
-		<variant id="interceptor">
+		<variant id="interceptor" noBase="true">
 			<vehicle han="2/3" acc="24" spdi="28" tspd="240" bod="12" arm="8" pil="3" sen="4" sea="4"/>
 			<attrdef id="AVAILABILITY" value="4" />
 			<attrdef id="PRICE" value="32000" />
@@ -124,7 +124,7 @@
 	</item>
 	<item id="ford_dasher" lang="de" avail="3" price="28000" type="VEHICLES" subtype="CARS" >
 		<vehicle han="3/4" acc="20" spdi="22" tspd="210" bod="10" arm="6" pil="2" sen="4" sea="4"/>
-		<variant id="interceptor">
+		<variant id="interceptor" noBase="true">
 			<vehicle han="2/3" acc="24" spdi="28" tspd="240" bod="12" arm="8" pil="3" sen="4" sea="4"/>
 			<attrdef id="AVAILABILITY" value="4" />
 			<attrdef id="PRICE" value="32000" />

@@ -873,11 +873,11 @@
       </choices>
       <usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING"/>
       <attrdef id="PRICE" value="$RATING*2500" />
-      <variant id="warding">
+      <variant id="warding" noBase="true">
       	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING*2"/>
       	<attrdef id="PRICE" value="$RATING*4000" />
       </variant>
-      <variant id="warding" lang="de">
+      <variant id="warding" lang="de" noBase="true">
       	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING*2"/>
       	<attrdef id="PRICE" value="$RATING*5000" />
       </variant>

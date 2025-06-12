@@ -68,17 +68,17 @@
 		<attrdef id="PRICE" value="$RATING*30000"/>
 		<attrdef id="ESSENCECOST" value="$RATING"/>
  		<flags><flag>AUGMENTATION</flag></flags>
-   	<variant id="echo_machine_mind" modonly="true">
+   	<variant id="echo_machine_mind" modonly="true" noBase="true">
      		<usage mode="VIRTUAL"/>
 			<attrdef id="PRICE" value="0"/>
 	   	<attrdef id="ESSENCECOST" value="0.0"/>
    	</variant>
-   	<variant id="quality_pilot_origin" modonly="true">
+   	<variant id="quality_pilot_origin" modonly="true" noBase="true">
      		<usage mode="VIRTUAL"/>
 			<attrdef id="PRICE" value="0"/>
 	   	<attrdef id="ESSENCECOST" value="0.0"/>
    	</variant>
-   	<variant id="control_rig_codemod" modonly="true">
+   	<variant id="control_rig_codemod" modonly="true" noBase="true">
      		<usage mode="VIRTUAL"/>
 			<attrdef id="PRICE" value="0"/>
 	   	<attrdef id="ESSENCECOST" value="0.0"/>
