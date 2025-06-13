@@ -58,7 +58,7 @@
 			<attrdef id="PRICE" value="6400"/>
 			<attrdef id="RATING" value="4"/>
 		</variant>
-		<variant id="wand">
+		<variant id="wand" noBase="true">
 			<attrdef id="AVAILABILITY" value="2"/>
 			<attrdef id="PRICE" value="1800"/>
 			<attrdef id="RATING" value="3"/>
