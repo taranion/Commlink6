@@ -58,11 +58,11 @@
    <item avail="1" price="175"  id="microflare_launcher" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
    <item avail="1" price="25"   id="microflares"       subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
    <item avail="1" price="50"   id="rappelling_gloves" subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
-   <item avail="1" price="50"   id="respirator"  		 subtype="SURVIVAL_GEAR" type="SURVIVAL">
+   <item avail="1" price="50"   id="respirator"  		 subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y">
    	<choices><choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6" /></choices>
    	<attrdef id="PRICE" value="$RATING*50"/>
    </item>
-   <item avail="2" price="200"  id="survival_kit"      subtype="SURVIVAL_GEAR" type="SURVIVAL"/>
+   <item avail="2" price="200"  id="survival_kit"      subtype="SURVIVAL_GEAR" type="SURVIVAL" count="y"/>
    
    <!-- Grapple gun -->
    <item avail="3" price="500"  id="grapple_gun"       subtype="GRAPPLE_GUN" type="SURVIVAL">

@@ -159,18 +159,21 @@
 			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
-	<item id="esprit_foxhound" lang="de" avail="3L" price="10000" type="DRONE_MEDIUM" subtype="GROUND" >
+	<item id="esprit_foxhound" lang="de" avail="3L" price="10000" type="DRONE_MEDIUM" subtype="GROUND" reqVariant="true">
 		<vehicle han="3/3" acc="10" spdi="15" tspd="70" bod="8" arm="6" pil="4" sen="5" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="smoke_projector" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="mechanical_arm" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
+		<variant id="weapon" lang="de">
+			<modifications>
+				<embed type="GEAR" ref="weapon_turret_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			</modifications>
+		</variant>
 		<variant id="drones" lang="de">
 			<modifications>
-				<embed type="GEAR" ref="weapon_turret_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" remove="y"/>
 				<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			</modifications>
 		</variant>
