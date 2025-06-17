@@ -35,8 +35,8 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
-         <valmod  type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
-         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
+         <itemmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" id="e6be2be6-d109-4730-b00e-4bbb69ad13f2"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" sin="e6be2be6-d109-4730-b00e-4bbb69ad13f2" value="2"/>
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
    </item>
@@ -1606,8 +1606,8 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="trid_projector" />
          <itemmod type="GEAR" apply="CHARACTER" ref="biomonitor" />
          <itemmod type="GEAR" apply="CHARACTER" ref="bug_scanner" />
-         <valmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
-         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" value="2"/>
+         <itemmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" id="3859b0fc-172c-4947-a04c-5827bfe1f631"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" sin="3859b0fc-172c-4947-a04c-5827bfe1f631" value="2"/>
          <itemmod type="LIFESTYLE" apply="CHARACTER" ref="low" />
       </modifications>
    </item>

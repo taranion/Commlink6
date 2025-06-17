@@ -494,56 +494,36 @@
 <!-- Other Packs US -->
    <item id="pack_id_cheap" price="5800" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="ROUGH_MATCH" id="62eea7e0-1846-4a50-a6ff-82eba7a136b3"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="ROUGH_MATCH" sin="62eea7e0-1846-4a50-a6ff-82eba7a136b3" value="2"/>
       </modifications>
    </item>
 
    <item id="pack_id_risky" price="8700" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="GOOD_MATCH" id="ed0c8343-df21-4c2e-a0bd-53211f18b63b"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="GOOD_MATCH" sin="ed0c8343-df21-4c2e-a0bd-53211f18b63b" value="2"/>
       </modifications>
    </item>
 
    <item id="pack_id_reliable" price="11600" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" id="7c71b711-c01e-4399-bcbb-60eab20038dd"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SUPERFICIALLY_PLAUSIBLE" sin="7c71b711-c01e-4399-bcbb-60eab20038dd" value="2"/>
       </modifications>
    </item>
 
    <item id="pack_id_solid" price="13500" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="HIGHLY_PLAUSIBLE" id="2ce18f25-8304-4922-8101-f4fdf74181c4"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="HIGHLY_PLAUSIBLE" sin="2ce18f25-8304-4922-8101-f4fdf74181c4" value="2"/>
       </modifications>
    </item>
 
    <item id="pack_id_exquisite" price="17400" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="SECOND_LIFE" id="045bf498-9579-475a-bc00-7954c0a018d6"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="SECOND_LIFE" sin="045bf498-9579-475a-bc00-7954c0a018d6" value="2"/>
       </modifications>
    </item>
 
@@ -639,12 +619,8 @@
 <!-- Other Packs DE -->
    <item id="pack_id_solid" lang="de" price="14500" type="PACK" subtype="PACK_OTHER" >
       <modifications>
-         <!-- <itemmod type="SIN" apply="CHARACTER" ref="fake_sin"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable SINs -->
-                <!-- </itemmod> -->
-         <!-- <valmod type="LICENSE" apply="CHARACTER" ref="fake_license" value="2"> -->
-                <!-- <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/> TODO: Enable Licenses -->
-                <!-- </valmod> -->
+         <itemmod type="SIN" apply="CHARACTER" ref="HIGHLY_PLAUSIBLE" id="6d028c12-b2a0-498d-9e4f-54f4cab2fcfd"/>
+         <valmod  type="LICENSE" apply="CHARACTER" ref="HIGHLY_PLAUSIBLE" sin="6d028c12-b2a0-498d-9e4f-54f4cab2fcfd" value="2"/>
       </modifications>
    </item>
 
