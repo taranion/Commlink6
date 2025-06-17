@@ -189,7 +189,7 @@
 		<attrdef id="SIZE"      value="$RATING"/>
     	<attrdef id="PRICE"     value="$RATING*500+1500"/>
 		<usage mode="EMBEDDED"  value="$SIZE" slot="CASE_MODS"/>
-		<alternate id="dart_launcher" mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING">
+		<alternate id="dart_launcher" mode="WEAPON" type="WEAPON_SPECIAL" subtype="DART">
 			<weapon attack="8,8,,," ammo="1(m)" dmg="4S(e)" mode="SS" skill="exotic_weapons" spec="exotic_weapons/air"/>
     		<attrdef id="AMMUNITION"      value="$RATING(m)"/>
 		</alternate>
