@@ -369,4 +369,330 @@
   		</modifications>
    </item>
 
+	<!--  Transgenic infusions mimiking bioware, bodyshop page 102, bioware price -30%, essence +50% -->
+	
+		<!--  Bioware: must be coupled with minor biosculpting -->
+
+   <item id="transgen_dietware" avail="3" price="700" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="transgen_balance_receptor_alteration" avail="4" price="1400" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+	<item id="transgen_gills" avail="3" price="5600" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="true">
+    	<usage mode="IMPLANTED" value="0.3"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="saltwater"/>
+    	<variant id="freshwater"/>
+    	<variant id="air"/>
+  	</item>
+ 	<item id="transgen_frog_tongue" avail="3" price="1400" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS" id="weapon">
+			<weapon dmg="0S" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/tongue"/>
+		</alternate>
+   </item>
+	<item id="transgen_hand_foot_webbing" avail="3" price="700" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+    	<usage mode="IMPLANTED" value="0.075"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<checkmod type="SKILL" ref="athletics" value="1" what="DICE" cond="y"/>
+    	</modifications>
+  	</item>
+	<item id="transgen_nictitating_membranes" avail="2" price="700" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" >
+    	<usage mode="IMPLANTED" value="0.075"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+   	</item>
+	<item id="transgen_tail" avail="6" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="true">
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="balance">
+    		<usage mode="IMPLANTED" value="0.15"/>
+      		<attrdef id="PRICE" value="1750"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="paddle">
+    		<usage mode="IMPLANTED" value="0.15"/>
+      		<attrdef id="PRICE" value="1750"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="prehensile">
+    		<usage mode="IMPLANTED" value="0.375"/>
+      		<attrdef id="PRICE" value="3500"/>
+    		<modifications>
+    			<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="thagomizer">
+    		<usage mode="IMPLANTED" value="0.3"/>
+      		<attrdef id="PRICE" value="4900"/>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="weapon">
+				<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
+ 			</alternate>
+    	</variant>
+    	<variant id="whip">
+    		<usage mode="IMPLANTED" value="0.75"/>
+      		<attrdef id="PRICE" value="6300"/>
+ 			<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS" id="weapon">
+      			<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+   			</alternate>
+    	</variant>
+   	</item>
+	<item id="transgen_tailored_critter_pheromones" avail="2" price="1400" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      	<usage mode="IMPLANTED" value="$RATING*0.15"/>
+      	<attrdef id="PRICE" value="$RATING*2000"/>
+      	<attrdef id="AVAILABILITY" value="$RATING*2"/>
+      	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+    		<checkmod type="SKILL" ref="con" value="$RATING" what="DICE" cond="y"/>
+    		<checkmod type="SKILL" ref="influence" value="$RATING" what="DICE" cond="y"/>
+    	</modifications>
+   </item>
+
+		<!--  Biosenses -->
+		
+   <item id="transgen_awareness" avail="4" price="8400" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tactical1">
+      	<usage mode="IMPLANTED" value="0.3"/>
+      	<attrdef id="PRICE" value="10500"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="1" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="1" what="DICE"/>
+      	</modifications>
+      </variant>
+      <variant id="tactical2">
+      	<usage mode="IMPLANTED" value="0.6"/>
+      	<attrdef id="PRICE" value="21000"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="2" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="2" what="DICE"/>
+      	</modifications>
+      </variant>
+      <variant id="tactical3">
+      	<usage mode="IMPLANTED" value="0.9"/>
+      	<attrdef id="PRICE" value="31500"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<modifications>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT"  value="3" what="DICE"/>
+         	<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL"  value="3" what="DICE"/>
+      	</modifications>
+      </variant>
+   </item>
+   <item id="transgen_echolocation" avail="6" price="10500" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="transgen_electrosense" avail="5" price="3500" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.3"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="transgen_hearing_enhancement" avail="2" price="2800" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+        	<checkmod type="SKILL" ref="perception"  value="1" what="EDGE_ONLY_TEST" cond="y"/>
+     	</modifications>
+   </item>
+   <item id="transgen_hearing_expansion" avail="4" price="2800" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+
+		<!--  Chemicals and Weapons -->
+
+   <item id="transgen_chemical_gland" avail="5L" price="14000" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+		<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+       <modifications>
+         <itemmod type="HOOK" ref="TRANSGEN_GLAND" />
+        </modifications>
+      <variant id="spray">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="18200"/>
+      </variant>
+      <variant id="spit">
+     		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="18200"/>
+      </variant>
+   </item>
+	<item id="transgen_chemical_gland_expanded" avail="6L" price="1400" type="BIOWARE" subtype="BIOWARE_STANDARD">
+		<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+    	</choices>
+    	<usage mode="EMBEDDED" slot="TRANSGEN_GLAND"/>
+   	</item>
+   <item id="transgen_corrosive_spit" avail="5" price="3500" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		</choices>
+      <usage mode="IMPLANTED" value="$RATING*0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     		<weapon  dmg="2P" attack="4,,,," skill="exotic_weapons" spec="exotic_weapons/spitter"/>
+     	</alternate>
+   </item>
+   <item id="transgen_fangs" avail="3" price="700" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="non_retractable">
+      	<usage mode="IMPLANTED" value="0.075"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="2P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="retractable">
+      	<usage mode="IMPLANTED" value="0.225"/>
+      	<attrdef id="PRICE" value="1050"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+   <item id="transgen_horns" avail="3" price="350" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+     	<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     		<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     	</alternate>
+   </item>
+   <item id="transgen_natural_venom" avail="5" price="10500" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+      <usage mode="IMPLANTED" value="0.3"/>
+      <flags><flag>AUGMENTATION</flag></flags>
+   </item>
+   <item id="transgen_stinger" avail="3" price="350" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tiny">
+      	<usage mode="IMPLANTED" value="0.075"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="medium">
+      	<usage mode="IMPLANTED" value="0.15"/>
+      	<attrdef id="PRICE" value="1750"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="large">
+      	<usage mode="IMPLANTED" value="0.225"/>
+      	<attrdef id="PRICE" value="5600"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+   <item id="transgen_tusks" avail="2" price="70" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="y">
+      <flags><flag>AUGMENTATION</flag></flags>
+      <variant id="tiny">
+      	<usage mode="IMPLANTED" value="0.15"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="1P" attack="2,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="medium">
+      	<usage mode="IMPLANTED" value="0.225"/>
+      	<attrdef id="PRICE" value="350"/>
+      	<attrdef id="AVAILABILITY" value="4"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+      <variant id="large">
+      	<usage mode="IMPLANTED" value="0.375"/>
+      	<attrdef id="PRICE" value="700"/>
+      	<attrdef id="AVAILABILITY" value="8L"/>
+     		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
+     			<weapon  dmg="3P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+     		</alternate>
+      </variant>
+   </item>
+		
+		<!--  Dermal -->
+
+	<item id="transgen_bark_skin" avail="4" price="1050" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+     	<usage mode="IMPLANTED" value="0.15"/>
+     	<requires>
+     		<datareq type="CARRIED" ref="rhino_skin" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" set="NATURAL"/>
+         <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
+    	</modifications>
+ 	</item>
+	<item id="transgen_camouflage" avail="4" price="1050" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+     	<usage mode="IMPLANTED" value="0.15"/>
+     	<requires>
+     		<datareq type="ITEMSUBTYPE" ref="BIOWARE_DERMAL" negate="true"/>
+     	</requires>
+     	<flags><flag>AUGMENTATION</flag></flags>
+    	<modifications>
+	     <checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="transgen_chamaeleon_skin" avail="6" type="GENEWARE" subtype="TRANSGENIC_BIOWARE" reqVariant="true">
+      <flags><flag>AUGMENTATION</flag></flags>
+    	<variant id="basic">
+    		<usage mode="IMPLANTED" value="0.3"/>
+      	<attrdef id="AVAILABILITY" value="6"/>
+      	<attrdef id="PRICE" value="1400"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+    	<variant id="dynamic">
+    		<usage mode="IMPLANTED" value="0.45"/>
+      	<attrdef id="PRICE" value="2800"/>
+      	<attrdef id="AVAILABILITY" value="7"/>
+    		<modifications>
+	     		<checkmod type="SKILL" ref="stealth" value="1" what="DICE" cond="y"/>
+    		</modifications>
+    	</variant>
+   </item>
+	<item id="transgen_climate_adaption" avail="3" price="4200" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+     	<usage mode="IMPLANTED" value="0.15"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="dermal_plating" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <checkmod type="SKILL" ref="outdoors" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+    	</modifications>
+ 	</item>
+	<item id="transgen_rhino_skin" avail="4" price="2100" type="GENEWARE" subtype="TRANSGENIC_BIOWARE">
+     	<usage mode="IMPLANTED" value="0.15"/>
+     	<flags><flag>AUGMENTATION</flag></flags>
+     	<requires>
+     		<datareq type="CARRIED" ref="bark_skin" negate="true"/>
+     	</requires>
+    	<modifications>
+	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="3" set="NATURAL"/>
+    	</modifications>
+ 	</item>
+	
 </items>

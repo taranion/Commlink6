@@ -121,7 +121,8 @@ public enum ItemType {
 			ItemSubType.THERAPEUTIC,
 			ItemSubType.AUGMENTICS,
 			ItemSubType.COMPLEMENTARY_GENETIC_MODS,
-			ItemSubType.TRANSGENICS
+			ItemSubType.TRANSGENICS,
+			ItemSubType.TRANSGENIC_BIOWARE
 			),
 	PACK(
 			ItemSubType.PACK_COMPLETE,

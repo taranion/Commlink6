@@ -51,6 +51,7 @@ public enum ItemHook implements Hook {
 	CYBEREAR_IMPLANT(true),
 	CYBERLIMB_IMPLANT(true),
 	GLAND,
+	TRANSGEN_GLAND,
 	/* used as implant weapon here */
 	IMPLANT_MELEE,
 	IMPLANT_RANGED,
