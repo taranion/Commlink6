@@ -45,26 +45,31 @@
    </item>
    <item id="balance_receptor_alteration" avail="4" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
       <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
    </item>
    <item id="chemical_gland" avail="5L" price="20000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
            <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
     	</choices>
       <usage mode="IMPLANTED" value="0.1"/>
+      <flags><flag>AUGMENTATION</flag></flags>
        <modifications>
          <itemmod type="HOOK" ref="GLAND" />
         </modifications>
       <variant id="spray">
-     		<attrdef id="AVAILABILITY" value="8L"/>
-      	<attrdef id="PRICE" value="6000"/>
+     	<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="26000"/>
+		<attrdef id="ESSENCECOST"  value="0.2" />
       </variant>
       <variant id="spit">
-     		<attrdef id="AVAILABILITY" value="8L"/>
-      	<attrdef id="PRICE" value="6000"/>
+   		<attrdef id="AVAILABILITY" value="8L"/>
+      	<attrdef id="PRICE" value="26000"/>
+		<attrdef id="ESSENCECOST"  value="0.2" />
       </variant>
       <variant id="weapon">
-      	<attrdef id="PRICE" value="4000"/>
-     	 	<attrdef id="AVAILABILITY" value="7L"/>
+   	 	<attrdef id="AVAILABILITY" value="7L"/>
+      	<attrdef id="PRICE" value="24000"/>
+		<attrdef id="ESSENCECOST"  value="0.2" />
       </variant>
    </item>
 	<item id="chemical_gland_expanded" avail="6L" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
@@ -72,6 +77,8 @@
            <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
     	</choices>
     	<usage mode="EMBEDDED" slot="GLAND"/>
+        <flags><flag>AUGMENTATION</flag></flags>
+		<attrdef id="ESSENCECOST"  value="0.1" />
    	</item>
   	 <item id="expanded_volume" avail="2" price="2000" type="BIOWARE" subtype="BIOWARE_STANDARD">
 		<choices>
@@ -259,8 +266,7 @@
      	<flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
 	     <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="2" set="NATURAL"/>
-	     <!-- TODO: 10% on Armor and clothing -->
-	     <valmod type="PRICEMOD" ref="ARMOR" value="10"/>
+         <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
     	</modifications>
  	</item>
 	<item id="blubber" avail="5" price="1500" type="BIOWARE" subtype="BIOWARE_DERMAL">
@@ -364,8 +370,7 @@
      	<flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
 	     <valmod type="ATTRIBUTE" ref="ATTACK_RATING_PHYSICAL" value="1" set="NATURAL" cond="y"/>
-	     <!-- TODO: 10% on Armor and clothing -->
-	     <valmod type="PRICEMOD" ref="CLOTHING" value="20"/>
+         <valmod type="PRICEMOD" ref="ARMOR" value="0.2" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
     	</modifications>
  	</item>
 

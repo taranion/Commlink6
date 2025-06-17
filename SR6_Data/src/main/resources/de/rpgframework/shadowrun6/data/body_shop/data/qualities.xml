@@ -69,7 +69,7 @@
    <quality id="fine_young_cannibal" karma="4" pos="false" type="TRANSGENIC" />
    <quality id="doesn't_quite_fit" karma="2" pos="false" type="TRANSGENIC" >
 		<modifications>
-			<valmod type="PRICEMOD" ref="CLOTHING" value="25"/>
+			<valmod type="PRICEMOD" ref="ARMOR" value="0.25" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
    </quality>
    <quality id="sensitive_nose" karma="4" pos="false" type="TRANSGENIC" >

@@ -45,6 +45,7 @@
    </item>
    <item id="flex_hands" avail="4I" price="1500" type="CYBERWARE" subtype="COSMETIC">
    	  <usage mode="IMPLANTED" value="0.15"/>
+      <flags><flag>AUGMENTATION</flag></flags>
    </item>
    <item id="keypad_sequencing_fingers" avail="4I" type="CYBERWARE" subtype="COSMETIC">
    	<choices>
