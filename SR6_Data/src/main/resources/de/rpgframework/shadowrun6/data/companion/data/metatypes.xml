@@ -21,10 +21,25 @@
 	</metatype>
 	<metatype id="gnome" variantof="dwarf" size="80" weight="37" karma="5">
 		<modifications>
-           <valmod ref="BODY"      type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
-           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <valmod ref="REACTION"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
-           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="BODY"      type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="REACTION"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="LOGIC"     type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="magic_resistance"/>
+           <itemmod type="QUALITY" ref="neoteny"/>
+           <itemmod type="QUALITY" ref="thermographic_vision"/>
+           <itemmod type="QUALITY" ref="toxin_resistance"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
+		</modifications>
+	</metatype>
+	<metatype id="gnome" variantof="dwarf" size="80" weight="15" karma="5" lang="de">
+		<modifications>
+           <valmod ref="BODY"      type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="REACTION"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/> <!-- 1 higher as shown in book, as neoteny reduces physical attributes by one -->
            <valmod ref="WILLPOWER" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="LOGIC"     type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <itemmod type="QUALITY" ref="magic_resistance"/>
@@ -73,9 +88,35 @@
            <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
 		</modifications>
 	</metatype>
+	<metatype id="menehune" variantof="dwarf" size="110" weight="38" karma="5" lang="de">
+		<modifications>
+           <valmod ref="BODY"      type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="thermographic_vision"/>
+           <itemmod type="QUALITY" ref="toxin_resistance"/>
+           <itemmod type="QUALITY" ref="underwater_vision"/>
+           <itemmod type="QUALITY" ref="webbed_digits"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
+		</modifications>
+	</metatype>
 
 	<!-- Elf variants -->
 	<metatype id="dalakitnon" variantof="elf" size="170" weight="80" karma="5">
+		<modifications>
+           <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="LOGIC"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="INTUITION" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+           <valmod ref="CHARISMA"  type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="allergy" id="fe2953dc-b337-4a44-bdf1-d010508e301b">
+           	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="common"/>
+           	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="moderate"/>
+           	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="spices"/>
+           </itemmod>
+           <itemmod type="QUALITY" ref="low-light_vision"/>
+		</modifications>
+	</metatype>
+	<metatype id="dalakitnon" variantof="elf" size="170" weight="58" karma="5" lang="de">
 		<modifications>
            <valmod ref="AGILITY"   type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
            <valmod ref="LOGIC"     type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
@@ -340,7 +381,43 @@
          <itemmod type="CRITTER_POWER" ref="vanishing"/>
 		</modifications>
 	</metatype>
+	<metatype id="pixie" size="60" weight="5" karma="10" human="false" lang="de">
+		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="3" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="AGILITY"   value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="2" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="8" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="LOGIC"     value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="INTUITION" value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="CHARISMA"  value="8" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="allergy">
+           	 <decision choice="55a6dda7-7565-4108-9a04-65b7607081df" value="uncommon"/>
+           	 <decision choice="b3cd035c-f2c3-4c56-abcd-9a218954d92a" value="moderate"/>
+           	 <decision choice="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" value="iron"/>
+           </itemmod>
+         <itemmod type="CRITTER_POWER" ref="concealment"/>
+         <itemmod type="CRITTER_POWER" ref="vanishing"/>
+		</modifications>
+	</metatype>
 	<metatype id="sasquatch" size="240" weight="244" karma="10" human="false">
+		<geardef>
+			<item id="kick" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3S" attack="10,,,," skill="close_combat" spec="close_combat/unarmed" />
+			</item>
+		</geardef>
+		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
+         <itemmod type="QUALITY"  ref="biosonar"/>
+         <itemmod type="CRITTER_POWER" ref="dual_natured"/>
+         <itemmod type="CRITTER_POWER" ref="mimicry"/>
+         <itemmod type="CRITTER_POWER" ref="natural_weapon">
+         	<decision choice="b5c11ee6-708e-448c-a5c6-438df8335f09" value="kick" />
+         </itemmod>
+		</modifications>
+	</metatype>
+	<metatype id="sasquatch" size="240" weight="265" karma="10" human="false" lang="de">
 		<geardef>
 			<item id="kick" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
 				<weapon dmg="3S" attack="10,,,," skill="close_combat" spec="close_combat/unarmed" />

@@ -158,7 +158,7 @@
 	 		</modifications>
 		</variant>
    </item>
-   <item avail="4" price="750" id="ares_lf_silencer" modonly="yes" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+   <item avail="4" price="750" id="ares_lf_silencer" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="BARREL"/>
       <requires>
          <selreq apply="DATA_ITEM">

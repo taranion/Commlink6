@@ -12,7 +12,7 @@
    <item avail="3L" price="250" id="armored_retention_holster" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
       <usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
       <requires>
-      	<selreq>
+         <selreq apply="DATA_ITEM">
       		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="HOLDOUTS"/>
       		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
       		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_HEAVY"/>
