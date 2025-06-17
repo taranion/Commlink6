@@ -96,7 +96,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 	 </modifications>
       <weapon attack="9,9,7,," ammo="40(c)" dmg="2P" mode="SA/BF" skill="firearms" spec="firearms/machine_pistols"/>
@@ -141,7 +141,7 @@
       <modifications>
           <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
       <weapon attack="10,9,6,," ammo="10(c)" dmg="3P" mode="SA" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -228,7 +228,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
       <weapon attack="11,9,6,," ammo="32(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/submachine_guns"/>
@@ -376,9 +376,9 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <!-- embed type="GEAR" ref="raiden_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/ -->
-         <!-- embed type="GEAR" ref="raiden_launcher" intoType="HOOK" intoRef="UNDER" included="true"/ -->
+         <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="raiden_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="raiden_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
       </modifications>
    </item>
    <item avail="4I" price="11000" id="ares_desert_strike" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
