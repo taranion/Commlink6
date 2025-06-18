@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-   <item id="awareness" avail="3" price="1200" type="BIOWARE" subtype="BIOSENSE">
+   <item id="awareness" avail="4" price="12000" type="BIOWARE" subtype="BIOSENSE">
       <usage mode="IMPLANTED" value="0.1"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <variant id="tactical1">
