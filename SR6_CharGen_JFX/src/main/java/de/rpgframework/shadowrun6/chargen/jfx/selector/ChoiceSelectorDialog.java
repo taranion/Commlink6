@@ -440,7 +440,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 //		logger.log(Level.INFO, "TODO: Check if variants are suitable for "+context+" and carrymode "+carry);
 		List<SR6PieceOfGearVariant> filtered = template.getVariants().stream()
-				.filter(var -> var.getUsage(carry)!=null)
+				.filter(var -> var.getUsage(carry)!=null || var.getUsages().isEmpty())
 				.toList();
 		if (filtered.size()!=template.getVariants().size()) {
 			logger.log(Level.INFO, "Filtered variants for carry mode {0} down to {1}", carry, filtered);
