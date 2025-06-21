@@ -65,8 +65,8 @@ public class FixCharacterStep implements ProcessingStep {
 		}
 		if (!mess.isEmpty()) {
 			mess.add(0, "Character "+model.getName());
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, String.join("\r\n", mess));
 			mess.add("\nPlease verify character and save it again");
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, String.join("\r\n", mess));
 		}
 	}
 
