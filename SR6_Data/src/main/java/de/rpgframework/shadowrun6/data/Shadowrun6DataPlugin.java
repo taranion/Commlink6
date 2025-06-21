@@ -193,6 +193,7 @@ public class Shadowrun6DataPlugin  {
 			initDPBundeswehr();
 			initBestialNature();
 			initTarnishedStar();
+			initDPSOTA2083();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1091,6 +1092,21 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" tools");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"tarnished_star/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+	}
+
+	//-------------------------------------------------------------------
+	private void initDPSOTA2083() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------DE SOTA 2083-----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2083", "de_sota2083.i18n", Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_accessories.xml");
+		//logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
+		//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_vehicles.xml");
+		//logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 }

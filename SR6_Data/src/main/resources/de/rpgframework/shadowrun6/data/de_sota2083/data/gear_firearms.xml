@@ -2,41 +2,95 @@
 <items>
 
 	<item id="ruhrmetall_blizzard" avail="6L" price="3500" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT" >
-      <modifications>
-         <itemmod type="HOOK" ref="BARREL"/>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+		<weapon dmg="5P" mode="SA/BF/FA" attack="4,11,10,6,2" ammo="32(c)" skill="firearms" spec="firearms/rifles"/>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
 			<itemmod type="GEARMOD" ref="rigid_stock" />
-			<itemmod type="GEARMOD" ref="gas_vent_system" />
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
 			<itemmod type="GEARMOD" ref="foregrip" />
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
 			<itemmod type="GEARMOD" ref="accessory_rail_left" />
 			<itemmod type="GEARMOD" ref="accessory_rail_right" />
-      </modifications>
-      <weapon dmg="5P" attack="4,11,10,6,2" mode="SA/BF/FA" ammo="32(c)" skill="firearms" spec="firearms/rifles"/>
-   </item>
-	<item id="glock_giftzwerg_2" avail="2L" price="400" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
+		</modifications>
+	</item>
+	
+	<item id="glock_giftzwerg_2" avail="5L" price="1250" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" >
+		<weapon dmg="3P" mode="SA" attack="10,8,,," ammo="5(c)" skill="firearms" spec="firearms/pistols_light"/> 
 		<modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
 			<itemmod type="GEARMOD" ref="melee_hardening" />
-      </modifications>
-      <weapon dmg="3P" attack="9,10,8,," mode="SA" ammo="6(c)" skill="firearms" spec="firearms/pistols_light"/>
+		</modifications>
    </item>
-   <item id="blaser_conqueror" avail="2L" price="9500" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
-      <modifications>
-         <itemmod type="HOOK" ref="BARREL"/>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
-         <itemmod type="HOOK" ref="STOCK"/>
+   <!-- special ammo not created as item, as it has same stats as explosive, just 2x more expensive -->
+   
+   <item id="blaser_conqueror" avail="6L" price="9500" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+		<weapon dmg="5P" mode="SA" attack="2,6,11,11,5" ammo="5(c)" skill="firearms" spec="firearms/rifles"/>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
 		 	<itemmod type="GEARMOD" ref="biometric_gun_lock" />
 		 	<itemmod type="GEARMOD" ref="easy_breakdown" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="weapon_commlink" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-      </modifications>
-      <weapon attack="2,6,11,11,5"  ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
-   </item>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+		 	<itemmod type="GEARMOD" ref="weapon_commlink" />
+		</modifications>
+	</item>
+
+	<item id="ruhrmetall_sfw_30" avail="7I" price="20000" type="WEAPON_FIREARMS" subtype="HMG">
+		<weapon dmg="7P" mode="BF/FA" attack="3,18,19,18,16" ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="GEARMOD" ref="trigger_removal" />
+			<itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
+			<itemmod type="GEARMOD" ref="heavy_weight"/>
+			<itemmod type="GEARMOD" ref="barrel_extension"/>
+			<itemmod type="GEARMOD" ref="nanoconstruction"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="6" apply="CHARACTER"/>
+		</requires>
+	</item>
+	<item id="ammo_sfw_30" avail="7I" price="45" count="y" units="10" type="AMMUNITION" subtype="CROSSBOWS" >
+		<attrdef id="DAMAGE" value="0"/>
+		<requires>
+			<datareq type="GEAR" ref="ruhrmetall_sfw_30" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<item id="onotario_arms_slingshot" avail="3L" price="1500" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
+		<weapon dmg="0S" mode="SS" attack="2,9,4,," ammo="10(m)" skill="athletics" spec="athletics/archery"/>
+	</item>
+	<item id="slingshot_capsule" avail="2" price="10" count="y" units="10" type="AMMUNITION" subtype="CROSSBOWS" reqVariant="true" >
+		<requires>
+			<datareq type="GEAR" ref="onotario_arms_slingshot" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="paint">
+			<attrdef id="PRICE" value="10"/>
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+		<variant id="toxin">
+			<attrdef id="PRICE" value="610"/>
+			<attrdef id="AVAILABILITY" value="5L"/>
+		</variant>
+		<variant id="acid">
+			<attrdef id="PRICE" value="100"/>
+			<attrdef id="AVAILABILITY" value="4L"/>
+		</variant>
+	</item>
+
+	<item id="walther_supernova" avail="8I" price="1000" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo blast="10" />
+	</item>
 
 </items>
