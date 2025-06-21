@@ -7,7 +7,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
  */
 public enum WeaponSize {
 
-	/**  for hidden_arm_slide) = TASERS, HOLDOUTS, PISTOLS_LIGHT, OTHER_SPECIAL* */
+	/** (for hidden_arm_slide) = TASERS, HOLDOUTS, PISTOLS_LIGHT, OTHER_SPECIAL* */
 	TINY,
 	/** (for all holsters) = PISTOLS_HEAVY, MACHINE_PISTOLS, DMSO*, DART* */
 	SMALL,
@@ -16,7 +16,9 @@ public enum WeaponSize {
 	/** (for weapon_mount_standard) = SHOTGUNS, RIFLE_ASSAULT, RIFLE_HUNTING, RIFLE_SNIPER */
 	LARGE,
 	/** (for weapon_mount_heavy) = LMG, MMG, HMG, ASSAULT_CANNON, LAUNCHERS, THROWERS, BALLISTAS, CANNON */
-	BIG
+	BIG,
+	/** (only for buildings) = WEAPON_SPECIAL - OTHER_SPECIAL - guizhen_2_hall_of_tears */
+	BUILDING
 	;
 
 	//-------------------------------------------------------------------

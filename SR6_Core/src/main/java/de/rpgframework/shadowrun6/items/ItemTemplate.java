@@ -389,9 +389,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			break;
 		case SHOTGUNS:
 		case RIFLE_ASSAULT:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.LARGE); break;
 		case RIFLE_HUNTING:
 		case RIFLE_SNIPER:
-			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.LARGE); break;
 		case LMG:
 		case MMG:
 		case HMG:
@@ -415,6 +415,37 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			return;
 		ItemSubType carriedSubtype = this.getItemSubtype(CarryMode.CARRIED);
 
+		// define firearms based on weapon size		
+		if (carriedType==ItemType.WEAPON_FIREARMS || carriedType==ItemType.WEAPON_SPECIAL) {
+		WeaponSize size = (this.getAttribute(SR6ItemAttribute.WEAPON_SIZE)!=null)?this.getAttribute(SR6ItemAttribute.WEAPON_SIZE).getValue():null;
+			if (size!=null) {
+			switch (size) {
+				case BUILDING: // Kechibi hall of tears 
+					break;
+			
+				case BIG: // all other
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE)); // Double Clutch 142 "any man-portable weapon"
+					break;
+
+				case LARGE: // RIFLE_ASSAULT, SHOTGUNS
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON)); // Double Clutch 142 "any assault rifle or smaller firearm"
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
+					break;
+
+				case TINY: // TASERS, etc.
+				case SMALL: // PISTOLS_HEAVY, etc.
+				case MEDIUM: // SMG
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_SMALL)); // Double Clutch 142 "any SMG or smaller firearm"
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON));
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_LARGE));
+					break;
+
+				}
+			return;
+			}
+		}
+		
+		// if no weapon size found, use subtype
 		switch (carriedSubtype) {
 		case BLADES:
 		case WHIPS:
