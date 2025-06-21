@@ -77,8 +77,8 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, required);
 
 		// May not be at maximum yet
-		int maximum = (value.getMaximum()==0)?6:value.getMaximum();
-		if (maximum<4) maximum+=6;
+		int maxBase = value.getMaximumBase().orElse(6);
+		int maximum = value.getMaximum(maxBase);
 		if (value.getDistributed() >= maximum) {
 			return new Possible(IRejectReasons.IMPOSS_MAX_LEVEL_REACHED);
 		}
@@ -279,14 +279,14 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 			int rank = getModel().getAttribute(ShadowrunAttribute.INITIATION_RANK).getModifiedValue();
 			if (rank>0) {
 				getModel().getAttribute(ShadowrunAttribute.MAGIC).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, "MAGIC", rank, MetamagicOrEcho.Type.METAMAGIC, ValueType.MAX));
-				logger.log(Level.ERROR, "Through initiation the maximum of MAGIC is {0} ", getModel().getAttribute(ShadowrunAttribute.MAGIC).getMaximum());
+				logger.log(Level.ERROR, "Through initiation the maximum of MAGIC is {0} ", getModel().getAttribute(ShadowrunAttribute.MAGIC).getMaximum(6));
 			}
 		}
 		if (mrType.usesResonance()) {
 			int rank = getModel().getAttribute(ShadowrunAttribute.SUBMERSION_RANK).getModifiedValue();
 			if (rank>0) {
 				getModel().getAttribute(ShadowrunAttribute.RESONANCE).addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, "RESONANCE", rank, MetamagicOrEcho.Type.METAMAGIC, ValueType.MAX));
-				logger.log(Level.ERROR, "Through initiation the maximum of RESONANCE is {0} ", getModel().getAttribute(ShadowrunAttribute.RESONANCE).getMaximum());
+				logger.log(Level.ERROR, "Through initiation the maximum of RESONANCE is {0} ", getModel().getAttribute(ShadowrunAttribute.RESONANCE).getMaximum(6));
 			}
 		}
 
