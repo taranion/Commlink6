@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="greifenauge" avail="7L" price="4500" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="TOP"/>
+      <geardef>
+		<item id="greifenauge_camera" type="ACCESSORY" subtype="VISION_ENHANCEMENT" modonly="true">
+			<usage mode="EMBEDDED" slot="OPTICAL" value="1"/>
+		</item>
+      </geardef>
+	  <requires>
+	    <selreq>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
+	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_SNIPER"/>
+	    </selreq>
+	  </requires>
+      <modifications>
+		<valmod type="HOOK" ref="OPTICAL" value="0"/>
+		<embed type="GEAR" ref="greifenauge_camera" intoType="HOOK" intoRef="OPTICAL" />
+		<embed type="GEAR" ref="vision_magnification" intoType="HOOK" intoRef="OPTICAL" />
+		<embed type="GEAR" ref="image_link" intoType="HOOK" intoRef="OPTICAL" />
+		<embed type="GEAR" ref="vision_enhancement" intoType="HOOK" intoRef="OPTICAL" />
+		<embed type="GEAR" ref="smartlink" intoType="HOOK" intoRef="OPTICAL" />
+		<embed type="GEAR" ref="low_light_vision" intoType="HOOK" intoRef="OPTICAL" />
+		</modifications>
+   </item>
+   
+	<item id="aquadyne_lateralis" avail="3" price="9000" type="ELECTRONICS" subtype="SENSOR">
+		<modifications>
+			<checkmod type="SKILL" ref="perception" value="0" what="OTHER" cond="y"/>
+		</modifications>
+	</item>
+
+	<item id="swarovski_hartschier" avail="7" price="5000" type="ARMOR" subtype="ARMOR_SOCIAL">
+		<armor rating="4" social="4"/>
+		<modifications>
+			<valmod type="HOOK" value="0" ref="ARMOR"/>
+			<embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="gear_access" included="true"/>
+			<embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="hidden_pocket" included="true"/>
+            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="thermal_dissipation" included="true">
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
+        	<checkmod type="SKILL" ref="athletics" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+        	<checkmod type="SKILL" ref="stealth" value="1" what="EDGE_ONLY_TEST" cond="y"/>
+		</modifications>
+	</item>
+
+</items>

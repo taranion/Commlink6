@@ -1103,8 +1103,10 @@ public class Shadowrun6DataPlugin  {
 		set.setType(DataSetType.OPT_RULES);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_firearms.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
-		//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_accessories.xml");
-		//logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
+		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"de_sota2083/data/weapon_modifications.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_accessories.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
 		//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_vehicles.xml");
 		//logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
