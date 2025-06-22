@@ -424,7 +424,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"firing_squad/data/quality_paths.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
-		//ShadowrunCore.loadEquipment     (FSQUAD, clazz.getResourceAsStream("firing_squad/data/gear_underbarrel_weapons.xml"), FSQUAD.getResources(), FSQUAD.getHelpResources());
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_underbarrel_weapons.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" underbarrel weapons");
 		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"firing_squad/data/weapon_modifications.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"firing_squad/data/gear_melee.xml");
@@ -1107,8 +1108,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_accessories.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
-		//list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_vehicles.xml");
-		//logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 }
