@@ -314,12 +314,12 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" matrix actions");
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon accessories");
 		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, core, clazz,"core/data/weapon_modifications.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz, "core/data/gear_melee.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" items");
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon accessories");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_armor.xml");

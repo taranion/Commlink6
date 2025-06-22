@@ -154,7 +154,6 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		//case WEAPON_SECURITY   : index= 5; break; // Slot no longer in use, depreciated
 		case SIDE_L            : index= 6; break;
 		case INTERNAL          : index= 8; break;
-		//case OPTICAL           : index= 8; break; // Created by smartgun_system, should be a mod (pen symbol) inside smartgun, not a new slot
 		case FIREARMS_EXTERNAL : index= 9; break;
 		case TOP               : index=10; break;
 		case BARREL            : index=11; break;
@@ -170,7 +169,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case VEHICLE_HARDPOINT  : index= 9; break;
 		case VEHICLE_CF         : index=10; break;
 		// slot 11 used for modslot circle (body, powertrain, electrical)
-		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
+		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_HARDPOINT)
 
 
 		default:
