@@ -114,17 +114,17 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
-         <embed type="GEAR" ref="steyr_ucr_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="steyr_ucr_shotgun" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
       </modifications>
       <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="steyr_ucr_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 				<weapon dmg="4P" mode="SS/SA" attack="7,9,8,," ammo="4(m)"  skill="firearms" spec="firearms/shotguns"/>
 			</item>
 		</geardef>
@@ -133,17 +133,17 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
-         <embed type="GEAR" ref="steyr_ucr_taser" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="steyr_ucr_taser" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
       </modifications>
       <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="steyr_ucr_taser" type="WEAPON_FIREARMS" subtype="TASERS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 				<weapon dmg="4S(e)" mode="SS" attack="9,9,,," ammo="4(m)"  skill="firearms" spec="firearms/tasers"/>
 			</item>
 		</geardef>
@@ -162,7 +162,7 @@
       <weapon dmg="5P" attack="5,11,11,7,2" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="steyr_ucr_bayonet" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER"/>
 				<weapon  dmg="3P" attack="8,2,,," skill="close_combat" spec="close_combat/blades"/>
 			</item>
 		</geardef>
@@ -196,11 +196,11 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="hkg12_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="hkg12_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <itemmod type="GEARMOD" ref="rigid_stock"/>
          <itemmod type="GEARMOD" ref="foregrip"/>
@@ -208,7 +208,7 @@
       <weapon dmg="4P" attack="4,11,10,6,1" ammo="32(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="hkg12_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 				<weapon dmg="0P" attack="4,11,7,1," mode="SS" ammo="8(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
 			</item>
 		</geardef>
@@ -217,13 +217,13 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="SIDE_L"/>
          <itemmod type="HOOK" ref="SIDE_R"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>
          <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
@@ -232,7 +232,7 @@
       <weapon dmg="5P" attack="6,11,10,7,1" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="hk223_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER"/>
 				<weapon dmg="0P" attack="4,12,8,1," mode="SS" ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
 			</item>
 		</geardef>
@@ -241,13 +241,13 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
+         <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="SIDE_L"/>
          <itemmod type="HOOK" ref="SIDE_R"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER" included="true"/>
+         <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>
          <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
@@ -257,7 +257,7 @@
       <weapon dmg="5P" attack="6,11,10,7,1" ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 			<item id="hk223_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 				<weapon dmg="0P" attack="4,12,8,1," mode="SS" ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers" />
 			</item>
 		</geardef>
