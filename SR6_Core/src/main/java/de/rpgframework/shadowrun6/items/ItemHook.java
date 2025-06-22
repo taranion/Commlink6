@@ -75,7 +75,7 @@ public enum ItemHook implements Hook {
 	VEHICLE_WEAPON_LARGE(true),
 	VEHICLE_ACCESSORY(true),
 	VEHICLE_TIRES ,
-	KOMMODORE_MODULE, // for EMC Kommodore from SOTA 2083
+	KOMMODORE_MODULE(true), // for EMC Kommodore from SOTA 2083
 	SOFTWARE(true),
 	SKILLJACK(true),
 	INSTRUMENT_SLOT(true),
