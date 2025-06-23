@@ -585,10 +585,9 @@
    	<attrdef id="PRICE" value="$RATING*2500"/>
    </item>
 
-	<!-- Chassis - Seating and Cargo Mods -->
-   <item id="increase_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO">
+   <item id="increase_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_INTERIOR">
    	<choices>
-  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
    	</choices>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
@@ -598,60 +597,48 @@
       	<valmod type="HOOK" ref="VEHICLE_CF" value="$RATING*2"/>
       </modifications>
    </item>
-   <item id="reduce_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO">
+   <item id="reduce_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_INTERIOR">
    	<choices>
-  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
    	</choices>
       <requires>
         <datareq type="ITEMTYPE" ref="VEHICLES" />
       </requires>
-   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="$RATING"/>
+   	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
       <modifications>
+      	<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="$RATING"/>
       	<valmod type="HOOK" ref="VEHICLE_CF" value="$RATING*-2"/>
       </modifications>
    </item>
 
-	<!--
+	<!-- Chassis - Seating and Cargo Mods -->
 
-   <item id="increase_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO" rate="y" ratemul="PRICE CAPACITY MODIFIER" >
-   	 <useas type="MOD_CHASSIS" subtype="MOD_CARGO" cap="1" slot="VEHICLE_CHASSIS"/>
-      <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_CF" value="2"/>
-      </modifications>
+	<item id="increase_seating" avail="2" price="1200" type="MOD_CHASSIS" subtype="MOD_CARGO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
+		</choices>
+		<requires>
+			<datareq type="ITEMTYPE" ref="VEHICLES" />
+		</requires>
+		<usage mode="EMBEDDED" slot="VEHICLE_CF" value="$RATING"/>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="$RATING" />
+		</modifications>
+	</item>
+
+	<item id="reduce_seating" avail="0" price="0" type="MOD_CHASSIS" subtype="MOD_CARGO">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
+		</choices>
+		<requires>
+			<datareq type="ITEMTYPE" ref="VEHICLES" />
+		</requires>
+		<usage mode="EMBEDDED" slot="VEHICLE_CF" value="0"/>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="-$RATING" />
+			<valmod type="HOOK" ref="VEHICLE_CF" value="1"/>
+		</modifications>
    </item>
-
-   <item id="reduce_cargo_space" avail="2" price="800" type="MOD_CHASSIS" subtype="MOD_CARGO" rate="y" ratemul="PRICE CAPACITY MODIFIER" >
-      <requires>
-        <slotreq capacity="2" slot="VEHICLE_CF" />
-      </requires>
-      <modifications>
-      	<valmod type="HOOK" ref="VEHICLE_CHASSIS" value="1"/>
-      </modifications>
-   </item>
-
-   <item id="increase_seating" avail="2" price="1200" type="MOD_CHASSIS" subtype="MOD_CARGO" rate="y" ratemul="PRICE CAPACITY MODIFIER" >
-   	 <useas type="MOD_CHASSIS" subtype="MOD_CARGO" cap="1" slot="VEHICLE_CF"/>
-      <requires>
-         <datareq type="ITEMTYPE" ref="VEHICLES" />
-      </requires>
-      <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="1" />
-      </modifications>
-   </item>
-
-   <item id="reduce_seating" avail="0" price="0" type="MOD_CHASSIS" subtype="MOD_CARGO" rate="y" maxrat="99" ratemul="CAPACITY MODIFIER" >
-   	 <useas type="MOD_CHASSIS" subtype="MOD_CARGO" cap="0" slot="VEHICLE_CF"/>
-      <requires>
-        <datareq type="ITEMTYPE" ref="VEHICLES" />
-      </requires>
-      <modifications>
-        <valmod type="ITEM_ATTRIBUTE" ref="SEATS" value="-1" />
-      	<valmod type="HOOK" ref="VEHICLE_CF" value="1"/>
-      </modifications>
-   </item>
- -->
-
-<!-- CF - Seating and Cargo Mods -->
 
     <item id="living_space" avail="2" price="500" type="MOD_CHASSIS" subtype="MOD_CARGO" count="true" >
       <requires>
