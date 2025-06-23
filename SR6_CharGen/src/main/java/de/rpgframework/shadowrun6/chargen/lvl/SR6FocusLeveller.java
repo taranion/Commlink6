@@ -70,7 +70,7 @@ public class SR6FocusLeveller extends SR6CommonFocusController {
 	public List<Modification> process(List<Modification> unprocessed) {
 		unprocessed = super.process(unprocessed);
 
-		logger.log(Level.ERROR, "Force pool is "+forcePool);
+		logger.log(Level.INFO, "Remaining Force pool is "+forcePool);
 
 		return unprocessed;
 	}
