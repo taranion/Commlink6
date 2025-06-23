@@ -260,23 +260,23 @@
 
 <!-- Rigger Software -->
 
-	<item avail="4I" price="250" id="smart_rig" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+	<item avail="4I" price="250" id="smart_rig" type="SOFTWARE" subtype="RIGGER_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<attrdef id="SIZE" value="1"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item>
-	<item avail="1" price="60" id="smart_rig" lang="de" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+	<item avail="1" price="60" id="smart_rig" lang="de" type="SOFTWARE" subtype="RIGGER_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<attrdef id="SIZE" value="1"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item>
 
-	<item avail="4I" price="250" id="swarm_rig" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+	<item avail="4I" price="250" id="swarm_rig" type="SOFTWARE" subtype="RIGGER_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<attrdef id="SIZE" value="1"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
 	</item>
-	<item avail="1" price="60" id="swarm_rig" lang="de" type="ACCESSORY" subtype="RIGGER_PROGRAM">
+	<item avail="1" price="60" id="swarm_rig" lang="de" type="SOFTWARE" subtype="RIGGER_PROGRAM">
 		<usage mode="EMBEDDED" slot="SOFTWARE" />
 		<attrdef id="SIZE" value="1"/>
 		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="AUTOSOFT" apply="DATA_ITEM"/></requires>
