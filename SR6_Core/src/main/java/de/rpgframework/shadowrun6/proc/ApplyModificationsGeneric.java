@@ -15,6 +15,7 @@ import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.IReferenceResolver;
+import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.AllowModification;
@@ -99,6 +100,11 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						return applySkill(model, (ValueModification) mod);
 					else
 						return applySkill(model, mod);
+				case SKILLSPECIALIZATION:
+					if (mod instanceof ValueModification)
+						return applySkillSpec(model, (ValueModification) mod);
+					else
+						return applySkillSpec(model, mod);
 				case ITEM_ATTRIBUTE:
 				case ACTION:
 					logger.log(Level.INFO, "Add global item {1} modification {0}", mod, mod.getOrigin());
@@ -179,6 +185,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			return false;
 		}
 		AdeptPowerValue value = model.getAdeptPower(mod.getKey());
+		logger.log(Level.ERROR, "from "+mod.getSource()+" applyAdeptPower "+item+" that currently has "+value);
 		// Find an adept power that matches ID
 		// AND decisions
 		value = Shadowrun6Tools.getMatchIncludingDecisions(model.getAdeptPowers(),mod.getKey(), mod.getDecisions());
@@ -186,11 +193,10 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		if (value == null) {
 			value = new AdeptPowerValue(item, 0);
 			value.setInjectedBy(mod.getSource());
-			value.addIncomingModification(mod);
 			// For non-rating adept powers, assume rating 1
-			if (!(mod instanceof ValueModification) && item.hasLevel()) {
-				value.setDistributed(1);
-			}
+//			if (!(mod instanceof ValueModification) && item.hasLevel()) {
+//				value.setDistributed(1);
+//			}
 			// Handle decisions
 			for (Decision dec : mod.getDecisions()) {
 				value.addDecision(dec);
@@ -204,9 +210,9 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 		value.addIncomingModification(mod);
 
 		if (item.hasLevel()) {
-			logger.log(Level.DEBUG, " Level is now distr={0}   mod={1} = " + value.getNameWithoutRating(), value.getDistributed(),
+			logger.log(Level.WARNING, " Level is now distr={0}   mod={1} = " + value.getNameWithoutRating(), value.getDistributed(),
 					value.getModifier());
-			logger.log(Level.DEBUG, "  result=" + value);
+			logger.log(Level.INFO, "  result=" + value);
 		}
 		return true;
 	}
@@ -301,6 +307,55 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			value.setUuid(mod.getId());
 		value.addIncomingModification(mod);
 		logger.log(Level.ERROR, "Added skill {0} (from {1})",  item, mod.getSource());
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applySkillSpec(Shadowrun6Character model, ValueModification mod) {
+		SkillSpecialization<SR6Skill> item = mod.getReferenceType().resolve(mod.getKey());
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " from {1} - no such skill spec {0}", mod.getKey(),mod.getSource());
+		}
+//		SR6SkillValue value = model.getSkillValue(item);
+//		if (value==null  && mod.getSet()==ValueType.NATURAL) {
+//			value = new SR6SkillValue(item, mod.getValue());
+//			model.addSkillValue(value);
+//		}
+//		if (value == null) {
+//			if ("language".equals(item.getId()) || "knowledge".equals(item.getId())) {
+//				value = new SR6SkillValue(item, 0);
+//				model.addSkillValue(value);
+//				for (Decision dec : mod.getDecisions()) {
+//					value.addDecision(dec);
+//					logger.log(Level.DEBUG, "Add decision {0} to skill {1}", dec, item);
+//				}
+//			} else {
+//				logger.log(Level.WARNING, "applySkill for skill unset: "+mod.getKey());
+//				return false;
+//			}
+//		}
+//
+//		value.addIncomingModification(mod);
+//		logger.log(Level.INFO, "Added {0} to skill {1} ({2}) from {3}", mod.getValue(), item, mod.getSet(), mod.getSource());
+
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applySkillSpec(Shadowrun6Character model, DataItemModification mod) {
+		SkillSpecialization<SR6Skill> item = mod.getReferenceType().resolve(mod.getKey());
+		// Before adding a new skill, check if it already exists
+//		if (mod.getId()!=null) {
+//			SR6SkillValue value = model.getSkillValue(mod.getId());
+//			if (value!=null)
+//				return true;
+//		}
+//
+//		SR6SkillValue value = new SR6SkillValue(item, 1);
+//		if (mod.getId()!=null)
+//			value.setUuid(mod.getId());
+//		value.addIncomingModification(mod);
+//		logger.log(Level.ERROR, "Added skill {0} (from {1})",  item, mod.getSource());
 		return true;
 	}
 
