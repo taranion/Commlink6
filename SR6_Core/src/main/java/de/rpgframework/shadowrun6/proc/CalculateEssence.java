@@ -2,6 +2,7 @@ package de.rpgframework.shadowrun6.proc;
 
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
@@ -129,18 +131,26 @@ public class CalculateEssence implements ProcessingStep {
 			makeSureAllGearRecorded();
 			
 			logger.log(Level.INFO, "Essence changes: "+model.getEssenceChanges());
+			List<ValueModification> brokenEssenceChanges = new ArrayList<>();
 			for (ValueModification mod : model.getEssenceChanges()) {
 				int change = mod.getValue();
 				String name = mod.getKey();
-				logger.log(Level.DEBUG, "Type "+mod.getReferenceType()+" for "+mod);
+//				logger.log(Level.DEBUG, "Type "+mod.getReferenceType()+" for "+mod);
 				switch ( (ShadowrunReference)mod.getReferenceType() ) {
 				case CARRIED:
 					CarriedItem<ItemTemplate> carried = model.getCarriedItem(mod.getId());
 					if (carried!=null) {
 						name = carried.getNameWithRating();
+						if (carried.getCarryMode()!=CarryMode.IMPLANTED) {
+							logger.log(Level.WARNING, "Remove essence cost item not IMPLANTED: "+name);
+							brokenEssenceChanges.add(mod);
+							continue;
+						}
 					} else {
-						logger.log(Level.INFO, "Removed item found: "+mod.getId()+" / "+mod.getSource());
+						logger.log(Level.WARNING, "Removed item found: "+mod.getId()+" / "+mod.getSource());
 						name = "BOOM";
+						brokenEssenceChanges.add(mod);
+						continue;
 					}
 					break;
 				case QUALITY:
@@ -187,12 +197,16 @@ public class CalculateEssence implements ProcessingStep {
 						}
 					}
 					if (change>0) {
-						logger.log(Level.DEBUG, "{0}: Pay essence {1}", name, change);
+						logger.log(Level.DEBUG, "{0}: Pay essence {1} ... essence before {2}", name, change, essence);
 						essence -= change;
 					}
 				}
 			}
 			logger.log(Level.INFO, "Final essence: {0}", essence);
+			
+			logger.log(Level.INFO, "Found {0} essence change histories that are not present anymore",brokenEssenceChanges.size());
+			model.getEssenceChanges().removeAll(brokenEssenceChanges);
+			
 			AttributeValue<ShadowrunAttribute> holeVal = model.getAttribute(ShadowrunAttribute.ESSENCE_HOLE);
 			if (holeVal==null) {
 				holeVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.ESSENCE_HOLE, 0);
