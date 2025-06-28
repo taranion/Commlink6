@@ -4,6 +4,7 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
@@ -313,7 +314,11 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		logger.log(Level.DEBUG, " Base INI Astral = "+val.getModifiedValue());
 		// Initiave Dice (Astral)
 		val = model.getAttribute(ShadowrunAttribute.INITIATIVE_DICE_ASTRAL);
+		if (Locale.getDefault().getLanguage().equals("de")) {
+			val.setDistributed(3); // Base value without modifiers, DE rules use 3D6 astral init
+		} else {
 		val.setDistributed(2); // Base value without modifiers
+		}
 		logger.log(Level.DEBUG, "              = "+val.getModifiedValue());
 		// Minor actions (Astral)
 		val = model.getAttribute(ShadowrunAttribute.MINOR_ACTION_ASTRAL);

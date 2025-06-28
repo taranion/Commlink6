@@ -105,7 +105,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		boolean large = false;
 		int index = -1;
 		switch (slot.getHook()) {
-		// Available slots: 2-6, 8-11 (1 = data, 7 = name and notes, 12 = cost and number)
+		// Available slots: 2-6, 8-11 (1 = keep free, 7 = name and notes, 12 = cost and number)
 
 		// Melee weapons
 		// Slot 2 is used for modifications
@@ -151,15 +151,15 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case UNDER_WEAPON_MOUNT: index= 3; break; // Ok to overlap with UNDER as UNDER_WEAPON_MOUNT replaces UNDER
 		case STOCK             : index= 4; break;
 		case SIDE_R            : index= 5; break;
-		//case WEAPON_SECURITY   : index= 5; break; // Overlaps with SIDE_R, should be a mod (pen symbol) inside the modification, not a new slot
+		//case WEAPON_SECURITY   : index= 5; break; // Slot no longer in use, depreciated
 		case SIDE_L            : index= 6; break;
 		case INTERNAL          : index= 8; break;
-		//case OPTICAL           : index= 8; break; // Created by smartgun_system, should be a mod (pen symbol) inside smartgun, not a new slot
 		case FIREARMS_EXTERNAL : index= 9; break;
 		case TOP               : index=10; break;
 		case BARREL            : index=11; break;
 
 		// Vehicles
+		case KOMMODORE_MODULE   : index= 1; break; // area 1 is not used for vehicles
 		case VEHICLE_CHASSIS    : index= 2; break;
 		case VEHICLE_ELECTRONICS: index= 3; break;
 		case VEHICLE_POWERTRAIN : index= 4; break;
@@ -169,7 +169,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case VEHICLE_HARDPOINT  : index= 9; break;
 		case VEHICLE_CF         : index=10; break;
 		// slot 11 used for modslot circle (body, powertrain, electrical)
-		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_BODY)
+		// slot for VEHICLE_WEAPON not needed, as those are inside hardpoints (VEHICLE_HARDPOINT)
 
 
 		default:

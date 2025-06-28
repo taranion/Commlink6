@@ -117,11 +117,12 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="UNDER" />
-            <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="walther_esg_shock_club" />
+			<itemmod type="HOOK" ref="BARREL" />
+            <embed type="GEAR" intoType="HOOK" intoRef="BARREL" ref="walther_esg_shock_club" />
       </modifications>
 		<geardef>
 			<item id="walther_esg_shock_club" type="WEAPON_CLOSE_COMBAT" subtype="CLUBS">
-				<usage mode="EMBEDDED"/>
+				<usage mode="EMBEDDED" slot="BARREL"/>
 				<weapon dmg="5S(e)" attack="5,,,,"  skill="close_combat" spec="close_combat/clubs"/>
 			</item>
 		</geardef>

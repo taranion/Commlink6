@@ -21,7 +21,7 @@ public enum ItemHook implements Hook {
 	TOP,
 	UNDER,
 	UNDER_WEAPON_MOUNT, // Firing squad
-	WEAPON_SECURITY, // Firing squad
+	WEAPON_SECURITY, // Firing squad, slot depreciated, replaced by choices
 	SIDE_L, // Firing squad
 	SIDE_R, // Firing squard
 	STOCK,
@@ -75,6 +75,7 @@ public enum ItemHook implements Hook {
 	VEHICLE_WEAPON_LARGE(true),
 	VEHICLE_ACCESSORY(true),
 	VEHICLE_TIRES ,
+	KOMMODORE_MODULE(true), // for EMC Kommodore from SOTA 2083
 	SOFTWARE(true),
 	SKILLJACK(true),
 	INSTRUMENT_SLOT(true),

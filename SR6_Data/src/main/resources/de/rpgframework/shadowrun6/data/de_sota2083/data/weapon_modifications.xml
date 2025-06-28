@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+
+	<itemenhancement id="hk_tyr" avail="3L" price="400">
+		<requires>
+			<selreq>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_LIGHT"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="PISTOLS_HEAVY"/>
+			</selreq>
+			<datareq type="GEAR" ref="collapsible_stock" negate="true" apply="PARENT"/>
+			<datareq type="GEAR" ref="folding_stock" negate="true" apply="PARENT"/>
+			<datareq type="GEAR" ref="no_stock" negate="true" apply="PARENT"/>
+			<datareq type="GEAR" ref="foldinrevolution_arms_collapsible_stockg_stock" negate="true" apply="PARENT"/>
+			<datareq type="GEAR" ref="rigid_stock" negate="true" apply="PARENT"/>
+			<datareq type="GEAR" ref="stock" negate="true" apply="PARENT"/>
+		</requires>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="0,+2,+2,,"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="-1" />
+			<itemmod type="HOOK" ref="STOCK"/>
+			<itemmod type="GEARMOD" ref="foregrip" />
+			<itemmod type="HOOK" ref="SIDE_L"/>
+			<itemmod type="HOOK" ref="SIDE_R"/>
+		</modifications>
+	</itemenhancement>
+
+</itemenhancements>

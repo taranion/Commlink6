@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="bmw_vt5" avail="7L" price="375000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="3/6" acc="10" spdi="20" tspd="130" bod="8" arm="3" pil="3" sen="3" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="vector_thrust" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+			<embed type="GEAR" ref="anti_theft" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" variant="rating3" />
+			<embed type="GEAR" ref="electrochromatic_paint" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="gridlink" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="zapper" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications> 
+	</item>
+
+	<item id="proteus_beachskipper" avail="3" price="18000" type="VEHICLES" subtype="ATVS" >
+		<vehicle han="4/3" acc="15" spdi="15" tspd="120" bod="2" arm="2" pil="1" sen="1" sea="2"/>
+		<modifications>
+      		<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
+		</modifications> 
+	</item>
+
+   <item id="man_grf668" avail="8I"  price="190000" type="VEHICLES" subtype="TRUCKS">
+      <vehicle han="3/2" acc="17" spdi="30" tspd="140" bod="18" arm="14" pil="3" sen="3" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="anti_theft" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" variant="rating2" />
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="hardpoint_concealment" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" variant="huge" />
+			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" variant="regular" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" variant="regular" />
+			<embed type="GEAR" ref="extra_entry_points" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+		</modifications> 
+   </item>
+
+	<item id="proteus_explorer" avail="6" price="132000" type="VEHICLES" subtype="SUBMARINES" >
+		<vehicle han="2" acc="15" spdi="25" tspd="50" bod="11" arm="8" pil="3" sen="5" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="CHEMICAL"/>
+				</embed>
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="extreme_environment" intoType="HOOK" intoRef="VEHICLE_CHASSIS" variant="depth" />
+			<embed type="GEAR" ref="life_safety_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" variant="level2" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<!-- "Unterwasseranpassung" does not exist, probably should be "Umweltanpassung" which is a design mod, not a vehicle mod, thus cannot be added -->
+			<embed type="GEAR" ref="enhanced_sensors" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+		</modifications>
+	</item>
+
+	<item id="messerschmitt_maikaefer" avail="3" price="7000" type="DRONE_SMALL" subtype="AIR" >
+		<vehicle han="3" acc="11" spdi="25" tspd="78" bod="1" arm="1" pil="3" sen="3" />
+		<modifications>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="porsche_aqua503" avail="2" price="41000" type="VEHICLES" subtype="BOATS" >
+		<vehicle han="3" acc="14" spdi="15" tspd="160" bod="5" arm="8" pil="2" sen="2" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="amenities" intoType="HOOK" intoRef="VEHICLE_CHASSIS" variant="low" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	
+	<item id="bmw_ggx_civil" avail="5"  price="12000" type="VEHICLES" subtype="ATVS">
+		<vehicle han="4/2" acc="20" spdi="20" tspd="80" bod="4" arm="2" pil="2" sen="2" sea="2"/>
+		<modifications>
+			<itemmod type="CONSTRUCTION" ref="OPEN"/>
+			<embed type="GEAR" ref="anti_theft" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" variant="rating1" />
+			<embed type="GEAR" ref="elemental_hardening" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="CHEMICAL"/>
+				</embed>
+			<embed type="GEAR" ref="multi_terrain_static" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+				</embed>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
+		</modifications>
+	</item>
+	
+	<item id="plex_cab" avail="2" price="13000" type="VEHICLES" subtype="CARS" >
+		<vehicle han="1/1" acc="8" spdi="20" tspd="40" bod="5" arm="4" pil="2" sen="2" sea="6"/>
+		<modifications>
+			<embed type="GEAR" ref="removed_manuals" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+				</embed>
+			<embed type="GEAR" ref="gridlink" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="sony_emporer" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="trid_projector" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<valmod type="HOOK" ref="VEHICLE_CF" value="1"/> <!-- factory installed mods do not change base values, so installing an increase_cargo_space mod does not change CF -->
+		</modifications> 
+	</item>
+	
+	<item id="der_otto" avail="2" price="26300" type="VEHICLES" subtype="CARS" >
+		<vehicle han="4/2" acc="10" spdi="20" tspd="45" bod="14" arm="13" pil="2" sen="2" sea="4"/>
+		<modifications>
+			<embed type="GEAR" ref="removed_manuals" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="multi_terrain_static" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+				</embed>
+			<embed type="GEAR" ref="gridlink" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" variant="passenger_troll" />
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" variant="passenger_troll" />
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" variant="passenger_troll" />
+			<embed type="GEAR" ref="meta_adjust_pilot" intoType="HOOK" intoRef="VEHICLE_CF" variant="passenger_troll" />
+		</modifications> 
+	</item>
+
+	<item id="eurocopter_commuter" avail="6L" price="225000" type="VEHICLES" subtype="ROTORCRAFT" >
+		<vehicle han="3" acc="18" spdi="25" tspd="160" bod="12" arm="8" pil="4" sen="4" sea="8"/>
+		<modifications>
+			<embed type="GEAR" ref="anti_theft" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" variant="rating2" />
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+            	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				</embed>
+			<embed type="GEAR" ref="amenities" intoType="HOOK" intoRef="VEHICLE_CHASSIS" variant="luxury" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+		</modifications>
+	</item>
+
+	<item id="emc_kommodore" avail="3" price="25000" type="VEHICLES" subtype="VANS" >
+		<vehicle han="4/4" acc="12" spdi="20" tspd="115" bod="12" arm="10" pil="2" sen="2" sea="2"/>
+		<modifications>
+			<embed type="GEAR" ref="extra_entry_points" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<valmod type="HOOK" ref="KOMMODORE_MODULE" value="6"/>
+		</modifications>
+	</item>
+	
+	<item id="emc_kommodore_module_drone" avail="3" price="8000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_passengers" avail="3" price="4800" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_trolls" avail="3" price="2400" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_freight" avail="3" price="1600" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_long_distance" avail="3" price="12000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_solar" avail="3" price="9500" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_valkyrie" avail="3" price="3000" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_living_squat" avail="3" price="1500" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+	<item id="emc_kommodore_module_living_low" avail="3" price="3500" type="ACCESSORY" subtype="VEHICLE_ACCESSORY">
+		<usage mode="EMBEDDED" slot="KOMMODORE_MODULE"/>
+	</item>
+
+ </items>

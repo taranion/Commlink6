@@ -54,8 +54,7 @@ public enum ItemSubType {
 	OTHER_SPECIAL,
 	WEAPON_ACCESSORY,
 	EXPLOSIVES,
-	WEAPON_SECURITY,
-	// AMMUNITION,
+	WEAPON_SECURITY, // Firing squad, slot depreciated, replaced by choices
 	AMMUNITION,
 //	AMMO_TASER,
 //	AMMO_LIGHT,

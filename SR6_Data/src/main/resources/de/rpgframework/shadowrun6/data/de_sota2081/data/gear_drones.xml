@@ -8,7 +8,7 @@
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="mulataschak_soundsystem" />
       </modifications>
 		<geardef>
-			<item id="mulataschak_soundsystem" type="ACCESSORY" subtype="MOD_MISC" >
+			<item id="mulataschak_soundsystem" type="MOD_ELEC" subtype="MOD_MISC" >
 			<usage mode="EMBEDDED"/>
 			</item>
 		</geardef>

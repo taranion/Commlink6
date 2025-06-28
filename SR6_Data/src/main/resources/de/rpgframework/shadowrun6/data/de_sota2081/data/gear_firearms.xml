@@ -121,16 +121,16 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-			<itemmod type="HOOK" ref="UNDER" />
+			<itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT" />
 			<itemmod type="HOOK" ref="STOCK" />
 			<embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
 			<embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
-			<embed type="GEAR" ref="steyr_ucr_shotgun" intoType="HOOK" intoRef="UNDER" included="true"/>
+			<embed type="GEAR" ref="steyr_ucr_shotgun" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
       </modifications>
       <weapon dmg="5P" mode="SA/BF/FA" attack="4,10,10,6,2" ammo="40(c)"  skill="firearms" spec="firearms/rifles"/>
 		<geardef>
 		<item id="steyr_ucr_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
-			<usage mode="EMBEDDED"/>
+			<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 			<weapon dmg="4P" mode="SS/SA" attack="7,9,8,," ammo="4(m)"  skill="firearms" spec="firearms/shotguns"/>
 		</item>
 		</geardef>

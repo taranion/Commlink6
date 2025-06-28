@@ -91,14 +91,14 @@
       <modifications>
 		<itemmod type="HOOK" ref="BARREL"/>
         <itemmod type="HOOK" ref="TOP"/>
-        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="krime_ditch_shotgun" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" ref="krime_ditch_shotgun" included="true"/>
         <itemmod type="GEARMOD" ref="metahuman_adaption"/>
       </modifications>
 	<geardef>
 		<item id="krime_ditch_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
-			<usage mode="EMBEDDED"/>
+			<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
 			<weapon dmg="5P" mode="SS" attack="7,5,1,," ammo="1(b)" skill="firearms" spec="firearms/shotguns"/>
 		</item>
 	</geardef>
@@ -151,14 +151,14 @@
       <weapon dmg="5P" mode="SA/BF" attack="1,7,6,3,1" ammo="21(c)" skill="firearms" spec="firearms/rifles"/>
       <modifications>
 		<itemmod type="HOOK" ref="BARREL"/>
-        <itemmod type="HOOK" ref="UNDER"/>
+        <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
         <itemmod type="GEARMOD" ref="metahuman_adaption"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="UNDER" ref="krime_grenade_launcher" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" ref="krime_grenade_launcher" included="true"/>
       </modifications>
 	<geardef>
 		<item id="krime_grenade_launcher" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
-			<usage mode="EMBEDDED" slot="UNDER" />
+			<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT" />
 			<weapon dmg="0P" mode="SS" attack="4,10,6,2," ammo="4(m)" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
 		</item>
 	</geardef>
