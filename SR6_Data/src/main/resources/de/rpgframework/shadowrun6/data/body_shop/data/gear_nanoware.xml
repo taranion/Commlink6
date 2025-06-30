@@ -31,6 +31,7 @@
 	<item id="nanite_pilot" avail="3" price="500" type="SOFTWARE" subtype="OTHER_PROGRAMS">
    	<choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3"/>
+		<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
    	</choices>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 		<attrdef id="PRICE" value="$RATING*500"/>
