@@ -2367,6 +2367,26 @@ public class Shadowrun6Tools {
 
 	//-----------Get primary armor = has defense_physical and NOT has Cumulative-------------------------------------
 	public static CarriedItem<ItemTemplate> getPrimaryArmor(Shadowrun6Character model) {
+		// Clear automatic flags
+		model.getCarriedItems().stream()
+			.filter(ci -> ci.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) && !ci.hasFlag(SR6ItemFlag.CUMULATIVE))
+			.forEach(item -> {
+				item.setAutoFlag(SR6ItemFlag.PRIMARY, false);
+				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, true);
+			});
+		
+		// Check if there has been a user selection
+		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
+			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) || item.hasFlag(SR6ItemFlag.CUMULATIVE))
+				continue;
+			if (item.hasUserFlag(SR6ItemFlag.PRIMARY)) {
+				item.setAutoFlag(SR6ItemFlag.IGNORE_FOR_CALCULATIONS, false);
+				item.setAutoFlag(SR6ItemFlag.PRIMARY, true);
+				return item;
+			}
+		}
+		
+		// No user selection - find best armor
 		CarriedItem<ItemTemplate> bestArmor = null;
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {
 			if (!item.hasAttribute(SR6ItemAttribute.DEFENSE_PHYSICAL) || item.hasFlag(SR6ItemFlag.CUMULATIVE))
