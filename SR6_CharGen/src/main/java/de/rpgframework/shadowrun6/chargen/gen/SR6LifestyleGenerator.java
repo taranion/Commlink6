@@ -19,6 +19,7 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
+import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
@@ -308,7 +309,12 @@ public class SR6LifestyleGenerator extends ControllerImpl<LifestyleQuality> impl
 	 */
 	@Override
 	public Possible canBeIncreased(SR6Lifestyle value) {
-		return new Possible(parent.getModel().getNuyen() >= value.getCostPerMonth());
+		int toPay = value.getCostPerMonth();
+		// Infected pay 30% more
+		if (model.hasRuleFlag(SR6RuleFlag.INFECTED)) {
+			toPay = (int)(toPay*1.3);
+		}
+		return new Possible(parent.getModel().getNuyen() >= toPay);
 	}
 
 	//-------------------------------------------------------------------

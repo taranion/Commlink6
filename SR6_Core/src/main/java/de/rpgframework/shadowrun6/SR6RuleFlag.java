@@ -51,6 +51,8 @@ public enum SR6RuleFlag implements RuleFlag {
 
 	// 6WC: Physical monitor round down (e.g. Neoteny from 6WC)
 	PHYSICAL_ROUND_DOWN,
+	// +30% Lifestyle cost
+	INFECTED,
 
 	/** Used and standard cyberware gets upgraded by one */
 	CYBERADEPT_NOVICE,

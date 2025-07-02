@@ -61,6 +61,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private WizardPagePriority<SR6Skill, SR6SkillValue, Shadowrun6Character, SR6PrioritySettings> prios;
 	private SR6WizardPageMetatype race;
 	private SR6WizardPageDrake drake;
+	private SR6WizardPageInfected infected;
 	private SR6WizardPageChangeling surge;
 	private SR6WizardPageShifter shifter;
 	private SR6WizardPageMagicOrResonance magic;
@@ -107,6 +108,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case PRIORITIES   : ret.add(    prios); break;
 			case METATYPE     : ret.add(     race); break;
 			case DRAKE        : ret.add(    drake); break;
+			case INFECTED     : ret.add( infected); break;
 			case SURGE        : ret.add(    surge); break;
 			case SHIFTER      : 
 				ret.add(  shifter); 
@@ -147,6 +149,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		prios  = new WizardPagePriority<>(this, wrapper.getWrapped(), new SR6PriorityTable( (type,prio) -> Shadowrun6Core.getPriorityTableEntry(type, prio)));
 		race   = new SR6WizardPageMetatype(this, wrapper);
 		surge  = new SR6WizardPageChangeling(this, wrapper);
+		infected= new SR6WizardPageInfected(this, wrapper);
 		shifter= new SR6WizardPageShifter(this, wrapper);
 		magic  = new SR6WizardPageMagicOrResonance(this, wrapper) {
 			protected void refresh() {

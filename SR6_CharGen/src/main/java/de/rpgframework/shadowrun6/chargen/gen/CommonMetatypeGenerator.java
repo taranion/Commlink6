@@ -14,7 +14,6 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetaTypeOption;
-import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;

@@ -271,6 +271,10 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		val.setDistributed(0);
 		for (Lifestyle lifestyle : model.getLifestyles()) {
 			int toPay = lifestyle.getCostPerMonth();
+			// Infected pay 30% more
+			if (model.hasRuleFlag(SR6RuleFlag.INFECTED)) {
+				toPay = (int)(toPay*1.3);
+			}
 			addNaturalModifier(val, toPay, lifestyle);
 		}
 
