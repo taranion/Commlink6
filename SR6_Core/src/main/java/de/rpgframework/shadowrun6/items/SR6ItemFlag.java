@@ -51,7 +51,7 @@ public enum SR6ItemFlag implements ItemFlag {
 	ESSENCE_COST_KARMA_10,
 	/** This item counts as a cyberlimb with regard to some essence qualities */
 	CYBERLIMB,
-	
+	/** Set modifications slots to 0 */
 	UNMODIFYABLE,
 
 	// Dynamic Flags
