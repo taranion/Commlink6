@@ -129,7 +129,7 @@ public class SR6KarmaSpellGenerator extends ControllerImpl<SR6Spell> implements 
 		// Ensure character is caster and has sorcery
 		if (!getModel().getMagicOrResonanceType().usesSpells())
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
-		if (getModel().getSkillValue("sorcery")==null || getModel().getSkillValue("sorcery").getModifiedValue()==0)
+		if ((getModel().getSkillValue("sorcery")==null || getModel().getSkillValue("sorcery").getModifiedValue()==0)&&((getModel().getSkillValue("enchanting")==null || getModel().getSkillValue("enchanting").getModifiedValue()==0)))
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NO_SPELLCASTER);
 
 		// Ensure spell has not been selected yet
