@@ -483,6 +483,11 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 
 	//-------------------------------------------------------------------
 	private void validateModificationSlots() {
+		if (hasFlag(SR6ItemFlag.UNMODIFYABLE.name())) {
+			setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0);
+			return;
+		}
+		
 		switch (type) {
 		case WEAPON_CLOSE_COMBAT:
 			setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2);
