@@ -194,6 +194,7 @@ public class Shadowrun6DataPlugin  {
 			initBestialNature();
 			initTarnishedStar();
 			initDPSOTA2083();
+			initDealersOfDeath();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1100,7 +1101,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ------------------------------DE SOTA 2083-----------------------------------");
-		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DE_SOTA2083", "de_sota2083.i18n", Locale.GERMAN);
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "de_sota2083", "de_sota2083.i18n", Locale.GERMAN);
 		set.setType(DataSetType.OPT_RULES);
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_firearms.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
@@ -1110,6 +1111,33 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" accessories");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_sota2083/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+	}
+
+	//-------------------------------------------------------------------
+	private void initDealersOfDeath() throws IOException {
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		logger.log(Level.INFO, "START ------------------------------Dealers of Death -----------------------------------");
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "dealers_of_death", "dealers_of_death.i18n", Locale.ENGLISH);
+		set.setType(DataSetType.OPT_RULES);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "dealers_of_death/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"dealers_of_death/data/quality_paths.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"dealers_of_death/data/gear_melee.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" melee weapons");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"dealers_of_death/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"dealers_of_death/data/weapon_modifications.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "dealers_of_death/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"dealers_of_death/data/spells.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"dealers_of_death/data/gear_drones.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"dealers_of_death/data/gear_toxins.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" toxins");
 	}
 
 }

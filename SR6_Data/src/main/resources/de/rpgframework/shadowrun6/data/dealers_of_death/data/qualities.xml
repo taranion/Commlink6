@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+	<quality id="cool_under_pressure" karma="4" pos="true" type="NORMAL" max="4">
+		<modifications>
+			<checkmod type="ATTRIBUTE" ref="COMPOSURE" what="DICE" value="1" apply="CHARACTER"/>
+		</modifications>
+	</quality>
+	<quality id="developed_imunity" karma="15" pos="true" type="NORMAL">
+		<choices>
+			<choice type="TEXT" uuid="2cef71b7-7af8-4def-a788-d73903c776e9"/>
+		</choices>
+	</quality>
+	<quality id="for_a_higher_purpose" karma="6" pos="true" type="NORMAL">
+		<modifications>
+			<itemmod type="RULE" ref="PAIN_TOLERANCE_LOWER_MOD"/>
+		</modifications>
+	</quality>
+
+	<quality id="cold_detachment" karma="8" pos="false" type="NORMAL">
+		<modifications>
+			<checkmod type="SKILL" ref="influence"  value="0" what="NOT_SPEND_EDGE"/>
+		</modifications>
+	</quality>
+
+<!-- Qualities for Quality Path -->
+
+	<quality id="family_initiate" karma="5" pos="false" type="QUALITY_PATH"/>
+	<quality id="family_graduate" karma="7" pos="true" type="QUALITY_PATH"/>
+	<quality id="family_operative" karma="8" pos="true" type="QUALITY_PATH"/>
+	<quality id="family_retired" karma="4" pos="false" type="QUALITY_PATH"/>
+	<quality id="family_deserted" karma="0" pos="false" type="QUALITY_PATH"/>
+	
+</qualities>

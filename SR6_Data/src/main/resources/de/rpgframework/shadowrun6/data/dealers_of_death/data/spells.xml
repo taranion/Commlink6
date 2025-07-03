@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spells>
+
+   <spell id="conceal_scent" cat="ILLUSION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="4" >
+      <spellfeature ref="sense_single"/>
+   </spell>
+
+   <spell id="reptile_blood" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="SPECIAL" drain="4" />
+   
+</spells>
