@@ -3,10 +3,10 @@ package de.rpgframework.shadowrun6.cards;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.PdfPCell;
+import com.lowagie.text.BadElementException;
+import com.lowagie.text.Image;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.pdf.PdfPCell;
 
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 
