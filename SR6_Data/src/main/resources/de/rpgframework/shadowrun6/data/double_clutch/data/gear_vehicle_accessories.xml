@@ -253,7 +253,7 @@
       </requires>
    </item>
 
-   <item id="extreme_environment" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
+   <item id="extreme_environment" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE" reqVariant="true">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
 	<variant id="heat" />
 	<variant id="cold" />
@@ -262,7 +262,7 @@
 	<variant id="water" />
 	<variant id="swamp" />
 	</item>
-   <item id="extreme_environment" lang="de" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
+   <item id="extreme_environment" lang="de" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE" reqVariant="true">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
 	<variant id="heat" />
 	<variant id="cold" />
