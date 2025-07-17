@@ -271,12 +271,20 @@
       <usage mode="IMPLANTED" value="0.1"/>
  		<flags><flag>AUGMENTATION</flag></flags>
    </item>
-   <item avail="2" price="1000" id="soundlink" type="CYBERWARE" subtype="CYBER_EARWARE">
-      <usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="1"/>
-      <usage mode="IMPLANTED" value="0.1"/>
- 		<flags><flag>AUGMENTATION</flag></flags>
+	<item avail="2" price="1000" id="soundlink" type="CYBERWARE" subtype="CYBER_EARWARE">
+   	<variant id="cybereye">
+   		<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="1"/>
+   		<flags><flag>AUGMENTATION</flag></flags>
+   	</variant>
+   	<variant id="bodyware" mode="BODYWARE">
+   		<usage mode="IMPLANTED" />
+  		<attrdef id="ITEMTYPE" value="CYBERWARE"/>
+   		<attrdef id="ESSENCECOST" value="0.1"/>
+   		<flags><flag>AUGMENTATION</flag></flags>
+   	</variant>
    </item>
-
+   
+   
 	<!-- Bodyware -->
    <item id="bone_lacing" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="y">
  		<flags><flag>AUGMENTATION</flag></flags>
