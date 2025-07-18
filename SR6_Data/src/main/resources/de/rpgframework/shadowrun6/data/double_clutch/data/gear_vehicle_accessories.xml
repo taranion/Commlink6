@@ -336,7 +336,7 @@
 
    <item id="increased_integrity" avail="4" price="5000" type="MOD_CHASSIS" subtype="MOD_CORE"  > <!-- for later modification of vehicles -->
    	<choices>
-  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="@BODY*1.5"/>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="60"/> <!-- TODO should be BODY*1.5 but that does not work -->
    	</choices>
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
    	<attrdef id="PRICE" value="$RATING*5000"/>
