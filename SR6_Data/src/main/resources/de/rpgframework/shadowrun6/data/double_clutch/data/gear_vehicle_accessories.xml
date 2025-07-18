@@ -804,7 +804,7 @@
 
    <item id="armor_standard" avail="3" price="800" type="MOD_SKIN" subtype="MOD_ARMOR" >
       <choices>
-      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$$BODY*2"/>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="80"/> <!-- TODO max="$$BODY*2" does not work yet -->
       </choices>
       <usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
       <attrdef id="PRICE" value="$$BODY * $RATING *800"/>
