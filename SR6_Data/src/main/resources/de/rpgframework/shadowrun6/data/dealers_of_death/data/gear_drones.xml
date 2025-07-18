@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="mitsuhama_akiyama" avail="9I" price="225500" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="2" acc="10" spdi="15" tspd="30" bod="4" arm="6" pil="3" sen="3" type="GROUND" />
+		<geardef>
+			<item id="enhanced_gecko" type="MOD_POWER" subtype="MOD_PROPULSION" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="0"/>
+			</item>
+		</geardef>
+		<modifications>
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                </embed>
+			<embed type="GEAR" ref="enhanced_gecko" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+		</modifications>
+	</item>
+
+</items>

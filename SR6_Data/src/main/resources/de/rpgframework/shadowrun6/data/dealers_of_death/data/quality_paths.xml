@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qpaths>
+
+	<qpath id="part_of_the_family">
+		<step id="initiate" level="0">
+			<nextSteps>
+				<next>graduate</next>
+				<next>deserted</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="family_initiate"/>
+			</modifications>
+		</step>
+		<step id="graduate" level="1">
+			<nextSteps>
+				<next>operative</next>
+				<next>deserted</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="family_initiate" remove="true"/>
+				<itemmod type="QUALITY" ref="family_graduate"/>
+			</modifications>
+		</step>
+		<step id="operative" level="2">
+			<nextSteps>
+				<next>retired</next>
+				<next>deserted</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="family_graduate" remove="true"/>
+				<itemmod type="QUALITY" ref="family_operative"/>
+			</modifications>
+		</step>
+		<step id="retired" level="3">
+			<nextSteps>
+				<next>deserted</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="family_operative" remove="true"/>
+				<itemmod type="QUALITY" ref="family_retired"/>
+			</modifications>
+		</step>
+		<step id="deserted" level="3">
+			<modifications>
+				<itemmod type="QUALITY" ref="family_initiate" remove="true"/>
+				<itemmod type="QUALITY" ref="family_graduate" remove="true"/>
+				<itemmod type="QUALITY" ref="family_operative" remove="true"/>
+				<itemmod type="QUALITY" ref="family_deserted"/>
+			</modifications>
+		</step>
+	</qpath>
+
+</qpaths>

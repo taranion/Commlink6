@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="aconite"             avail="6I" price="200"  count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="atropine"            avail="6I" price="150"  count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="black_mamba"         avail="8I" price="2000" count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="deathrattle"         avail="6I" price="400"  count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="dog_asp"             avail="8I" price="350"  count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="nova_scorpion_venom" avail="7I" price="600"  count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="void_wasp_venom"     avail="8I" price="1200" count="y" type="CHEMICALS" subtype="TOXINS"/>
+	<item id="naga_venom"                                  count="y" type="CHEMICALS" subtype="TOXINS">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+		</choices>
+      	<attrdef id="PRICE" value="$RATING*100"/>
+      	<attrdef id="AVAILABILITY" value="$RATING I"/>
+	</item>
+  
+</items>

@@ -45,6 +45,13 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 				model.addSlot(extern);
 			}
 		}
+		if (type==ItemType.WEAPON_SPECIAL) {
+			if (model.getSlot(ItemHook.FIREARMS_EXTERNAL)==null) {
+				logger.log(Level.DEBUG, "Add FIREARMS_EXTERNAL slot to {0}", model.getKey());
+				AvailableSlot extern = new AvailableSlot(ItemHook.FIREARMS_EXTERNAL,99);
+				model.addSlot(extern);
+			}
+		}
 		if (type==ItemType.WEAPON_CLOSE_COMBAT) {
 			if (model.getSlot(ItemHook.MELEE_EXTERNAL)==null) {
 				logger.log(Level.DEBUG, "Add MELEE_EXTERNAL slot to {0}", model.getKey());
