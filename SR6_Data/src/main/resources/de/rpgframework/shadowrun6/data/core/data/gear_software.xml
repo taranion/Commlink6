@@ -288,10 +288,10 @@
 		</choices>
 		<usage mode="EMBEDDED" slot="SOFTWARE"/>
 	</item>
-   <item avail="4" price="5000" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
+   <item avail="4" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" options="athletics,biotech,close_combat,con,cracking,electronics,engineering,perception,exotic_weapons, firearms,influence,outdoors,perception,piloting,stealth" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*5000"/>
 		<attrdef id="SIZE" value="1"/>
@@ -305,29 +305,34 @@
    </item>
    <item avail="2" price="2500" id="knowsoft" type="SOFTWARE" subtype="SKILLSOFT" >
 		<choices>
-			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="knowledge" />
+			<choice uuid="44f263ec-dcb7-4377-b110-0b9c3c53aa28" type="TEXT" ref="skill" />
 		</choices>
+		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SKILLJACK"/>
        <modifications>
-         <itemmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" />
+         <itemmod type="SKILL" ref="knowledge" set="ARTIFICIAL">
+			<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="choice:44f263ec-dcb7-4377-b110-0b9c3c53aa28" />
+		</itemmod>
        </modifications>
 	</item>
-   <item avail="1" price="1500" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >
+   <item avail="1" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4"/>
+			<choice uuid="da16f6b8-b2d5-4ddf-8acb-fd4e3d539333" type="TEXT" ref="skill" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*1500"/>
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SKILLJACK"/>
       <modifications>
-         <valmod type="SKILL" ref="CHOICE" choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="$RATING" set="ARTIFICIAL"/>
+        <valmod type="SKILL" ref="language" value="$RATING" set="ARTIFICIAL">
+			<decision choice="a7103ee4-31fa-435d-ac42-08f7d4d1e80c" value="choice:da16f6b8-b2d5-4ddf-8acb-fd4e3d539333" />
+		</valmod>
        </modifications>
 	</item>
    <item avail="1" price="400" id="tutorsoft" type="SOFTWARE" subtype="OTHER_PROGRAMS">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" ref="mundane" />
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" options="athletics,biotech,close_combat,con,cracking,electronics,engineering,perception,exotic_weapons, firearms,influence,outdoors,perception,piloting,stealth" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*400"/>
 		<attrdef id="AVAILABILITY" value="$RATING/3"/>
