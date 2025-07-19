@@ -67,7 +67,7 @@ public class BasicDataPage2 extends Page implements IShadowrunCharacterControlle
 		initCritterPower();
 		flex.getChildren().addAll(secQualPaths, secCritterPower);
 
-		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
+		layout = new OptionalNodePane(flex, new Label(ResourceI18N.get(RES,"select.for.description")));
 		setContent(layout);
 //		setTitle("Basics");
 
