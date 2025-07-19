@@ -372,13 +372,8 @@
      </modifications>
    </quality>
    <quality id="goring_horns" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
-		<geardef>
-			<item id="goring_horns" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
-				<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
-    		</item>
-		</geardef>
      <modifications>
-     	<itemmod type="GEAR" apply="CHARACTER" ref="goring_horns"/>
+     	<itemmod type="GEAR" apply="CHARACTER" ref="goring_horns_item"/>
      </modifications>
    </quality>
    <quality id="keen_eared" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">
