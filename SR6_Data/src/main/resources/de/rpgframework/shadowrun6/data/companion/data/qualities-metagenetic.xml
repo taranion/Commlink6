@@ -76,11 +76,13 @@
      </modifications>
    </quality>
 
-   <quality id="arcane_arrester" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" max="4">
+   <quality id="arcane_arrester" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
      <modifications>
        <relevancemod topic="MAGICAL"/>
-       <!--valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_DIRECT" value="1" set="EDGE"/>
-       <valmod type="ATTRIBUTE" ref="DEFENSIVE_POOL_COMBAT_INDIRECT" value="1" set="EDGE"/-->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" what="EDGE" value="1" apply="CHARACTER"/>
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" what="EDGE" value="1" apply="CHARACTER"/>
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL" what="EDGE" value="1" apply="CHARACTER"/>
+		<!--checkmod type="ATTRIBUTE" ref="MAGIC_HEALING" what="ESSENCE" value="-2" apply="CHARACTER"/-->
      </modifications>
    </quality>
    <quality id="climate_adaption" karma="5" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" max="4">
