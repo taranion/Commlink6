@@ -5,7 +5,7 @@
 
 	<item id="shifter_barding_light" avail="6" price="1000" type="ARMOR" subtype="ARMOR_BODY" >
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- max="$$BODY" does not work yet -->
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- TODO max="$$BODY" does not work yet -->
 		</choices>
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="BODY" value="$RATING" apply="CHARACTER"/> <!-- In US rules light barding has no upper rating limit, which makes no sense, thus using the DE rule of limiting to body -->
@@ -19,7 +19,7 @@
 
 	<item id="shifter_barding_heavy" avail="6" price="500" type="ARMOR" subtype="ARMOR_BODY" >
 		<choices>
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- max="$$BODY" does not work yet -->
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20" /> <!-- TODO max="$$BODY" does not work yet -->
 		</choices>
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="BODY" value="$RATING" apply="CHARACTER"/>

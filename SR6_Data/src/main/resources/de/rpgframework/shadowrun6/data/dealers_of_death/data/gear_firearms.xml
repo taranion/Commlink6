@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="trafalgar_cane" avail="5L" price="750" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
+		<weapon dmg="5P" mode="SS" attack="10,9,,," ammo="1(b)" skill="firearms" spec="firearms/rifles"/>
+	</item>
+
+	<item id="tiffany_bracelet_pistol" avail="6L" price="1000" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT">
+		<weapon dmg="3P" mode="SS" attack="9,7,,," ammo="1(b)" skill="firearms" spec="firearms/pistols_light"/>
+		<attrdef id="WEAPON_SIZE" value="TINY"/>
+		<flags><flag>UNMODIFYABLE</flag></flags>
+	</item>
+
+	<item id="tiffany_bracelet_dart" avail="4L" price="400" type="WEAPON_SPECIAL" subtype="DART">
+		<weapon dmg="0S" mode="SS" attack="10,6,,," ammo="1(b)" skill="exotic_weapons" spec="exotic_weapons/air" />
+		<attrdef id="WEAPON_SIZE" value="TINY"/>
+		<flags><flag>UNMODIFYABLE</flag></flags>
+	</item>
+
+</items>

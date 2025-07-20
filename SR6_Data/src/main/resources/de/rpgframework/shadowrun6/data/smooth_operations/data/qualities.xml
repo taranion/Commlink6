@@ -69,11 +69,7 @@
          <choice type="SIGNATURE_MANEUVERS" uuid="1031aa98-982c-4544-b781-219514da7886"/>
       </choices>
    </quality>
-   <quality id="social_style"    karma="7"  pos="true" type="NORMAL" >
-      <choices>
-         <choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$CHARISMA"/>
-      </choices>
-   </quality>
+   <quality id="social_style"    karma="7"  pos="true" type="NORMAL" max="9"/> <!-- TODO max should be $CHARISMA, but that does not work -->
    <quality id="stiff_upper_lip" karma="9"  pos="true" type="NORMAL" />
 
 

@@ -253,7 +253,7 @@
       </requires>
    </item>
 
-   <item id="extreme_environment" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
+   <item id="extreme_environment" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE" reqVariant="true">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
 	<variant id="heat" />
 	<variant id="cold" />
@@ -262,7 +262,7 @@
 	<variant id="water" />
 	<variant id="swamp" />
 	</item>
-   <item id="extreme_environment" lang="de" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE">
+   <item id="extreme_environment" lang="de" avail="3" price="3000" type="MOD_CHASSIS" subtype="MOD_CORE" reqVariant="true">
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="2"/>
 	<variant id="heat" />
 	<variant id="cold" />
@@ -336,7 +336,7 @@
 
    <item id="increased_integrity" avail="4" price="5000" type="MOD_CHASSIS" subtype="MOD_CORE"  > <!-- for later modification of vehicles -->
    	<choices>
-  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="@BODY*1.5"/>
+  			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="60"/> <!-- TODO should be BODY*1.5 but that does not work -->
    	</choices>
    	<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="1"/>
    	<attrdef id="PRICE" value="$RATING*5000"/>
@@ -804,7 +804,7 @@
 
    <item id="armor_standard" avail="3" price="800" type="MOD_SKIN" subtype="MOD_ARMOR" >
       <choices>
-      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="$$BODY*2"/>
+      	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="80"/> <!-- TODO max="$$BODY*2" does not work yet -->
       </choices>
       <usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
       <attrdef id="PRICE" value="$$BODY * $RATING *800"/>

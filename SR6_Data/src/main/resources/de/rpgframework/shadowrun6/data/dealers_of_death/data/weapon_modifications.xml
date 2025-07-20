@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<itemenhancements>
+
+	<itemenhancement id="ceramic_components" avail="6I" >
+		<requires>
+			<selreq>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
+			</selreq>
+		</requires>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<!-- price should be rating of mod * base cost of weapon that is modified -->
+		<!-- <attrdef id="PRICE" value="$RATING*$$PRICE"/> -->
+	</itemenhancement>
+
+</itemenhancements>

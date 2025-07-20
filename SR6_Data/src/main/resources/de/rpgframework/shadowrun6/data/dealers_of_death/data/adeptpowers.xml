@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<powers>
+
+	<power id="adept_accident"  cost="0.5" act="MINOR_ACTION"/>
+	<power id="archers_focus"  cost="0.5" act="PASSIVE"/>
+	<power id="precise_throw"  cost="0.25" hasLevel="true" act="PASSIVE">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,0,0" apply="THROWING"/>
+		</modifications>
+	</power>
+
+</powers>
