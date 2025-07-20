@@ -96,11 +96,8 @@
             <flag>AUGMENTATION</flag>
         </flags>
         <modifications>
-            <itemmod type="HOOK" ref="IMPLANT_RIFLES"/>
-            <itemmod type="HOOK" ref="IMPLANT_MACHINEGUN"/>
-            <itemmod type="HOOK" ref="IMPLANT_ASSAULT_CANNON"/>
-            <itemmod type="HOOK" ref="IMPLANT_LAUNCHER"/>
-        </modifications>
+            <itemmod type="HOOK" ref="IMPLANT_HEAVY"/>
+		</modifications>
     </item>
     <item id="cyberweapon_oral_slasher" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
         <attrdef id="PRICE" value="1000"/>

@@ -245,14 +245,14 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		}
 
 		validateVehicleWeaponMountSlots();
-		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS) {
+		if (this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_FIREARMS || this.getItemType(CarryMode.CARRIED)==ItemType.WEAPON_SPECIAL) {
 			// Auto-detect ammunition class, if necessary
 			validateAmmunitionClass();
 
 			if (!flags.contains(SR6ItemFlag.NO_CASELESS_AMMO.name())) {
 				addUserSelectableFlag(SR6ItemFlag.USES_CASELESS);
 			}
-			// Also add item hook for mounted weapons
+			// Also add item hook for implanted weapons
 			if (getUsage(CarryMode.EMBEDDED)==null || (getUsage(CarryMode.EMBEDDED).getSlot()!=null) && !getUsage(CarryMode.EMBEDDED).getSlot().name().startsWith("IMPLANT")) {
 				Usage implantUse = new Usage(CarryMode.EMBEDDED);
 				switch (subtype) {
@@ -271,13 +271,34 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				case PISTOLS_HEAVY  : implantUse.setSlot(ItemHook.IMPLANT_PISTOL_HEAVY); break;
 				case SUBMACHINE_GUNS: implantUse.setSlot(ItemHook.IMPLANT_SMG); break;
 				case SHOTGUNS: implantUse.setSlot(ItemHook.IMPLANT_SHOTGUN); break;
+				case LAUNCHERS:
 				case RIFLE_ASSAULT:
 				case RIFLE_HUNTING:
 				case RIFLE_SNIPER:
-					implantUse.setSlot(ItemHook.IMPLANT_RIFLES); break;
-				case LAUNCHERS: implantUse.setSlot(ItemHook.IMPLANT_LAUNCHER); break;
+				case LMG:
+				case MMG:
+				case HMG:
+				case ASSAULT_CANNON:
+				case THROWERS:
+					implantUse.setSlot(ItemHook.IMPLANT_HEAVY); break;
+				case OTHER_SPECIAL:
+					WeaponSize size = (this.getAttribute(SR6ItemAttribute.WEAPON_SIZE)!=null)?this.getAttribute(SR6ItemAttribute.WEAPON_SIZE).getValue():null;
+					if (size!=null) {
+						switch (size) {
+						case TINY: // TASERS, HOLDOUTS, PISTOLS_LIGHT sized
+							implantUse.setSlot(ItemHook.IMPLANT_PISTOL_LIGHT); break;
+						case SMALL: // PISTOLS_HEAVY, MACHINE_PISTOLS, DMSO, DART sized
+							implantUse.setSlot(ItemHook.IMPLANT_PISTOL_HEAVY); break;
+						case MEDIUM: // SUBMACHINE_GUNS sized
+							implantUse.setSlot(ItemHook.IMPLANT_SMG); break;
+						case LARGE: // SHOTGUNS sized
+							implantUse.setSlot(ItemHook.IMPLANT_SHOTGUN); break;
+						// not assessing BIG, as this contains BALLISTAS and CANNONS, which will not be able to be implanted
+						}
+					}
+					break;
 				}
-				this.addUsage(implantUse);
+			this.addUsage(implantUse);
 			}
 		}
 
