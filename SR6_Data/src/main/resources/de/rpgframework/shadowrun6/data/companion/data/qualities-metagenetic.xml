@@ -71,9 +71,6 @@
          <subOption id="physical" cost="2"/>
        </choice>
      </choices>
-     <modifications>
-     	<!-- CLUSTERFUCK - need a subselection of factors that must be added -->
-     </modifications>
    </quality>
 
    <quality id="arcane_arrester" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS">
@@ -133,18 +130,19 @@
    <quality id="tough_gut" karma="8" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS" >
      <modifications>
      	<!--  ToDo Lifestyle points -->
-     	<!--  ToDo Resist ingested toxins -->
+		<checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" what="EDGE" value="1" apply="CHARACTER" cond="yes"/> <!-- ToDo: Only ingested toxins -->
      </modifications>
    </quality>
 
    <quality id="bark" karma="4" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-	     <!--valmod type="POOL" ref="DEFENSE_RATING" value="2" set="NATURAL"/-->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" what="EDGE" value="1" apply="CHARACTER"/>
      </modifications>
    </quality>
    <quality id="blubber" karma="3" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-		     	<!--  ToDo ? Kälteangriffe -->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" what="EDGE" value="1" apply="CHARACTER" cond="yes"/> <!--  ToDo: Only for cold based attacks -->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" what="EDGE" value="1" apply="CHARACTER" cond="yes"/> <!--  ToDo: Only for cold based attacks -->
      </modifications>
    </quality>
    <quality id="camouflage" karma="5" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
@@ -165,26 +163,28 @@
    </quality>
    <quality id="dragon" karma="3" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-     			<!--  ToDo ? Feuerangriff -->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" what="EDGE" value="1" apply="CHARACTER" cond="yes"/> <!--  ToDo: Only for fire based attacks -->
+		<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" what="EDGE" value="1" apply="CHARACTER" cond="yes"/> <!--  ToDo: Only for fire based attacks -->
      </modifications>
    </quality>
    <quality id="granite" karma="15" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="4"/-->
-     	<!-- ToDo Critterpower Hardened Armor -->
+       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="4" set="NATURAL" />
+       <valmod type="CRITTER_POWER" ref="hardened_armor" value="2" set="NATURAL"/>
      </modifications>
    </quality>
    <quality id="rhino" karma="8" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-     	<!--valmod type="ATTRIBUTE" ref="DEFENSE_RATING" value="3"/-->
+       <valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="3" set="NATURAL" />
      </modifications>
    </quality>
    <quality id="thorns" karma="5" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION" >
      <modifications>
-     	<!--ToDo: AR+1 in Close Combat-->
-     	<!--ToDo: Physical damage-->
-     	<!--ToDo: -1 physical activities-->
-     	<!--ToDo: Cloth +20%-->
+		<valmod type="ATTRIBUTE" ref="ATTACK_RATING_PHYSICAL" value="1,0,0,0,0" set="NATURAL"/>
+		<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" apply="CHARACTER"/>
+		<valmod type="ATTRIBUTE" ref="DEFENSE_POOL_PHYSICAL" value="-1"/>
+     	<!-- ToDo: -1 dice to all physical activities-->
+		<valmod  type="PRICEMOD" ref="ARMOR" value="0.2" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
      </modifications>
    </quality>
 
@@ -228,8 +228,8 @@
      </choices>
      <modifications>
        <checkmod type="SKILL" ref="perception" value="1" what="EDGE"/>
-       <!--costmod type="PRICE" ref="NUR_AUGENCYBERWARE"/>
-       <costmod type="ESSENCE" ref="NUR_AUGENCYBERWARE"/-->
+       <!-- ToDo: costmod type="PRICE" ref="NUR_AUGENCYBERWARE" x5/>
+       <ToDo: costmod type="ESSENCE" ref="NUR_AUGENCYBERWARE" x2 /-->
      </modifications>
    </quality>
    <quality id="beak" karma="9" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" >
@@ -241,13 +241,13 @@
      </choices>
      <modifications>
      	<!--  ToDo Lifestyle points -->
-     	<!--  ToDo Resist ingested toxins -->
+		<checkmod type="ATTRIBUTE" ref="RESIST_TOXIN" what="EDGE" value="1" apply="CHARACTER" cond="yes"/>
      </modifications>
    </quality>
    <quality id="bicardiac" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
      <modifications>
-       <!--costmod type="PRICE" ref="synthacardium"/>
-       <costmod type="ESSENCE" ref="synthacardium"/-->
+       <!-- ToDo: costmod type="PRICE" ref="synthacardium" x1,5/>
+       <ToDo: costmod type="ESSENCE" ref="synthacardium" x1,5/-->
      </modifications>
    </quality>
    <quality id="bone_spikes" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
@@ -257,7 +257,7 @@
 		</item>
 	</geardef>
      <modifications>
-     	<!-- ToDo Armor teurer -->
+		<valmod  type="PRICEMOD" ref="ARMOR" value="0.5" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
      	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_spurs"/>
      </modifications>
    </quality>
@@ -371,6 +371,14 @@
      </choices>
    </quality>
     <quality id="functional_wings" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+		<geardef>
+			<item id="claws1" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+			<item id="claws2" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+		</geardef>
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="da1c74d5-0b31-4241-abc8-78d045e7b698">
          <subOption id="type1">
@@ -388,17 +396,6 @@
          </subOption>
        </choice>
      </choices>
-		<geardef>
-			<item id="claws1" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
-				<weapon dmg="1P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed" />
-    		</item>
-			<item id="claws2" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
-				<weapon dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
-    		</item>
-		</geardef>
-     <modifications>
-     	<!-- ToDo Waffe: Claws -->
-     </modifications>
    </quality>
    <quality id="goring_horns" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
 	<geardef>
