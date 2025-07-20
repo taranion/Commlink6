@@ -24,7 +24,7 @@
    <quality id="corrosive_spit" karma="4" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" max="4">
 	<geardef>
 		<item id="metagenetic_corrosive_spit" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL" modonly="true">
-			<weapon dmg="2P" attack="4,6,4,," skill="exotic_weapons" spec="exotic_weapons/quills" /> <!-- ToDo: Damage increase 2P per level of quality -->
+			<weapon dmg="2P" attack="4,6,4,," skill="exotic_weapons" spec="exotic_weapons/spitter" /> <!-- ToDo: Damage increase 2P per level of quality -->
 		</item>
 	</geardef>
      <modifications>
@@ -42,7 +42,7 @@
    <quality id="natural_venom" karma="9" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
 	<geardef>
 		<item id="metagenetic_venom_spittle" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
-			<weapon dmg="0S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/quills" />
+			<weapon dmg="0S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/spitter" />
 		</item>
 	</geardef>
      <choices>
@@ -332,8 +332,11 @@
 			<item id="thagomizer_tail" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
 				<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/thagomizer" />
     		</item>
-   		<item id="bullwhip_tail" avail="4" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
-      		<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+			<item id="bullwhip_tail" avail="4" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS">
+				<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whips" />
+  			 </item>
+			<item id="bullwhip_tail" avail="4" type="WEAPON_CLOSE_COMBAT" subtype="WHIPS" lang="de">
+				<weapon dmg="1P" attack="6,,,,"  skill="exotic_weapons" spec="exotic_weapons/whiptail" />
   			 </item>
 		</geardef>
      <choices>
