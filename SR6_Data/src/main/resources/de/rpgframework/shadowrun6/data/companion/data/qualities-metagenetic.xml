@@ -233,10 +233,19 @@
      </modifications>
    </quality>
    <quality id="beak" karma="9" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" >
+		<geardef>
+			<item id="metagenetic_beak" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+				<weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+    		</item>
+		</geardef>
      <choices>
        <choice type="SUBSELECT" ref="variant" uuid="bd170d36-8f72-48b4-870f-c23c2c618e33">
          <subOption id="standard" />
-         <subOption id="raptor"  cost="2"/>
+         <subOption id="raptor"  cost="2">
+			<modifications>
+				<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_beak"/>
+			</modifications>
+		</subOption>
        </choice>
      </choices>
      <modifications>
@@ -309,12 +318,12 @@
    </quality>
    <quality id="fangs" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
 		<geardef>
-			<item id="fangs" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+			<item id="metagenetic_fangs" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
 				<weapon dmg="2P" attack="5,,,," skill="close_combat" spec="close_combat/unarmed" />
     		</item>
 		</geardef>
      <modifications>
-     		<itemmod type="GEAR" apply="CHARACTER" ref="fangs"/>
+     		<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_fangs"/>
      </modifications>
    </quality>
    <quality id="frog_tongue" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
