@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.proc;
 
 import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,6 +54,7 @@ public class FixCharacterStep implements ProcessingStep {
 
 		fixLicencesWithoutSIN();
 		fixMissingHeat();
+		fixMissingReputation();
 		
 		return unprocessed;
 	}
@@ -94,8 +96,30 @@ public class FixCharacterStep implements ProcessingStep {
 				}
 				model.getAttribute(ShadowrunAttribute.HEAT).setDistributed(heat);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.log(Level.ERROR, "Error calculating heat",e);
+			}
+		}
+	}
+	
+	//-------------------------------------------------------------------
+	private void fixMissingReputation() {
+		// Calculate reputation, if it doesn't exit
+		int rep = 0;
+		AttributeValue<ShadowrunAttribute> heatVal = model.getAttribute(ShadowrunAttribute.REPUTATION);
+		if (heatVal==null) {
+			heatVal = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.REPUTATION);
+			model.setAttribute(heatVal);
+			try {
+				for (Reward reward : model.getRewards()) {
+					ValueModification modRep = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name());
+					if (modRep!=null) {
+						rep += modRep.getValue();
+						if (rep<0) rep=0;
+					}
+				}
+				model.getAttribute(ShadowrunAttribute.REPUTATION).setDistributed(rep);
+			} catch (Exception e) {
+				logger.log(Level.ERROR, "Error calculating reputation",e);
 			}
 		}
 	}
