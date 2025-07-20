@@ -589,8 +589,6 @@ public class Shadowrun6DataPlugin  {
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "COMPANION", "companion.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.RULES);
 		set.setReleased(202205);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"companion/data/gear_items.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" items");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "companion/data/qualities-metagenetic.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" metagenic qualities");
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "companion/data/qualities-infected.xml");

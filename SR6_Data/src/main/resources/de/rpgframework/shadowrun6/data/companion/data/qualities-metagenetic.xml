@@ -11,14 +11,24 @@
      </modifications>
    </quality>
    <quality id="quills" karma="10" pos="true" type="METAGENIC" cat="ANIMAL_PELAGE">
+	<geardef>
+		<item id="metagenetic_quills" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
+			<weapon dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/quills" />
+		</item>
+	</geardef>
      <modifications>
-       <!-- ToDo: Exotic Weapon (Quills) -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_quills"/>
      </modifications>
    </quality>
 
    <quality id="corrosive_spit" karma="4" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" max="4">
+	<geardef>
+		<item id="metagenetic_corrosive_spit" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL" modonly="true">
+			<weapon dmg="2P" attack="4,6,4,," skill="exotic_weapons" spec="exotic_weapons/quills" /> <!-- ToDo: Damage increase 2P per level of quality -->
+		</item>
+	</geardef>
      <modifications>
-       <!-- ToDo: Exotic Weapon (Spittle) -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_corrosive_spit"/> <!-- ToDo: Damage increase 2P per level of quality -->
      </modifications>
    </quality>
    <quality id="defensive_secretion" karma="6" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
@@ -30,12 +40,21 @@
      </modifications>
    </quality>
    <quality id="natural_venom" karma="9" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS" >
+	<geardef>
+		<item id="metagenetic_venom_spittle" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
+			<weapon dmg="0S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/quills" />
+		</item>
+	</geardef>
      <choices>
        <choice type="SUBSELECT" ref="vector" uuid="dbb18bb4-89a4-4435-bede-3077ee600bc5" count="4">
          <subOption id="contact" cost="2"/>
          <subOption id="exhaled" cost="2"/>
          <subOption id="injected" cost="0"/>
-         <subOption id="spat" cost="4"/>
+         <subOption id="spat" cost="4">
+			<modifications>
+				<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_venom_spittle"/>
+			</modifications>
+		 </subOption>
        </choice>
        <choice type="SUBSELECT" ref="speed" uuid="f9dd21db-30a6-422a-81dc-3c547ec9ccd3" >
          <subOption id="turn" cost="0"/>
@@ -230,9 +249,14 @@
      </modifications>
    </quality>
    <quality id="bone_spikes" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+	<geardef>
+		<item id="metagenetic_spurs" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true">
+			<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+		</item>
+	</geardef>
      <modifications>
      	<!-- ToDo Armor teurer -->
-     	<!-- ToDo Waffe: Spurs -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_spurs"/>
      </modifications>
    </quality>
    <quality id="celerity" karma="5" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
@@ -372,8 +396,13 @@
      </modifications>
    </quality>
    <quality id="goring_horns" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+	<geardef>
+		<item id="metagenetic_goring_horns" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true">
+			<weapon dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed" />
+		</item>
+	</geardef>
      <modifications>
-     	<itemmod type="GEAR" apply="CHARACTER" ref="goring_horns_item"/>
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_goring_horns"/>
      </modifications>
    </quality>
    <quality id="keen_eared" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_SENSES">
@@ -382,8 +411,13 @@
      </modifications>
    </quality>
    <quality id="larger_tusks" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+	<geardef>
+		<item id="metagenetic_tusks" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true">
+			<weapon dmg="2P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed" />
+		</item>
+	</geardef>
      <modifications>
-     	<!-- ToDo Waffe: Tusks -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_tusks"/>
      </modifications>
    </quality>
    <quality id="marsupial_pouch" karma="4" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS" />
@@ -393,8 +427,13 @@
      </modifications>
    </quality>
    <quality id="probosics" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+	<geardef>
+		<item id="metagenetic_probiosics" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
+			<weapon dmg="2S" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/probiosics" /> <!-- ToDo: AR should be Agility + Strength -->
+		</item>
+	</geardef>
      <modifications>
-     	<!-- ToDo Waffe: Trunk -->
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_probiosics"/>
      </modifications>
    </quality>
    <quality id="satyr_legs" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
