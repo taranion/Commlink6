@@ -2460,11 +2460,19 @@ public class Shadowrun6Tools {
 		ValueModification modHeat = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.HEAT.name());
 		if (modHeat!=null) {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.HEAT);
+			if (val==null) {
+				val = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.HEAT);
+				model.setAttribute(val);
+			}
 			val.setDistributed( val.getDistributed() + modHeat.getValue());
 		}
 		ValueModification modRep = reward.getModification(ShadowrunReference.ATTRIBUTE, ShadowrunAttribute.REPUTATION.name());
 		if (modRep!=null) {
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(ShadowrunAttribute.REPUTATION);
+			if (val==null) {
+				val = new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.REPUTATION);
+				model.setAttribute(val);
+			}
 			val.setDistributed( val.getDistributed() + modHeat.getValue());
 		}
 	}
