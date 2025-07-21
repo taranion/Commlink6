@@ -437,14 +437,14 @@
        <checkmod ref="athletics" type="SKILL" what="EDGE" value="1"/>
      </modifications>
    </quality>
-   <quality id="probosics" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
+   <quality id="probosics" karma="6" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"> <!-- note: 'probosics' is a typos, correct is 'proboscis' however not changing the names to avoid issues with characters that have this quality or skill -->
 	<geardef>
-		<item id="metagenetic_probiosics" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
-			<weapon dmg="2S" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/probiosics" /> <!-- ToDo: AR should be Agility + Strength -->
+		<item id="metagenetic_probosics" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" modonly="true">
+			<weapon dmg="2S" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/probosics" /> <!-- ToDo: AR should be Agility + Strength -->
 		</item>
 	</geardef>
      <modifications>
-     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_probiosics"/>
+     	<itemmod type="GEAR" apply="CHARACTER" ref="metagenetic_probosics"/>
      </modifications>
    </quality>
    <quality id="satyr_legs" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS">
