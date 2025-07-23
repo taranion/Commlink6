@@ -463,8 +463,8 @@
       <attrdef id="AVAILABILITY" value="$RATING*2"/>
       <flags><flag>AUGMENTATION</flag></flags>
     	<modifications>
-	     <checkmod type="SKILL" ref="perception" value="1" what="DICE"/>
-	     <checkmod type="ACTION" ref="matrix_perception" value="1" what="DICE" set="NATURAL"/>
+	     <checkmod type="SKILL" ref="perception" value="$RATING" what="DICE"/>
+	     <checkmod type="ACTION" ref="matrix_perception" value="$RATING" what="DICE" set="NATURAL"/>
     	</modifications>
    </item>
  	<item id="reproductive_replacement" avail="3" price="15000" type="BIOWARE" subtype="BIOWARE_CULTURED">
