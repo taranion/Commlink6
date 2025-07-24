@@ -12,6 +12,7 @@ import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
 import org.prelle.javafx.layout.AutoBox;
 
+import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.ComplexDataItem;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.jfx.GenericDescriptionVBox;
@@ -112,7 +113,7 @@ public class QualityPathPage extends Page {
 		flex.getContent().addAll(bxDescAndVisual, boxes);
 //		flex.setBreakpoint(WindowMode.MINIMAL);
 
-		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
+		layout = new OptionalNodePane(flex, new Label(ResourceI18N.get(RES,"select.for.description")));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}

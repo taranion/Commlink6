@@ -669,11 +669,16 @@
       </modifications>
    </item>
    <item avail="6I" price="24000" id="cyber_launcher" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+	  <geardef>
+			<item id="cyber_launcher_weapon" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+				<weapon attack=",8,9,6,2" ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" /> <!-- high cost indicate the cyber_launcher includes the weapon, especially when compared to cyberweapon_heavy_implanted_weapon from bodyshop, assumning MGL-12 data -->
+			</item>
+	  </geardef>
 		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="15"/>
 		<usage mode="IMPLANTED" value="1.5"/>
  		<flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<itemmod type="HOOK" ref="IMPLANT_LAUNCHER"/>
+     	<itemmod type="GEAR" apply="CHARACTER" ref="cyber_launcher_weapon"/>
       </modifications>
    </item>
    <item avail="1" price="1000" id="external_clip_port" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">

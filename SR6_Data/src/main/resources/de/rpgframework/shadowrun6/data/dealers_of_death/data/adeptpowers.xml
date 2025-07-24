@@ -5,7 +5,7 @@
 	<power id="archers_focus"  cost="0.5" act="PASSIVE"/>
 	<power id="precise_throw"  cost="0.25" hasLevel="true" act="PASSIVE">
 		<modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,0,0" apply="THROWING"/>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,0,0" options="THROWING"/>
 		</modifications>
 	</power>
 

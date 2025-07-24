@@ -18,6 +18,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.jfx.FilteredListPage;
 import de.rpgframework.jfx.GenericDescriptionVBox;
 import de.rpgframework.jfx.cells.ComplexDataItemListCell;
+import de.rpgframework.shadowrun.ShadowrunAction;
 import de.rpgframework.shadowrun.ASpell;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.ComplexForm;
@@ -36,6 +37,7 @@ import de.rpgframework.shadowrun.chargen.jfx.pane.AdeptPowerPane;
 import de.rpgframework.shadowrun.chargen.jfx.pane.ComplexFormDescriptionPane;
 import de.rpgframework.shadowrun.chargen.jfx.pane.MetatypePane;
 import de.rpgframework.shadowrun.chargen.jfx.pane.SpellDescriptionPane;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.DataStructure;
 import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.SR6MetaType;
@@ -80,6 +82,7 @@ public class LibraryPage extends Page {
 	private Button btnParagon;
 	private Button btnQualityPaths;
 	private Button btnCritterPowers;
+	private Button btnActions;
 	private Button btnCritters;
 	private Button btnGrunts;
 
@@ -168,6 +171,11 @@ public class LibraryPage extends Page {
 		btnCritters.getStyleClass().add("category-button");
 		btnCritters.graphicProperty().addListener( scaleButtons);
 
+		btnActions = new Button(ResourceI18N.get(RES, "category.actions"));
+		btnActions.setId("actions");
+		btnActions.getStyleClass().add("category-button");
+		btnActions.graphicProperty().addListener( scaleButtons);
+
 		btnGrunts = new Button(ResourceI18N.get(RES, "category.grunts"));
 		btnGrunts.setId("grunts");
 		btnGrunts.getStyleClass().add("category-button");
@@ -176,7 +184,7 @@ public class LibraryPage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		content = new FlowPane(btnMetatypes, btnQualities, btnQualityPaths, btnGear, btnSpells, btnPowers, btnMentor, btnFoci, btnComplex, btnParagon, btnDataStruct, btnCritterPowers); //, btnCritterPowers, btnCritters, btnGrunts);
+		content = new FlowPane(btnMetatypes, btnQualities, btnQualityPaths, btnGear, btnSpells, btnPowers, btnMentor, btnFoci, btnComplex, btnParagon, btnDataStruct, btnCritterPowers, btnActions); // to be added later: btnCritters, btnGrunts
 		content.setVgap(10);
 		content.setHgap(10);
 		content.setId("categories");
@@ -212,6 +220,7 @@ public class LibraryPage extends Page {
 		btnDataStruct.setOnAction(ev -> openDataStructures(ev));
 		btnQualityPaths.setOnAction(ev -> openQualityPaths(ev));
 		btnCritterPowers.setOnAction(ev -> openCritterPowers(ev));
+		btnActions.setOnAction(ev -> openActions(ev));
 		btnCritters.setOnAction(ev -> openCritters(ev));
 		btnGrunts.setOnAction(ev -> openGrunts(ev));
 	}
@@ -479,6 +488,27 @@ public class LibraryPage extends Page {
 			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Error opening CritterPowers",e);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void openActions(ActionEvent ev) {
+		logger.log(Level.WARNING, "Navigate Actions");
+		try {
+			FilteredListPage<ShadowrunAction> page =new FilteredListPage<ShadowrunAction>(
+					ResourceI18N.get(LibraryPage.RES, "category.actions"),
+					() -> Shadowrun6Core.getItemList(Shadowrun6Action.class),
+
+					new GenericDescriptionVBox(
+							Shadowrun6Tools.requirementResolver(Locale.getDefault()),
+							Shadowrun6Tools.modificationResolver(Locale.getDefault())
+							)
+					);
+
+			page.setAppLayout(getAppLayout());
+			getAppLayout().getApplication().openScreen(new ApplicationScreen(page));
+		} catch (Exception e) {
+			logger.log(Level.ERROR, "Error opening Actions Page",e);
 		}
 	}
 

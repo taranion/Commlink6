@@ -157,7 +157,7 @@ public class AugmentationPage extends Page {
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secTrans, secCyber, secBio, secNano, secGene);
 
-		layout = new OptionalNodePane(flex, new Label("Select something to get a description"));
+		layout = new OptionalNodePane(flex, new Label(ResourceI18N.get(RES,"select.for.description")));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}

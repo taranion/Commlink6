@@ -146,7 +146,7 @@ public class GearPage extends Page {
 		ScrollPane scroll = new ScrollPane(flex);
 		scroll.setFitToWidth(true);
 
-		layout = new OptionalNodePane(scroll, new Label("Select something to get a description"));
+		layout = new OptionalNodePane(scroll, new Label(ResourceI18N.get(RES,"select.for.description")));
 		setContent(layout);
 		super.setMode(Mode.REGULAR);
 	}

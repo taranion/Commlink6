@@ -309,7 +309,8 @@
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
      		<valmod type="ATTRIBUTE" ref="REACTION" value="1"/>
-  		</modifications>
+			<valmod type="ATTRIBUTE" ref="INITIATIVE_DICE_PHYSICAL" value="1"/>
+      </modifications>
    </item>
 
 	<!--  Transgenic infusions -->

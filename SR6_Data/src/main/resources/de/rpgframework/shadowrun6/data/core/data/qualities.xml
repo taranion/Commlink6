@@ -124,8 +124,10 @@
    <quality id="magic_resistance"     karma="8" pos="true" type="NORMAL">
      <modifications>
        <relevancemod topic="MAGICAL"/>
-		 <checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL" what="EDGE" value="1" apply="CHARACTER"/>
-		<!--checkmod ref="MAGIC_HEALING" type="ATTRIBUTE" what="ESSENCE" value="-2" apply="CHARACTER"/-->
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" what="EDGE" value="1" apply="CHARACTER"/>
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" what="EDGE" value="1" apply="CHARACTER"/>
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_ASTRAL" what="EDGE" value="1" apply="CHARACTER"/>
+			<!--checkmod type="ATTRIBUTE" ref="MAGIC_HEALING" what="ESSENCE" value="-2" apply="CHARACTER"/-->
      </modifications>
    </quality>
    <quality id="mentor_spirit" 		  karma="10" pos="true" type="NORMAL" >

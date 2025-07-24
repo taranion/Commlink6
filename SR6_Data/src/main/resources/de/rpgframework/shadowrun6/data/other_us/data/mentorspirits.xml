@@ -3,12 +3,13 @@
 
   <mentorspirit id="adversary">
 		<modifications>
-			<checkmod type="ATTRIBUTE" ref="RESIST_MAGIC" what="EDGE" value="1" cond="y"/> <!-- Gain a point of Edge when targeted by enemy spells -->
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" what="EDGE" value="1" apply="CHARACTER"/> <!-- Gain a point of Edge when targeted by enemy spells -->
+			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_INDIRECT" what="EDGE" value="1" apply="CHARACTER"/> <!-- Gain a point of Edge when targeted by enemy spells -->
 		</modifications>
-		<!-- Magician: Edge Boosts cost 1 less for spells, preparations, and rituals in the Combat or Manipulation category, or for Counterspelling (choose two) -->
 		<choices>
-			<choice type="SPELL_CATEGORY" uuid="0ac507d3-be8a-4bc6-a5ce-7bfa79ac4714" options="combat,manipulation"/>
+			<choice type="SPELL_CATEGORY" uuid="0ac507d3-be8a-4bc6-a5ce-7bfa79ac4714" options="COMBAT,MANIPULATION"/>
 		</choices>
+		<!-- Magician: Edge Boosts cost 1 less for spells, preparations, and rituals in the Combat or Manipulation category, or for Counterspelling (choose two) -->
 		<magician>
 			<checkmod type="SPELL" ref="CHOICE" choice="0ac507d3-be8a-4bc6-a5ce-7bfa79ac4714" value="-1" what="EDGE_BOOST" /> 
 			<checkmod type="ACTION" ref="boosted_defense" value="-1" what="EDGE_BOOST" /> 

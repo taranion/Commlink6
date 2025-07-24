@@ -78,7 +78,7 @@
 		<skillspec id="tongue"/>
 		<skillspec id="biosprayer"/>
 		<skillspec id="whiptail" lang="de"/>
-		<skillspec id="probosics" lang="de"/>
+		<skillspec id="probosics"/>
 		<skillspec id="other"/>
 		<skillspec id="biosprayer"/>
 		<skillspec id="critterpower"/>
