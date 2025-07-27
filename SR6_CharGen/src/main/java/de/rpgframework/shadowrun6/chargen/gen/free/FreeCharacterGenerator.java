@@ -13,6 +13,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
@@ -142,6 +143,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 			processChain.add(martial);
 			processChain.add(equipment);
 			processChain.add(foci);
+			processChain.add(animalism);
 			processChain.add(dataStructures);
 			processChain.add(complex);
 			processChain.add(metaEcho);
@@ -207,6 +209,7 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 		qPaths     = new CommonQualityPathController(this);
 		martial    = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
+		animalism = new SR6FreeAnimalismController(this, true);
 		dataStructures = new SR6DataStructureController(this);
 	}
 }
