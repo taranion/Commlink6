@@ -552,8 +552,7 @@
 				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
 				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
 				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
-				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="LAUNCHERS"/>
-				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="THROWERS"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
 			</selreq>
 		</requires>
 		<choices>
@@ -583,6 +582,12 @@
 	</itemenhancement>
 	<itemenhancement id="weapon_security_system_add_option" size="1">
 		<requires>
+			<selreq>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
+			</selreq>
 			<datareq type="GEAR" ref="weapon_security_system" apply="PARENT"/>
 		</requires>
 		<choices>
@@ -612,8 +617,7 @@
 	    <selreq>
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_FIREARMS"/>
 			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_RANGED"/>
-	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="LAUNCHERS"/>
-	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="THROWERS"/>
+			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_SPECIAL"/>
 	    </selreq>
 	  </requires>
 	  <modifications>
