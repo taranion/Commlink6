@@ -201,8 +201,6 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 		for (Decision dec : decisions) fake.addDecision(dec);
 		int cost = fake.getKarmaCost();
 		
-		if (data.isNoDouble())
-			return cost;
 		return cost;
 	}
 
