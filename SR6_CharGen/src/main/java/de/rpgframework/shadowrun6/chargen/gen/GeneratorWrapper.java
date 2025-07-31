@@ -179,6 +179,7 @@ public class GeneratorWrapper implements SR6CharacterGenerator, IGeneratorWrappe
 
 	//-------------------------------------------------------------------
 	public void setWrapped(SR6CharacterGenerator newCtrl) {
+		if (wrapped==newCtrl) return;
 		logger.log(Level.ERROR, "#################Generator changed to "+newCtrl+"\n\n\n");
 		// Move all existing listener to new controller
 		if (wrapped!=null) {

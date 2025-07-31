@@ -55,7 +55,7 @@ public abstract class CommonSR6CharacterGenerator extends SR6CharacterController
 		ruleCtrl = new RuleController(model, Shadowrun6Core.getItemList(RuleInterpretation.class), Shadowrun6Rules.values());
 //		updateEffectiveRules();
 		shifter   = new SR6ShifterGenerator(this);
-		createPartialController();
+//		createPartialController();
 	}
 
 	// --------------------------------------------------------------------

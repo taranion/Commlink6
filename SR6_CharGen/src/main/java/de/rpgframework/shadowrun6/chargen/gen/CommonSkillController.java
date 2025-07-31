@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
+import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -42,6 +44,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public final static String I18N_NOT_SELECTED     = "skill.error.notSelected";
 	public final static String I18N_SKILL_AUTOSELECT = "skill.error.isAutoSelected";
 	public final static String I18N_NOT_AVAILABLE_SPEC = "skill.error.specNotAvailable";
+	public final static String I18N_EXOTIC_WITHOUT_SPEC = "skill.error.exoticWithoutSpec";
 
 	protected List<SR6Skill> available;
 	protected List<SR6Skill> allowed;
@@ -339,6 +342,21 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 			else if (model.getSkillValue(skill)==null || model.getSkillValue(skill).getModifiedValue()==0) {
 				available.add(skill);
 			}
+		}
+	}
+
+	//-------------------------------------------------------------------
+	protected void checkForExoticWeaponsSpecilization() {
+		SR6SkillValue val = model.getSkillValue("exotic_weapons");
+		if (val==null)
+			return;
+		int value = getValue(val);
+		if (value<1)
+			return;
+		
+		// Exotic weapons has been taken
+		if (val.getSpecializations().isEmpty()) {
+			todos.add(new ToDoElement(Severity.WARNING, RES, I18N_EXOTIC_WITHOUT_SPEC));
 		}
 	}
 

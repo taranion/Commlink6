@@ -82,6 +82,10 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	}
 
 	//-------------------------------------------------------------------
+	public static String getStaticName() {
+		return RES.getString("generator.name");
+	}
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
 	 */

@@ -215,11 +215,16 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 
 			// Ensure native language is present
 			ensureNativeLanguage();
+			checkForExoticWeaponsSpecilization();
 
 			for (SR6SkillValue val : model.getSkillValues()) {
 				if (val.getSkill().isRestricted() && !allowed.contains(val.getSkill()) && val.getDistributed()>0) {
 					val.setDistributed(0);
 				}
+				
+				boolean isExotic = "exotic_weapons".equals(val.getKey());
+				boolean isFreeFirstExotic = isExotic && val.getSpecializations().isEmpty();
+				
 				int karma = 0;
 				switch (val.getSkill().getType()) {
 				case LANGUAGE:
@@ -249,7 +254,10 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 					break;
 				default:
 					// Pay specialization (should be max. 1)
-					karma += val.getSpecializations().size()*5;
+					if (isExotic) {
+						karma += Math.max(0,val.getSpecializations().size()-1)*5;
+					} else
+						karma += val.getSpecializations().size()*5;
 					int from = val.getModifier(ValueType.NATURAL);
 					int upTo = val.getModifiedValue(ValueType.NATURAL);
 					for (int i=from+1; i<=upTo; i++) {
@@ -377,21 +385,6 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		return RES.getString("pointbuy.points2");
 	}
 
-//	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-//		return Possible.FALSE;
-//	}
-
-//	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-//		return Possible.FALSE;
-//	}
-//	public OperationResult<SR6SkillValue> selectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-//		return new OperationResult<>();
-//	}
-//
-//	public OperationResult<SR6SkillValue> deselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-//		return new OperationResult<>();
-//	}
-
 	@Override
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
 			boolean expertise) {
@@ -400,6 +393,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		 * and you cannot acquire an expertise.
 		 */
 		if (expertise) return Possible.FALSE;
+		
+		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 
 		// Check if there already is one specialization in this skill
 		if (!skillVal.getSpecializations().isEmpty())
@@ -411,7 +406,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		}
 
 		// If this is Exotic Weapons, no Karma/Points are needed
-		if (skillVal.getKey().equals("exotic_weapons"))
+		if (isExotic && skillVal.getSpecializations().size()<1)
 			return Possible.TRUE;
 
 		// Need a skill point or 5 Karma

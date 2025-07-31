@@ -84,6 +84,11 @@ public class KarmaCharacterGenerator extends CommonSR6CharacterGenerator  implem
 	}
 
 	//-------------------------------------------------------------------
+	public static String getStaticName() {
+		return RES.getString("generator.name");
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
 	 */

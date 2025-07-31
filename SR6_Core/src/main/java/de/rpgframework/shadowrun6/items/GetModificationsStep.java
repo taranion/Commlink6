@@ -178,11 +178,11 @@ public class GetModificationsStep implements CarriedItemProcessor {
 				if (m.getReferenceType()==ShadowrunReference.GEAR &&  m instanceof DataItemModification) {
 					ItemTemplate pack = ((DataItemModification)m).getResolvedKey();
 					if (pack!=null && pack.getItemType()==ItemType.PACK) {
-						logger.log(Level.WARNING, "Gear {0} adds a {1} PACK", model.getKey(), pack.getId());
+						logger.log(Level.TRACE, "Gear {0} adds a {1} PACK", model.getKey(), pack.getId());
 						for (Modification mod : pack.getOutgoingModifications()) {
 							decideModification(mod, unprocessed, model, charac);
 						}
-						logger.log(Level.WARNING, "Done adding from PACK");
+						logger.log(Level.TRACE, "Done adding from PACK");
 					} else {
 						decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
 					}
