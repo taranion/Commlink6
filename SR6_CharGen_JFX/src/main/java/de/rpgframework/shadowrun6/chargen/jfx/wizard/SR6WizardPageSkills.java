@@ -278,7 +278,6 @@ public class SR6WizardPageSkills extends WizardPageSkills<SR6Skill, SR6SkillValu
 
 	//-------------------------------------------------------------------
 	protected void refresh() {
-		logger.log(Level.WARNING, "refresh() - current table controller is "+table.getController()+" - it should be "+charGen.getSkillController());
 		super.refresh();
 		ISkillController<SR6Skill, SR6SkillValue> skillCtrl = charGen.getSkillController();
 		if (skillCtrl instanceof SR6PrioritySkillGenerator) {

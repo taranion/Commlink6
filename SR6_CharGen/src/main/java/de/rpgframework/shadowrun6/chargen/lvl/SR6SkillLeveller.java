@@ -330,6 +330,9 @@ public class SR6SkillLeveller extends CommonSkillController {
 				logger.log(Level.WARNING, "Tried to select a specialization, which is not allowed because: "+poss.getMostSevere());
 				return new OperationResult<>(poss);
 			}
+			
+			boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
+			boolean isFreeFirstExotic = isExotic && skillVal.getSpecializations().isEmpty();
 
 			SkillSpecializationValue<SR6Skill> ret = null;
 			if (expertise) {
@@ -342,9 +345,12 @@ public class SR6SkillLeveller extends CommonSkillController {
 			logger.log(Level.WARNING, "Select specialization ''{0}'' in skill ''{1}'' as {2}", spec.getId(), skillVal.getKey(), skillVal.getSpecializations());
 
 			// Now pay
-			int cost = 5;
-			model.setKarmaFree( model.getKarmaFree() - cost);
-			model.setKarmaInvested( model.getKarmaInvested() + cost);
+			int cost = 0;
+			if (!isFreeFirstExotic) {
+				cost = 5;
+				model.setKarmaFree( model.getKarmaFree() - cost);
+				model.setKarmaInvested( model.getKarmaInvested() + cost);
+			}
 
 			ValueModification mod = new ValueModification(ShadowrunReference.SKILLSPECIALIZATION, skillVal.getSkill().getId()+"/"+ret.getKey(), String.valueOf(expertise?3:2));
 			mod.setSet(ValueType.NATURAL);
@@ -537,6 +543,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 				unprocessed.add(_mod);
 		}
 
+		checkForExoticWeaponsSpecilization();
 		return unprocessed;
 	}
 

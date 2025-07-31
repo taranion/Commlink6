@@ -518,7 +518,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			logger.log(Level.DEBUG, "Language/Knowledge points: {0}", points2);
 
 			// Ensure auto-added native skill
-			ensureExistanceOfNativeLanguage();
+			ensureExistanceOfNativeLanguage(SR6PrioritySettings.class);
 
 			for (Modification tmp : previous) {
 				if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
@@ -580,6 +580,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 			updateAvailable();
+			checkForExoticWeaponsSpecilization();
 
 			Shadowrun6Character model = parent.getModel();
 			SR6PrioritySettings settings = getModel().getCharGenSettings(SR6PrioritySettings.class);
@@ -766,9 +767,11 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		 * and you cannot acquire an expertise.
 		 */
 		if (expertise) return Possible.FALSE;
+		
+		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 
 		// Check if there already is one specialization in this skill
-		if (!skillVal.getSpecializations().isEmpty())
+		if (!skillVal.getSpecializations().isEmpty() && !isExotic)
 			return Possible.FALSE;
 
 		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
@@ -777,7 +780,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		}
 
 		// If this is Exotic Weapons, no Karma/Points are needed
-		if (skillVal.getKey().equals("exotic_weapons"))
+		if (isExotic && skillVal.getSpecializations().size()<1)
 			return Possible.TRUE;
 
 		// Need a skill point or 5 Karma
@@ -809,6 +812,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				logger.log(Level.WARNING, "Tried to select a specialization, which is not allowed because: "+poss.getMostSevere());
 				return new OperationResult<>(poss);
 			}
+			
+			boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
+			boolean isFreeFirstExotic = isExotic && skillVal.getSpecializations().isEmpty();
 
 			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
 			skillVal.getSpecializations().add(ret);
@@ -819,15 +825,19 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			if (settings.get(skillVal)==null) {
 				settings.put(skillVal, new PerSkillPoints());
 			}
-			if (points1>0) {
-				logger.log(Level.INFO, "Pay with skill points");
-				settings.get(skillVal).pointSpec++;
+			
+			if (!isFreeFirstExotic) {
+				if (points1>0) {
+					logger.log(Level.INFO, "Pay with skill points");
+					settings.get(skillVal).pointSpec++;
+				} else {
+					settings.get(skillVal).karmaSpec++;
+					logger.log(Level.INFO, "Pay with karma");
+				}
 			} else {
-				settings.get(skillVal).karmaSpec++;
-				logger.log(Level.INFO, "Pay with karma");
+				logger.log(Level.INFO, "Don't pay, because it was free");
 			}
 			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
-
 
 			parent.runProcessors();
 

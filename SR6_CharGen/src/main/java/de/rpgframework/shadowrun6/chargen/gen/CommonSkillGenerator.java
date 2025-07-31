@@ -8,6 +8,7 @@ import java.util.Locale;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
+import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.OperationResult;
@@ -55,7 +56,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 	}
 
 	//-------------------------------------------------------------------
-	protected void ensureExistanceOfNativeLanguage() {
+	protected void ensureExistanceOfNativeLanguage(Class<? extends CommonSR6GeneratorSettings> clazz) {
 		ValueModification nat = new ValueModification(ShadowrunReference.SKILL, "language",0);
 		boolean missingNative=true;
 		for (SR6SkillValue tmp : model.getSkillValues()) {
@@ -69,10 +70,17 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			val.addIncomingModification(nat);
 			model.addSkillValue(val);
 
-			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
-			PerSkillPoints points = new PerSkillPoints();
-			points.base = 4;
-			settings.put(val, points);
+			if (clazz==SR6PrioritySettings.class) {
+				SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+				PerSkillPoints points = new PerSkillPoints();
+				points.base = 4;
+				settings.put(val, points);
+			} else if (clazz==SR6PointBuySettings.class) {
+				SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
+				PerSkillPoints points = new PerSkillPoints();
+				points.base = 4;
+				settings.put(val, points);
+			}
 		}
 
 	}

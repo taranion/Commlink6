@@ -735,8 +735,7 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static String getRequirementString(Requirement req, Locale loc) {
 		try {
-		if (req instanceof ExistenceRequirement) {
-			ExistenceRequirement tmp = (ExistenceRequirement)req;
+		if (req instanceof ExistenceRequirement tmp) {
 			String prefix = (tmp.isNegate())?(RES.getString("require.negate")+" "):"";
 			switch ((ShadowrunReference)tmp.getType()) {
 			case GEAR:
@@ -792,7 +791,11 @@ public class Shadowrun6Tools {
 				if (skill==null)
 					return "Unknown "+tmp.getKey();
 				return prefix+skill.getName(loc);
-
+			case SKILLSPECIALIZATION:
+				data = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
+				if (data==null)
+					return "Unknown "+tmp.getKey();
+				return prefix+"SkillSpec "+" "+data.getName(loc);
 //			case MASTERSHIP:
 //				Mastership master =  SplitterMondCore.getItem(Mastership.class, tmp.getKey());
 //				if (master==null) {

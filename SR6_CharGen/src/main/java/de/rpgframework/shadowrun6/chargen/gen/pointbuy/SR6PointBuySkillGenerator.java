@@ -44,6 +44,12 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 	//-------------------------------------------------------------------
 	public SR6PointBuySkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
+		try {
+			throw new RuntimeException("Trace");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -182,6 +188,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
+		logger.log(Level.WARNING, "ENTER process for "+this+" and model "+model);
 		List<Modification> unprocessed = new ArrayList<>();
 
 		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
@@ -223,6 +230,10 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 
+			// Ensure native language is present
+			ensureExistanceOfNativeLanguage(SR6PointBuySettings.class);
+			checkForExoticWeaponsSpecilization();
+			
 			// Be sure to remove all skills that are not allowed
 			logger.log(Level.INFO, "Skills in settings2 {0}", settings.perSkill);
 			try {
@@ -239,6 +250,10 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			for (Entry<String,PerSkillPoints> entry : settings.perSkill.entrySet()) {
 				logger.log(Level.INFO, "... {0}={1}", entry.getKey(), entry.getValue());
 				SR6Skill key = Shadowrun6Core.getSkill( entry.getKey() );
+				if (key == null) {
+					logger.log(Level.WARNING, "Unknown skill ''{0}'' in character", entry.getKey());
+					continue;
+				}
 				PerSkillPoints per = entry.getValue();
 				if (per == null) {
 					logger.log(Level.WARNING, "No data for " + key);
@@ -310,7 +325,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					if (skill==null) {
 						logger.log(Level.ERROR, "No skill '"+entry.getKey()+"'");
 						System.err.println( "No skill '"+entry.getKey()+"'");
-						System.exit(1);
+						continue;
 					}
 					val = new SR6SkillValue(skill, 0);
 					model.addSkillValue(val);
@@ -348,7 +363,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			}
 
 		} catch (Exception e) {
-
+			logger.log(Level.ERROR, "Problem calculating skills",e);
 		} finally {
 			if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "LEAVE process");
 		}
@@ -548,21 +563,6 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		return RES.getString("pointbuy.points2");
 	}
 
-//	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-//		return Possible.FALSE;
-//	}
-
-//	public Possible canDeselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-//		return Possible.FALSE;
-//	}
-//	public OperationResult<SR6SkillValue> selectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec) {
-//		return new OperationResult<>();
-//	}
-//
-//	public OperationResult<SR6SkillValue> deselectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec){
-//		return new OperationResult<>();
-//	}
-
 	@Override
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
 			boolean expertise) {
@@ -571,6 +571,8 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		 * and you cannot acquire an expertise.
 		 */
 		if (expertise) return Possible.FALSE;
+		
+		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 
 		// Check if there already is one specialization in this skill
 		if (!skillVal.getSpecializations().isEmpty())
@@ -582,7 +584,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		}
 
 		// If this is Exotic Weapons, no Karma/Points are needed
-		if (skillVal.getKey().equals("exotic_weapons"))
+		if (isExotic && skillVal.getSpecializations().size()<1)
 			return Possible.TRUE;
 
 		// Need a skill point or 5 Karma
