@@ -617,6 +617,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				logger.log(Level.WARNING, "Tried to select a specialization, which is not allowed because: "+poss.getMostSevere());
 				return new OperationResult<>(poss);
 			}
+			
+			boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
+			boolean isFreeFirstExotic = isExotic && skillVal.getSpecializations().isEmpty();
 
 			SkillSpecializationValue<SR6Skill> ret = new SkillSpecializationValue<>(spec);
 			skillVal.getSpecializations().add(ret);
@@ -627,12 +630,15 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			if (settings.get(skillVal)==null) {
 				settings.put(skillVal, new PerSkillPoints());
 			}
-			if (points1>0 || (settings.cpToSkills<20 && settings.characterPoints>=2)) {
-				logger.log(Level.INFO, "Pay with free skill points");
-				settings.get(skillVal).pointSpec++;
-			} else {
-				settings.get(skillVal).karmaSpec++;
-				logger.log(Level.INFO, "Pay with karma");
+
+			if (!isFreeFirstExotic) {
+				if (points1>0 || (settings.cpToSkills<20 && settings.characterPoints>=2)) {
+					logger.log(Level.INFO, "Pay with free skill points");
+					settings.get(skillVal).pointSpec++;
+				} else {
+					settings.get(skillVal).karmaSpec++;
+					logger.log(Level.INFO, "Pay with karma");
+				}
 			}
 			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
 

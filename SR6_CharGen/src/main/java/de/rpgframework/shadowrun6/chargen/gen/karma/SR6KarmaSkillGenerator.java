@@ -221,6 +221,10 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 				if (val.getSkill().isRestricted() && !allowed.contains(val.getSkill()) && val.getDistributed()>0) {
 					val.setDistributed(0);
 				}
+				
+				boolean isExotic = "exotic_weapons".equals(val.getKey());
+				boolean isFreeFirstExotic = isExotic && val.getSpecializations().isEmpty();
+				
 				int karma = 0;
 				switch (val.getSkill().getType()) {
 				case LANGUAGE:
@@ -250,7 +254,10 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 					break;
 				default:
 					// Pay specialization (should be max. 1)
-					karma += val.getSpecializations().size()*5;
+					if (isExotic) {
+						karma += Math.max(0,val.getSpecializations().size()-1)*5;
+					} else
+						karma += val.getSpecializations().size()*5;
 					int from = val.getModifier(ValueType.NATURAL);
 					int upTo = val.getModifiedValue(ValueType.NATURAL);
 					for (int i=from+1; i<=upTo; i++) {
