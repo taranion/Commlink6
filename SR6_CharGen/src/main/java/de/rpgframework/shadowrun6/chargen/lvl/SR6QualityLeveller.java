@@ -78,7 +78,7 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 		
 		if (data.isNoDouble())
 			return cost;
-		return cost;
+		return cost*2;
 	}
 
 	//-------------------------------------------------------------------
