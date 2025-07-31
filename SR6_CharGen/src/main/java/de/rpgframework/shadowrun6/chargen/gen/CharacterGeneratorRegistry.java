@@ -1,7 +1,9 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -33,6 +35,8 @@ public class CharacterGeneratorRegistry {
 	private static Map<String,Class<? extends SR6CharacterGenerator>> generators;
 	private static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(CharacterGeneratorRegistry.class.getName(), Locale.ENGLISH, Locale.GERMAN);;
 
+	private static Map<Class<? extends SR6CharacterGenerator>, String> generatorNames = new HashMap<>();
+	
 	//-------------------------------------------------------------------
 	static {
 		generators = new LinkedHashMap<String,Class<? extends SR6CharacterGenerator>>();
@@ -63,21 +67,43 @@ public class CharacterGeneratorRegistry {
 		Class<? extends SR6CharacterGenerator> clazz = generators.get(id);
 		if (clazz==null)
 			throw new NoSuchElementException("Unknown generator: "+id);
-		return clazz.getConstructor(Shadowrun6Character.class, CharacterHandle.class).newInstance(model, handle);
+		
+		SR6CharacterGenerator charGen = clazz.getConstructor(Shadowrun6Character.class, CharacterHandle.class).newInstance(model, handle);
+		generatorNames.put(clazz, charGen.getName());
+		return charGen;
+	}
+
+	//---------------------------------------------------------
+	private static String getGeneratorName(Shadowrun6Character model, Class<? extends SR6CharacterGenerator> clazz) {
+		String generatorName = generatorNames.get(clazz);
+		if (generatorName!=null)
+			return generatorName;
+		try {
+			Method getStaticName = clazz.getMethod("getStaticName");
+			generatorName = (String) getStaticName.invoke(null);
+			if (generatorName!=null) {
+				generatorNames.put(clazz, generatorName);
+				return generatorName;
+			}
+			SR6CharacterGenerator charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model, null);
+			generatorNames.put(clazz, charGen.getName());
+			return charGen.getName();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return clazz.getSimpleName();
+		}
 	}
 
 	//---------------------------------------------------------
 	public static List<String> getGenerationInfoStrings(Shadowrun6Character model, Locale loc) {
 		List<String> ret = new ArrayList<>();
 
-		// Character Generator
-		SR6CharacterGenerator charGen = null;
 		Class<? extends SR6CharacterGenerator> clazz = null;
 		if (model.getCharGenUsed()!=null) {
 			try {
 				clazz = generators.get(model.getCharGenUsed());
-				charGen = CharacterGeneratorRegistry.getGenerator(model.getCharGenUsed(), model, null);
-				ret.add(RES.format("chargeninfo.generator", charGen.getName()));
+				String generatorName = getGeneratorName(model, clazz);
+				ret.add(RES.format("chargeninfo.generator", generatorName));
 			} catch (Exception e) {
 				ret.add("Error instantiating "+generators.get(model.getCharGenUsed())+": "+e);
 			}

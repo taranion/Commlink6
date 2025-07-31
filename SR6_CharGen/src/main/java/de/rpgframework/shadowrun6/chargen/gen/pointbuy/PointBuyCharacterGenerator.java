@@ -63,6 +63,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	//-------------------------------------------------------------------
 	public PointBuyCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
 		super(model, handle, SR6PointBuySettings.class);
+//		try {throw new RuntimeException("Trace");} catch (Exception e) {e.printStackTrace();}
 		initializeModel();
 	}
 
@@ -92,6 +93,11 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	}
 
 	//-------------------------------------------------------------------
+	public static String getStaticName() {
+		return RES.getString("generator.name");
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.CharacterGenerator#getName()
 	 */
@@ -117,7 +123,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	public void setModel(Shadowrun6Character model, CharacterHandle handle) {
 		this.model = model;
 		this.handle= handle;
-		this.setupDone = false;
+		//this.setupDone = false;
 
 		initializeModel();
 		logger.log(Level.INFO, "----------------Start generator-----------------------" + toString() + "\n\n\n");
@@ -136,6 +142,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	protected void setupProcessChain() {
+		logger.log(Level.WARNING, "ENTER: setupProcessChain() for "+this+"  setupDone="+setupDone);
 		if (logger.isLoggable(Level.DEBUG))
 			logger.log(Level.DEBUG, "ENTER: setupProcessChain()");
 		try {
@@ -173,6 +180,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(new RemainingKarmaNuyenController(this));
 
 			setupDone = true;
+			logger.log(Level.WARNING, "Setup done for "+this);
 		} finally {
 			if (logger.isLoggable(Level.DEBUG))
 				logger.log(Level.DEBUG, "LEAVE: setupProcessChain()");

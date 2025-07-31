@@ -40,7 +40,6 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.SR6ShifterGenerator;
 import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
 import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
@@ -90,6 +89,11 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	@Override
 	public String getId() {
 		return "prio";
+	}
+
+	//-------------------------------------------------------------------
+	public static String getStaticName() {
+		return RES.getString("generator.name");
 	}
 
 	// -------------------------------------------------------------------
