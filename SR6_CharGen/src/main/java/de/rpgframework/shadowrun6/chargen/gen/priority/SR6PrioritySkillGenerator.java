@@ -609,6 +609,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					per.pointSpec=0;
 					per.karmaSpec=0;
 				}
+				
+				boolean isExotic = "exotic_weapons".equals(sVal.getKey());
+				boolean isFreeFirstExotic = isExotic && sVal.getSpecializations().isEmpty();
 
 				/*
 				 * Pay skill points
