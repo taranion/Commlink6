@@ -124,7 +124,7 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 		OperationResult<QualityValue> res = super.select(value, decisions);
 		if (res.wasSuccessful()) {
 			// Add to history
-			cost = res.get().getKarmaCost();
+			cost = (int) getSelectionCost(value, decisions);
 			DataItemModification mod = new DataItemModification(ShadowrunReference.QUALITY, value.getId());
 			mod.setDate(Date.from(Instant.now()));
 			if (!value.isPositive()) cost=0;
