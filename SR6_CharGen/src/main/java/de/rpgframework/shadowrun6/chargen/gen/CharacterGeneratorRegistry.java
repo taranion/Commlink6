@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger.Level;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -112,6 +113,9 @@ public class CharacterGeneratorRegistry {
 
 		// Depending on rule system
 		if (clazz==PriorityCharacterGenerator.class || clazz==SumToTenCharacterGenerator.class) {
+			if (model.getCharGenSettings(Object.class) == null && model.getChargenSettingsJSON() != null ) {
+					model.readCharGenSettings(SR6PrioritySettings.class);;			
+			}
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			List<String> prios = new ArrayList<>();
 			prios.add(RES.format("chargeninfo.prio.metatype", loc, settings.priorities.get(PriorityType.METATYPE)));
@@ -125,6 +129,9 @@ public class CharacterGeneratorRegistry {
 			}
 		}
 		if (clazz==PointBuyCharacterGenerator.class) {
+			if (model.getCharGenSettings(Object.class) == null && model.getChargenSettingsJSON() != null ) {
+				model.readCharGenSettings(SR6PointBuySettings.class);;			
+			}
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 			ret.add(RES.format("chargeninfo.pointbuy.adjust", loc, settings.cpBoughtSpecial, settings.cpBoughtSpecial/4));
 			ret.add(RES.format("chargeninfo.pointbuy.attrib", loc, settings.cpBoughtAttrib, settings.cpBoughtAttrib/2));
@@ -141,6 +148,9 @@ public class CharacterGeneratorRegistry {
 			ret.add(RES.format("chargeninfo.pointbuy.resrc", loc, settings.cpToResources, settings.cpToResources*20000));
 		}
 		if (clazz==KarmaCharacterGenerator.class) {
+			if (model.getCharGenSettings(Object.class) == null && model.getChargenSettingsJSON() != null ) {
+				model.readCharGenSettings(SR6KarmaSettings.class);;			
+			}
 			SR6KarmaSettings settings = model.getCharGenSettings(SR6KarmaSettings.class);
 			ret.add(RES.format("chargeninfo.karma.meta", loc, settings.meta));
 			ret.add(RES.format("chargeninfo.karma.mortype", loc, settings.morType));
