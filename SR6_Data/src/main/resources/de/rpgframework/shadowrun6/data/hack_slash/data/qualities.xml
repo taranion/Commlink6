@@ -39,7 +39,7 @@
    <quality id="impenetrable_logic"   karma="7" pos="true" type="NORMAL" />
    <quality id="jack_jockey"     	  karma="11" pos="true" type="NORMAL" />
    <quality id="loner" 	              karma="5" pos="true" type="NORMAL" />
-   <quality id="matrix_attribute_adv" karma="15" pos="true" type="NORMAL" multi="true" max="3"> <!-- check if this limits to 3 in total or 3 per attribute -->
+   <quality id="matrix_attribute_adv" karma="15" pos="true" type="NORMAL" multi="true" max="3"> <!-- ToDo check if this limits to 3 in total or 3 per attribute -->
      <choices>
        <choice type="ITEM_ATTRIBUTE" options="ATTACK,SLEAZE,DATA_PROCESSING,FIREWALL" uuid="684fc8ad-4256-4229-b6b6-5ff67123917d"/>
      </choices>
@@ -122,35 +122,35 @@
 
 <!-- Qualities for Quality Paths -->
 
-   <quality id="cyberadept_novice"     karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
+   <quality id="cyberadept_novice"     karma="10" pos="true" type="QUALITY_PATH" nodouble="true" >
      <modifications>
      	<itemmod type="RULE" ref="CYBERADEPT_NOVICE"/>
-   		<!-- augmentation overdrive: reroll wild die on -->
-   		<!-- increase standard and used cyberware by one grade -->
-   		<!-- new cyberware needs to be alpha or better -->
+   		<!-- ToDo: augmentation overdrive: reroll wild die on -->
+   		<!-- ToDo: increase standard and used cyberware by one grade -->
+   		<!-- ToDo: new cyberware needs to be alpha or better -->
      </modifications>
    </quality>
-   <quality id="cyberadept_disciple"   karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
+   <quality id="cyberadept_disciple"   karma="10" pos="true" type="QUALITY_PATH" nodouble="true" >
      <modifications>
      	<itemmod type="RULE" ref="CYBERADEPT_DISCIPLE"/>
-   		<!-- augmentation overdrive: improve by resonance -->
-   		<!-- increase alpha and standard cyberware by one grade -->
-   		<!-- new cyberware needs to be beta or better -->
+   		<!-- ToDo: augmentation overdrive: improve by resonance -->
+   		<!-- ToDo: increase alpha and standard cyberware by one grade -->
+   		<!-- ToDo: new cyberware needs to be beta or better -->
      </modifications>
    </quality>
-   <quality id="cyberadept_master"     karma="10" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
+   <quality id="cyberadept_master"     karma="10" pos="true" type="QUALITY_PATH" nodouble="true" >
      <modifications>
      	<itemmod type="RULE" ref="CYBERADEPT_MASTER"/>
-   		<!-- add submergence grade to defense tests of augments  -->
-   		<!-- increase beta and alpha cyberware by one grade -->
-   		<!-- new cyberware needs to be delta -->
+   		<!-- ToDo: add submergence grade to defense tests of augments  -->
+   		<!-- ToDo: increase beta and alpha cyberware by one grade -->
+   		<!-- ToDo: new cyberware needs to be delta -->
      </modifications>
    </quality>
-   <quality id="cyberadept_transcendent"     karma="25" pos="true" type="QUALITY_PATH"> <!-- Karma cost not doubled -->
+   <quality id="cyberadept_transcendent"     karma="25" pos="true" type="QUALITY_PATH" nodouble="true" >
      <modifications>
-   		<!-- reroll wild die on augmentation overdrive -->
-   		<!-- increase all cyberware to gamma -->
-   		<!-- new cyberware needs to be delta -->
+   		<!-- ToDo: reroll wild die on augmentation overdrive -->
+   		<!-- ToDo: increase all cyberware to gamma -->
+   		<!-- ToDo: new cyberware needs to be delta -->
      </modifications>
    </quality>
 

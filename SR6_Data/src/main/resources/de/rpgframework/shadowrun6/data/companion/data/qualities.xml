@@ -207,8 +207,8 @@
 		</modifications>
 	</quality>
 
-	<quality id="favored_weapon_extension" karma="10" pos="true" type="QUALITY_PATH"/>
-	<quality id="favored_weapon_custom" karma="5" pos="true" type="QUALITY_PATH" multi="y" max="3">
+	<quality id="favored_weapon_extension" karma="10" pos="true" type="QUALITY_PATH" nodouble="true"/>
+	<quality id="favored_weapon_custom" karma="5" pos="true" type="QUALITY_PATH" multi="y" max="3" nodouble="true">
 		<choices>
 			<choice type="SUBSELECT" ref="variant" uuid="06f71621-9cf3-4d54-ae82-a21cc00ef966">
 				<subOption id="fav_weapon_kill" />
@@ -222,8 +222,8 @@
 			</choice>
 		</choices>
 	</quality>
-	<quality id="favored_weapon_attachment" karma="5" pos="false" type="QUALITY_PATH"/>
-	<quality id="favored_weapon_lost" karma="0" pos="false" type="QUALITY_PATH"/>
+	<quality id="favored_weapon_attachment" karma="5" pos="false" type="QUALITY_PATH" nodouble="true"/>
+	<quality id="favored_weapon_lost" karma="0" pos="false" type="QUALITY_PATH" nodouble="true"/>
 
 	<quality id="sinners_path_record" karma="5" pos="false" type="QUALITY_PATH"/>
 	<quality id="sinners_path_criminal" karma="0" pos="false" type="QUALITY_PATH"/>
