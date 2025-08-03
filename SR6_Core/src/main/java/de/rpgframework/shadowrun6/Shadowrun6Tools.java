@@ -2224,11 +2224,14 @@ public class Shadowrun6Tools {
 				boolean isMet = ItemUtil.isRequirementMet(weapon, ammo.getResolved(), req);
 				logger.log(Level.INFO, "Ammo "+ammo+" mets requirement = "+isMet);
 				if (isMet) {
+					/** check for cased vs. caseless deactivated, as weapons cannot be selected to be caseless
 					// Check cased vs. caseless
 					if (caseless && ammoIsCaseless)
 						ret.add(ammo);
 					else if (!caseless && !ammoIsCaseless)
 						ret.add(ammo);
+					*/
+					ret.add(ammo); //delete this line if check for cased vs. caseless is reactivated
 				}
 			}
 		}

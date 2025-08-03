@@ -30,10 +30,6 @@
 		</requires>
 		<variant id="caseless">
 			<attrdef id="PRICE" value="10"/>
-			<requires>
-				<datareq type="ITEMFLAG" ref="USES_CASELESS" apply="DATA_ITEM"/>
-			</requires>
-			<flags><flag>USES_CASELESS</flag></flags>
 		</variant>
 	</item>
 	<item id="ammo_heavy_smg" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">

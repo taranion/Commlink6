@@ -6,16 +6,7 @@
 		</choices>
       <!-- attrdef id="PRICE" value="$RATING*500"/ -->
 	  <requires>
-	    <selreq>
-	    	<datareq type="GEAR" ref="cyberarm"/>
-	    	<datareq type="GEAR" ref="cyberleg"/>
-	    	<datareq type="GEAR" ref="cyberarm_custom"/>
-	    	<datareq type="GEAR" ref="cyberleg_custom"/>
-	    	<datareq type="GEAR" ref="additional_cyberarm"/>
-	    	<datareq type="GEAR" ref="digitigrade_legs"/>
-	    	<datareq type="GEAR" ref="lower_body_replacement"/>
-	    	<datareq type="GEAR" ref="primitive_cyberlimb"/>
-	    </selreq>
+		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="CYBER_LIMBS"/>
 	  </requires>
 	  <modifications>
          <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="$RATING"/>

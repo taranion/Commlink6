@@ -2,27 +2,27 @@
 
 <qualities>
 
-   <quality id="machinists" karma="20" type="STREAM" pos="true" >
+   <quality id="machinists" karma="20" type="STREAM" pos="true" nodouble="true" >
    	<modifications>
-			<!-- all fade -2 if drone is target -->
-         	<checkmod type="SKILL" ref="tasking"  value="2" what="DICE" cond="y"/> <!-- only for machine sprites -->
+			<!-- ToDo: all fade -2 if drone is target -->
+         	<checkmod type="SKILL" ref="tasking"  value="2" what="DICE" cond="y"/> <!-- ToDo: only for machine sprites -->
 			<itemmod type="GEAR" ref="machinist_console"/>
      		<allowmod type="COMPLEX_FORM" ref="loto"/>
      </modifications>
    </quality>
 
-   <quality id="sourceror" karma="20" type="STREAM" pos="true">
+   <quality id="sourceror" karma="20" type="STREAM" pos="true" nodouble="true" >
    	<modifications>
-			<!-- all complex form fade -2 -->
-			<!-- sustain SubmersionGrade/2 complex forms without penalty -->
+			<!-- ToDo: all complex form fade -2 -->
+			<!-- ToDo: sustain SubmersionGrade/2 complex forms without penalty -->
      		<allowmod type="COMPLEX_FORM" ref="hyperthreading"/>
      </modifications>
    </quality>
 
-   <quality id="technoshaman" karma="20" type="STREAM" pos="true">
+   <quality id="technoshaman" karma="20" type="STREAM" pos="true" nodouble="true" >
    	<modifications>
-			<!-- all compile and decompile fade -2 -->
-			<!-- 1 additional sprite service -->
+			<!-- ToDo: all compile and decompile fade -2 -->
+			<!-- ToDo: 1 additional sprite service -->
 			<itemmod type="METAECHO" apply="CHARACTER" ref="hybrid_sprites"/>
      		<allowmod type="COMPLEX_FORM" ref="control_virtual_life"/>
      </modifications>

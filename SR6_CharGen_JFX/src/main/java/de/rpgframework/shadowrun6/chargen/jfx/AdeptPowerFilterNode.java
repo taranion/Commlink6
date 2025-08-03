@@ -70,7 +70,7 @@ public class AdeptPowerFilterNode extends ComplexDataItemListFilter<AdeptPower,A
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		btnSort = new Button(null,new SymbolIcon("sort"));
-		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "pages.adeptpowers.sort.tooltip")));
+		btnSort.setTooltip(new Tooltip(ResourceI18N.get(RES, "page.adeptpowers.sort.tooltip")));
 
 		tfSearch = new TextField();
 		tfSearch.setPromptText(ResourceI18N.get(RES, "page.adeptpowers.search.prompt"));

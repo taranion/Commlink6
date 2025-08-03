@@ -266,7 +266,7 @@
          <allowmod type="SKILL" ref="CHOICE" choice="d0b872d0-0783-4b7a-b38a-35db1cef3685" neg="true"/>
        </modifications>
    </quality>
-   <quality id="in_debt"              karma="0" pos="false" type="NORMAL" >
+   <quality id="in_debt"              karma="0" pos="false" type="NORMAL" > <!-- core rules say this can only be take at creation, however companion allows taking this later using favor points -->
    	<choices>
    		<choice type="TEXT" uuid="3011a0ca-1cc5-4ca1-b046-0870a282c3be"/>
    	</choices>

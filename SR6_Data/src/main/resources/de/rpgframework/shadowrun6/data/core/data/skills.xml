@@ -32,6 +32,7 @@
         <skillspec id="disguise"/>
         <skillspec id="impersonation"/>
         <skillspec id="performance"/>
+        <skillspec id="seduction"/> <!-- from Smooth Operations -->
     </skill>
     <skill id="conjuring"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
         <skillspec id="banishing"/>
