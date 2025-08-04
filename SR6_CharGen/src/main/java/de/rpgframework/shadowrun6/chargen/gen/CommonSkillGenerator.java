@@ -111,8 +111,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 //			return Possible.TRUE;
 //		}
 //		// No points left - maybe with karma?
-//		SR6SkillValue sVal = model.getSkillValue(data);
-//		int karma = getIncreaseCost(sVal);
+//		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 //		if (model.getKarmaFree()>=karma)
 //			return Possible.TRUE;
 //		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));

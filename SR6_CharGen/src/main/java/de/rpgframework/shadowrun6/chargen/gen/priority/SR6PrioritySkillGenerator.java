@@ -165,8 +165,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return Possible.TRUE;
 		}
 		// No points left - maybe with karma?
-		SR6SkillValue sVal = model.getSkillValue(data);
-		int karma = getIncreaseCost(sVal);
+		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
@@ -446,6 +445,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		// Do decrease
 		value.setDistributed(value.getDistributed()-1); //decrease skill
 		per.points3--; //decrease karma levels spend for skill
+		if (per.getSum()==0) { //if skill 0, deselect skill
+			deselect(value); 
+		}
 		// Return karma
 		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
@@ -591,7 +593,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					key = Shadowrun6Core.getSkill(entry.getKey());
 				} else
 					key = sVal.getResolved();
-				if (key==null) {
+				if (key==null || sVal==null ) { //catch skill with value 0 and sVal null, which have not been correctly deselected
 					logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", entry.getKey());
 					continue;
 				}

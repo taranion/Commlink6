@@ -79,8 +79,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		// Are there enough unused skillpoints
 		if (settings.characterPoints>=2) return Possible.TRUE;
 		// Has the user enough karma
-		SR6SkillValue sVal = model.getSkillValue(skill);
-		int pay = getIncreaseCost(sVal);
+		int pay = (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=pay) return Possible.TRUE;
 
 		return Possible.FALSE;
