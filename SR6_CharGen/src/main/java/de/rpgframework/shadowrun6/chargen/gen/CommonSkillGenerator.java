@@ -316,9 +316,8 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		if (!allowed.get())
 			return new OperationResult<>(allowed);
 
-		// Do increase
 		PerSkillPoints per = getPerSkill(value);
-		// Do increase
+		// Do decrease
 		per.points2--;
 		logger.log(Level.INFO, "decrease points2 of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 				per.points2, per.getSum());
@@ -396,7 +395,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 				return select(value.getModifyable());
 			}
 			PerSkillPoints per = getPerSkill(value);
-			// Do increase
+			// Do decrease
 			per.points1++;
 			logger.log(Level.INFO, "increase points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());

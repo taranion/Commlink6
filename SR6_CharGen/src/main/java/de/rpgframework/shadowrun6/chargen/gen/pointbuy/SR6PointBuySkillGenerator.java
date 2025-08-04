@@ -797,6 +797,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		// Do decrease
 		value.setDistributed(value.getDistributed()-1); //decrease skill
 		per.points3--; //decrease karma levels spend for skill
+		if (per.getSum()==0) { //if skill 0, deselect skill
+			deselect(value); 
+		}
 		// Return karma
 		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
