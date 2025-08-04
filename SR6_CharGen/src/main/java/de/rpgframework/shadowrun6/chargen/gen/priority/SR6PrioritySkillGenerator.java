@@ -165,7 +165,8 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return Possible.TRUE;
 		}
 		// No points left - maybe with karma?
-		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
+		SR6SkillValue sVal = model.getSkillValue(data);
+		int karma = getIncreaseCost(sVal);
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
@@ -248,17 +249,6 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE deselect("+data+")");
 		}
-	}
-
-	//-------------------------------------------------------------------
-	private int getIncreaseCost(SR6SkillValue sVal) {
-		SR6Skill key = sVal.getModifyable();
-
-		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)
-			return 3;
-
-		int newVal = (sVal==null)?1:(sVal.getModifiedValue()+1);
-		return newVal*5;
 	}
 
 	//-------------------------------------------------------------------
@@ -649,10 +639,14 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 				/* Pay karma */
 				if (per.points3>0) {
-					int pay = per.getKarmaInvestSR6();
-					// Knowledge skills are cheaper
-					if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE) {
-						pay = (pay/5)*3;
+					int pay = per.getKarmaInvestSR6(); //this gives pay = sum of 5 per new skill level as for active skills
+					// Knowledge skills are only 3 per skill
+					if (key.getType()==SkillType.KNOWLEDGE) {
+						pay = 3;
+					}
+					// Language skills are only 3 per skill level (not sum of 3 per new skill level)
+					if (key.getType()==SkillType.LANGUAGE) {
+						pay = per.points3*3;
 					}
 					model.setKarmaFree( model.getKarmaFree() - pay );
 					logger.log(Level.DEBUG, "  Pay {0} karma for {1}", pay, key);
@@ -1041,6 +1035,39 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return 0;//-1;
 		}
 		return val.getSum();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Variant of the decrease from chargen\gen\CommonSkillGenerator.java which in addition checks for decrease of karma (points3) first
+	 */
+	public OperationResult<SR6SkillValue> decrease(SR6SkillValue ref) {
+		if (logger.isLoggable(Level.TRACE))
+			logger.log(Level.TRACE, "ENTER decrease " + ref);
+		try {
+			SR6Skill key = ref.getModifyable();
+
+			Possible allowed = canBeDecreasedPoints3(ref);
+			if (allowed.get()) {
+				return decreasePoints3(ref);
+			}
+
+			allowed = canBeDecreasedPoints2(ref);
+			if (allowed.get()) {
+				return decreasePoints2(ref);
+			}
+
+			allowed = canBeDecreasedPoints(ref);
+			if (allowed.get()) {
+				return decreasePoints(ref);
+			}
+
+//			logger.log(Level.ERROR, "Neither with skill points, nor with Karma was decreasing possible");
+			return new OperationResult<>();
+		} finally {
+			if (logger.isLoggable(Level.TRACE))
+			logger.log(Level.TRACE, "LEAVE decrease " + ref);
+		}
 	}
 
 }

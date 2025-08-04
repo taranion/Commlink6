@@ -92,7 +92,8 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return pos;
 
 		// No points left - maybe with karma?
-		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
+		SR6SkillValue sVal = model.getSkillValue(data);
+		int karma = getIncreaseCost(sVal);
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
@@ -130,7 +131,8 @@ public class SR6SkillLeveller extends CommonSkillController {
 		OperationResult<SR6SkillValue> res = super.select(data, decisions);
 		if (res.wasSuccessful()) {
 			// Now pay
-			int cost = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
+			SR6SkillValue sVal = model.getSkillValue(data);
+			int cost = getIncreaseCost(sVal);
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
 
@@ -155,7 +157,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return false;
 		SR6Skill key = data.getModifyable();
 		ValueModification toUndo = getHighestModification(data.getModifyable());
-		int karma = (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)?3:5;
+		int karma = getIncreaseCost(data);
 		if (toUndo!=null) {
 			// Decrease from career
 			model.removeFromHistory(toUndo);
@@ -181,23 +183,6 @@ public class SR6SkillLeveller extends CommonSkillController {
 		// Inform listener
 		parent.runProcessors();
 		return true;
-	}
-
-	//-------------------------------------------------------------------
-	private int getIncreaseCost(SR6SkillValue sVal) {
-		SR6Skill key = sVal.getModifyable();
-		int newVal = (sVal==null)?1:(sVal.getDistributed()+1);
-
-		// Raising language skills is like a new specialization
-		if (key.getType()==SkillType.KNOWLEDGE)
-			return 3;
-		if (key.getType()==SkillType.LANGUAGE) {
-			return newVal*3;
-		}
-
-		int cost = newVal*5;
-
-		return cost;
 	}
 
 	//-------------------------------------------------------------------
@@ -440,7 +425,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		value.setDistributed(value.getDistributed() +1);
 		logger.log(Level.INFO, "Increase {0} to {1}", value.getKey(), value.getDistributed());
 
-		int cost = value.getDistributed()*5;
+		int cost= getIncreaseCost(value);		
 		model.setKarmaFree( model.getKarmaFree() - cost);
 		model.setKarmaInvested( model.getKarmaInvested() + cost);
 
@@ -467,7 +452,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new OperationResult<>(poss);
 		}
 
-		int cost = value.getDistributed()*5;
+		int cost= getIncreaseCost(value);
 		value.setDistributed(value.getDistributed() -1);
 		logger.log(Level.INFO, "Decrease {0} to {1}", value.getKey(), value.getDistributed());
 

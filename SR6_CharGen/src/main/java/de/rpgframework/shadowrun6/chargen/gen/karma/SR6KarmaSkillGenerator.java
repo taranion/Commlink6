@@ -66,7 +66,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		}
 
 		// Has the user enough karma
-		int pay = (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)?3:5;
+		SR6SkillValue sVal = model.getSkillValue(skill);
+		int pay = getIncreaseCost(sVal);
 		if (model.getKarmaFree()>=pay) return Possible.TRUE;
 
 		return Possible.FALSE;

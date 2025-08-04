@@ -360,4 +360,18 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		}
 	}
 
+	//--------------Calculate karma costs for increasing a skill by 1
+	protected int getIncreaseCost(SR6SkillValue sVal) {
+		SR6Skill key = sVal.getModifyable();
+		int newVal = (sVal==null)?1:(sVal.getDistributed()+1);
+
+		// Learning knowledge skill as well as learning or raising language skills is always just 3 karma
+		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)
+			return 3;
+
+		int cost = newVal*5; // Learning or raising active skill is 5 times new skill level
+
+		return cost;
+	}
+
 }
