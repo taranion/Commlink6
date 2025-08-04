@@ -344,6 +344,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public Possible canBeIncreasedPoints3(SR6SkillValue key) {
 //		logger.log(Level.WARNING, "canBeIncreasedPoints3("+key+")");
+
+		// Is the new value acceptable
+		Possible allowed = wouldNewValueBeOkay(key);
+		if (!allowed.get())
+			return allowed;
+
+		// Are there enough points
 		int karma = getIncreaseCost(key);
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
@@ -395,13 +402,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 
 			// Do increase
-			int karma = getIncreaseCost(value);
-			value.setDistributed(value.getDistributed() + 1);
+			int karma = getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input
+			value.setDistributed(value.getDistributed() + 1); //increase skill level
 			// Pay karma
 			model.setKarmaFree(model.getKarmaFree() - karma);
 
 			// Do increase
-			per.points3++;
+			per.points3++; //increase tracking variable for skill levels paid by karma
 			logger.log(Level.INFO, "increase karma points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points3, per.getSum());
 
@@ -437,10 +444,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		}
 
 		// Do decrease
-		value.setDistributed(value.getDistributed()-1);
-		per.points3--;
+		value.setDistributed(value.getDistributed()-1); //decrease skill
+		per.points3--; //decrease karma levels spend for skill
 		// Return karma
-		int karma = getIncreaseCost(value);
+		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
 
 		parent.runProcessors();
@@ -639,7 +646,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 				/* Pay karma */
 				if (per.points3>0) {
-					int pay = per.getKarmaInvestSR6(); //this gives pay = sum of 5 per new skill level as for active skills
+					int pay = per.getKarmaInvestSR6(); // Active skills = sum of 5 per skill level paid with karma
 					// Knowledge skills are only 3 per skill
 					if (key.getType()==SkillType.KNOWLEDGE) {
 						pay = 3;

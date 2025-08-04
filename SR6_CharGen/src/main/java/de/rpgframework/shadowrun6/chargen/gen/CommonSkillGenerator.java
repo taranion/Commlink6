@@ -175,7 +175,12 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		// Maximum not reached yet
 		Collection<SR6SkillValue> alreadyMaxed = getMaximizedSkills();
 
-		// Only allow to max an skill, if there isn't one already
+		// Several language skills can reach maximum
+		if (ref.getSkill().getType()==SkillType.LANGUAGE) {
+			return Possible.TRUE;
+		}
+
+		// For active skills: Only allow to max an skill, if there isn't one already
 		if ((ref.getDistributed()+1)==maximum && alreadyMaxed.size()>=maxLimit) {
 			return new Possible(Severity.STOPPER, RES,  I18N_MAX_SKILLS_MAXED, maxLimit);
 		}
