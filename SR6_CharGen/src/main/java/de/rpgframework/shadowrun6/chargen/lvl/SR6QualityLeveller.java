@@ -189,8 +189,23 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 				return new OperationResult<QualityValue>(poss);
 			}
 
+			int costBefore = value.getKarmaCost();
+			
 			value.setDistributed(value.getDistributed()+1);
 			logger.log(Level.INFO, "increased quality ''{0}'' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			// Pay
+			int cost = value.getKarmaCost() - costBefore;
+			if (!value.getResolved().isNoDouble()) cost*=2;
+			if (!value.getResolved().isPositive()) cost=0;
+			model.setKarmaFree( model.getKarmaFree() - cost);
+			model.setKarmaInvested( model.getKarmaInvested() + cost);
+			
+			// Add to history
+			ValueModification mod = new ValueModification(ShadowrunReference.QUALITY, value.getResolved().getId(), value.getDistributed());
+			mod.setDate(Date.from(Instant.now()));
+			mod.setExpCost(cost);
+			model.addToHistory(mod);
 
 			Shadowrun6Tools.recordEssenceChange(model, value.getResolved());
 
@@ -216,8 +231,26 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 				return new OperationResult<QualityValue>(poss);
 			}
 
+			int costBefore = value.getKarmaCost();
 			value.setDistributed(value.getDistributed()-1);
 			logger.log(Level.INFO, "decreased quality '{0}' to {1}", value.getModifyable().getId(), value.getDistributed());
+
+			// Problem: The reimbursed cost is different depending upon whether the quality
+			// has been raised at chargen or career.
+			int cost = costBefore - value.getKarmaCost();
+			// TODO: Check in the history if there has been an increase of the quality
+			// If so assume it has been raised in career - and pick the cost it got there.
+			// Otherwise use chargen cost
+//			if (!value.getResolved().isNoDouble()) cost*=2;
+//			if (!value.getResolved().isPositive()) cost=0;
+			model.setKarmaFree( model.getKarmaFree() + cost);
+			model.setKarmaInvested( model.getKarmaInvested() - cost);
+			
+			// Add to history
+			ValueModification mod = new ValueModification(ShadowrunReference.QUALITY, value.getResolved().getId(), value.getDistributed());
+			mod.setDate(Date.from(Instant.now()));
+			mod.setExpCost(-cost);
+			model.addToHistory(mod);
 
 			Shadowrun6Tools.removeEssenceChange(model, value.getResolved(), RemoveMode.UNDO);
 
