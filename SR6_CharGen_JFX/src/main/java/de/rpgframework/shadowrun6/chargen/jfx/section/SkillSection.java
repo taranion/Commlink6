@@ -173,7 +173,10 @@ public class SkillSection extends Section {
 		if (control!=null && control.getSkillController()!=null) {
 			SR6SkillController skCtrl = control.getSkillController();
 			table.setData(
-					control.getSkillController().getSelected().stream().filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType())).collect(Collectors.toList())
+					control.getSkillController().getSelected().stream()
+						.filter(sv -> Arrays.asList(type).contains(sv.getModifyable().getType()))
+						.filter(sv -> sv.getDistributed()>0)
+						.collect(Collectors.toList())
 					);
 			if (skCtrl instanceof NumericalValueWith1PoolController) {
 				lbPoints.setText(String.valueOf(((NumericalValueWith1PoolController<?,?>)skCtrl).getPointsLeft()));
