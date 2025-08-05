@@ -211,6 +211,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			allowed.clear();
 			todos.clear();
 
+			// Ensure native language is present
+			ensureExistanceOfNativeLanguage(SR6PointBuySettings.class);
+
 			for (Modification tmp : previous) {
 				if (tmp instanceof AllowModification) {
 					AllowModification mod = (AllowModification)tmp;
@@ -231,8 +234,6 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				}
 			}
 
-			// Ensure native language is present
-			ensureExistanceOfNativeLanguage(SR6PointBuySettings.class);
 			checkForExoticWeaponsSpecilization();
 			
 			// Be sure to remove all skills that are not allowed
