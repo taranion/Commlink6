@@ -763,7 +763,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 	 * Variant of canBeDecreasedPoints3 in SR6PrioritySkillGenerator
 	 */
 	public Possible canBeDecreasedPoints3(SR6SkillValue key) {
-		SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
+		SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);
 		PerSkillPoints per = settings.get(key);
 		if (per==null)
 			return new Possible(I18N_NOT_SELECTED);
