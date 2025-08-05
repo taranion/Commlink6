@@ -149,9 +149,12 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 			maxLimit = 1;
 			points1   = model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue(ValueType.NATURAL);;
 			points2   = model.getKarmaFree();
-			available.clear();
+			updateAvailable();
 			allowed.clear();
 			todos.clear();
+
+			// Ensure native language is present
+			ensureNativeLanguage();
 
 			for (Modification tmp : previous) {
 				if (tmp instanceof AllowModification) {
@@ -172,9 +175,6 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 					unprocessed.add(tmp);
 				}
 			}
-
-			// Ensure native language is present
-			ensureNativeLanguage();
 
 		} catch (Exception e) {
 
