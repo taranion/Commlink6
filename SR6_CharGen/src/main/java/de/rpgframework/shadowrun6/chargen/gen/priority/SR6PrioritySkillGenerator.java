@@ -251,17 +251,6 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	}
 
 	//-------------------------------------------------------------------
-	private int getIncreaseCost(SR6SkillValue sVal) {
-		SR6Skill key = sVal.getModifyable();
-
-		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)
-			return 3;
-
-		int newVal = (sVal==null)?1:(sVal.getModifiedValue()+1);
-		return newVal*5;
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueController#canBeIncreased(de.rpgframework.genericrpg.NumericalValue)
 	 */
@@ -354,6 +343,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 	@Override
 	public Possible canBeIncreasedPoints3(SR6SkillValue key) {
 //		logger.log(Level.WARNING, "canBeIncreasedPoints3("+key+")");
+
+		// Is the new value acceptable
+		Possible allowed = wouldNewValueBeOkay(key);
+		if (!allowed.get())
+			return allowed;
+
+		// Are there enough points
 		int karma = getIncreaseCost(key);
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
@@ -405,13 +401,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 
 			// Do increase
-			int karma = getIncreaseCost(value);
-			value.setDistributed(value.getDistributed() + 1);
+			int karma = getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input
+			value.setDistributed(value.getDistributed() + 1); //increase skill level
 			// Pay karma
 			model.setKarmaFree(model.getKarmaFree() - karma);
 
 			// Do increase
-			per.points3++;
+			per.points3++; //increase tracking variable for skill levels paid by karma
 			logger.log(Level.INFO, "increase karma points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points3, per.getSum());
 
@@ -447,10 +443,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		}
 
 		// Do decrease
-		value.setDistributed(value.getDistributed()-1);
-		per.points3--;
+		value.setDistributed(value.getDistributed()-1); //decrease skill
+		per.points3--; //decrease karma levels spend for skill
+		if (per.getSum()==0) { //if skill 0, deselect skill
+			deselect(value); 
+		}
 		// Return karma
-		int karma = getIncreaseCost(value);
+		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
 
 		parent.runProcessors();
@@ -594,7 +593,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					key = Shadowrun6Core.getSkill(entry.getKey());
 				} else
 					key = sVal.getResolved();
-				if (key==null) {
+				if (key==null || sVal==null ) { //catch skill with value 0 and sVal null, which have not been correctly deselected
 					logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", entry.getKey());
 					continue;
 				}
@@ -649,10 +648,14 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 				/* Pay karma */
 				if (per.points3>0) {
-					int pay = per.getKarmaInvestSR6();
-					// Knowledge skills are cheaper
-					if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE) {
-						pay = (pay/5)*3;
+					int pay = per.getKarmaInvestSR6(); // Active skills = sum of 5 per skill level paid with karma
+					// Knowledge skills are only 3 per skill
+					if (key.getType()==SkillType.KNOWLEDGE) {
+						pay = 3;
+					}
+					// Language skills are only 3 per skill level (not sum of 3 per new skill level)
+					if (key.getType()==SkillType.LANGUAGE) {
+						pay = per.points3*3;
 					}
 					model.setKarmaFree( model.getKarmaFree() - pay );
 					logger.log(Level.DEBUG, "  Pay {0} karma for {1}", pay, key);
@@ -1041,6 +1044,39 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return 0;//-1;
 		}
 		return val.getSum();
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * Variant of the decrease from chargen\gen\CommonSkillGenerator.java which in addition checks for decrease of karma (points3) first
+	 */
+	public OperationResult<SR6SkillValue> decrease(SR6SkillValue ref) {
+		if (logger.isLoggable(Level.TRACE))
+			logger.log(Level.TRACE, "ENTER decrease " + ref);
+		try {
+			SR6Skill key = ref.getModifyable();
+
+			Possible allowed = canBeDecreasedPoints3(ref);
+			if (allowed.get()) {
+				return decreasePoints3(ref);
+			}
+
+			allowed = canBeDecreasedPoints2(ref);
+			if (allowed.get()) {
+				return decreasePoints2(ref);
+			}
+
+			allowed = canBeDecreasedPoints(ref);
+			if (allowed.get()) {
+				return decreasePoints(ref);
+			}
+
+//			logger.log(Level.ERROR, "Neither with skill points, nor with Karma was decreasing possible");
+			return new OperationResult<>();
+		} finally {
+			if (logger.isLoggable(Level.TRACE))
+			logger.log(Level.TRACE, "LEAVE decrease " + ref);
+		}
 	}
 
 }
