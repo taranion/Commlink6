@@ -91,7 +91,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		if (!pos.get())
 			return pos;
 
-		// No points left - maybe with karma?
+		// No points left - can it be payed with karma?
 		SR6SkillValue sVal = model.getSkillValue(data);
 		int karma = getIncreaseCost(sVal);
 		if (model.getKarmaFree()>=karma)
@@ -156,7 +156,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		if (!super.deselect(data))
 			return false;
 		SR6Skill key = data.getModifyable();
-		ValueModification toUndo = getHighestModification(data.getModifyable());
+		ValueModification toUndo = getHighestModification(data.getModifyable()); 
 		int karma = getIncreaseCost(data);
 		if (toUndo!=null) {
 			// Decrease from career
@@ -254,6 +254,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new Possible(Severity.STOPPER, RES, I18N_NOT_AVAILABLE_SPEC, skillVal.getKey(), spec.getId(), expertise);
 		}
 		
+		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 		if (expertise) {
 			// Must have a specialization
 			if (skillVal.getDistributed()<5) {
@@ -275,7 +276,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		} else {
 			// May not have any other specialization
 			boolean allow = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.EXPANDED_SPECIALIZATIONS);
-			if (!allow && skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==0)) {
+			if (!allow && skillVal.getSpecializations().stream().anyMatch(sv -> sv.getDistributed()==0) && !isExotic) {
 				return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_ALREADY_PRESENT);
 			}
 			// May not already have anything in that field
@@ -422,10 +423,9 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new OperationResult<>(poss);
 		}
 
-		value.setDistributed(value.getDistributed() +1);
+		int cost= getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input		value.setDistributed(value.getDistributed() +1);
 		logger.log(Level.INFO, "Increase {0} to {1}", value.getKey(), value.getDistributed());
 
-		int cost= getIncreaseCost(value);		
 		model.setKarmaFree( model.getKarmaFree() - cost);
 		model.setKarmaInvested( model.getKarmaInvested() + cost);
 
@@ -452,10 +452,10 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new OperationResult<>(poss);
 		}
 
-		int cost= getIncreaseCost(value);
 		value.setDistributed(value.getDistributed() -1);
 		logger.log(Level.INFO, "Decrease {0} to {1}", value.getKey(), value.getDistributed());
 
+		int cost= getIncreaseCost(value);  //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input 
 		model.setKarmaFree( model.getKarmaFree() + cost);
 		model.setKarmaInvested( model.getKarmaInvested() - cost);
 

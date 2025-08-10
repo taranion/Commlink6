@@ -196,8 +196,8 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 
 			// Pay
 			int cost = value.getKarmaCost() - costBefore;
-			if (!value.getResolved().isNoDouble()) cost*=2;
-			if (!value.getResolved().isPositive()) cost=0;
+			if (!value.getResolved().isNoDouble()) cost*=2; // cost doubled in career mode unless quality has flag NoDouble
+			if (!value.getResolved().isPositive()) cost=0; // no costs if increased quality is negative 
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
 			
@@ -238,11 +238,10 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 			// Problem: The reimbursed cost is different depending upon whether the quality
 			// has been raised at chargen or career.
 			int cost = costBefore - value.getKarmaCost();
-			// TODO: Check in the history if there has been an increase of the quality
-			// If so assume it has been raised in career - and pick the cost it got there.
-			// Otherwise use chargen cost
-//			if (!value.getResolved().isNoDouble()) cost*=2;
-//			if (!value.getResolved().isPositive()) cost=0;
+			if (!value.getResolved().isNoDouble()) cost*=2;  // cost doubled in career mode unless quality has flag NoDouble
+			if (!value.getResolved().isPositive()) cost*=-1; // pay karma if decreased quality is negative
+			if (value.getResolved().isPositive()) cost=0;    // no karma change if decreased quality is positive
+			
 			model.setKarmaFree( model.getKarmaFree() + cost);
 			model.setKarmaInvested( model.getKarmaInvested() - cost);
 			

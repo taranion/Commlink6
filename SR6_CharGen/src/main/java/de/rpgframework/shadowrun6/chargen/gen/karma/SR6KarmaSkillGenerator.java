@@ -87,8 +87,9 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			}
 
 			logger.log(Level.INFO, "Selected skill {0}", data.getId());
+			// karma payment not needed as karma status is derived from running 'process' to recalculate all karma costs
 
-			getCharacterController().runProcessors();
+			parent.runProcessors();
 			return result;
 		} finally {
 			logger.log(Level.DEBUG, "LEAVE select("+data+")");
@@ -126,10 +127,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 
 		ref.setDistributed( ref.getDistributed() +1);
 		logger.log(Level.INFO, "Increased skill {0} to {1}", ref.getKey(), ref.getModifiedValue(ValueType.NATURAL));
-		// Pay karma
-		int karma = ref.getModifiedValue(ValueType.NATURAL);
-		model.setKarmaFree( model.getKarmaFree() -karma );
-		model.setKarmaInvested( model.getKarmaInvested() +karma);
+		// karma payment not needed as karma status is derived from running 'process' to recalculate all karma costs
 
 		parent.runProcessors();
 
@@ -151,14 +149,10 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		ref.setDistributed( ref.getDistributed() -1);
 		logger.log(Level.INFO, "Decreased skill {0} to {1}", ref.getKey(), ref.getModifiedValue(ValueType.NATURAL));
 		if (ref.getModifiedValue()<=0) {
-			model.removeSkillValue(ref);
+			deselect(ref);
 		}
 
-		// Pay karma
-		int karma = ref.getModifiedValue(ValueType.NATURAL);
-		model.setKarmaFree( model.getKarmaFree() -karma );
-		model.setKarmaInvested( model.getKarmaInvested() +karma);
-
+		// karma payment not needed as karma status is derived from running 'process' to recalculate all
 		parent.runProcessors();
 
 		return new OperationResult<SR6SkillValue>(ref);
@@ -308,17 +302,14 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.gen.PriorityPointBuySkillController#canBeIncreasedPoints(de.rpgframework.shadowrun.AShadowrunSkill)
+	 * This is trying to use free knowledge / language points to raise
 	 */
 	@Override
 	public Possible canBeIncreasedPoints(SR6SkillValue val) {
 		SR6Skill skill = val.getResolved();
-		if (skill.getType()!=SkillType.LANGUAGE) {
+		if (skill.getType()!=SkillType.LANGUAGE && skill.getType()!=SkillType.KNOWLEDGE) {
 			return Possible.FALSE;
 		}
-
-//		// Only one specialization is allowed
-//		if (val.getModifiedValue(ValueType.NATURAL)>2)
-//			return Possible.FALSE;
 
 		if (points1>0)
 			return Possible.TRUE;
@@ -332,6 +323,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#canBeIncreasedPoints2(java.lang.Object)
+	 * This is trying to use karma to raise
 	 */
 	@Override
 	public Possible canBeIncreasedPoints2(SR6SkillValue value) {
@@ -341,7 +333,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			return allowed;
 
 		// Is there enough Karma
-		int karmaNeeded = (value.getDistributed()+1) *5;
+		int karmaNeeded = getIncreaseCost(value);
 		if (karmaNeeded>model.getKarmaFree()){
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 		}
@@ -397,7 +389,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 
 		// Check if there already is one specialization in this skill
-		if (!skillVal.getSpecializations().isEmpty())
+		if (!skillVal.getSpecializations().isEmpty() && !isExotic)
 			return Possible.FALSE;
 
 		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
@@ -414,6 +406,20 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, 5);
 
 		return Possible.TRUE;
+	}
+
+	// Using canBeDeselected from CommonSkillGenerator which uses the one from CommonSkillController 
+
+	//-------------------------------------------------------------------
+	/**
+	 * need to have unique 'deselect' code here to force 'runProcessors' after deselection, otherwise data is not updated
+	 */
+	@Override
+	public boolean deselect(SR6SkillValue value) {
+		boolean success = super.deselect(value);
+		if (success)
+			parent.runProcessors();
+		return success;
 	}
 
 	//-------------------------------------------------------------------

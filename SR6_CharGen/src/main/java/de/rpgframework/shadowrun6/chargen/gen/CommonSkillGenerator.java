@@ -95,28 +95,6 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		return maxed;
 	}
 
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#canBeSelected(SR6Skill)
-//	 */
-//	@Override
-//	public Possible canBeSelected(SR6Skill data) {
-//		Possible pos = super.canBeSelected(data);
-//		if (!pos.get())
-//			return pos;
-//
-//		if (pointsSkills>0)
-//			return Possible.TRUE;
-//		if (pointsLangAndKnow>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
-//			return Possible.TRUE;
-//		}
-//		// No points left - maybe with karma?
-//		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
-//		if (model.getKarmaFree()>=karma)
-//			return Possible.TRUE;
-//		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));
-//	}
-
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSkillController#getMaximum(SR6SkillValue)
@@ -321,7 +299,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		per.points2--;
 		logger.log(Level.INFO, "decrease points2 of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 				per.points2, per.getSum());
-		if (per.getSum()==0) {
+		if (per.getSum()<=0) {
 			deselect(value);
 		}
 		getCharacterController().runProcessors();
@@ -395,7 +373,7 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 				return select(value.getModifyable());
 			}
 			PerSkillPoints per = getPerSkill(value);
-			// Do decrease
+			// Do increase
 			per.points1++;
 			logger.log(Level.INFO, "increase points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
@@ -423,11 +401,15 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 				return new OperationResult<>(allowed);
 
 			PerSkillPoints per = getPerSkill(value);
-			// Do increase
+			if (per==null) {
+				logger.log(Level.ERROR, "No PerSkillPoints found for {0}",value);
+				return new OperationResult<>();
+			}
+			// Do decrease
 			per.points1--;
 			logger.log(Level.INFO, "decrease points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
-			if (per.getSum()==0) {
+			if (per.getSum()<=0) {
 				deselect(value);
 			}
 			getCharacterController().runProcessors();

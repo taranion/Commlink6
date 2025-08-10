@@ -164,7 +164,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		if (points2>0 && (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)) {
 			return Possible.TRUE;
 		}
-		// No points left - maybe with karma?
+		// No points left - can it be payed with karma?
 		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
@@ -212,7 +212,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				per.points3++;
 			}
 			settings.put(result.get(), per);
-
+			// karma payment not needed as above code stores which types of points where used and point / karma status is recalculated based on that
 			getCharacterController().runProcessors();
 			return result;
 		} finally {
@@ -243,6 +243,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			SR6PrioritySettings settings = model.getCharGenSettings(SR6PrioritySettings.class);
 			settings.remove(data);
 
+			// karma payment not needed code stores that skill was deleted and karma status is recalculated based on that
 			getCharacterController().runProcessors();
 			return true;
 		} finally {
@@ -261,6 +262,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Can it be payed in any way
+		// Points1 and Points2 referring to methods in CommonSkillGenerator, only canBeIncreasedPoints3 is in SR6PrioritSkillGenerator
 		return new Possible( canBeIncreasedPoints(value).get() || canBeIncreasedPoints2(value).get() || canBeIncreasedPoints3(value).get() );
 	}
 
@@ -275,12 +277,12 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		try {
 			Possible allowed = canBeIncreasedPoints(ref);
 			if (allowed.get()) {
-				return increasePoints(ref);
+				return increasePoints(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeIncreasedPoints2(ref);
 			if (allowed.get()) {
-				return increasePoints2(ref);
+				return increasePoints2(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeIncreasedPoints3(ref);
@@ -313,6 +315,8 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		return Possible.TRUE;
 	}
 
+	// Using canBeDecreased from CommonSkillGenerator which uses the one from CommonSkillController
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueWith2PoolsController#canBeDecreasedPoints2(java.lang.Object)
@@ -445,7 +449,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		// Do decrease
 		value.setDistributed(value.getDistributed()-1); //decrease skill
 		per.points3--; //decrease karma levels spend for skill
-		if (per.getSum()==0) { //if skill 0, deselect skill
+		if (per.getSum()<=0) { //if skill 0, deselect skill
 			deselect(value); 
 		}
 		// Return karma
@@ -1058,17 +1062,17 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 			Possible allowed = canBeDecreasedPoints3(ref);
 			if (allowed.get()) {
-				return decreasePoints3(ref);
+				return decreasePoints3(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeDecreasedPoints2(ref);
 			if (allowed.get()) {
-				return decreasePoints2(ref);
+				return decreasePoints2(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeDecreasedPoints(ref);
 			if (allowed.get()) {
-				return decreasePoints(ref);
+				return decreasePoints(ref); // using method in 'CommonSkillGenerator'
 			}
 
 //			logger.log(Level.ERROR, "Neither with skill points, nor with Karma was decreasing possible");

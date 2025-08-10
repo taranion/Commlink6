@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.genericrpg.Possible;
@@ -99,9 +98,9 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		// Language skills cannot be decreased below 1
 		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
 			return Possible.FALSE;
-		// Is automatically added
-//		if (model.isAutoSkill(val))
-//			return false;
+		// Native language skill cannot be decreased below 4
+		if (value.getModifyable().getType()==SkillType.LANGUAGE && value.getDistributed()==4)
+			return Possible.FALSE;
 
 		if (!model.getSkillValues().contains(value)) {
 			// Value not present in character
@@ -109,52 +108,6 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		}
 		return new Possible(value.getDistributed()>0);
 	}
-
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
-//	 */
-//	@Override
-//	public boolean increase(SR6SkillValue ref) {
-//		logger.log(Level.DEBUG, "increase "+ref);
-//		Possible allowed = canBeIncreased(ref);
-//		if (!allowed.get()) {
-//			logger.log(Level.WARNING, "Trying to increase {0} which cannot be increased: {1}", ref.getSkill().getId(), allowed);
-//			return false;
-//		}
-//
-//		// Change model
-//		ref.setDistributed(ref.getDistributed()+1);
-//		logger.log(Level.INFO, "Increase skill "+ref.getModifyable().getId()+" to "+ref.getDistributed());
-//
-//		return true;
-//	}
-//
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
-//	 */
-//	@Override
-//	public boolean decrease(SR6SkillValue ref) {
-//		if (logger.isLoggable(Level.TRACE))
-//			logger.log(Level.TRACE, "ENTER decrease " + ref);
-//		try {
-//			Possible allowed = canBeDecreased(ref);
-//			if (!allowed.get())
-//				return false;
-//
-//			// Change model
-//			ref.setDistributed(ref.getDistributed() - 1);
-//			if (ref.getModifiedValue() == 0)
-//				model.removeSkillValue(ref);
-//			logger.log(Level.INFO, "Decrease skill " + ref.getModifyable().getId() + " to " + ref.getDistributed());
-//
-//			return true;
-//		} finally {
-//			if (logger.isLoggable(Level.TRACE))
-//			logger.log(Level.TRACE, "LEAVE decrease " + ref);
-//		}
-//	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -255,6 +208,8 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 				ret = new SR6SkillValue(data, 1);
 				ret.setUuid(UUID.randomUUID());
 				model.addSkillValue(ret);
+			} else { //if skill is present, it is invisible due to value being zero, thus set to 1			
+				ret.setDistributed(1);
 			}
 			logger.log(Level.DEBUG, "Added skill {0} to model", data);
 
@@ -276,7 +231,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 	public boolean deselect(SR6SkillValue value) {
 		logger.log(Level.DEBUG, "ENTER deselect("+value+")");
 		try {
-			// Ensure selecting this skill is allowed
+			// Ensure deselecting this skill is allowed
 			Possible possible = canBeDeselected(value);
 			if (!possible.get()) {
 				logger.log(Level.WARNING, "Tried to deselect a skill that is not valid to deselect: "+possible);
@@ -369,7 +324,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		} else
 			key = sVal.getModifyable();
 		if (key==null || sVal==null ) {
-			logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", sVal.getKey());
+			logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", sVal);
 			return(0);
 			}
 
