@@ -109,6 +109,9 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 
 		return new OperationResult<SR6SkillValue>(ref);
 	}
+	
+	// Using canBeDecreased from CommonSkillGenerator which uses the one from CommonSkillController
+	// Using canBeDeselected and deselect from CommonSkillGenerator which uses the one from CommonSkillController
 
 	//-------------------------------------------------------------------
 	/**
@@ -124,8 +127,8 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 
 		ref.setDistributed( ref.getDistributed() -1);
 		logger.log(Level.INFO, "Decreased skill {0} to {1}", ref.getKey(), ref.getModifiedValue(ValueType.NATURAL));
-		if (ref.getModifiedValue()<=0) {
-			model.removeSkillValue(ref);
+		if (ref.getModifiedValue()<=0) {//if skill 0, deselect skill
+			deselect(ref);
 		}
 
 		parent.runProcessors();
@@ -257,8 +260,10 @@ public class SR6FreeSkillGenerator extends CommonSkillGenerator {
 	public Possible canSelectSpecialization(SR6SkillValue skillVal, SkillSpecialization<SR6Skill> spec,
 			boolean expertise) {
 
+		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
+
 		// Check if there already is one specialization in this skill
-		if (!skillVal.getSpecializations().isEmpty())
+		if (!skillVal.getSpecializations().isEmpty() && !isExotic) 
 			return Possible.FALSE;
 
 		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
