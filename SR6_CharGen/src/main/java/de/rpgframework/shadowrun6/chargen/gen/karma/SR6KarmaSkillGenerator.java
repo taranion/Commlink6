@@ -134,6 +134,8 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 		return new OperationResult<SR6SkillValue>(ref);
 	}
 
+	// Using 'canBeDecreased' from CommonSkillGenerator which uses the one from CommonSkillController
+	
 	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.NumericalValueController#decrease(de.rpgframework.genericrpg.NumericalValue)
@@ -183,6 +185,9 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			allowed.clear();
 			todos.clear();
 
+			// Ensure native language is present
+			ensureNativeLanguage();
+
 			for (Modification tmp : previous) {
 				if (tmp instanceof AllowModification) {
 					AllowModification mod = (AllowModification)tmp;
@@ -207,8 +212,6 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			removeRestrictedSkills();
 			updateAvailable();
 
-			// Ensure native language is present
-			ensureNativeLanguage();
 			checkForExoticWeaponsSpecilization();
 
 			for (SR6SkillValue val : model.getSkillValues()) {

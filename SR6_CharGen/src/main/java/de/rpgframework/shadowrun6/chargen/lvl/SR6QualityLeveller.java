@@ -235,8 +235,8 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 			value.setDistributed(value.getDistributed()-1);
 			logger.log(Level.INFO, "decreased quality '{0}' to {1}", value.getModifyable().getId(), value.getDistributed());
 
-			// Problem: The reimbursed cost is different depending upon whether the quality
-			// has been raised at chargen or career.
+			// Problem: The reimbursed cost for a positive quality is different depending upon whether the quality
+			// has been raised at chargen or career, however reimbursement of positive not defined in rules, thus not done
 			int cost = costBefore - value.getKarmaCost();
 			if (!value.getResolved().isNoDouble()) cost*=2;  // cost doubled in career mode unless quality has flag NoDouble
 			if (!value.getResolved().isPositive()) cost*=-1; // pay karma if decreased quality is negative

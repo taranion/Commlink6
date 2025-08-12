@@ -96,7 +96,7 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
 			return Possible.FALSE;
 		// Language skills cannot be decreased below 1
-		if (value.getModifyable().getType()==SkillType.KNOWLEDGE)
+		if (value.getModifyable().getType()==SkillType.LANGUAGE && value.getDistributed()==1)
 			return Possible.FALSE;
 		// Native language skill cannot be decreased below 4
 		if (value.getModifyable().getType()==SkillType.LANGUAGE && value.getDistributed()==4)
@@ -317,23 +317,20 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 
 	//--------------Calculate karma costs for increasing a skill by 1
 	protected int getIncreaseCost(SR6SkillValue sVal) {
-		// Learning knowledge skill as well as learning or raising language skills is always just 3 karma
+		// catch nulls
 		SR6Skill key = null;
-		if (sVal==null) {
-			key = Shadowrun6Core.getSkill(sVal.getKey());
-		} else
-			key = sVal.getModifyable();
+		if (sVal!=null) key = sVal.getModifyable();
 		if (key==null || sVal==null ) {
-			logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings", sVal);
+			logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings");
 			return(0);
 			}
 
+		// Learning knowledge skill as well as learning or raising language skills is always just 3 karma
 		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)
 			return 3;
 
 		// Learning or raising active skill is 5 times new skill level
-		int newVal = (sVal==null)?1:(sVal.getDistributed()+1);
-		int cost = newVal*5; 
+		int cost = (sVal.getDistributed()+1)*5; 
 		return cost;
 	}
 

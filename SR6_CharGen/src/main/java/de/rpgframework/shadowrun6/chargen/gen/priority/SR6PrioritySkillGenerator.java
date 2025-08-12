@@ -1062,7 +1062,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 
 			Possible allowed = canBeDecreasedPoints3(ref);
 			if (allowed.get()) {
-				return decreasePoints3(ref); // using method in 'CommonSkillGenerator'
+				return decreasePoints3(ref);
 			}
 
 			allowed = canBeDecreasedPoints2(ref);
@@ -1070,7 +1070,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 				return decreasePoints2(ref); // using method in 'CommonSkillGenerator'
 			}
 
-			allowed = canBeDecreasedPoints(ref);
+			allowed = canBeDecreasedPoints(ref); // using method in 'CommonSkillGenerator'
 			if (allowed.get()) {
 				return decreasePoints(ref); // using method in 'CommonSkillGenerator'
 			}
