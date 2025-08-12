@@ -315,15 +315,16 @@ public abstract class CommonSkillController extends ControllerImpl<SR6Skill> imp
 		}
 	}
 
-	//--------------Calculate karma costs for increasing a skill by 1
-	protected int getIncreaseCost(SR6SkillValue sVal) {
-		// catch nulls
-		SR6Skill key = null;
-		if (sVal!=null) key = sVal.getModifyable();
-		if (key==null || sVal==null ) {
-			logger.log(Level.ERROR, "Cannot find Skill for ''{0}'' from PrioritySettings");
-			return(0);
-			}
+	//-------------------------------------------------------------------
+	/** Calculate karma costs for increasing a skill by 1 */
+	protected int getIncreaseCost(SR6SkillValue sVal, SR6Skill skill) {
+		// If sVal is null, assume it is selection cost
+		if (sVal==null || sVal.getModifyable()==null) {
+			return (skill.getType()==SkillType.KNOWLEDGE || skill.getType()==SkillType.LANGUAGE)?3:5;
+		}
+		
+		// prefer those from the skill value
+		SR6Skill key = sVal.getModifyable();;
 
 		// Learning knowledge skill as well as learning or raising language skills is always just 3 karma
 		if (key.getType()==SkillType.KNOWLEDGE || key.getType()==SkillType.LANGUAGE)

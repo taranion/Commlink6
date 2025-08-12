@@ -336,7 +336,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 			return allowed;
 
 		// Is there enough Karma
-		int karmaNeeded = getIncreaseCost(value);
+		int karmaNeeded = getIncreaseCost(value, value.getResolved());
 		if (karmaNeeded>model.getKarmaFree()){
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 		}

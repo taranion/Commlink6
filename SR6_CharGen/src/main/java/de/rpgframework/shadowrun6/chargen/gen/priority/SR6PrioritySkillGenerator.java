@@ -354,7 +354,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Are there enough points
-		int karma = getIncreaseCost(key);
+		int karma = getIncreaseCost(key, key.getResolved());
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(new ValueRequirement(ShadowrunReference.ATTRIBUTE, "KARMA", karma));
@@ -405,7 +405,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			}
 
 			// Do increase
-			int karma = getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input
+			int karma = getIncreaseCost(value, value.getResolved()); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input
 			value.setDistributed(value.getDistributed() + 1); //increase skill level
 			// Pay karma
 			model.setKarmaFree(model.getKarmaFree() - karma);
@@ -453,7 +453,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 			deselect(value); 
 		}
 		// Return karma
-		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
+		int karma = getIncreaseCost(value, value.getResolved()); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
 
 		parent.runProcessors();
