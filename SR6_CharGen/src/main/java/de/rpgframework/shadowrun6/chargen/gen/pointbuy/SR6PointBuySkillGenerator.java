@@ -109,6 +109,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 
 			settings.perSkill.put(result.get().getKey(), per);
 			logger.log(Level.DEBUG, "Added to PointBuy settings: {0}={1}", result.get().getKey(), per);
+			// karma payment not needed as above code stores which types of points where used and point / karma status is recalculated based on that
 
 			getCharacterController().runProcessors();
 			return result;
@@ -128,24 +129,22 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Can it be payed in any way
-		return new Possible( canBeIncreasedPoints(value).get() || canBeIncreasedPoints2(value).get());
+		return new Possible( canBeIncreasedPoints(value).get() || canBeIncreasedPoints2(value).get()); // canBeIncreasedPoints checks for Points1 & Points2, canBeIncreasedPoints 2 checks for Points3 = Karma
 	}
 
-//	//-------------------------------------------------------------------
-//	/**
-//	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
-//	 */
-//	@Override
-//	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
-//		OperationResult<SR6SkillValue> result = increasePoints(ref);
-//		if (result.wasSuccessful()) return result;
-//
-//		result = increasePoints2(ref);
-//		if (result.wasSuccessful()) return result;
-//
-//		logger.log(Level.WARNING, "Could not raise with any method");
-//		return new OperationResult<>();
-//	}
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 * basically using parent 'increase' but need unique 'increase' method here to ensure runProcessors after change 
+	 */
+	@Override
+	public OperationResult<SR6SkillValue> increase(SR6SkillValue ref) {
+		OperationResult<SR6SkillValue> result = super.increase(ref);
+		parent.runProcessors();
+		return result;
+	}
+
+	// Using 'canBeDecreased' from CommonSkillGenerator which uses the one from CommonSkillController
 
 	//-------------------------------------------------------------------
 	private SR6Skill getSkillFromSettings(String settingsId) {
@@ -429,20 +428,12 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Are there enough free points?
-		if (points1>0)
+		if (points1>0) // free skill points
 			return Possible.TRUE;
-		if (points2>0)
+		if (points2>0) // converted skill points
 			return Possible.TRUE;
 
-//		SR6PointBuySettings settings = parent.getModel().getCharGenSettings(SR6PointBuySettings.class);
-//		// Every conversion costs 2 CP
-//		if (settings.characterPoints < 2)
-//			return new Possible("skill.points.notEnoughCP");
-//		// Only 20 attribute points may be generated from CP
-//		if (skillsFromCP >= 20)
-//			return new Possible("skill.points.already20CP");
-
-		return Possible.TRUE;
+		return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_POINTS);
 	}
 
 	//-------------------------------------------------------------------
@@ -457,7 +448,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Is there enough Karma
-		int karmaNeeded = (value.getDistributed()+1) *5;
+		int karmaNeeded = getIncreaseCost(value);
 		if (karmaNeeded>model.getKarmaFree()){
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 		}
@@ -501,6 +492,8 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			per.points3++;
 			logger.log(Level.INFO, "Increased using points3/Karma to "+per.getSum()+ " with "+per);
 
+			// karma payment not needed as above code stores which types of points where used and point / karma status is recalculated based on that
+
 			getCharacterController().runProcessors();
 			return new OperationResult<SR6SkillValue>(value);
 		} finally {
@@ -527,6 +520,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		if (ret) {
 			SR6PointBuySettings settings = getModel().getCharGenSettings(SR6PointBuySettings.class);
 			settings.perSkill.remove(value.getKey());
+			getCharacterController().runProcessors();
 		}
 		return ret;
 	}
@@ -585,7 +579,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		boolean isExotic = "exotic_weapons".equals(skillVal.getKey());
 
 		// Check if there already is one specialization in this skill
-		if (!skillVal.getSpecializations().isEmpty())
+		if (!skillVal.getSpecializations().isEmpty() && !isExotic)
 			return Possible.FALSE;
 
 		List<SkillSpecialization<SR6Skill>> available = getAvailableSpecializations(skillVal);
@@ -649,6 +643,8 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					settings.get(skillVal).karmaSpec++;
 					logger.log(Level.INFO, "Pay with karma");
 				}
+			} else {
+				logger.log(Level.INFO, "Don't pay, because it was free");
 			}
 			logger.log(Level.INFO, "After paying: {0}",settings.get(skillVal));
 
@@ -745,9 +741,9 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 				return decreasePoints2(ref);
 			}
 
-			allowed = canBeDecreasedPoints(ref);
+			allowed = canBeDecreasedPoints(ref); // using method from CommonSkillGenerator
 			if (allowed.get()) {
-				return decreasePoints(ref);
+				return decreasePoints(ref); // using method from CommonSkillGenerator
 			}
 
 //			logger.log(Level.ERROR, "Neither with skill points, nor with Karma was decreasing possible");
@@ -755,6 +751,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		} finally {
 			if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "LEAVE decrease " + ref);
+			getCharacterController().runProcessors();
 		}
 	}
 
@@ -798,7 +795,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 		// Do decrease
 		value.setDistributed(value.getDistributed()-1); //decrease skill
 		per.points3--; //decrease karma levels spend for skill
-		if (per.getSum()==0) { //if skill 0, deselect skill
+		if (per.getSum()<=0) { //if skill 0, deselect skill
 			deselect(value); 
 		}
 		// Return karma
