@@ -157,11 +157,17 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return false;
 		SR6Skill key = data.getModifyable();
 		ValueModification toUndo = getHighestModification(data.getModifyable()); 
-		int karma = getIncreaseCost(data);
+		int karma = getIncreaseCost(data, key);
 		if (toUndo!=null) {
 			// Decrease from career
 			model.removeFromHistory(toUndo);
 			karma = toUndo.getExpCost();
+			
+			// If the skill had specializations, reimburse then
+			while (!data.getSpecializations().isEmpty()) {
+				SkillSpecializationValue<SR6Skill> spec = data.getSpecializations().get(0);
+				deselect(data, spec);
+			}
 
 			logger.log(Level.INFO, "Deselecting"+key+" from prev. career session grants "+karma+" karma  ");
 			model.setKarmaInvested(model.getKarmaInvested()-karma);
@@ -197,7 +203,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return poss;
 
 		// Enough karma?
-		if (model.getKarmaFree()<getIncreaseCost(value))
+		if (model.getKarmaFree()<getIncreaseCost(value, value.getResolved()))
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 
 
@@ -423,7 +429,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new OperationResult<>(poss);
 		}
 
-		int cost= getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input		
+		int cost= getIncreaseCost(value, value.getResolved()); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input		
 		value.setDistributed(value.getDistributed() +1);
 		logger.log(Level.INFO, "Increase {0} to {1}", value.getKey(), value.getDistributed());
 
@@ -456,7 +462,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 		value.setDistributed(value.getDistributed() -1);
 		logger.log(Level.INFO, "Decrease {0} to {1}", value.getKey(), value.getDistributed());
 
-		int cost= getIncreaseCost(value);  //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input 
+		int cost= getIncreaseCost(value, value.getResolved());  //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input 
 		model.setKarmaFree( model.getKarmaFree() + cost);
 		model.setKarmaInvested( model.getKarmaInvested() - cost);
 

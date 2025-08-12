@@ -448,7 +448,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			return allowed;
 
 		// Is there enough Karma
-		int karmaNeeded = getIncreaseCost(value);
+		int karmaNeeded = getIncreaseCost(value, value.getResolved());
 		if (karmaNeeded>model.getKarmaFree()){
 			return new Possible(IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA);
 		}
@@ -799,7 +799,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 			deselect(value); 
 		}
 		// Return karma
-		int karma = getIncreaseCost(value); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
+		int karma = getIncreaseCost(value, value.getResolved()); //Note: Important to get karma cost after level is changed as method assumes +1 increase versus input
 		model.setKarmaFree(model.getKarmaFree() + karma);
 
 		parent.runProcessors();
