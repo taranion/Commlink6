@@ -8,10 +8,10 @@ pipelines:
           script:
             - mvn -U -B -s settings.xml clean install -Dgpg.skip
   default:
-   - step:
-       name: Build
-       script:
-         - mvn -U -B -s settings.xml dependency:tree
+    - step:
+      name: Build
+      script:
+        - mvn -U -B -s settings.xml dependency:tree
 
     - step:
         name: Build
