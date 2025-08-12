@@ -162,6 +162,12 @@ public class SR6SkillLeveller extends CommonSkillController {
 			// Decrease from career
 			model.removeFromHistory(toUndo);
 			karma = toUndo.getExpCost();
+			
+			// If the skill had specializations, reimburse then
+			while (!data.getSpecializations().isEmpty()) {
+				SkillSpecializationValue<SR6Skill> spec = data.getSpecializations().get(0);
+				deselect(data, spec);
+			}
 
 			logger.log(Level.INFO, "Deselecting"+key+" from prev. career session grants "+karma+" karma  ");
 			model.setKarmaInvested(model.getKarmaInvested()-karma);
