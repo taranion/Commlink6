@@ -11,7 +11,7 @@ pipelines:
     - step:
        name: Dependency Tree
        script:
-         - mvn -U -B -s settings.xml dependency:tree
+         - cd Commlink6 ; mvn -U -B -s settings.xml dependency:tree
     - step:
         name: Build
         script:
