@@ -93,7 +93,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 
 		// No points left - can it be payed with karma?
 		SR6SkillValue sVal = model.getSkillValue(data);
-		int karma = getIncreaseCost(sVal);
+		int karma = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 		if (model.getKarmaFree()>=karma)
 			return Possible.TRUE;
 		return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
@@ -128,11 +128,11 @@ public class SR6SkillLeveller extends CommonSkillController {
 	 */
 	@Override
 	public OperationResult<SR6SkillValue> select(SR6Skill data, Decision...decisions) {
-		OperationResult<SR6SkillValue> res = super.select(data, decisions);
+		OperationResult<SR6SkillValue> res = super.select(data, decisions); //this calls 'select' in CommonSkillController, setting level to 1
 		if (res.wasSuccessful()) {
 			// Now pay
 			SR6SkillValue sVal = model.getSkillValue(data);
-			int cost = getIncreaseCost(sVal);
+			int cost = (data.getType()==SkillType.KNOWLEDGE || data.getType()==SkillType.LANGUAGE)?3:5;
 			model.setKarmaFree( model.getKarmaFree() - cost);
 			model.setKarmaInvested( model.getKarmaInvested() + cost);
 
@@ -423,7 +423,8 @@ public class SR6SkillLeveller extends CommonSkillController {
 			return new OperationResult<>(poss);
 		}
 
-		int cost= getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input		value.setDistributed(value.getDistributed() +1);
+		int cost= getIncreaseCost(value); //Note: Important to get karma cost before level is changed as method assumes +1 increase versus input		
+		value.setDistributed(value.getDistributed() +1);
 		logger.log(Level.INFO, "Increase {0} to {1}", value.getKey(), value.getDistributed());
 
 		model.setKarmaFree( model.getKarmaFree() - cost);
