@@ -310,7 +310,7 @@ public class SR6KarmaSkillGenerator extends CommonSkillGenerator {
 	@Override
 	public Possible canBeIncreasedPoints(SR6SkillValue val) {
 		SR6Skill skill = val.getResolved();
-		if (skill.getType()!=SkillType.LANGUAGE || skill.getType()!=SkillType.KNOWLEDGE) {
+		if (skill.getType()!=SkillType.LANGUAGE && skill.getType()!=SkillType.KNOWLEDGE) {
 			return Possible.FALSE;
 		}
 
