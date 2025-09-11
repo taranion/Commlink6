@@ -285,7 +285,7 @@
      <requires>
        <selreq type="METATYPE" apply="CHARACTER">
          <datareq type="METATYPE" ref="human" apply="CHARACTER"/>
-         <datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+         <datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
        </selreq>
      </requires>
    </quality>
