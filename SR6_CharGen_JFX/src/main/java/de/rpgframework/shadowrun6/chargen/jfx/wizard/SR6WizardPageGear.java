@@ -77,7 +77,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		initComponents();
 		initLayout();
 		initInteractivity();
-		((ItemTemplateFilterNode)selection.getFilterNode()).setSelected(ItemType.PACK);
+		((ItemTemplateFilterNode)selection.getFilterNode()).setSelected(ItemType.CYBERWARE);
 
 		charGen.addListener(this);
 	}
