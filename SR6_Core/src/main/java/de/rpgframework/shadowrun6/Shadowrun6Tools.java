@@ -54,6 +54,7 @@ import de.rpgframework.genericrpg.items.ItemAttributeNumericalValue;
 import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
+import de.rpgframework.genericrpg.items.Usage;
 import de.rpgframework.genericrpg.items.formula.FormulaImpl;
 import de.rpgframework.genericrpg.items.formula.FormulaTool;
 import de.rpgframework.genericrpg.items.formula.VariableResolver;
@@ -1131,7 +1132,11 @@ public class Shadowrun6Tools {
 				}
 			} else {
 				if (requiredFor.getClass()==ItemTemplate.class) {
-					CarryMode mode = ((ItemTemplate) requiredFor).getUsages().get(0).getMode();
+					List<Usage> usages = ((ItemTemplate) requiredFor).getUsages();
+					if (usages.isEmpty()) { 
+						logger.log(Level.ERROR, "No usages for "+requiredFor+" for value req "+tmp); 
+					}
+					CarryMode mode = usages.isEmpty()?CarryMode.EMBEDDED:usages.get(0).getMode();
 					CarriedItem item = GearTool.buildItem((ItemTemplate) requiredFor, mode, model, false, decisions).get();
 					VariableResolver resolver = new VariableResolver(item, model);
 					if (((FormulaImpl)tmp.getFormula()).getAsString().startsWith("$")) {
