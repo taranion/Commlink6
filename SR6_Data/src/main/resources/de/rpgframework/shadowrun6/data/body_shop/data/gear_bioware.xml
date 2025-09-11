@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
 
+	<!-- Biosculpting -->
+	<item id="biosculp_gender_ethno" avail="5" price="20000" type="BIOWARE" subtype="BIOSCULP">
+		<usage mode="IMPLANTED" value="0"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+	</item>
+	<item id="biosculp_minor" avail="2" price="100" type="BIOWARE" subtype="BIOSCULP">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="20"/>
+		</choices>
+ 		<attrdef id="PRICE" value="$RATING*100"/>
+		<usage mode="IMPLANTED" value="0"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+	</item>
+	<item id="biosculp_moderate" avail="3" price="1000" type="BIOWARE" subtype="BIOSCULP">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="5"/>
+		</choices>
+ 		<attrdef id="PRICE" value="$RATING*1000"/>
+		<usage mode="IMPLANTED" value="0"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+	</item>
+	<item id="biosculp_severe" avail="4" price="10000" type="BIOWARE" subtype="BIOSCULP">
+		<usage mode="IMPLANTED" value="0"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+	</item>
+	<item id="biosculp_metatype" avail="5" price="25000" type="BIOWARE" subtype="BIOSCULP">
+		<usage mode="IMPLANTED" value="0.25"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<requires>
+			<selreq type="METATYPE" apply="CHARACTER">
+				<datareq type="METATYPE" ref="human" apply="CHARACTER"/>
+				<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+				<datareq type="METATYPE" ref="elf" apply="CHARACTER"/>
+			</selreq>
+		</requires>
+	</item>
+	<item id="biosculp_trollorc" avail="4" price="15000" type="BIOWARE" subtype="BIOSCULP">
+		<usage mode="IMPLANTED" value="0.25"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<requires>
+			<selreq type="METATYPE" apply="CHARACTER">
+				<datareq type="METATYPE" ref="ork" apply="CHARACTER"/>
+				<datareq type="METATYPE" ref="troll" apply="CHARACTER"/>
+			</selreq>
+		</requires>
+	</item>
+
    <!-- Cosmetic Bioware -->
    <item id="clean_metabolism" avail="3" price="1000" type="BIOWARE" subtype="COSMETIC">
       <usage mode="IMPLANTED" value="0.05"/>
