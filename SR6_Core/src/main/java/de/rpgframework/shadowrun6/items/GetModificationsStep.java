@@ -187,7 +187,11 @@ public class GetModificationsStep implements CarriedItemProcessor {
 						decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
 					}
 				} else {
-					decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
+					try {
+						decideModification(m.setOrigin(Origin.CHILDREN), unprocessed, model, charac);
+					} catch (Exception e) {
+						logger.log(Level.ERROR, "Error deciding modification "+m+" of "+model.getResolved(),e);
+					}
 				}
 			});
 		}
