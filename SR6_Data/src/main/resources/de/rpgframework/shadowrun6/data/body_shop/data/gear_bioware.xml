@@ -12,6 +12,7 @@
    </item>
    <item id="hair_growth" avail="2" price="500" type="BIOWARE" subtype="COSMETIC">
       <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
       <variant id="fullbody">
       	<attrdef id="PRICE" value="1500"/>
       </variant>
@@ -25,9 +26,11 @@
    </item>
    <item id="perfect_eyes" avail="3" price="500" type="BIOWARE" subtype="COSMETIC">
       <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
    </item>
    <item id="skin_pigmentation" avail="3" price="100" type="BIOWARE" subtype="COSMETIC">
       <usage mode="IMPLANTED" value="0"/>
+      <flags><flag>AUGMENTATION</flag></flags>
       <variant id="permanent">
       	<attrdef id="PRICE" value="1000"/>
       </variant>
