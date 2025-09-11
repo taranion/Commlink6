@@ -432,6 +432,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		logger.log(Level.INFO, "variants detected");
 		addLabel(ResourceI18N.get(RES, "label.variant"));
 		ChoiceBox<SR6PieceOfGearVariant> cbVariants = new ChoiceBox<>();
+		cbVariants.setMinWidth(150);
 		// If no item is required, add a "regular item"
 		List<Usage> mainUsages = template.getUsages().stream().filter(us -> us.getMode()==carry && us.getSlot()==hook).toList();
 //		logger.log(Level.INFO, "TODO: template usages "+template.getUsages()+" and carrymode "+carry+" and hook "+hook+" --> main usages "+mainUsages);
@@ -440,7 +441,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		}
 //		logger.log(Level.INFO, "TODO: Check if variants are suitable for "+context+" and carrymode "+carry);
 		List<SR6PieceOfGearVariant> filtered = template.getVariants().stream()
-				.filter(var -> var.getUsage(carry)!=null || var.getUsages().isEmpty())
+				.filter(var -> carry==null || var.getUsage(carry)!=null || var.getUsages().isEmpty())
 				.toList();
 		if (filtered.size()!=template.getVariants().size()) {
 			logger.log(Level.INFO, "Filtered variants for carry mode {0} down to {1}", carry, filtered);
