@@ -454,6 +454,7 @@
     	</variant>
     </item>
     <item id="cyberarm" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
+      <usage mode="IMPLANTED"/>
  		<flags><flag>AUGMENTATION</flag></flags>
     	<variant id="fullarm_synthetic">
     		<usage mode="IMPLANTED" value="1"/>
@@ -519,6 +520,7 @@
     	</variant>
     </item>
     <item id="cyberleg" avail="4" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
+      <usage mode="IMPLANTED"/>
  		<flags><flag>AUGMENTATION</flag></flags>
     	<variant id="fullleg_synthetic">
     		<usage mode="IMPLANTED" value="1"/>

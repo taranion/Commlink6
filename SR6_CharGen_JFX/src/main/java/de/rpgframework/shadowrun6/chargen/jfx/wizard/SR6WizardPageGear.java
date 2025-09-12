@@ -77,7 +77,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 		initComponents();
 		initLayout();
 		initInteractivity();
-		((ItemTemplateFilterNode)selection.getFilterNode()).setSelected(ItemType.PACK);
+		((ItemTemplateFilterNode)selection.getFilterNode()).setSelected(ItemType.CYBERWARE);
 
 		charGen.addListener(this);
 	}
@@ -105,7 +105,7 @@ public class SR6WizardPageGear extends WizardPage implements ControllerListener{
 			}
 		});
 		selection.setShowHeadings(ResponsiveControlManager.getCurrentMode()!=WindowMode.MINIMAL);
-		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection,null));
+		selection.setFilterNode(new ItemTemplateFilterNode(RES, selection,null, ItemType.CYBERWARE, ItemType.BIOWARE, ItemType.VEHICLES));
 		selection.getFilterNode().setStyle("-fx-min-width: 20em; -fx-pref-width: 28em");
 
 
