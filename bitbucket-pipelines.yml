@@ -20,13 +20,13 @@ pipelines:
         name: Deploy to Development
         script: 
           - sed -i 's/STABILITY/develop/g' Commlink6/target/config.xml
-          - pipe: atlassian/scp-deploy:1.5.2
+          - pipe: atlassian/scp-deploy:1.6.0
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
               REMOTE_PATH: '/var/www/html/commlink6-updates/develop'
               LOCAL_PATH: 'Commlink6/target/config.xml'
-          - pipe: atlassian/scp-deploy:1.5.2
+          - pipe: atlassian/scp-deploy:1.6.0
             variables:
               USER: bitbucket
               SERVER: eden.rpgframework.de
