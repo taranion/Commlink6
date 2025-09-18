@@ -233,7 +233,7 @@
 			<plugin>
 				<groupId>org.prelle</groupId>
 				<artifactId>update4j-plugin</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>1.0.0</version>
 				<configuration>
 					<baseUri>https://eden.rpgframework.de/</baseUri>
 					<basePath>${user.home}/CommLink6/app/STABILITY</basePath>
