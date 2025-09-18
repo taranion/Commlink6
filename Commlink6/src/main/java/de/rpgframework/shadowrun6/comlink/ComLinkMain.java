@@ -68,6 +68,8 @@ public class ComLinkMain extends EdenClientApplication {
     	Package pack = ComLinkMain.class.getPackage();
     	String full = pack.getImplementationVendor()+" / "+pack.getImplementationTitle()+" / "+pack.getImplementationVersion();
     	System.err.println("Version: "+full);
+    	System.err.println("Version: "+System.getProperty("project.version"));
+    	System.getProperties().forEach( (k,v) -> System.out.println(k+"\t= "+v));
     	System.setProperty("commlink.version", full);
     	checkInit();
     	//    	System.out.println("Default locale = "+Locale.getDefault());
