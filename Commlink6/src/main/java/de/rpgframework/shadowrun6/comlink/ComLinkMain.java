@@ -66,11 +66,10 @@ public class ComLinkMain extends EdenClientApplication {
     	System.out.println("ComLinkMain.main");
 
     	Package pack = ComLinkMain.class.getPackage();
-    	String full = pack.getImplementationVendor()+" / "+pack.getImplementationTitle()+" / "+pack.getImplementationVersion();
+    	String full = pack.getImplementationTitle()+" / "+pack.getImplementationVersion();
     	System.err.println("Version: "+full);
-    	System.err.println("Version: "+System.getProperty("project.version"));
-    	System.getProperties().forEach( (k,v) -> System.out.println(k+"\t= "+v));
-    	System.setProperty("commlink.version", full);
+//     	System.getProperties().forEach( (k,v) -> System.out.println(k+"\t= "+v));
+//    	System.setProperty("commlink.version", full);
     	checkInit();
     	//    	System.out.println("Default locale = "+Locale.getDefault());
 ////    	System.setProperty("prism.forceGPU", "true");

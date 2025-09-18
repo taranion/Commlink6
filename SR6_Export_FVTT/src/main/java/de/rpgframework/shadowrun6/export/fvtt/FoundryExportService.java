@@ -78,8 +78,8 @@ public class FoundryExportService {
 
 		ActorData<Shadowrun6FoundryCharacter> actor = new ActorData<Shadowrun6FoundryCharacter>(character.getName(), "Player", getJSONCharacter(character));
 //		actor.exportVersion = VERSION;
-		actor.generatorName="Commlink 6";
-		actor.generatorVersion=System.getProperty("commlink.version");
+		actor.generatorName="Commlink6";
+		actor.generatorVersion=System.getProperty("project.version");
 		addFoundryItems(actor, character);
 		return gson.toJson(actor);
 	}
