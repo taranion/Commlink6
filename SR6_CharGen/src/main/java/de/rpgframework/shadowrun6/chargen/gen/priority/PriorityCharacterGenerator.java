@@ -120,7 +120,7 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 	 */
 	@Override
 	public WizardPageType[] getWizardPages() {
-		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE, WizardPageType.SHIFTER, //WizardPageType.DRAKE,
+		return new WizardPageType[] { WizardPageType.PRIORITIES, WizardPageType.METATYPE, WizardPageType.SHIFTER, WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.QUALITIES, WizardPageType.ATTRIBUTES,
 				WizardPageType.SKILLS, WizardPageType.SPELLS, WizardPageType.RITUALS,

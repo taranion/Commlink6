@@ -195,8 +195,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		}
 
 		if (getModel().getKarmaFree()<karma) {
-			return Possible.FALSE;
-//			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
+			return new Possible(Severity.STOPPER, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
 
 		return Possible.TRUE;
