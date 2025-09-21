@@ -20,7 +20,7 @@ public enum ItemSubType {
 	BIOSENSE,
 	BIOWARE_WEAPON,
 	SYMBIONTS,
-	BIOSCULP,
+	BIOSCULPT,
 	// Weapon
 	CLUBS,
 	BLADES,

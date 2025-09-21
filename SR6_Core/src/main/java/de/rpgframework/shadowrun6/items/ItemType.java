@@ -46,7 +46,7 @@ public enum ItemType {
 			ItemSubType.BIOSENSE,
 			ItemSubType.BIOWARE_WEAPON,
 			ItemSubType.SYMBIONTS,
-			ItemSubType.BIOSCULP
+			ItemSubType.BIOSCULPT
 			),
 	CYBERWARE(
 //			ItemSubType.CYBER_COSMETICS,
