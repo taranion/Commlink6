@@ -26,7 +26,6 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSkillGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySettings;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -345,11 +344,7 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					continue;
 				}
 				// Reduce final value by one if there was a specialization
-				if (val.getSpecializations().isEmpty()) {
-					val.setDistributed(entry.getValue().getSum());
-				} else {
-					val.setDistributed(entry.getValue().getSum()-1);
-				}
+				val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills
