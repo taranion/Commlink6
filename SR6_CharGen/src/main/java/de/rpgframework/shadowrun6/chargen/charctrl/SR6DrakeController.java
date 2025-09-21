@@ -423,7 +423,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 	 */
 	@Override
 	public List<Modification> process(List<Modification> previous) {
-		if (logger.isLoggable(Level.TRACE)) logger.log(Level.TRACE, "ENTER process");
+		logger.log(Level.INFO, "ENTER process");
 		List<Modification> unprocessed = new ArrayList<>();
 		try {
 			Shadowrun6Character model = getModel();

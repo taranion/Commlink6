@@ -24,6 +24,7 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -37,11 +38,13 @@ import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BodyPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.DrakePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.LifePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.ResonancePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SR6MatrixDevicePage;
+import de.rpgframework.shadowrun6.chargen.jfx.page.ShifterPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.VirtualLifePage;
@@ -79,6 +82,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private LifePage pgLife;
 	private CareerPage pgCareer;
 	private BodyPage pgBody;
+	private DrakePage pgDrake;
+	private ShifterPage pgShifter;
 
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
@@ -169,7 +174,9 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgLife   = new LifePage();
 		pgCareer = new CareerPage();
 		pgBody   = new BodyPage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgVirtual, pgMagic, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
+		pgShifter= new ShifterPage();
+		pgDrake  = new DrakePage();
+		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgVirtual, pgMagic, pgMatrix, pgResonance, pgBody, pgVehicles, pgGear, pgLife); //, pgBody);
 	}
 
 	//-------------------------------------------------------------------
@@ -294,6 +301,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			pgLife.setController(control);
 			pgCareer.setController(control);
 			pgBody.setController(control);
+			pgDrake.setController(control);
+			pgShifter.setController(control);
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "Failed setting controller", e);
 		}
@@ -354,6 +363,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		pgLife.refresh();
 		pgCareer.refresh();
 		pgBody.refresh();
+		pgShifter.refresh();
+		pgDrake.refresh();
 
 		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
 		if (mtype==null) {
@@ -372,6 +383,15 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 				getPages().add(idx, pgVirtual);
 			}
 		}
+		// Eventually add page for drakes
+		if (control.getModel().getBodytype()==BodyType.DRAKE && !getPages().contains(pgDrake)) {
+			int idx = getPages().indexOf(pgAugment);
+			getPages().add(idx+1, pgDrake);
+		} else if (control.getModel().getBodytype()==BodyType.SHAPESHIFTER && !getPages().contains(pgShifter)) {
+			int idx = getPages().indexOf(pgAugment);
+			getPages().add(idx+1, pgShifter);
+		}
+		
 		if (control instanceof SR6CharacterLeveller) {
 			getPages().addAll(pgCareer);
 		}
