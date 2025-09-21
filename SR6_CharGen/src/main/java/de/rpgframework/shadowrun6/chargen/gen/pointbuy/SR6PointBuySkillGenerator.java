@@ -344,7 +344,11 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 					continue;
 				}
 				// Reduce final value by one if there was a specialization
-				val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
+				if ("exotic_weapons".equals(entry.getKey())){
+					val.setDistributed(entry.getValue().getSum()- (val.getSpecializations().size()-1));
+				} else {
+					val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
+				}
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills
