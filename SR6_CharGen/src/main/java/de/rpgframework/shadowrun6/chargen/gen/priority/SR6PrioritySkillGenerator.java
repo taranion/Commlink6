@@ -275,14 +275,14 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
-			Possible allowed = canBeIncreasedPoints(ref);
-			if (allowed.get()) {
-				return increasePoints(ref); // using method in 'CommonSkillGenerator'
-			}
-
-			allowed = canBeIncreasedPoints2(ref);
+			Possible allowed = canBeIncreasedPoints2(ref); // If there are still free Knowledge/Language points, pay with those first
 			if (allowed.get()) {
 				return increasePoints2(ref); // using method in 'CommonSkillGenerator'
+			}
+
+			allowed = canBeIncreasedPoints(ref);
+			if (allowed.get()) {
+				return increasePoints(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeIncreasedPoints3(ref);
