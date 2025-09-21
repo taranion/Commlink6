@@ -64,8 +64,14 @@ public class ComLinkMain extends EdenClientApplication {
     public static void main(String[] args) {
     	//LicenseManager.storeGlobalLicenses(List.of("SHADOWRUN6/CORE","SHADOWRUN6/COMPANION","SHADOWRUN6/FIRING_SQUAD","SHADOWRUN6/STREET_WYRD","SHADOWRUN6/DOUBLE_CLUTCH","SHADOWRUN6/HACK_SLASH"));
     	System.out.println("ComLinkMain.main");
+
+    	Package pack = ComLinkMain.class.getPackage();
+    	String full = pack.getImplementationTitle()+" / "+pack.getImplementationVersion();
+    	System.err.println("Version: "+full);
+//     	System.getProperties().forEach( (k,v) -> System.out.println(k+"\t= "+v));
+//    	System.setProperty("commlink.version", full);
     	checkInit();
-//    	System.out.println("Default locale = "+Locale.getDefault());
+    	//    	System.out.println("Default locale = "+Locale.getDefault());
 ////    	System.setProperty("prism.forceGPU", "true");
 //    	System.setProperty("prism.verbose", "false");
 //    	List<String> keys = new ArrayList<String>();

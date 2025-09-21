@@ -346,6 +346,11 @@ public class Shadowrun6Tools {
 			level = RES.getString("modification.value.level",loc)+"*2";
 		} else if ("&INITIATION_RANK".equals(valMod.getRawValue())) {
 			level = RES.getString("modification.value.initiation_rank",loc);
+		} else if (valMod.getRawValue().startsWith("&")) {
+			// Reference to attribute
+			String attrKey = valMod.getRawValue().substring(1);
+			ShadowrunAttribute attrib = ShadowrunAttribute.valueOf(attrKey);
+			return attrib.getName(loc);
 		} else if (valMod.getRawValue().contains(".")) {
 			level = String.valueOf(valMod.getValueAsDouble());
 		} else

@@ -456,8 +456,8 @@ public class Converter {
 		FVTTCritter actor = new FVTTCritter();
 
 		ActorData<FVTTCritter> foundry = new ActorData<FVTTCritter>(data.getName(loc), "Critter", actor);
-		fillAttributes(foundry.data, data);
-		fillSkills(foundry.data, data);
+		fillAttributes(foundry.system, data);
+		fillSkills(foundry.system, data);
 
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
@@ -488,8 +488,8 @@ public class Converter {
 		actor.movement.perHit = 1;
 
 		ActorData<FVTTNPCActor> foundry = new ActorData<FVTTNPCActor>(data.getName(loc), "NPC", actor);
-		fillAttributes(foundry.data, data);
-		fillSkills(foundry.data, data);
+		fillAttributes(foundry.system, data);
+		fillSkills(foundry.system, data);
 
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
@@ -512,7 +512,7 @@ public class Converter {
 
 		ActorData<FVTTVehicleActor> foundry = new ActorData<FVTTVehicleActor>(data.getName(loc), "Vehicle", actor);
 
-		fillVehicleAttributes(foundry.data, data);
+		fillVehicleAttributes(foundry.system, data);
 		fillAccessories(foundry, data, loc);
 //		fillSkills(foundry.data, data);
 //

@@ -72,14 +72,14 @@ public class FoundryExportService {
 
 	private final static Logger logger = System.getLogger(FoundryExportService.class.getPackageName());
 
-	public final static String VERSION = "0.8.9";
-
 	//-------------------------------------------------------------------
 	public String exportCharacter(Shadowrun6Character character) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		ActorData<Shadowrun6FoundryCharacter> actor = new ActorData<Shadowrun6FoundryCharacter>(character.getName(), "Player", getJSONCharacter(character));
 //		actor.exportVersion = VERSION;
+		actor.generatorName="Commlink6";
+		actor.generatorVersion=System.getProperty("project.version");
 		addFoundryItems(actor, character);
 		return gson.toJson(actor);
 	}
@@ -377,7 +377,7 @@ public class FoundryExportService {
 				fVal.points    = val.getDistributed();
 				fVal.modifier  = val.getModifier();
 
-				ItemData<FVTTSkill> item = new ItemData<FVTTSkill>(val.getName(), "skill", fVal);
+				ItemData<FVTTSkill> item = new ItemData<FVTTSkill>(val.getNameWithoutRating(), "skill", fVal);
 				actor.addItem(item);
 			}
 		}
