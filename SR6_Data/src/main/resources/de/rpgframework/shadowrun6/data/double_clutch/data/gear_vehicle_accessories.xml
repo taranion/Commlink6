@@ -435,7 +435,7 @@
       </requires>
    	<attrdef id="PRICE" value="$RATING*2500"/>
       <modifications>
-			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="+$RATING/-$RATING" />
+			<valmod type="ITEM_ATTRIBUTE" ref="HANDLING" value="$RATING/-$RATING" />
       </modifications>
    </item>
 

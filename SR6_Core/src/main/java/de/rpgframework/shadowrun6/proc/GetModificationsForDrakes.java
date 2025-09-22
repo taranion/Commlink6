@@ -33,7 +33,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  */
 public class GetModificationsForDrakes implements ProcessingStep {
 
-	protected static final Logger logger = System.getLogger(GetModificationsForDrakes.class.getPackageName());
+	protected static final Logger logger = System.getLogger(GetModificationsForDrakes.class.getPackageName()+".drake");
 
 	private Shadowrun6Character model;
 
@@ -54,6 +54,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 		try {
 			DrakeTypeValue drake = model.getDrakeType();
 			if (drake==null) {
+				logger.log(Level.INFO, "not a drake");
 				return previous;
 			}
 
@@ -79,6 +80,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				mod.setSet(ValueType.NATURAL);
 				mod.setOrigin(Origin.OUTSIDE);
 				copy.addIncomingModification(mod);
+				logger.log(Level.INFO, "Change {0} fro {1} to {2}", key, model.getAttribute(key).getDistributed(), copy);
 			}
 
 			// Add natural weapon

@@ -59,7 +59,7 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 	 */
 	@Override
 	public List<Modification> process(List<Modification> unprocessed) {
-		logger.log(Level.WARNING, "process shifter");
+		logger.log(Level.DEBUG, "process shifter");
 		
 		todos.clear();
 		

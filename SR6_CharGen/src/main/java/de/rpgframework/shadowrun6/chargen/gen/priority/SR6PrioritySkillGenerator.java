@@ -275,14 +275,14 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
-			Possible allowed = canBeIncreasedPoints2(ref); // If there are still free Knowledge/Language points, pay with those first
-			if (allowed.get()) {
-				return increasePoints2(ref); // using method in 'CommonSkillGenerator'
-			}
-
-			allowed = canBeIncreasedPoints(ref);
+			Possible allowed = canBeIncreasedPoints(ref);
 			if (allowed.get()) {
 				return increasePoints(ref); // using method in 'CommonSkillGenerator'
+			}
+
+			allowed = canBeIncreasedPoints2(ref);
+			if (allowed.get()) {
+				return increasePoints2(ref); // using method in 'CommonSkillGenerator'
 			}
 
 			allowed = canBeIncreasedPoints3(ref);
@@ -706,10 +706,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					continue;
 				}
 				logger.log(Level.INFO, "Set skill {0} to {1} ", entry.getKey(), entry.getValue().getSum());
-				if (val.getSpecializations().isEmpty()) {
-					val.setDistributed(entry.getValue().getSum());
+				if ("exotic_weapons".equals(entry.getKey())){
+					val.setDistributed(entry.getValue().getSum()- (val.getSpecializations().size()-1));
 				} else {
-					val.setDistributed(entry.getValue().getSum()-1);
+					val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
 				}
 				usedSkills.add(val);
 			}
