@@ -111,7 +111,6 @@ public class AlternateBodySection extends Section {
 	@Override
 	public void refresh() {
 		logger.log(Level.TRACE, "refresh");
-
 		
 		if (model!=null) {
 			BodyForm bForm = model.getBodyForm(model.getBodytype());
