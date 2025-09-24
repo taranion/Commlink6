@@ -117,7 +117,8 @@ public class AlternateBodySection extends Section {
 			BodyForm bForm = model.getBodyForm(model.getBodytype());
 			for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
 				AttributeValue<ShadowrunAttribute> aVal = bForm.getAttributeValue(key);
-				attribLabels.get(key).setText(aVal.getDisplayString());
+				if (aVal!=null)
+					attribLabels.get(key).setText(aVal.getDisplayString());
 			}
 		} 
 			
