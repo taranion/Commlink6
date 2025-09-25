@@ -706,7 +706,13 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					continue;
 				}
 				logger.log(Level.INFO, "Set skill {0} to {1} ", entry.getKey(), entry.getValue().getSum());
-				val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
+
+				if ("exotic_weapons".equals(entry.getKey())&&val.getSpecializations().size()>0){
+					val.setDistributed(entry.getValue().getSum()- (val.getSpecializations().size()-1));
+				} else {
+					val.setDistributed(entry.getValue().getSum()- val.getSpecializations().size());
+				}
+
 				usedSkills.add(val);
 			}
 			// Reverse check: all skills in model should be in usedSkills
