@@ -449,7 +449,10 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 		// Do decrease
 		value.setDistributed(value.getDistributed()-1); //decrease skill
 		per.points3--; //decrease karma levels spend for skill
-		if (per.getSum()<=0) { //if skill 0, deselect skill
+
+		int numberSpecs = value.getSpecializations().size();
+		if ("exotic_weapons".equals(value.getKey())&&value.getSpecializations().size()>0)numberSpecs -= 1;
+		if (per.getSum()<=numberSpecs) { //if points spend for skill = 0 (ignoring points spend for specializations), deselect skill
 			deselect(value); 
 		}
 		// Return karma
