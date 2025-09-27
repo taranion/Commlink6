@@ -299,7 +299,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		per.points2--;
 		logger.log(Level.INFO, "decrease points2 of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 				per.points2, per.getSum());
-		if (per.getSum()<=0) {
+
+		int numberSpecs = value.getSpecializations().size();
+		if ("exotic_weapons".equals(value.getKey())&&value.getSpecializations().size()>0)numberSpecs -= 1;
+		if (per.getSum()<=numberSpecs) { //if points spend for skill = 0 (ignoring points spend for specializations), deselect skill
 			deselect(value);
 		}
 		getCharacterController().runProcessors();
@@ -409,7 +412,10 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 			per.points1--;
 			logger.log(Level.INFO, "decrease points of {0} to {1} - sum is now {2}", value.getModifyable().getId(),
 					per.points1, per.getSum());
-			if (per.getSum()<=0) {
+
+			int numberSpecs = value.getSpecializations().size();
+			if ("exotic_weapons".equals(value.getKey())&&value.getSpecializations().size()>0)numberSpecs -= 1;
+			if (per.getSum()<=numberSpecs) { //if points spend for skill = 0 (ignoring points spend for specializations), deselect skill
 				deselect(value);
 			}
 			getCharacterController().runProcessors();
