@@ -174,14 +174,14 @@ public abstract class CommonSkillGenerator extends CommonSkillController impleme
 		if (logger.isLoggable(Level.TRACE))
 			logger.log(Level.TRACE, "ENTER increase({0})", ref);
 		try {
-			Possible allowed = canBeIncreasedPoints2(ref); // If there are still free Knowledge/Language points, pay with those first
-			if (allowed.get()) {
-				return increasePoints2(ref);
-			}
-
-			allowed = canBeIncreasedPoints(ref);
+			Possible allowed = canBeIncreasedPoints(ref);
 			if (allowed.get()) {
 				return increasePoints(ref);
+			}
+
+			allowed = canBeIncreasedPoints2(ref);
+			if (allowed.get()) {
+				return increasePoints2(ref);
 			}
 
 			logger.log(Level.ERROR, "Neither with skill points, nor with Karma was increasing possible");
