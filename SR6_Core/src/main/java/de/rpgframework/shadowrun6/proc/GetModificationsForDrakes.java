@@ -120,7 +120,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 					break;
 				case METAECHO:
 					diMod = (DataItemModification)mod;
-					logger.log(Level.INFO, "TODO Add special power {0} to drake body", diMod.getKey());
+					logger.log(Level.INFO, "Add special power {0} to drake body", diMod.getKey());
 					MetamagicOrEcho meta = mod.getReferenceType().resolve( diMod.getKey() );
 					MetamagicOrEchoValue mVal = new MetamagicOrEchoValue(meta);
 					if (mod instanceof ValueModification) {
