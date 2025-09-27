@@ -123,6 +123,7 @@ public class DrakePage extends Page {
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				MetamagicOrEcho.Type.DRACOGENESIS_POWER
 				);
+		secMeta.setControlSupplier( () -> ctrl.getDrakeController());
 		secMeta.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secMeta, 4);
 		FlexGridPane.setMinHeight(secMeta, 6);

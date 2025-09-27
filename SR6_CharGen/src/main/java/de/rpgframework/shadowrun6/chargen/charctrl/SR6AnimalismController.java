@@ -102,7 +102,7 @@ public class SR6AnimalismController extends ControllerImpl<MetamagicOrEcho>
 	 */
 	@Override
 	public List<MetamagicOrEchoValue> getSelected() {
-		return getModel().getMetamagicOrEchoes();
+		return getModel().getMetamagicOrEchoes().stream().filter(m -> m.getResolved().getType()==Type.ANIMALISM).toList();
 	}
 
 	//-------------------------------------------------------------------
