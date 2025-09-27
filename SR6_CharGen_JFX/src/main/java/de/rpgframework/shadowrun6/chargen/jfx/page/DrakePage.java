@@ -85,13 +85,10 @@ public class DrakePage extends Page {
 	private void initBody() {
 		secBody = new AlternateBodySection(
 				ResourceI18N.get(RES, "page.drake.section.body"), null);
-		secBody.setMaxHeight(100);
 		FlexGridPane.setMinWidth(secBody, 4);
-		FlexGridPane.setMinHeight(secBody, 2);
+		FlexGridPane.setMinHeight(secBody, 6);
 		FlexGridPane.setMediumWidth(secBody, 5);
-		FlexGridPane.setMediumHeight(secBody, 2);
-		FlexGridPane.setMaxWidth(secBody, 4);
-		FlexGridPane.setMaxHeight(secBody, 2);
+		FlexGridPane.setMediumHeight(secBody, 8);
 	}
 
 	//-------------------------------------------------------------------
@@ -126,6 +123,7 @@ public class DrakePage extends Page {
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				MetamagicOrEcho.Type.DRACOGENESIS_POWER
 				);
+		secMeta.setControlSupplier( () -> ctrl.getDrakeController());
 		secMeta.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secMeta, 4);
 		FlexGridPane.setMinHeight(secMeta, 6);

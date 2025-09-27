@@ -25,6 +25,7 @@ import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
+import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.AWizardPageQualities;
 import de.rpgframework.shadowrun6.DrakeType;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -36,6 +37,8 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
@@ -52,6 +55,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 
 	protected SR6CharacterController charGen;
 
+	private ImageView iView;
 	private ChoiceBox<DrakeType> cbDrakeType;
 	private DracoformAttributePane paneAttr;
 	protected ComplexDataItemControllerNode<MetamagicOrEcho, MetamagicOrEchoValue> selection;
@@ -75,6 +79,10 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 
 	//-------------------------------------------------------------------
 	protected void initComponents() {
+		iView = new ImageView();
+		iView.setFitHeight(620);
+		iView.setFitWidth(620);
+		iView.setImage(new Image(CommonShadowrunJFXResourceHook.class.getResourceAsStream("images/metatypes/drakes.png")));
 		cbDrakeType = new ChoiceBox<>();
 		cbDrakeType.getItems().addAll(Shadowrun6Core.getItemList(DrakeType.class));
 		cbDrakeType.setConverter(new StringConverter<DrakeType>() {
@@ -114,7 +122,7 @@ public class SR6WizardPageDrake extends WizardPage implements ControllerListener
 			super.setBackHeader(backHeader);
 //		}
 
-		VBox content = new VBox(10, cbDrakeType, paneAttr, selection);
+		VBox content = new VBox(10, cbDrakeType, paneAttr, new HBox(20, iView,selection));
 
 		layout = new OptionalNodePane(content, bxDescription);
 		setContent(layout);

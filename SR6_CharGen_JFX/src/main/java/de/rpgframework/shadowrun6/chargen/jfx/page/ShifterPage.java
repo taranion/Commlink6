@@ -98,6 +98,7 @@ public class ShifterPage extends Page {
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
 				MetamagicOrEcho.Type.ANIMALISM
 				);
+		secMeta.setControlSupplier( () -> ctrl.getAnimalismController());
 		secMeta.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secMeta, 4);
 		FlexGridPane.setMinHeight(secMeta, 6);

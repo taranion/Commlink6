@@ -149,6 +149,27 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController#getGrade()
 	 */
 	@Override
+	public int getGrade(Type type) {
+		List<MetamagicOrEchoValue> list = getSelected().stream()
+				.filter(m -> m.getModifyable().getType() == type)
+				.filter(m -> !m.isAutoAdded())
+				.collect(Collectors.toList());
+		// Determine the grade
+		int grade = 0;
+		for (MetamagicOrEchoValue tmp : list) {
+			if (tmp.getModifyable().hasLevel())
+				grade += tmp.getDistributed();
+			else
+				grade ++;
+		}
+		return grade;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun.chargen.charctrl.IMetamagicOrEchoController#getGrade()
+	 */
+	@Override
 	public int getGrade() {
 		MagicOrResonanceType type = getModel().getMagicOrResonanceType();
 		MetaType meta = getModel().getMetatype();

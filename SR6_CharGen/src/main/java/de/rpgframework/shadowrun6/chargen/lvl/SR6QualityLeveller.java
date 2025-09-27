@@ -54,6 +54,7 @@ public class SR6QualityLeveller extends AQualityLeveller<Shadowrun6Character> {
 				.filter(p -> parent.showDataItem(p))
 				.filter(p -> !model.hasQuality(p.getId()) || p.isMulti())
 				.filter(p -> p.getType()!=QualityType.QUALITY_PATH)
+				.filter(p -> p.getType()!=QualityType.SHIFTER)
 				.collect(Collectors.toList());
 	}
 

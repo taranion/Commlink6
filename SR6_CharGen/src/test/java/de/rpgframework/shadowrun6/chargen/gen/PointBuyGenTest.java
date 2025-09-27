@@ -150,8 +150,11 @@ public class PointBuyGenTest {
 		SR6Skill athletics = Shadowrun6Core.getItem(SR6Skill.class, "athletics");
 		assertNotNull(athletics);
 		assertTrue(skill.select(athletics).wasSuccessful());
+		assertEquals(11, skill.getPointsLeft());
 		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 2
+		assertEquals(10, skill.getPointsLeft());
 		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 3
+		assertEquals( 9, skill.getPointsLeft());
 		assertTrue(skill.increase(model.getSkillValue(athletics)).wasSuccessful()); // 4
 		assertEquals( 8, skill.getPointsLeft());
 		assertEquals(34, settings.characterPoints);

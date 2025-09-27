@@ -12,18 +12,22 @@ import org.prelle.javafx.Section;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.data.AttributeValue;
-import de.rpgframework.jfx.cells.ComplexDataItemValueListCell;
 import de.rpgframework.shadowrun.BodyForm;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -39,6 +43,7 @@ public class AlternateBodySection extends Section {
 	private SR6CharacterController control;
 	
 	private Map<ShadowrunAttribute,Label> attribLabels;
+	private ListView<QualityValue> qualities;
 	
 	private GridPane attribGrid = new GridPane();
 	
@@ -63,6 +68,8 @@ public class AlternateBodySection extends Section {
 	//-------------------------------------------------------------------
 	private void initComponents() {
 		attribLabels = new HashMap<>();
+		qualities    = new ListView<>();
+		qualities.setCellFactory( (lv) -> new QualityValueListCell(()->control, false));
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
 			Label label = new Label("?");
 			label.setTextAlignment(TextAlignment.CENTER);
@@ -92,7 +99,11 @@ public class AlternateBodySection extends Section {
 			x++;
 		}
 		
-		HBox layout = new HBox(20, attribGrid);
+		Label hdQualities = new Label(ResourceI18N.get(RES, "section.altbody.qualities"));
+		hdQualities.getStyleClass().add(JavaFXConstants.STYLE_HEADING4);
+		VBox layout = new VBox(10, attribGrid, hdQualities,qualities);
+		VBox.setMargin(hdQualities, new Insets(20,0,0,0));
+		VBox.setVgrow(qualities, Priority.ALWAYS);
 		setContent(layout);
 	}
 
@@ -119,6 +130,7 @@ public class AlternateBodySection extends Section {
 				if (aVal!=null)
 					attribLabels.get(key).setText(aVal.getDisplayString());
 			}
+			qualities.getItems().setAll( bForm.getQualities() );
 		} 
 			
 	}
