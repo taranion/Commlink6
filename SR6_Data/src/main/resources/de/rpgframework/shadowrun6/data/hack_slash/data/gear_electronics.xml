@@ -596,4 +596,9 @@
  		<flags><flag>MATRIX_DEVICE</flag></flags>
    </item>
 
+   <!-- Coding tools -->
+	<item id="coding_kit" avail="2" price="50" type="TOOLS" subtype="TOOLS"/>
+	<item id="coding_shop" avail="4L" price="500" type="TOOLS" subtype="TOOLS"/>
+	<item id="coding_facility" avail="8L" price="5000" type="TOOLS" subtype="TOOLS"/>
+
 </items>
