@@ -253,6 +253,10 @@
                      <key>test.project.version</key>
                      <value>${project.version}</value>
                   </property>
+                  <property>
+                     <key>section.nontransparent</key>
+                     <value>true</value>
+                  </property>
 					</properties>
 					<includes>
 						<include>
