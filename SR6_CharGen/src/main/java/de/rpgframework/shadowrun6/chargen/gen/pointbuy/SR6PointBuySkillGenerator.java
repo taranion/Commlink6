@@ -12,14 +12,17 @@ import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
+import de.rpgframework.genericrpg.data.ApplyTo;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.SkillType;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.chargen.gen.PerSkillPoints;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -226,6 +229,33 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 						}
 					} else {
 						unprocessed.add(mod);
+					}
+				} else if (tmp instanceof ValueModification mod) {
+					if (tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS) {
+						if (mod.getResolvedKey()==CreatePoints.MAXED_OUT_SKILLS) {
+							maxLimit = Math.max(1, mod.getValue());
+							logger.log(Level.DEBUG, "Consume "+mod+" and set maxLimit to "+maxLimit);
+						} else {
+							if (ApplyTo.POINTS==mod.getApplyTo()) {
+								ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
+								switch (ref) {
+								case SKILL:
+									logger.log(Level.DEBUG, "Add "+mod.getValue()+" skill points from "+tmp.getSource());
+									points1 += mod.getValue();
+									break;
+								case SKILL_KNOWLEDGE:
+									logger.log(Level.DEBUG, "Add "+mod.getValue()+" knowledge skill points from "+tmp.getSource());
+									points2 += mod.getValue();
+									break;
+								default:
+									unprocessed.add(mod);
+								}
+							} else {
+								unprocessed.add(tmp);
+							}
+						}
+					} else {
+						unprocessed.add(tmp);
 					}
 				} else {
 					unprocessed.add(tmp);

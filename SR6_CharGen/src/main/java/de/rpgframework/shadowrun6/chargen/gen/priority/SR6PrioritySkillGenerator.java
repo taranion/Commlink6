@@ -532,6 +532,9 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 					if (mod.getResolvedKey()==CreatePoints.SKILLS) {
 						points1 += mod.getValue();
 						logger.log(Level.DEBUG, "Consume "+mod+" and set pointsSkills to "+points1);
+					} else if (mod.getResolvedKey()==CreatePoints.MAXED_OUT_SKILLS) {
+						maxLimit = Math.max(1, mod.getValue());
+						logger.log(Level.DEBUG, "Consume "+mod+" and set maxLimit to "+maxLimit);
 					} else {
 						if (ApplyTo.POINTS==mod.getApplyTo()) {
 							ShadowrunReference ref = (ShadowrunReference)mod.getReferenceType();
