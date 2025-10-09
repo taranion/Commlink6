@@ -217,6 +217,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	protected void calculateKarmaSURGE() {
 		karmaSURGE = 0;
 		for (QualityValue val : model.getQualities()) {
+			if (val==null) continue;
 			if (val.isAutoAdded())
 				continue;
 			Quality item = val.getResolved();

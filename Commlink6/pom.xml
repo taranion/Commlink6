@@ -12,7 +12,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.12.1-SNAPSHOT</version>
+	<version>1.12.0</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -252,6 +252,10 @@
                   <property>
                      <key>test.project.version</key>
                      <value>${project.version}</value>
+                  </property>
+                  <property>
+                     <key>section.nontransparent</key>
+                     <value>true</value>
                   </property>
 					</properties>
 					<includes>
