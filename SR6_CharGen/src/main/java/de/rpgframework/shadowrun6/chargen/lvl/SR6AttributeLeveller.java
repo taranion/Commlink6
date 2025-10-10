@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
 import de.rpgframework.genericrpg.data.ApplyWhen;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.modification.AllowModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
@@ -256,6 +257,10 @@ public class SR6AttributeLeveller extends ControllerImpl<ShadowrunAttribute> imp
 		metatypeAttribute.clear();
 		todos.clear();
 		for (Modification _mod : previous) {
+			if (_mod instanceof AllowModification) {
+				unprocessed.add(_mod);
+				continue;
+			}
 			if (_mod.getReferenceType() == ShadowrunReference.ATTRIBUTE) {
 				ValueModification mod = (ValueModification) _mod;
 				ShadowrunAttribute key = mod.getResolvedKey();
