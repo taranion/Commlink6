@@ -14,6 +14,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterControllerImpl;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
@@ -81,6 +82,7 @@ public class SR6CharacterLeveller extends SR6CharacterControllerImpl {
 		lifestyles= new SR6LifestyleLeveller(this);
 		contacts  = new SR6ContactLeveller(this);
 		animalism = new SR6AnimalismController(this, false);
+		drake     = new SR6DrakeController(this, false);
 		dataStructures = new SR6DataStructureController(this);
 		martial   = new SR6MartialArtsController(this);
 
