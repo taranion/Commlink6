@@ -110,8 +110,8 @@
        <itemmod type="CRITTER_POWER" ref="fear"/>
      </modifications>
    </metaecho>
-   <metaecho id="hardened_armor" type="DRACOGENESIS_POWER" />
-   <metaecho id="hardened_mystic_armor" type="DRACOGENESIS_POWER" />
+   <metaecho id="hardened_armor" type="DRACOGENESIS_POWER" max="2"/>
+   <metaecho id="hardened_mystic_armor" type="DRACOGENESIS_POWER" max="2"/>
    <metaecho id="heavy_scales" type="DRACOGENESIS_POWER" >
    	<requires>
    		<datareq type="DRAKE_TYPE" ref="western"/>
