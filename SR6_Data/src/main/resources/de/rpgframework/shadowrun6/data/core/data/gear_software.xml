@@ -291,7 +291,7 @@
    <item avail="4" id="activesoft"  type="SOFTWARE" subtype="SKILLSOFT">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
-			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" options="athletics,biotech,close_combat,con,cracking,electronics,engineering,perception,exotic_weapons, firearms,influence,outdoors,perception,piloting,stealth" />
+			<choice uuid="2baf4c6e-417b-4d1a-943c-edfa816d50bf" type="SKILL" options="athletics,biotech,close_combat,con,cracking,electronics,engineering,perception,exotic_weapons,firearms,influence,outdoors,perception,piloting,stealth" />
 		</choices>
 		<attrdef id="PRICE" value="$RATING*5000"/>
 		<attrdef id="SIZE" value="1"/>

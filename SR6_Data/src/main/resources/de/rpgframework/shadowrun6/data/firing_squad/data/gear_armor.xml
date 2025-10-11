@@ -3,7 +3,7 @@
     <item id="mems_basic_harness_standalone" avail="2" price="300" type="ARMOR" subtype="ARMOR_BODY">
         <armor rating="0" social="0" />
         <modifications>
-        		<valmod type="HOOK" ref="ARMOR_MEMS" value="10"/>
+        		<valmod type="HOOK" ref="ARMOR_MEMS" value="20"/>
         </modifications>
     </item>
     <item id="ares_bug_stomper" avail="9I" price="55000" type="ARMOR" subtype="ARMOR_BODY">

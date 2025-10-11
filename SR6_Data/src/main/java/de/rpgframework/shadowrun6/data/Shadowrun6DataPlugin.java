@@ -195,6 +195,7 @@ public class Shadowrun6DataPlugin  {
 			initTarnishedStar();
 			initDPSOTA2083();
 			initDealersOfDeath();
+			initShadowCast();			
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1015,7 +1016,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -----------------------------Smooth_Operations------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "smooth_operations", "smooth_operations.i18n", Locale.ENGLISH, Locale.GERMAN);
-		set.setType(DataSetType.LOCATION);
+		set.setType(DataSetType.OPT_RULES);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"smooth_operations/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} qualities from 'Smooth Operations'", list.size());
 		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz,"smooth_operations/data/spells.xml");
@@ -1063,7 +1064,7 @@ public class Shadowrun6DataPlugin  {
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START ----------------------------Bestial Nature---------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "bestial_nature", "bestial_nature.i18n", Locale.ENGLISH, Locale.GERMAN);
-		set.setType(DataSetType.RULES);
+		set.setType(DataSetType.OPT_RULES);
 		set.setReleased(202306);
 		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"bestial_nature/data/qualities.xml");
 		logger.log(Level.DEBUG, "Loaded {0} shifter qualities", list.size());
@@ -1138,6 +1139,20 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"dealers_of_death/data/gear_toxins.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" toxins");
+	}
+
+	//-------------------------------------------------------------------
+	private void initShadowCast() throws IOException {
+		logger.log(Level.INFO, "START -------------------------------Shadow Cast------------------------------------------");
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "SHADOW_CAST", "shadow_cast.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202210);
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "shadow_cast/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"shadow_cast/data/quality_paths.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
 	}
 
 }
