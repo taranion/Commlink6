@@ -11,7 +11,6 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
-import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -24,6 +23,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.CommonEquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
@@ -135,6 +135,64 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		} finally {
 			logger.log(Level.TRACE, "LEAVE select({0}, {1}", value, mode);
 		}
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#embed(CarriedItem, ItemHook, ItemTemplate, Decision[])
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> embed(CarriedItem<ItemTemplate> container, ItemHook slot, ItemTemplate value, String variantID, Decision... decisions) {
+		int oldValue = container.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		OperationResult<CarriedItem<ItemTemplate>> after = super.embed(container, slot, value, variantID, decisions);
+		if (after.hasError())
+			return after;
+
+		ValueModification logMod = new ValueModification(ShadowrunReference.CARRIED, value.getId(), 0);
+		logMod.setId(after.get().getUuid());
+		logMod.setDate(new Date());
+		
+		Shadowrun6Character model = getModel();
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int newValue = container.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			int nuyen = newValue - oldValue;
+			logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getId(), nuyen);
+			model.setNuyen( model.getNuyen() - nuyen );
+			logMod.setValue(nuyen);
+		}
+
+		model.addToHistory(logMod);
+		parent.runProcessors();
+		
+		return after;
+	}
+
+	//-------------------------------------------------------------------
+	public Possible removeEmbedded(CarriedItem<ItemTemplate> container, ItemHook slot, CarriedItem<ItemTemplate> toRemove) {
+		int oldValue = container.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		Possible after = super.removeEmbedded(container, slot, toRemove);
+		if (!after.get())
+			return after;
+
+		ValueModification logMod = new ValueModification(ShadowrunReference.CARRIED, toRemove.getKey(), 0);
+		logMod.setId(toRemove.getUuid());
+		logMod.setDate(new Date());
+		
+		Shadowrun6Character model = getModel();
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int newValue = container.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			int nuyen = oldValue - newValue;
+			logger.log(Level.INFO, "Sell {0} for {1} nuyen", toRemove.getKey(), nuyen);
+			model.setNuyen( model.getNuyen() - nuyen );
+			logMod.setValue(nuyen);
+		}
+
+		model.addToHistory(logMod);
+		parent.runProcessors();
+		
+		return after;
 	}
 
 	//-------------------------------------------------------------------
