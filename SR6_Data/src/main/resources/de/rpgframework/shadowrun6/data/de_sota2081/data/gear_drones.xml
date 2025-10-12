@@ -18,8 +18,6 @@
 	  <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="smoke_projector" variant="regular" />
 		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 </embed>
