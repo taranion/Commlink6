@@ -14,7 +14,7 @@ public class ComLinkStarter {
 		EdenSettings.setupDirectories("CommLink6");
 		System.out.println("Locale = "+EdenSettings.getPreferredLangauge("CommLink6"));
 		Locale.setDefault(EdenSettings.getPreferredLangauge("CommLink6"));
-		System.setProperty("section.nontransparent", "true");
+		//System.setProperty("section.nontransparent", "true");
 		ComLinkMain.main(args);
 	}
 
