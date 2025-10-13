@@ -133,7 +133,7 @@
        <valmod type="CRITTER_POWER" ref="hardened_mystic_armor" value="2" set="NATURAL" apply="DRAKE"/>
      </modifications>
    </metaecho>
-   <metaecho id="magnificent_specimen" type="DRACOGENESIS_POWER" >
+   <metaecho id="magnificent_specimen" type="DRACOGENESIS_POWER" max="99">
      <modifications>
        <valmod type="CREATION_POINTS" ref="ADJUST_DRAKE" value="2" apply="DRAKE"/>
      </modifications>
