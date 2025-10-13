@@ -1502,6 +1502,7 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	private static SkillSpecializationValue<SR6Skill> getBestSpecialization(SR6SkillValue sVal, String...special) {
 		SkillSpecializationValue<SR6Skill> bestSpec = null;
+		if (sVal==null) return null;
 		for (SkillSpecializationValue<SR6Skill> spec : sVal.getSpecializations()) {
 			// Test if specializ. matches requested specs
 			if (!Arrays.asList(special).contains(spec.getResolved().getId()))
