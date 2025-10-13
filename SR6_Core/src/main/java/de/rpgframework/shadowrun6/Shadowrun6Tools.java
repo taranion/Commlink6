@@ -1494,7 +1494,22 @@ public class Shadowrun6Tools {
 
 	//--------------------------------------------------------------------
 	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, String...special) {
-		return getSkillPool(model, skill, skill.getAttribute(), special);
+		SkillSpecializationValue<SR6Skill> spec = getBestSpecialization(model.getSkillValue(skill), special);
+		ShadowrunAttribute attrib = (spec!=null && spec.getResolved().getAttribute()!=null)?(ShadowrunAttribute.valueOf(spec.getResolved().getAttribute())):skill.getAttribute();
+		return getSkillPool(model, skill, attrib, special);
+	}
+
+	//-------------------------------------------------------------------
+	private static SkillSpecializationValue<SR6Skill> getBestSpecialization(SR6SkillValue sVal, String...special) {
+		SkillSpecializationValue<SR6Skill> bestSpec = null;
+		for (SkillSpecializationValue<SR6Skill> spec : sVal.getSpecializations()) {
+			// Test if specializ. matches requested specs
+			if (!Arrays.asList(special).contains(spec.getResolved().getId()))
+				continue;
+			//if (bestSpec == null || spec.isExpertise())
+				bestSpec = spec;
+		}
+		return bestSpec;
 	}
 
 	//--------------------------------------------------------------------
@@ -1506,8 +1521,14 @@ public class Shadowrun6Tools {
 	 */
 	public static Pool<Integer> getSkillPool(Shadowrun6Character model, SR6Skill skill, ShadowrunAttribute useAttrib, String...special) {
 		Pool<Integer> ret = getSkillPoolCalculationWithoutAttribute(model, skill, special);
+		
+		SkillSpecializationValue<SR6Skill> spec = getBestSpecialization(model.getSkillValue(skill), special);
+		ShadowrunAttribute attrib = (spec!=null && spec.getResolved().getAttribute()!=null)?(ShadowrunAttribute.valueOf(spec.getResolved().getAttribute())):skill.getAttribute();
+		if (useAttrib!=null)
+			attrib = useAttrib;
+		
 		ret.addAll(
-				model.getAttribute( (useAttrib==null)?skill.getAttribute():useAttrib).getPool()
+				model.getAttribute( attrib).getPool()
 				);
 		return ret;
 	}
