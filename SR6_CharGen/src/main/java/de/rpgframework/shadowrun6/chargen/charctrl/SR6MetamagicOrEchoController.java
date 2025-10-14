@@ -114,14 +114,14 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					.filter(m -> m.getType()==Type.TRANSHUMANISM)
 					.collect(Collectors.toList()) );
 			}
-			// Eventually add dracogenesis powers
-			if (getModel().getBodytype()==BodyType.DRAKE) {
-				ret.addAll( Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
-						.filter(p -> parent.showDataItem(p))
-						.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
-						.filter(m -> m.getType()==Type.DRACOGENESIS_POWER)
-						.collect(Collectors.toList()) );
-			}
+		}
+		// Eventually add dracogenesis powers
+		if (getModel().getBodytype()==BodyType.DRAKE) {
+			ret.addAll( Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
+					.filter(p -> parent.showDataItem(p))
+					.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
+					.filter(m -> m.getType()==Type.DRACOGENESIS_POWER)
+					.collect(Collectors.toList()) );
 		}
 		return ret;
 	}
