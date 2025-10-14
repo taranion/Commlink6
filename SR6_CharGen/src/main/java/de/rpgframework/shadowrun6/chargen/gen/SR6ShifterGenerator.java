@@ -81,8 +81,6 @@ public class SR6ShifterGenerator extends ControllerImpl<Quality> implements
 				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_SHIFTER_MUST_BE_METAHUMAN));
 			}
 			
-			QualityValue shifter = getModel().getQuality(SHIFTER_QUALITY_ID);
-			int min = shifter.getKarmaCost();
 			int cost = Math.max(0, getCurrentKarmaCost());
 			getModel().setKarmaFree( getModel().getKarmaFree() - cost);
 			getModel().setKarmaInvested( getModel().getKarmaInvested() + cost);

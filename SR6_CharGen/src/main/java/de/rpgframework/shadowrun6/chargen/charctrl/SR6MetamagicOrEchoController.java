@@ -20,6 +20,7 @@ import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.genericrpg.requirements.Requirement;
+import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MetaType;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
@@ -112,6 +113,14 @@ public class SR6MetamagicOrEchoController extends ControllerImpl<MetamagicOrEcho
 					.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
 					.filter(m -> m.getType()==Type.TRANSHUMANISM)
 					.collect(Collectors.toList()) );
+			}
+			// Eventually add dracogenesis powers
+			if (getModel().getBodytype()==BodyType.DRAKE) {
+				ret.addAll( Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
+						.filter(p -> parent.showDataItem(p))
+						.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
+						.filter(m -> m.getType()==Type.DRACOGENESIS_POWER)
+						.collect(Collectors.toList()) );
 			}
 		}
 		return ret;
