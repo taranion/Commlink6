@@ -636,6 +636,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" critter powers");
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "lofwyr/data/dracogenesis_powers.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" dracogenesis powers");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz, "lofwyr/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 		list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"lofwyr/data/techniques.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
 		list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"lofwyr/data/martialarts.xml");
