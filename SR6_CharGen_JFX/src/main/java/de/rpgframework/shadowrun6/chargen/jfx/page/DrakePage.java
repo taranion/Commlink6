@@ -44,7 +44,7 @@ public class DrakePage extends Page {
 	private MetamagicOrEchoSection secMeta;
 	private CritterPowerSection   secCrit;
 
-	private HBox flex;
+	private FlexGridPane flex;
 	private ImageView ivShape;
 	private OptionalNodePane layout;
 
@@ -67,7 +67,7 @@ public class DrakePage extends Page {
 
 	//-------------------------------------------------------------------
 	private void initLayout() {
-		flex = new HBox();
+		flex = new FlexGridPane();
 		flex.setSpacing(20);
 		flex.getChildren().addAll(secBody,secMeta, secCrit);
 
