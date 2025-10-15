@@ -14,6 +14,6 @@
      </modifications>
 	</critterpower>
 	
-    <critterpower id="unterwater_adaption" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
+    <critterpower id="underwater_adaption" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
 
 </critterpowers>

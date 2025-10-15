@@ -84,7 +84,7 @@
       	<itemmod type="QUALITY" apply="drake" ref="misshapen"/>
       	<itemmod type="QUALITY" apply="CHARACTER" ref="most_wanted"/>
 
-      	<itemmod type="CRITTER_POWER" ref="unterwater_adaption"/>
+      	<itemmod type="CRITTER_POWER" ref="underwater_adaption"/>
       	<itemmod type="METAECHO" ref="adaptive_coloration"/>
       </modifications>
    </draketype>
