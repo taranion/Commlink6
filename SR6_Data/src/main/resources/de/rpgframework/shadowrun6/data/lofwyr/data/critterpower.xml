@@ -10,7 +10,7 @@
 	<!-- movement -->
     <critterpower id="vestigial_wings" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" >
      <modifications>
-		<!-- TODO: Movement flight at base movement rate -->
+		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="10/15/1/AIR" set="NATURAL" apply="DRAKE"/>
      </modifications>
 	</critterpower>
 	

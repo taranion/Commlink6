@@ -95,7 +95,7 @@
    </metaecho>
    <metaecho id="improved_flight" type="DRACOGENESIS_POWER" >
      <modifications>
- 			<!-- TODO: Movement flight at 20/30/+4 -->
+		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="20/30/4/AIR" set="NATURAL" apply="DRAKE"/>
      </modifications>
    </metaecho>
    <metaecho id="improved_natural_weapon" type="DRACOGENESIS_POWER" max="2">
