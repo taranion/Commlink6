@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
 
-	<quality id="memorable" karma="0" pos="false" type="DRAKE" apply="drake" selectable="false"/>
-	<quality id="misshapen" karma="0" pos="false" type="DRAKE" apply="drake" selectable="false"/>
-	<quality id="most_wanted" karma="0" pos="false" type="DRAKE" apply="drake" selectable="false"/>
+	<quality id="memorable" karma="0" pos="false" type="DRAKE" apply="DRAKE" selectable="false"/>
+	<quality id="misshapen" karma="0" pos="false" type="DRAKE" apply="DRAKE" selectable="false"/>
+	<quality id="most_wanted" karma="0" pos="false" type="DRAKE" apply="DRAKE" selectable="false"/>
 
 </qualities>
