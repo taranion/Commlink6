@@ -108,7 +108,7 @@ public class SR6DrakeController extends ControllerImpl<MetamagicOrEcho>
 		if (getModel().getDrakeType()==null) return List.of();
 		return Shadowrun6Core.getItemList(MetamagicOrEcho.class).stream()
 				.filter(p -> parent.showDataItem(p))
-				.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel())
+				.filter(p -> !getModel().hasMetamagicOrEcho(p.getId()) || p.hasLevel() || p.isMulti())
 				.filter(m -> m.getType()==Type.DRACOGENESIS_POWER)
 				.collect(Collectors.toList());
 	}
