@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <critterpowers>
-    <critterpower id="vestigial_wings"  type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
+	<!-- all -->
+	<critterpower id="drake_armor" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS">
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$DRAKE_EDGE" apply="CHARACTER"/>
+		</modifications>
+	</critterpower>
+
+	<!-- movement -->
+    <critterpower id="vestigial_wings" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" >
+     <modifications>
+		<valmod type="ATTRIBUTE" ref="MOVEMENT" value="10/15/1/AIR" set="NATURAL" apply="DRAKE"/>
+     </modifications>
+	</critterpower>
+	
+    <critterpower id="underwater_adaption" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS" />
+
 </critterpowers>

@@ -44,7 +44,11 @@
     <critterpower id="mindspeech"      type="MANA"     action="AUTO"  range="LINE_OF_SIGHT" dur="INSTANTANEOUS"/>
     <critterpower id="mist_form"       type="PHYSICAL" action="MAJOR" range="SELF"          dur="SUSTAINED" />
     <critterpower id="movement"        type="PHYSICAL" action="MAJOR" range="LINE_OF_SIGHT" dur="SUSTAINED"/>
-    <critterpower id="mystic_armor"    type="MANA"     action="AUTO"  range="SELF"          dur="ALWAYS" level="true"/>
+    <critterpower id="mystic_armor"    type="MANA"     action="AUTO"  range="SELF"          dur="ALWAYS" level="true">
+    	<modifications>
+    		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_ASTRAL" value="1" apply="CHARACTER"/>
+    	</modifications>
+    </critterpower>
     <critterpower id="natural_weapon"  type="PHYSICAL" action="AUTO"  range="TOUCH"         dur="INSTANTANEOUS" >
     	<choices>
     		<choice uuid="b5c11ee6-708e-448c-a5c6-438df8335f09" type="GEAR"/>

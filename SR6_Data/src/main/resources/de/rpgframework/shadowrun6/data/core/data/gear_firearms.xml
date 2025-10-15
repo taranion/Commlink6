@@ -511,7 +511,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
-      <weapon attack=",8,8,3," ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
+      <weapon attack=",8,8,3," ammo="6(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
    </item>
    <item avail="4I" price="5000" id="armtech_mgl12" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
        <modifications>
