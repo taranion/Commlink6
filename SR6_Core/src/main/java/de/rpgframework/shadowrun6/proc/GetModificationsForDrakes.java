@@ -128,7 +128,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 					}
 					diMod.getDecisions().forEach(d -> mVal.addDecision(d));
 					mVal.addIncomingModification(diMod);
-					model.addMetamagicOrEcho(mVal);
+					model.addAutoMetamagicOrEchoe(mVal);
 //					body.addMetaOrEcho(mVal);
 					break;
 				}
