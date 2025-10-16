@@ -66,7 +66,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			logger.log(Level.INFO, "Added Drake body");
 
 			// Copy attributes from regular body to drake body
-			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValuesDrake()) {
 				AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(key);
 				AttributeValue<ShadowrunAttribute> copy = new AttributeValue<ShadowrunAttribute>(key, aVal.getDistributed());
 				body.getAttributeValues().add(copy);

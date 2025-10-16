@@ -87,9 +87,9 @@ public class DrakePage extends Page {
 	private void initBody() {
 		secBody = new AlternateBodySection(
 				ResourceI18N.get(RES, "page.drake.section.body"), null);
-		FlexGridPane.setMinWidth(secBody, 4);
+		FlexGridPane.setMinWidth(secBody, 6);
 		FlexGridPane.setMinHeight(secBody, 6);
-		FlexGridPane.setMediumWidth(secBody, 5);
+		FlexGridPane.setMediumWidth(secBody, 6);
 		FlexGridPane.setMediumHeight(secBody, 8);
 	}
 

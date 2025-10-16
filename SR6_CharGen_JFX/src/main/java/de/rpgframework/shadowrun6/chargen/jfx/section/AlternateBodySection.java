@@ -70,7 +70,7 @@ public class AlternateBodySection extends Section {
 		attribLabels = new HashMap<>();
 		qualities    = new ListView<>();
 		qualities.setCellFactory( (lv) -> new QualityValueListCell(()->control, false));
-		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesDrake()) {
 			Label label = new Label("?");
 			label.setTextAlignment(TextAlignment.CENTER);
 			label.setAlignment(Pos.CENTER);
@@ -85,7 +85,7 @@ public class AlternateBodySection extends Section {
 	private void initLayout() {
 		attribGrid = new GridPane();
 		int x=0;
-		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesDrake()) {
 			Label heading = new Label(key.getShortName());
 			heading.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 			ColumnConstraints cons = new ColumnConstraints(40);
@@ -126,7 +126,7 @@ public class AlternateBodySection extends Section {
 		if (model!=null) {
 			BodyForm bForm = model.getBodyForm(model.getBodytype());
 			if (bForm==null) return;
-			for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+			for (ShadowrunAttribute key : ShadowrunAttribute.primaryValuesDrake()) {
 				AttributeValue<ShadowrunAttribute> aVal = bForm.getAttributeValue(key);
 				if (aVal!=null)
 					attribLabels.get(key).setText(aVal.getDisplayString());
