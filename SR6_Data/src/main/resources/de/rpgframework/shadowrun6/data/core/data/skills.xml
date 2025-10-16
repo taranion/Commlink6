@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <skills>
     <skill id="astral"  attr="INTUITION" type="MAGIC" untr="n" restrict="y">
-        <skillspec id="astral_combat"/>
+        <skillspec id="astral_combat" attr="WILLPOWER"/>
         <skillspec id="astral_signatures"/>
         <skillspec id="emotional_stress"/>
         <skillspec id="spirit_types"/>
     </skill>
     <skill id="athletics"  attr="AGILITY" type="PHYSICAL" untr="y">
-        <skillspec id="climbing"/>
+        <skillspec id="climbing" attr="STRENGTH"/>
         <skillspec id="flying"/>
         <skillspec id="freefall"/>
         <skillspec id="gymnastics"/>
@@ -61,7 +61,7 @@
         <skillspec id="demolitions"/>
         <skillspec id="gunnery"/>
         <skillspec id="industrial_mechanic"/>
-        <skillspec id="lockpicking"/>
+        <skillspec id="lockpicking" attr="AGILITY"/>
         <skillspec id="nautical_mechanic"/>
     </skill>
     <skill id="exotic_weapons"  attr="AGILITY" type="COMBAT" untr="n">
@@ -101,7 +101,7 @@
         <skillspec id="instruction"/>
         <skillspec id="intimidation"/>
         <skillspec id="leadership"/>
-        <skillspec id="negotiation"/>
+        <skillspec id="negotiation" attr="LOGIC"/>
     </skill>
     <skill id="outdoors"  attr="INTUITION" type="PHYSICAL" untr="y">
         <skillspec id="navigation"/>
