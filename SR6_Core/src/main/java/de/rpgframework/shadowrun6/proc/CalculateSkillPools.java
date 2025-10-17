@@ -17,6 +17,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 
 /**
  * @author prelle
@@ -98,7 +99,7 @@ public class CalculateSkillPools implements ProcessingStep {
 			ValueModification mod = (ValueModification)tmp;
 			if (mod.getSet()!=ValueType.AUGMENTED)
 				continue;
-			if (mod instanceof CheckModification) {
+			if (mod instanceof CheckModification cMod && cMod.getWhat()!=ShadowrunCheckInfluence.DICE) {
 				pool.addCheckModification((CheckModification) mod);
 				continue;
 			}
@@ -108,14 +109,18 @@ public class CalculateSkillPools implements ProcessingStep {
 			}
 			String name = Shadowrun6Tools.getModificationSourceString(mod.getSource());
 			PoolCalculation<Integer> toAdd = new PoolCalculation<Integer>(value, name, true);
-			if (sumAugmentations+value > 4) {
-				value = 4 - sumAugmentations;
-				toAdd.value = value;
-				toAdd.hitLimit = true;
+			if (mod.isIgnoreLimit()) {
+				pool.addStep(ValueType.NATURAL, toAdd);
+			} else {
+				if (sumAugmentations+value > 4) {
+					value = 4 - sumAugmentations;
+					toAdd.value = value;
+					toAdd.hitLimit = true;
+				}
+				sumAugmentations += value;
+				pool.addStep(ValueType.NATURAL, toAdd);
 			}
-			sumAugmentations += value;
-			pool.addStep(ValueType.NATURAL, toAdd);
-
+			
 			if (name.startsWith("?")) {
 				System.err.println("Unknown modification source "+mod.getSource()+" for "+mod+" in attribute "+sVal);
 				System.exit(1);

@@ -82,9 +82,6 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 		int countUncapped = 0;
 		List<ValueType> types = List.of(typeArray);
 		for (Modification mod : getIncomingModifications()) {
-			if (mod instanceof CheckModification) {
-				continue;
-			}
 			if (mod instanceof CheckModification cMod && cMod.getWhat()!=ShadowrunCheckInfluence.DICE)
 				continue;
 			if (mod instanceof ValueModification vMod) {
