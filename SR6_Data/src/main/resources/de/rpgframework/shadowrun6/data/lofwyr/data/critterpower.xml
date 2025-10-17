@@ -3,7 +3,7 @@
 	<!-- all -->
 	<critterpower id="drake_armor" type="PHYSICAL" action="AUTO" range="SELF" dur="ALWAYS">
 		<modifications>
-			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$DRAKE_EDGE" apply="CHARACTER"/>
+			<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="$DRAKE_EDGE" apply="DRAKE"/>
 		</modifications>
 	</critterpower>
 

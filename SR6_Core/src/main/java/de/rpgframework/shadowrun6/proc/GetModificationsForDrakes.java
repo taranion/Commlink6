@@ -27,6 +27,8 @@ import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
+import static de.rpgframework.shadowrun.ShadowrunAttribute.*;
+
 /**
  * @author prelle
  *
@@ -66,7 +68,8 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			logger.log(Level.INFO, "Added Drake body");
 
 			// Copy attributes from regular body to drake body
-			for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			ShadowrunAttribute[] attributes = new ShadowrunAttribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,EDGE,MAGIC,RESONANCE,DRAKE_EDGE};
+			for (ShadowrunAttribute key : attributes) {
 				AttributeValue<ShadowrunAttribute> aVal = model.getAttribute(key);
 				AttributeValue<ShadowrunAttribute> copy = new AttributeValue<ShadowrunAttribute>(key, aVal.getDistributed());
 				body.getAttributeValues().add(copy);
