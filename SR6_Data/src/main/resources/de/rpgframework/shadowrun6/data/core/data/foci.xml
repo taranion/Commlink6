@@ -33,7 +33,9 @@
 
 	<focus id="power_focus" karma="6" cost="18000" avail="3" hasLevel="true">
 		<modifications>
-			<valmod type="SKILL" ref="sorcery" value="$LEVEL" />
+			<checkmod type="SKILL" ref="sorcery" value="$LEVEL" what="DICE" unlimited="true"/>
+         <checkmod type="SKILL" ref="conjuring" value="$LEVEL" what="DICE" unlimited="true"/>
+         <checkmod type="SKILL" ref="enchanting" value="$LEVEL" what="DICE" unlimited="true"/>
 		</modifications>
 	</focus>
 	<focus id="qi_focus" karma="2" cost="3000" hasLevel="true" >
