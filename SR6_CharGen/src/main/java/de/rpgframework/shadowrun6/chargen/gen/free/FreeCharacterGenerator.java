@@ -39,6 +39,11 @@ public class FreeCharacterGenerator extends CommonSR6CharacterGenerator {
 	}
 
 	//-------------------------------------------------------------------
+	public static String getStaticName() {
+		return "No Rules";
+	}
+
+	//-------------------------------------------------------------------
 	public FreeCharacterGenerator(Shadowrun6Character model, CharacterHandle handle) {
 		super(model, handle, SR6FreeSettings.class);
 		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN, true);
