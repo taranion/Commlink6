@@ -3,9 +3,17 @@
  */
 package de.rpgframework.shadowrun6;
 
+import java.util.List;
+
 import org.prelle.simplepersist.Root;
 
+import de.rpgframework.genericrpg.ValueType;
+import de.rpgframework.genericrpg.data.CheckInfluence;
+import de.rpgframework.genericrpg.modification.CheckModification;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.AShadowrunSkillValue;
+import de.rpgframework.shadowrun6.modifications.ShadowrunCheckInfluence;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -60,6 +68,46 @@ public class SR6SkillValue extends AShadowrunSkillValue<SR6Skill> {
 			return (SR6Skill) resolved;
 		resolved = ShadowrunReference.resolve(ShadowrunReference.SKILL, ref);
 		return (SR6Skill) resolved;
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.ModifyableNumericalValue#getModifier(de.rpgframework.genericrpg.ValueType)
+	 */
+	@Override
+	public int getModifier(ValueType... typeArray) {
+		int count = 0;
+		int countEquip = 0;
+		int countMagic = 0;
+		int countUncapped = 0;
+		List<ValueType> types = List.of(typeArray);
+		for (Modification mod : getIncomingModifications()) {
+			if (mod instanceof CheckModification) {
+				continue;
+			}
+			if (mod instanceof CheckModification cMod && cMod.getWhat()!=ShadowrunCheckInfluence.DICE)
+				continue;
+			if (mod instanceof ValueModification vMod) {
+				if (types.contains( vMod.getSet() )) {
+					if (vMod.isIgnoreLimit()) {
+						countUncapped += vMod.getValue();
+					} else {
+						count += vMod.getValue();
+					}
+				}
+			}
+		}
+
+		if (modifierCap>0) {
+			count += Math.min(countMagic, modifierCap);
+			count += Math.min(countEquip, modifierCap);
+		} else {
+			count += countMagic;
+			count += countEquip;
+		}
+		count += countUncapped;
+
+		return count;
 	}
 
 }
