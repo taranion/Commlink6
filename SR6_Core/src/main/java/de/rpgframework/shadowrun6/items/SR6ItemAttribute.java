@@ -77,6 +77,7 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	MODSLOTS_POWERTRAIN,
 	// Vehicle Pilot
 	PILOT,
+	POOL_SUPPLIER,
 	PRICE,
 	/** Used for two-step price calculations - e.g. Infostick alchemical preparation */
 	PRICE2,
