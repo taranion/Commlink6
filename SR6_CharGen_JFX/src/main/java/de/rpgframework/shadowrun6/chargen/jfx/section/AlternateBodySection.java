@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.prelle.javafx.JavaFXConstants;
 import org.prelle.javafx.Section;
@@ -18,6 +20,7 @@ import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun.BodyType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,6 +32,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+
+import static de.rpgframework.shadowrun.ShadowrunAttribute.*;
 
 /**
  * 
@@ -70,7 +75,9 @@ public class AlternateBodySection extends Section {
 		attribLabels = new HashMap<>();
 		qualities    = new ListView<>();
 		qualities.setCellFactory( (lv) -> new QualityValueListCell(()->control, false));
-		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+		
+		ShadowrunAttribute[] attributes = new ShadowrunAttribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,DRAKE_EDGE};
+		for (ShadowrunAttribute key : attributes) {		
 			Label label = new Label("?");
 			label.setTextAlignment(TextAlignment.CENTER);
 			label.setAlignment(Pos.CENTER);
@@ -85,7 +92,9 @@ public class AlternateBodySection extends Section {
 	private void initLayout() {
 		attribGrid = new GridPane();
 		int x=0;
-		for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+
+		ShadowrunAttribute[] attributes = new ShadowrunAttribute[]{BODY,AGILITY,REACTION,STRENGTH, WILLPOWER,LOGIC,INTUITION,CHARISMA,DRAKE_EDGE};
+		for (ShadowrunAttribute key : attributes) {		
 			Label heading = new Label(key.getShortName());
 			heading.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 			ColumnConstraints cons = new ColumnConstraints(40);
@@ -126,7 +135,12 @@ public class AlternateBodySection extends Section {
 		if (model!=null) {
 			BodyForm bForm = model.getBodyForm(model.getBodytype());
 			if (bForm==null) return;
-			for (ShadowrunAttribute key : ShadowrunAttribute.primaryValues()) {
+
+			List<ShadowrunAttribute> attributes = new ArrayList<>(List.of(ShadowrunAttribute.primaryValues()));
+			if (control.getModel().getBodytype()==BodyType.DRAKE) {
+				attributes.add(DRAKE_EDGE);
+			} 
+			for (ShadowrunAttribute key : attributes) {
 				AttributeValue<ShadowrunAttribute> aVal = bForm.getAttributeValue(key);
 				if (aVal!=null)
 					attribLabels.get(key).setText(aVal.getDisplayString());

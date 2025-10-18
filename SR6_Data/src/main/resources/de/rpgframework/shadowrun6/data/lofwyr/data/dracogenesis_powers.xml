@@ -47,11 +47,6 @@
     	<choices>
 			<choice uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72d" type="ELEMENT" options="WATER,AIR,EARTH"/>
     	</choices>
-     <modifications>
-       <itemmod type="CRITTER_POWER" ref="elemental_attack" apply="DRAKE">
-			<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="6a8584c5-043d-4e37-bbb2-f56d3c51f72d"/>
-       </itemmod>
-     </modifications>
    </metaecho>
    <metaecho id="elemental_resistance" type="DRACOGENESIS_POWER" />
    <metaecho id="energy_aura" type="DRACOGENESIS_POWER" >
