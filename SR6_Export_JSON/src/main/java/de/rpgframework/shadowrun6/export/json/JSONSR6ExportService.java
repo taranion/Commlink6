@@ -315,7 +315,8 @@ public class JSONSR6ExportService {
             //TODO itemRating, quality
 //            jsonAugmentation.level = item.getRating() > 0 ? String.valueOf(item.getRating()) : "-";
 //            jsonAugmentation.quality = item.getQuality().name();
-            jsonAugmentation.essence =  item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue() / 1000.0f;
+            if (item.getAsFloat(SR6ItemAttribute.ESSENCECOST)!=null)
+            	jsonAugmentation.essence =  item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue() / 1000.0f;
             jsonAugmentation.page = getPageString(item.getResolved());
             jsonAugmentation.description = getDescription(item.getResolved());
             jsonAugmentation.accessories = getJsonItemAccessories(item.getAccessories());

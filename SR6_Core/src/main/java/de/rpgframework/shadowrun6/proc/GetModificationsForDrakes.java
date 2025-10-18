@@ -8,6 +8,9 @@ import java.util.List;
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.items.CarryMode;
+import de.rpgframework.genericrpg.items.ItemAttributeObjectValue;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.Modification.Origin;
@@ -17,6 +20,7 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.MetamagicOrEcho.Type;
 import de.rpgframework.shadowrun.MetamagicOrEchoValue;
 import de.rpgframework.shadowrun.Movement;
 import de.rpgframework.shadowrun.Movement.MovementType;
@@ -25,6 +29,8 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.DrakeTypeValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -71,6 +77,12 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				AttributeValue<ShadowrunAttribute> copy = new AttributeValue<ShadowrunAttribute>(key, aVal.getDistributed());
 				body.getAttributeValues().add(copy);
 			}
+
+			// Calculate DRAKE_EDGE
+			int dEdge = model.getAttribute(ShadowrunAttribute.EDGE).getModifiedValue();
+			dEdge += model.getMetamagicOrEchoes().stream().filter(me -> me.getModifyable().getType()==Type.DRACOGENESIS_POWER).count();
+			body.getAttributeValues().add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.DRAKE_EDGE, dEdge));
+
 			// Modify with drake adjustments
 			for (AttributeValue<ShadowrunAttribute> aVal : drake.getAttributes()) {
 				ShadowrunAttribute key = aVal.getModifyable();
@@ -82,10 +94,15 @@ public class GetModificationsForDrakes implements ProcessingStep {
 				copy.addIncomingModification(mod);
 				logger.log(Level.INFO, "Change {0} fro {1} to {2}", key, model.getAttribute(key).getDistributed(), copy);
 			}
-
+			
 			// Add natural weapon
 //			body.clearWeapons();
-//			ItemTemplate natural = new ItemTemplate();
+			ItemTemplate natural = new ItemTemplate();
+			natural.setId("drake.naturalweapon");
+			CarriedItem<ItemTemplate> elementalAttack = new CarriedItem<ItemTemplate>(natural, null, CarryMode.VIRTUAL);
+			ItemAttributeObjectValue<SR6ItemAttribute> av = new ItemAttributeObjectValue<>(SR6ItemAttribute.ATTACK_RATING, new int[] {dEdge*2, dEdge*2-2, dEdge*2-4, dEdge*2-6, dEdge*2-8, dEdge*2-10});
+			elementalAttack.setAttribute(SR6ItemAttribute.ATTACK_RATING, av);
+			body.addNaturalWeapon(elementalAttack);
 
 
 			// Iterate modifications
