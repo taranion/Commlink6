@@ -125,7 +125,7 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			
 			// Natural weapon
 			ItemTemplate natural = new ItemTemplate();
-			natural.setId("claws");
+			natural.setId("natweapon");
 			Shadowrun6Core.getDataSet("LOFWYR").ifPresent(ds -> natural.assignToDataSet(ds));
 			
 			CarriedItem<ItemTemplate> natAttack = new CarriedItem<ItemTemplate>(natural, null, CarryMode.VIRTUAL);
