@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 
 import de.rpgframework.foundry.ActorData;
 import de.rpgframework.foundry.ItemData;
+import de.rpgframework.genericrpg.data.PageReference;
 import de.rpgframework.genericrpg.data.SkillSpecialization;
 import de.rpgframework.genericrpg.data.SkillSpecializationValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -77,7 +78,7 @@ public class FoundryExportService {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 		ActorData<Shadowrun6FoundryCharacter> actor = new ActorData<Shadowrun6FoundryCharacter>(character.getName(), "Player", getJSONCharacter(character));
-//		actor.exportVersion = VERSION;
+		actor.exportVersion = "14.0";
 		actor.generatorName="Commlink6";
 		actor.generatorVersion=System.getProperty("project.version");
 		addFoundryItems(actor, character);
@@ -394,6 +395,10 @@ public class FoundryExportService {
 			// Value fields
 			fVal.value = val.getDistributed();
 			fVal.explain = val.getDescription();
+			val.getModifyable().getPageReferences().forEach(pr -> {
+				fVal.product = pr.getProduct().getID().toLowerCase();
+				fVal.page    = pr.getPage();
+			});
 
 			ItemData<FVTTQuality> item = new ItemData<FVTTQuality>(val.getName(), "quality", fVal);
 			actor.addItem(item);
@@ -467,6 +472,11 @@ public class FoundryExportService {
 				gear.needsRating = item.getResolved().getChoice(ItemTemplate.UUID_RATING)!=null;
 				if (gear.needsRating && item.getDecision(ItemTemplate.UUID_RATING)!=null)
 					gear.rating = item.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
+				
+				for (PageReference pr : item.getModifyable().getPageReferences()) {
+					gear.product = pr.getProduct().getID().toLowerCase();
+					gear.page    = pr.getPage();
+				}
 
 				// Accessories
 				List<String> accList = new ArrayList<>();
@@ -555,12 +565,22 @@ public class FoundryExportService {
 
 			ItemData<FVTTMAStyle> item = new ItemData<FVTTMAStyle>(val.getResolved().getName(), "martialartstyle", fVal);
 			actor.addItem(item);
+			
+			for (PageReference pr : val.getModifyable().getPageReferences()) {
+				fVal.product = pr.getProduct().getID().toLowerCase();
+				fVal.page    = pr.getPage();
+			}
 
 			for (TechniqueValue tech : model.getTechniques(val.getResolved())) {
 				FVTTMATechnique toAdd = new FVTTMATechnique();
 				toAdd.genesisID = tech.getResolved().getId();
 				if (tech.getMartialArt()!=null)
 					toAdd.style = tech.getMartialArt().getId();
+				
+				for (PageReference pr : tech.getModifyable().getPageReferences()) {
+					toAdd.product = pr.getProduct().getID().toLowerCase();
+					toAdd.page    = pr.getPage();
+				}
 				ItemData<FVTTMATechnique> item2 = new ItemData<FVTTMATechnique>(tech.getResolved().getName(), "martialarttech", toAdd);
 				actor.addItem(item2);
 			}
@@ -587,6 +607,11 @@ public class FoundryExportService {
 				case "sense_multi": spell.multiSense=true; break;
 				}
 			}
+			
+			for (PageReference pr : item.getModifyable().getPageReferences()) {
+				spell.product = pr.getProduct().getID().toLowerCase();
+				spell.page    = pr.getPage();
+			}
 
 			ItemData<FVTTSpell> foundry = new ItemData<FVTTSpell>(item.getNameWithoutRating(), "spell", spell);
 			actor.addItem(foundry);
@@ -601,6 +626,11 @@ public class FoundryExportService {
 			spell.genesisID = item.getModifyable().getId();
 			spell.cost      = (float)item.getCost();
 			spell.activation= item.getModifyable().getActivation().name().toLowerCase();
+			
+			for (PageReference pr : item.getModifyable().getPageReferences()) {
+				spell.product = pr.getProduct().getID().toLowerCase();
+				spell.page    = pr.getPage();
+			}
 
 			ItemData<FVTTAdeptPower> foundry = new ItemData<FVTTAdeptPower>(item.getNameWithoutRating(), "adeptpower", spell);
 			actor.addItem(foundry);
@@ -623,6 +653,11 @@ public class FoundryExportService {
 				case "spotter": spell.features.spotter=true; break;
 				}
 			}
+			
+			for (PageReference pr : item.getModifyable().getPageReferences()) {
+				spell.product = pr.getProduct().getID().toLowerCase();
+				spell.page    = pr.getPage();
+			}
 
 			ItemData<FVTTRitual> foundry = new ItemData<FVTTRitual>(item.getModifyable().getName(), "ritual", spell);
 			actor.addItem(foundry);
@@ -641,6 +676,11 @@ public class FoundryExportService {
 			fVal.level     = val.getModifyable().hasLevel();
 			fVal.adepts    = (val.getModifyable().getType()==MetamagicOrEcho.Type.METAMAGIC_ADEPT);
 			fVal.mages     = true;
+			
+			for (PageReference pr : val.getModifyable().getPageReferences()) {
+				fVal.product = pr.getProduct().getID().toLowerCase();
+				fVal.page    = pr.getPage();
+			}
 
 			ItemData<FVTTMetamagic> item = new ItemData<FVTTMetamagic>(val.getNameWithoutRating(), "metamagic", fVal);
 			actor.addItem(item);
@@ -673,6 +713,11 @@ public class FoundryExportService {
 			if (!item.getDecisions().isEmpty()) {
 				cplx.choice = item.getDecisionString(Locale.getDefault());
 			}
+			
+			for (PageReference pr : item.getModifyable().getPageReferences()) {
+				cplx.product = pr.getProduct().getID().toLowerCase();
+				cplx.page    = pr.getPage();
+			}
 
 			ItemData<FVTTComplexForm> foundry = new ItemData<FVTTComplexForm>(item.getNameWithoutRating(), "complexform", cplx);
 			actor.addItem(foundry);
@@ -691,6 +736,11 @@ public class FoundryExportService {
 			fVal.level     = val.getModifyable().hasLevel();
 			if (!val.getDecisions().isEmpty()) {
 				fVal.choice = val.getDecisionString(Locale.getDefault());
+			}
+			
+			for (PageReference pr : val.getModifyable().getPageReferences()) {
+				fVal.product = pr.getProduct().getID().toLowerCase();
+				fVal.page    = pr.getPage();
 			}
 
 			ItemData<FVTTEcho> item = new ItemData<FVTTEcho>(val.getNameWithoutRating(), "echo", fVal);
