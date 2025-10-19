@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -1835,6 +1836,11 @@ public class Shadowrun6Tools {
 	//-------------------------------------------------------------------
 	public static Pool<Integer> getWeaponPoolCalculation(Shadowrun6Character model, CarriedItem<ItemTemplate> item) {
 		Pool<Integer> pool = new Pool<Integer>();
+		
+		if (item.getAsObject(SR6ItemAttribute.POOL_SUPPLIER)!=null) {
+			return ((BiFunction<Shadowrun6Character,CarriedItem<ItemTemplate>,Pool<Integer>>) item.getAsObject(SR6ItemAttribute.POOL_SUPPLIER).getModifiedValue())
+					.apply(model, item);
+		}
 
 		if (item.getAsObject(SR6ItemAttribute.SKILL)==null) {
 			logger.log(Level.ERROR, "No SKILL attribute for weapon {0}", item.getNameWithoutRating());
