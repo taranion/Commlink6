@@ -17,10 +17,11 @@ import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
+import java.util.function.BiFunction;
 
 import de.rpgframework.character.ProcessingStep;
 import de.rpgframework.genericrpg.Pool;
+import de.rpgframework.genericrpg.PoolCalculation;
 import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -103,7 +104,8 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			dEdge += model.getMetamagicOrEchoes().stream()
 					.filter(me -> me.getModifyable().getType()==Type.DRACOGENESIS_POWER)
 					.filter(me -> !me.isAutoAdded())
-					.count();
+					.mapToInt(me -> (me.getDistributed()>0)?me.getDistributed():1)
+					.sum();
 			body.getAttributeValues().add(new AttributeValue<ShadowrunAttribute>(ShadowrunAttribute.DRAKE_EDGE, dEdge));
 
 			// Modify with drake adjustments
@@ -122,10 +124,6 @@ public class GetModificationsForDrakes implements ProcessingStep {
 //			body.clearWeapons();
 			
 			// Natural weapon
-			Supplier<Pool<Integer>> supp = () -> {
-				Pool<Integer> pool = new Pool<>();
-				return pool;
-			};
 			ItemTemplate natural = new ItemTemplate();
 			natural.setId("claws");
 			Shadowrun6Core.getDataSet("LOFWYR").ifPresent(ds -> natural.assignToDataSet(ds));
@@ -137,12 +135,15 @@ public class GetModificationsForDrakes implements ProcessingStep {
 			ItemAttributeObjectValue<SR6ItemAttribute> av = new ItemAttributeObjectValue<>(SR6ItemAttribute.ATTACK_RATING, new int[] {strPlusRea,0,0,0,0});
 			natAttack.setAttribute(SR6ItemAttribute.ATTACK_RATING, av);
 			natAttack.setAttribute(SR6ItemAttribute.DAMAGE, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.DAMAGE, new Damage(dmg, DamageType.PHYSICAL, DamageElement.REGULAR)));
-			natAttack.setAttribute(SR6ItemAttribute.POOL_SUPPLIER, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.DAMAGE, supp));
+			natAttack.setAttribute(SR6ItemAttribute.SKILL, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.SKILL, Shadowrun6Core.getSkill("close_combat")));
+			natAttack.setAttribute(SR6ItemAttribute.SKILL_SPECIALIZATION, new ItemAttributeObjectValue<SR6ItemAttribute>(SR6ItemAttribute.SKILL_SPECIALIZATION, Shadowrun6Core.getSkill("close_combat").getSpecialization("unarmed")));
 			body.addNaturalWeapon(natAttack);
 			
 			// Elemental attack
-			supp = () -> {
+			BiFunction<Shadowrun6Character,CarriedItem<ItemTemplate>,Pool<Integer>> supp = (mod,weap) -> {
 				Pool<Integer> pool = new Pool<>();
+				pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(body.getAttributeValue(ShadowrunAttribute.DRAKE_EDGE).getModifiedValue(), ShadowrunAttribute.EDGE.getName()));
+				pool.addStep(ValueType.NATURAL, new PoolCalculation<Integer>(body.getAttributeValue(ShadowrunAttribute.AGILITY).getModifiedValue(), ShadowrunAttribute.AGILITY.getName()));
 				return pool;
 			};
 			ItemTemplate elemAt = new ItemTemplate();
