@@ -520,7 +520,7 @@
       </modifications>
       <weapon attack=",8,9,6,2" ammo="12(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
    </item>
-   <item avail="5I" price="700" id="aztechnology_striker" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+   <item avail="5I" price="7000" id="aztechnology_striker" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
