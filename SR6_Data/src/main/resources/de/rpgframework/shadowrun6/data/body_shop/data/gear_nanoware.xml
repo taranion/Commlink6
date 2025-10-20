@@ -8,9 +8,10 @@
           <flag>AUGMENTATION</flag>
       </flags>
 		<usage mode="IMPLANTED" value="$RATING*0.2" />
+		<usage mode="EMBEDDED" slot="CYBERLIMB_IMPLANT" value="$RATING*2"/>
 		<attrdef id="PRICE" value="$RATING*15000"/>
 		<modifications>
-			<valmod type="HOOK" ref="NANITES" value="$RATING*2"/>
+			<valmod type="HOOK" ref="NANITES" value="$RATING"/>
 		</modifications>
 		<variant id="distributed">
 			<attrdef id="AVAILABILITY" value="5L"/>
