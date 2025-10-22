@@ -1,4 +1,75 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qpaths>
 
+	<!-- Cyber Ninja: The Human Touch -->
+	<qpath id="the_human_touch">
+		<step id="losing_balance" level="0">
+			<nextSteps>
+				<next>evaluating_humanity</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="social_stress"/>
+			</modifications>
+		</step>
+		<step id="evaluating_humanity" level="1">
+			<nextSteps>
+				<next>re_balanced</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="social_stress" remove="true"/>
+			</modifications>
+		</step>
+		<step id="re_balanced" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="re_balanced"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Decker Fighter: The Healing Journey -->
+	<qpath id="the_healing_journey">
+		<step id="rehab_blues" level="0">
+			<nextSteps>
+				<next>learning_too_fast</next>
+			</nextSteps>
+		</step>
+		<step id="learning_too_fast" level="1">
+			<nextSteps>
+				<next>synchronicity</next>
+			</nextSteps>
+		</step>
+		<step id="synchronicity" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="synchronicity"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Decker Fighter: Training Montage -->
+	<qpath id="training_montage">
+		<step id="punching_above_your_weight" level="0">
+			<nextSteps>
+				<next>limited_specialization</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="punching_above_your_weight"/>
+			</modifications>
+		</step>
+		<step id="limited_specialization" level="1">
+			<nextSteps>
+				<next>synchronicity</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="punching_above_your_weight" remove="true"/>
+				<itemmod type="QUALITY" ref="limited_specialization"/>
+			</modifications>
+		</step>
+		<step id="synchronicity" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="limited_specialization" remove="true"/>
+				<itemmod type="QUALITY" ref="synchronicity"/>
+			</modifications>
+		</step>
+	</qpath>
+
 </qpaths>
