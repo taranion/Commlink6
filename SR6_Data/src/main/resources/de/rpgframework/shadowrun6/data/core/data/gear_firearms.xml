@@ -509,7 +509,6 @@
    <item avail="4I" price="1800" id="armtech_mgl6" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
        <modifications>
          <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <weapon attack=",8,8,3," ammo="6(c)" dmg="0P" mode="SA" skill="exotic_weapons" />
    </item>
