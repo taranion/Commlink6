@@ -3,10 +3,6 @@
    <!-- Hold-outs-->
    <item id="colt_secret_agent" avail="3" price="550" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
       <weapon dmg="2P" attack="9,7,,," mode="SS" ammo="6(cy)" skill="firearms" spec="firearms/holdouts"/>
-      <modifications>
-         <itemmod type="HOOK" ref="TOP"/>
-         <itemmod type="HOOK" ref="BARREL"/>
-      </modifications>
    </item>
 
    <!-- Light pistols -->
