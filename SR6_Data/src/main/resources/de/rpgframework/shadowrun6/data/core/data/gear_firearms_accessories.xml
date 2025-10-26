@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
    <item avail="3" price="600" id="airburst_link" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+      <usage mode="EMBEDDED" slot="OPTICAL" value="0"/> <!-- optical slot needs to be first, otherwise the value="0" is not correctly applied -->
       <usage mode="EMBEDDED" slot="INTERNAL"/>
       <requires>
-          <datareq type="ITEMSUBTYPE" ref="LAUNCHERS" apply="DATA_ITEM"/>
+		<selreq>
+          <datareq type="ITEMSUBTYPE" ref="LAUNCHERS" apply="DATA_ITEM"/> <!-- if item is installed in INTERNAL, the requirement is LAUNCHERS -->
+          <datareq type="GEAR" ref="smartgun_system" apply="DATA_ITEM"/> <!-- if item is installed in OPTICAL, the requirement is smartgun_system -->
+		</selreq>
       </requires>
    </item>
    <item avail="1" price="200" id="bipod" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
