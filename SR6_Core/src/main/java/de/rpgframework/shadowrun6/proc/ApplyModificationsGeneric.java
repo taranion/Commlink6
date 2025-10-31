@@ -43,12 +43,14 @@ import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.SIN.FakeRating;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.persist.MovementConverter;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
@@ -105,6 +107,8 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						return applySkillSpec(model, (ValueModification) mod);
 					else
 						return applySkillSpec(model, mod);
+				case SPELL		:
+					return applySpell(model, mod);
 				case ITEM_ATTRIBUTE:
 				case ACTION:
 					logger.log(Level.INFO, "Add global item {1} modification {0}", mod, mod.getOrigin());
@@ -113,7 +117,8 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 					logger.log(Level.WARNING, "Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 					System.err.println("ApplyModificationsGeneric: Don't know how to apply "+tmp.getReferenceType()+" of "+tmp);
 				}
-			}
+			} else
+				System.err.println("ApplyModGeneric: "+tmp.getClass());
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
 		}
@@ -154,6 +159,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						|| tmp.getReferenceType()==ShadowrunReference.RULE
 						|| tmp.getReferenceType()==ShadowrunReference.SIN
 						|| tmp.getReferenceType()==ShadowrunReference.SKILL
+						|| tmp.getReferenceType()==ShadowrunReference.SPELL
 						) {
 					try {
 						if (!applyModification(model, tmp)) {
@@ -167,7 +173,7 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 						logger.log(Level.ERROR, "Error applying "+tmp+" from "+tmp.getSource(),e);
 					}
 				} else {
-					logger.log(Level.INFO, "Unprocessed "+tmp);
+					logger.log(Level.WARNING, "Unprocessed "+tmp);
 					unprocessed.add(tmp);
 				}
 			}
@@ -649,6 +655,41 @@ public class ApplyModificationsGeneric implements ProcessingStep {
 			logger.log(Level.DEBUG, "Inject License {0} (from {1})", tmp.getUniqueId(), mod.getSource());
 			model.addLicense(tmp);
 		}
+		return true;
+	}
+
+	// -------------------------------------------------------------------
+	private static boolean applySpell(Shadowrun6Character model, DataItemModification mod) {
+		SR6Spell item = Shadowrun6Core.getItem(SR6Spell.class, mod.getKey());
+		if (item == null) {
+			logger.log(Level.ERROR, "Cannot apply modification " + mod + " - no such spell {0}", mod.getKey());
+			return false;
+		}
+		SpellValue<SR6Spell> value = model.getSpells().stream().filter(s -> s.getResolved()==item).findFirst().orElse(null);
+		logger.log(Level.ERROR, "from "+mod.getSource()+" applyAdeptPower "+item+" that currently has "+value);
+		// Find an adept power that matches ID
+		// AND decisions
+		value = Shadowrun6Tools.getMatchIncludingDecisions(model.getSpells(),mod.getKey(), mod.getDecisions());
+
+		if (value == null) {
+			value = new SpellValue<SR6Spell>(item);
+			value.setInjectedBy(mod.getSource());
+			// For non-rating adept powers, assume rating 1
+//			if (!(mod instanceof ValueModification) && item.hasLevel()) {
+//				value.setDistributed(1);
+//			}
+			// Handle decisions
+			for (Decision dec : mod.getDecisions()) {
+				value.addDecision(dec);
+				logger.log(Level.DEBUG, "Add decision {0} to spell {1}", dec, item);
+			}
+
+			//model.addAutoAdeptPower(value);
+			model.addSpell(value);
+			logger.log(Level.DEBUG, "Add spell {0} to character", item);
+		}
+		// Mark as auto-added
+		value.addIncomingModification(mod);
 		return true;
 	}
 
