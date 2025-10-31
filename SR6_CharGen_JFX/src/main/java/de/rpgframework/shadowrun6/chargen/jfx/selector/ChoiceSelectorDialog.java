@@ -70,6 +70,7 @@ import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6RuleFlag;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Sense;
 import de.rpgframework.shadowrun6.Shadowrun6Action;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -625,6 +626,9 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 			break;
 		case SKILLSPECIALIZATION:
 			ret.add( handleSKILLSPECIALIZATION(item, choice) );
+			break;
+		case SPELL:
+			ret.add( handleSPELL(item, choice) );
 			break;
 		case SPELL_CATEGORY:
 			ret.add( handleSPELL_CATEGORY(item, choice) );
@@ -1525,6 +1529,39 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		 });
 		content.getChildren().add(cbSub);
 		return cbSub;
+	}
+
+	//-------------------------------------------------------------------
+	private Node handleSPELL(ComplexDataItem item, Choice choice) {
+		ChoiceBox<SR6Spell> choicebox = new ChoiceBox<>();
+		choicebox.setConverter(new StringConverter<SR6Spell>() {
+			public SR6Spell fromString(String value) { return null;}
+			public String toString(SR6Spell value) {
+				if (value==null) return "-";
+				return value.getName();
+			}
+		});
+		List<SR6Spell> items = Shadowrun6Core.getItemList(SR6Spell.class)
+				.stream()
+				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
+				.toList();
+		// Eventually sort
+		choicebox.getItems().addAll(items);
+
+		Collections.sort(choicebox.getItems(), new Comparator<SR6Spell>() {
+			public int compare(SR6Spell o1, SR6Spell o2) {
+				return Collator.getInstance().compare(o1.getName(), o2.getName());
+			}});
+		choicebox.getSelectionModel().selectedItemProperty().addListener( (ov,o,n) -> {
+			logger.log(Level.DEBUG, "Chose {0} for {1}", n, choice.getUUID());
+			decisions.put(choice, new Decision(choice, n.getId()));
+
+			updateButtons();
+			showHelpFor(n);
+		 });
+		content.getChildren().add(choicebox);
+
+		return choicebox;
 	}
 
 	//-------------------------------------------------------------------
