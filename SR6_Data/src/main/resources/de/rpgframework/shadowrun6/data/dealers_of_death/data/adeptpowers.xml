@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <powers>
 
-	<power id="adept_accident"  cost="0.5" act="MINOR_ACTION"/>
+	<power id="adept_accident" cost="0.5" act="MINOR_ACTION"/>
+	<power id="adept_spell"    cost="1" act="MAJOR_ACTION" lang="de">
+		<choices>
+			<choice type="SPELL" uuid="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+		</choices>
+		<modifications>
+			<allowmod type="SKILL" ref="sorcery" />
+			<itemmod type="SPELL" ref="CHOICE" choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" />
+		</modifications>
+	</power>
 	<power id="archers_focus"  cost="0.5" act="PASSIVE"/>
 	<power id="precise_throw"  cost="0.25" hasLevel="true" act="PASSIVE">
 		<modifications>
 			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="1,1,1,0,0" options="THROWING"/>
 		</modifications>
+	</power>
+	<power id="delayed_damage"  cost="0.5" act="MINOR_ACTION" lang="de">
+		<requires>
+			<selreq>
+				<datareq type="ADEPT_POWER" ref="killing_hands"/>
+				<datareq type="ADEPT_POWER" ref="distance_strike"/>
+			</selreq>
+		</requires>
 	</power>
 
 </powers>
