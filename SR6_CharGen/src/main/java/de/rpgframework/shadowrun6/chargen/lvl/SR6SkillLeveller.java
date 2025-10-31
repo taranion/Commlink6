@@ -511,7 +511,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 				if (_mod instanceof AllowModification) {
 					AllowModification mod = (AllowModification)_mod;
 					SR6Skill key = mod.getResolvedKey();
-					logger.log(Level.INFO, "Allow skill {0}", mod.getKey());
+					logger.log(Level.DEBUG, "Allow skill {0}", mod.getKey());
 					if (key!=null)
 						allowed.add(key);
 					continue;
@@ -534,6 +534,7 @@ public class SR6SkillLeveller extends CommonSkillController {
 			} else
 				unprocessed.add(_mod);
 		}
+		updateAvailable();
 
 		checkForExoticWeaponsSpecilization();
 		return unprocessed;
