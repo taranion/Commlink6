@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="hk_urban_stinger_bolts" avail="6I" price="10" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="hk_urban_stinger" apply="CHARACTER"/>
+      </requires>
+	</item>
+	<item id="hk_urban_stinger_air" avail="4" price="5" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="hk_urban_stinger" apply="CHARACTER"/>
+      </requires>
+	</item>
+
+	<item id="makarov22_ammo" avail="6I" price="150" type="AMMUNITION" subtype="AMMUNITION" count="y">
+      <requires>
+			<datareq type="GEAR" ref="makarov22" apply="CHARACTER"/>
+      </requires>
+	</item>
+
+</items>

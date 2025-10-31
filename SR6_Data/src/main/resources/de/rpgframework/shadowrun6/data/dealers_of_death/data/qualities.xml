@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
 
+	<quality id="numb" karma="5" pos="true" type="NORMAL" lang="de"/>
 	<quality id="cool_under_pressure" karma="4" pos="true" type="NORMAL" max="4">
 		<modifications>
 			<checkmod type="ATTRIBUTE" ref="COMPOSURE" what="DICE" value="1" apply="CHARACTER"/>

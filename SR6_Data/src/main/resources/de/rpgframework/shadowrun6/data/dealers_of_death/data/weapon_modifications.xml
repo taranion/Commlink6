@@ -12,6 +12,7 @@
 		</choices>
 		<!-- price should be rating of mod * base cost of weapon that is modified -->
 		<!-- <attrdef id="PRICE" value="$RATING*$$PRICE"/> -->
+		<!-- once selecting a rating works, add rating 4 to makarov22 -->
 	</itemenhancement>
 
 </itemenhancements>

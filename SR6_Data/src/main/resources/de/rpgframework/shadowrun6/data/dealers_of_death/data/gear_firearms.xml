@@ -3,6 +3,7 @@
 
 	<item id="trafalgar_cane" avail="5L" price="750" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
 		<weapon dmg="5P" mode="SS" attack="10,9,,," ammo="1(b)" skill="firearms" spec="firearms/rifles"/>
+		<flags><flag>UNMODIFYABLE</flag></flags>
 	</item>
 
 	<item id="tiffany_bracelet_pistol" avail="6L" price="1000" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT">
@@ -16,5 +17,43 @@
 		<attrdef id="WEAPON_SIZE" value="TINY"/>
 		<flags><flag>UNMODIFYABLE</flag></flags>
 	</item>
+
+	<item id="hk_urban_stinger" avail="9I" price="2500" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" lang="de">
+		<weapon dmg="2P" mode="SA" attack="9,9,,," ammo="10(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="GEARMOD" ref="accessory_rail_left" />
+		</modifications>
+	</item>
+
+	<item id="makarov22" avail="8I" price="3000" type="WEAPON_FIREARMS" subtype="PISTOLS_LIGHT" lang="de">
+		<weapon dmg="3P" mode="SS" attack="11,10,,," ammo="5(c)" skill="firearms" spec="firearms/pistols_light"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="GEARMOD" ref="ceramic_components"/> <!-- TODO: add rating="4" -->
+			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
+			<itemmod type="GEARMOD" ref="easy_breakdown" />		
+		</modifications>
+	</item>
+
+	<item id="pjss_superb" avail="7I" price="2000" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY" lang="de">
+		<weapon dmg="5P" mode="SS" attack="8,11,10,2," ammo="1(b)" skill="firearms" spec="firearms/pistols_heavy"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="GEARMOD" ref="personalized_grip_ranged"/>
+			<itemmod type="GEARMOD" ref="barrel_extension"/>
+			<itemmod type="GEARMOD" ref="custom_style"/>
+		</modifications>
+	</item>
+
+   <item id="pjss_superb_silencer" avail="7" price="750" type="ACCESSORY" subtype="WEAPON_ACCESSORY" lang="de">
+      <usage mode="EMBEDDED" slot="BARREL"/>
+      <requires>
+          <datareq type="GEAR" ref="pjss_superb" apply="DATA_ITEM"/>
+      </requires>
+   </item>
 
 </items>
