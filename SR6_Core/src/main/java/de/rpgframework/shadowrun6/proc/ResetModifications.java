@@ -19,7 +19,9 @@ import de.rpgframework.shadowrun.Movement.MovementType;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun6.SR6SkillValue;
+import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 
@@ -120,6 +122,16 @@ public class ResetModifications implements ProcessingStep {
 				if (remove) {
 					logger.log(Level.DEBUG, "Remove metaecho "+val);
 					model.removeMetamagicOrEcho(val);
+				}
+			}
+
+			// Remove all auto-spells
+			for (SpellValue<SR6Spell> val : new ArrayList<>(model.getSpells())) {
+				boolean remove = val.isAutoAdded();
+				val.clearIncomingModifications();
+				if (remove) {
+					logger.log(Level.DEBUG, "Remove spell"+val);
+					model.removeSpell(val);
 				}
 			}
 
