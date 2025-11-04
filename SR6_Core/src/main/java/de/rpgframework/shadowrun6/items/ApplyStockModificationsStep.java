@@ -248,6 +248,9 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			CarriedItem accessory = carriedR.get();
 			accessory.setParent(model);
 			accessory.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null) {
+				accessory.setUuid(mod.getId());
+			}
 			SR6GearTool.recalculate("", charac, accessory);
 			//if (mod.isIncludedInStats())
 			// Check if AvailableSlot already exists - if not, create one
