@@ -204,7 +204,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 
 	// -------------------------------------------------------------------
 	@SuppressWarnings({ "rawtypes", "incomplete-switch", "unchecked" })
-	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<?> model, EmbedModification mod) {
+	private boolean embedModification(boolean strict, Lifeform charac, CarriedItem<ItemTemplate> model, EmbedModification mod) {
 		logger.log(Level.DEBUG, "Before processing "+mod+" Decisions are "+model.getDecisions());
 		if (mod.getApplyTo() == ApplyTo.CHARACTER || mod.getApplyTo() == ApplyTo.UNARMED) {
 			model.addOutgoingModification(mod); // Is direction correct?
@@ -248,20 +248,34 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			CarriedItem accessory = carriedR.get();
 			accessory.setParent(model);
 			accessory.setInjectedBy(mod.getSource());
+			if (mod.getId()!=null) {
+				accessory.setUuid(mod.getId());
+			}
+
+			// Check if we already have this accessory - if yes, skip it
+			if (model.hasAccessory((ItemTemplate)accessory.getResolved(), mod.getId(), hook)) {
+				return true;
+			}
+
 			SR6GearTool.recalculate("", charac, accessory);
 			//if (mod.isIncludedInStats())
-			// Check if AvailableSlot already exists - if not, create one
-			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
-			if (slot==null) {
-				if (hook.hasCapacity && strict) {
-					logger.log(Level.WARNING, "Item {0} (from {1}) has an <embed> for a not existing slot {2}, but cannot auto-create slot since no capacity is given",
-							mod.getKey(), mod.getSource(), hook);
-					return false;
-				}
-				slot = new AvailableSlot(hook);
-				model.addSlot(slot);
+			boolean reallyAdded = model.addAccessory(accessory, hook);
+			if (!reallyAdded) {
+				return false;
 			}
-			slot.addEmbeddedItem(accessory);
+
+			// Check if AvailableSlot already exists - if not, create one
+//			AvailableSlot slot = (AvailableSlot) model.getSlot(hook);
+//			if (slot==null) {
+//				if (hook.hasCapacity && strict) {
+//					logger.log(Level.WARNING, "Item {0} (from {1}) has an <embed> for a not existing slot {2}, but cannot auto-create slot since no capacity is given",
+//							mod.getKey(), mod.getSource(), hook);
+//					return false;
+//				}
+//				slot = new AvailableSlot(hook);
+//				model.addSlot(slot);
+//			}
+//			slot.addEmbeddedItem(accessory);
 
 			// Now apply modifications that the new accessory provides
 			for (Modification mod2 : accessory.getOutgoingModifications()) {

@@ -8,8 +8,10 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
@@ -682,6 +684,65 @@ public class SR6CarriedItemTest {
 		assertNotNull(core);
 		assertFalse(core.getAllEmbeddedItems().isEmpty());
 		assertEquals("Table-Attribute of valmod not used",12,core.getFreeCapacity(),0);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testFactoryWeaponMounts() {
+		ItemTemplate temp = Shadowrun6Core.getItem(ItemTemplate.class, "nissan_samurai");
+		assertNotNull(temp);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(temp, null, CarryMode.CARRIED);
+		System.out.println("----Recalculate 1----");
+		SR6GearTool.recalculate("", null, item);
+		System.out.println("----Recalculate 1 done----");
+		System.out.println(item.dump());
+
+
+		AvailableSlot core = item.getSlot(ItemHook.VEHICLE_HARDPOINT);
+		assertNotNull(core);
+		assertFalse(core.getAllEmbeddedItems().isEmpty());
+		// Make sure there are two weapon mounts
+		assertEquals(2,core.getAllEmbeddedItems().stream()
+				.filter(acc ->
+					acc.getKey().equals("samurai_mount_small"))
+				.count());
+		// Make sure both have a UUID
+		assertEquals("Weapon mounts are missing UUID",2,core.getAllEmbeddedItems().stream()
+				.filter(acc -> acc.getKey().equals("samurai_mount_small"))
+				.filter(acc -> acc.getUuid()!=null)
+				.count());
+		// Find the second one
+		Optional<CarriedItem<ItemTemplate>> mount = core.getAllEmbeddedItems().stream()
+				.filter(acc -> acc.getKey().equals("samurai_mount_small"))
+				.filter(acc -> UUID.fromString("0654dd16-b094-4339-b687-72095c446254").equals(acc.getUuid()))
+				.findFirst();
+		assertTrue("Second weapon mount not found or has wrong UUID",mount.isPresent());
+
+		AvailableSlot smallWeapon = mount.get().getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
+		assertNotNull("Weapon mount misses slot",smallWeapon);
+		assertEquals(4, item.getEffectiveAccessories().size());
+
+		// Create a weapon to add
+		ItemTemplate wTemp = Shadowrun6Core.getItem(ItemTemplate.class, "walther_palm_pistol");
+		CarriedItem<ItemTemplate> wItem = new CarriedItem<ItemTemplate>(wTemp, null, CarryMode.CARRIED);
+		SR6GearTool.recalculate("", null, wItem);
+
+		mount.get().addAccessory(wItem, ItemHook.VEHICLE_WEAPON_SMALL);
+
+		assertEquals(1, smallWeapon.getAllEmbeddedItems().size());
+		Collection<CarriedItem<ItemTemplate>> allItems = item.getEffectiveAccessories();
+		System.out.println("All items: "+allItems);
+		assertEquals(5, allItems.size());
+
+		System.out.println("----Recalculate 2----");
+		SR6GearTool.recalculate("", null, item);
+		System.out.println("----Recalculate 2 done----");
+		allItems = item.getEffectiveAccessories();
+		System.err.println("All items: "+allItems);
+		assertEquals(5,allItems.size());
+		System.out.println(item.dump());
+
 	}
 
 }
