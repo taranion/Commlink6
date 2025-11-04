@@ -193,20 +193,20 @@
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /-->
 			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" />
-			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /> <!-- equipment needs 15 hardpoints, vehicle only has 7, 8 addl hardpoint slots needed = 4x2 large hardpoints -->
-			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" id="20bbabed-de47-4ae4-a482-d9a5d3b94daa"/>
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" id="be2dd38f-1552-4acc-96e7-056ef73dae6b"/>
+			<embed type="GEAR" ref="valkyrie_module" intoType="HOOK" intoRef="VEHICLE_CF" id="44e65303-3908-4ca9-a817-776f1e111265"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="662e7e19-a85d-4321-bcf2-909fdb354133"/> <!-- equipment needs 15 hardpoints, vehicle only has 7, 8 addl hardpoint slots needed = 4x2 large hardpoints -->
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="1765b9a5-6acf-42ec-9dfe-4999bbed293d"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="44bd8cc0-406b-4801-80eb-28824dbef3ae"/>
+			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="8e532ea6-b485-4a48-88cc-3a31f5abbb7d"/>
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
 			<embed type="GEAR" ref="push_bar" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 0 -->
-			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 1 -->
-			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
-			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 2 -->
-			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
-			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- 3 -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0f989031-fe27-44bf-9e92-fc1a6362005f" /> <!-- 1 -->
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="5639560e-77e7-47a5-b0c6-b60bfd4f655b"/> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="d7785305-1b62-4750-b593-1df223b8ed63"/> <!-- 2 -->
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="33822d97-6a20-4203-b11c-5735c2c309fc"/> <!-- 3 -->
+			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="749c90c3-0f95-427a-9e88-b07fb81dcbfe"/> <!-- 3 -->
 			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" > <!-- 1 --> <!-- US DC does not state rating, DE states 2  -->
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 			</embed>
@@ -217,7 +217,7 @@
 	</item>
 	<item id="ford_lifeline" lang="de" avail="5L" price="400000" type="VEHICLES" subtype="VANS" >
 		<vehicle han="4/5" acc="8" spdi="10" tspd="110" bod="22" arm="18" pil="4" sen="4" sea="10"/>
-		<modifications> 
+		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /-->
