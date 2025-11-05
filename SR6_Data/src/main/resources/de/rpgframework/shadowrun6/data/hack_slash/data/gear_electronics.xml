@@ -312,8 +312,8 @@
 			<weapon dmg="0S" attack="1,,,," skill="athletics" spec="athletics/archery"/>
 		</alternate>
    </item>
-   <item avail="2" price="50" id="grapple_tapper_cable" type="ELECTRONICS" subtype="COMMUNICATION"/>
-   <item avail="4I" price="350" id="grapple_tapper_pod" type="ELECTRONICS" subtype="COMMUNICATION"/>
+   <item avail="2" price="50" id="grapple_tapper_cable" type="ELECTRONICS" subtype="COMMUNICATION" count="y"/>
+   <item avail="4I" price="350" id="grapple_tapper_pod" type="ELECTRONICS" subtype="COMMUNICATION" count="y"/>
 
    <item avail="4" price="100" id="laser_jack" type="ELECTRONICS" subtype="COMMUNICATION"/>
    <item avail="5L" price="500" id="link_gloves" type="ELECTRONICS" subtype="COMMUNICATION"/>
