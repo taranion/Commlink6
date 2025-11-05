@@ -63,13 +63,17 @@
 		 		<datareq type="AUGMENTATION_QUALITY" ref="EXO"/>
 		 	</selreq>
 		</requires>
-		<choices> <!-- TODO: ideally PRICE would be based on delta of natural attributes-2 (value="($AGILITY:N-2+$STRENGTH:N-2)*7000"), however the :N to access natural attribute is not implemented in code yet, thus using 'rating' instead, asking the player to select the correct sum of AGI-2 + STR-2 -->
-			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="13"/>
+		<!-- TODO: ideally PRICE would be based on delta of natural attributes-2 (value="($AGILITY:N-2+$STRENGTH:N-2)*7000"), however the :N to access natural attribute is not implemented in code yet, thus using two choices with two ratings instead, asking the player to select the correct AGI-2 and STR-2 -->
+		<choices> 
+			<choice uuid="8807bebf-3183-47c3-8438-101c7c5ebf09" type="ITEM_ATTRIBUTE" ref="RATING1" max="7"/>
+			<choice uuid="83826dc6-4043-4c7a-ba9e-a89657391864" type="ITEM_ATTRIBUTE" ref="RATING2" max="9"/>
 		</choices>
-		<attrdef id="PRICE" value="$RATING*7000"/>
+		<attrdef id="PRICE" value="$RATING1*7000 + $RATING2*7000"/>
         <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
    		<modifications>  
-		<!-- TODO: A for artificial and :N for natural not implemented in code yet
+			<valmod type="ATTRIBUTE" ref="AGILITY" value="$RATING1" set="ARTIFICIAL" apply="CHARACTER"/>
+			<valmod type="ATTRIBUTE" ref="STRENGTH" value="$RATING2" set="ARTIFICIAL" apply="CHARACTER"/>
+		<!-- TODO: Codes :A for artificial and :N for natural not implemented in code yet
 			<valmod type="ATTRIBUTE" ref="AGILITY:A" value="$AGILITY:N" apply="CHARACTER"/>
 			<valmod type="ATTRIBUTE" ref="STRENGTH:A" value="$STRENGTH:N" apply="CHARACTER"/>
 		-->
