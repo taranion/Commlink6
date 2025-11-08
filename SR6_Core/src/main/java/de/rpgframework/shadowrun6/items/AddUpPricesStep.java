@@ -36,6 +36,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 	/**
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
@@ -49,7 +50,6 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 		}
 
 		if (model.hasFlag(SR6ItemFlag.CUSTOM_FITTED)) {
-			logger.log(Level.ERROR, "TODO: CUSTOM_FITTED");
 			/* The custom fitting process modifies the base limb’s cost by 7,000 nuyen for
 			 * each point of the user’s Strength and Agility that is higher than 2. */
 			int plus = Math.max(0, charac.getAttribute(ShadowrunAttribute.AGILITY).getDistributed()-2)*7000;

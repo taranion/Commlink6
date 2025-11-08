@@ -51,12 +51,6 @@
             <flag>AUGMENTATION</flag>
         </flags>
     </item>
-    <!--item id="custom-fitted_cyberlimb" avail="5" price="1000" type="CYBERWARE" subtype="CYBER_BODYWARE">
-        <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
-        <flags>
-            <flag>AUGMENTATION</flag>
-        </flags>
-    </item-->
     <item id="cyberfinger" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE" reqVariant="true">
         <usage mode="IMPLANTED" value="0.05"/>
         <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
