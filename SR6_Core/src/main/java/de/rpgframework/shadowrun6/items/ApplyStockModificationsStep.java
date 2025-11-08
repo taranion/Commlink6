@@ -14,6 +14,8 @@ import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarriedItemProcessor;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.ItemEnhancementValue;
+import de.rpgframework.genericrpg.items.PieceOfGear;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.EmbedModification;
 import de.rpgframework.genericrpg.modification.Modification;
@@ -238,9 +240,15 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 					return true;
 				}
 			}
+			// Is there a variant given?
+			SR6PieceOfGearVariant variant = null;
+			if (mod.getVariant()!=null) {
+				variant = templ.getVariant(mod.getVariant());
+			}
+
 			ItemHook hook = mod.getHook();
 			logger.log(Level.INFO, "Add instanceof {0} into hook {1} of {2} - with {3} decisions", templ.getId(), hook, model.getKey(), decs.length);
-			OperationResult<CarriedItem<ItemTemplate>> carriedR = SR6GearTool.buildItem(templ, CarryMode.EMBEDDED, null, charac, false, model, decs);
+			OperationResult<CarriedItem<ItemTemplate>> carriedR = SR6GearTool.buildItem(templ, CarryMode.EMBEDDED, variant, charac, false, model, decs);
 			if (carriedR.hasError()) {
 //				logger.log(Level.ERROR, "Error embedding {0} into hook {1} of {2}: {3}", mod.getKey(), hook, model.getKey(),carriedR.getError());
 				return true;
@@ -250,18 +258,6 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			accessory.setInjectedBy(mod.getSource());
 			if (mod.getId()!=null) {
 				accessory.setUuid(mod.getId());
-			}
-
-			// Check if we already have this accessory - if yes, skip it
-			if (model.hasAccessory((ItemTemplate)accessory.getResolved(), mod.getId(), hook)) {
-				return true;
-			}
-
-			SR6GearTool.recalculate("", charac, accessory);
-			//if (mod.isIncludedInStats())
-			boolean reallyAdded = model.addAccessory(accessory, hook);
-			if (!reallyAdded) {
-				return false;
 			}
 
 			// Check if AvailableSlot already exists - if not, create one
@@ -275,7 +271,23 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 //				slot = new AvailableSlot(hook);
 //				model.addSlot(slot);
 //			}
-//			slot.addEmbeddedItem(accessory);
+////			slot.addEmbeddedItem(accessory);
+
+			// Check if we already have this accessory - if yes, skip it
+			if (model.hasAccessory((ItemTemplate)accessory.getResolved(), mod.getId(), hook)) {
+				return true;
+			}
+			// Check if slot already has accessory - if no, add it
+//			if (!slot.hasAccessory((ItemTemplate)accessory.getResolved(), mod.getId(), hook)) {
+//				slot.addEmbeddedItem(accessory);
+//			}
+
+			SR6GearTool.recalculate("", charac, accessory);
+			//if (mod.isIncludedInStats())
+			boolean reallyAdded = model.addAccessory(accessory, hook);
+			if (!reallyAdded) {
+				return false;
+			}
 
 			// Now apply modifications that the new accessory provides
 			for (Modification mod2 : accessory.getOutgoingModifications()) {
