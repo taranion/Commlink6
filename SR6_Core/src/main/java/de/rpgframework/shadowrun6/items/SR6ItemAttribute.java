@@ -86,8 +86,6 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	QUALITY,
 	RANGE,
 	RATING,
-	RATING1, // if item has two ratings
-	RATING2, // if item has two ratings
 	SEATS,
 	SENSORS,
 	/** The amount of capacity slots required */
