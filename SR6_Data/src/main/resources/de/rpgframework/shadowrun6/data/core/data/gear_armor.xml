@@ -75,7 +75,7 @@
 		</modifications>
 	</item>
 	<item id="lined_coat" avail="4" price="900" type="ARMOR" subtype="ARMOR_BODY">
-		<armor rating="3" />
+		<armor rating="3" social="-2" />
 		<modifications>
 			<valmod type="HOOK" ref="ARMOR" value="7" />
 		</modifications>
