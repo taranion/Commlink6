@@ -14,6 +14,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.Modification.Origin;
 import de.rpgframework.genericrpg.modification.ModifiedObjectType;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -35,6 +36,7 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 	/**
 	 * @see de.rpgframework.genericrpg.items.CarriedItemProcessor#process(java.lang.String, de.rpgframework.genericrpg.data.Lifeform, de.rpgframework.genericrpg.items.CarriedItem, java.util.List)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public OperationResult<List<Modification>> process(boolean strict, ModifiedObjectType ref, Lifeform charac, CarriedItem<?> model,
 			List<Modification> unprocessed) {
@@ -45,6 +47,18 @@ public class AddUpPricesStep implements CarriedItemProcessor {
 				logger.log(Level.WARNING, "Item {0} has no price", model.getKey());
 			}
 			return new OperationResult<List<Modification>>(unprocessed);
+		}
+
+		if (model.hasFlag(SR6ItemFlag.CUSTOM_FITTED)) {
+			/* The custom fitting process modifies the base limb’s cost by 7,000 nuyen for
+			 * each point of the user’s Strength and Agility that is higher than 2. */
+			int plus = Math.max(0, charac.getAttribute(ShadowrunAttribute.AGILITY).getDistributed()-2)*7000;
+			plus += Math.max(0, charac.getAttribute(ShadowrunAttribute.STRENGTH).getDistributed()-2)*7000;
+			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), plus, SR6ItemFlag.CUSTOM_FITTED));
+		}
+		if (model.hasFlag(SR6ItemFlag.CHEAP_KNOCK_OFF)) {
+			int value = attrib.getDistributed()/2;
+			attrib.addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), -value, SR6ItemFlag.CHEAP_KNOCK_OFF));
 		}
 
 		// Add prices of accessories

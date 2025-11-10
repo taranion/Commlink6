@@ -45,6 +45,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6ItemFlag;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -96,6 +97,24 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		description = new CarriedItemDescriptionPane(Shadowrun6Tools.requirementResolver(Locale.getDefault()), control);
 		description.setStyle("-fx-pref-width: 30em; -fx-max-width: 30em");
 	}
+	//--------------------------------------------------------------------
+	protected void createPossibleItemFlags(CarriedItem<ItemTemplate> data) {
+		for (SR6ItemFlag flag : SR6ItemFlag.values()) {
+			if (flag.appliesTo(data)) {
+				CheckBox cb = new CheckBox(flag.getName());
+				cb.selectedProperty().addListener( (ov,o,n) -> {
+					if (n) {
+						data.addFlag(flag);
+					} else {
+						data.removeFlag(flag);
+					}
+					data.setDirty(true);
+					control.runProcessors();
+				});
+				super.selectedFlag.put(cb, flag);
+			}
+		}
+	}
 
 	//-------------------------------------------------------------------
 	/**
@@ -122,7 +141,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case ARMOR_MEMS        : index= 8; break;
 		case HELMET_ACCESSORY  : index= 9; break;
 		case FASHION		   : index= 10; break;
-		
+
 		// Cyberware
 		case HEADWARE_IMPLANT   : index= 2; break;
 		case SKILLJACK          : index= 3; break;

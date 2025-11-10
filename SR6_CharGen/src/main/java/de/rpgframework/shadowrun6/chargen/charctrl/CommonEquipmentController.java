@@ -109,7 +109,6 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getSelected()
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<CarriedItem<ItemTemplate>> getSelected() {
 		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
 		getModel().getCarriedItems().forEach(it -> ret.add(it));
