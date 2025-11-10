@@ -67,7 +67,7 @@
         <variant id="frag_finger"/>
         <variant id="torch_tip"/>
     </item>
-    <!--item id="digitigrade_legs" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
+    <item id="digitigrade_legs" type="CYBERWARE" subtype="CYBER_LIMBS" reqVariant="y">
         <flags>
             <flag>AUGMENTATION</flag>
         </flags>
@@ -94,7 +94,7 @@
             </modifications>
         </variant>
     </item>
-    <item id="gecko_tips" avail="1" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
+    <item id="gecko_tips_cyber" avail="1" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="IMPLANTED" value="0.2"/>
         <usage mode="EMBEDDED" value="1" slot="CYBERLIMB_IMPLANT"/>
         <flags>
@@ -120,7 +120,7 @@
         <modifications>
             <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="40"/>
         </modifications>
-    </item-->
+    </item>
     <item id="modular_connector" avail="3" price="250" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
         <flags>
@@ -134,7 +134,7 @@
             <flag>AUGMENTATION</flag>
         </flags>
     </item>
-    <!--item id="prehensile_foot" avail="4" price="5000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+    <item id="prehensile_foot" avail="4" price="5000" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="IMPLANTED" value="0.3"/>
         <usage mode="EMBEDDED" value="4" slot="CYBERLIMB_IMPLANT"/>
         <flags>
@@ -209,7 +209,7 @@
         <flags>
             <flag>AUGMENTATION</flag>
         </flags>
-    </item-->
+    </item>
     <item id="sinister_dexter_coprocessor" avail="2" price="500" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
         <flags>
@@ -230,7 +230,7 @@
       <attrdef id="AVAILABILITY" value="4"/>
       <attrdef id="PRICE" value="$RATING*500"/>
     </item>
-    <!--item id="tentacle_modification" avail="4" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
+    <item id="tentacle_modification" avail="4" price="2000" type="CYBERWARE" subtype="CYBER_BODYWARE">
         <usage mode="EMBEDDED" value="5" slot="CYBERLIMB_IMPLANT"/>
         <flags>
             <flag>AUGMENTATION</flag>
@@ -241,7 +241,7 @@
         <flags>
             <flag>AUGMENTATION</flag>
         </flags>
-    </item-->
+    </item>
 
 </items>
 
