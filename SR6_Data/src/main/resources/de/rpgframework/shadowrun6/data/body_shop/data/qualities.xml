@@ -7,7 +7,7 @@
 			<choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
    	</choices>
      <modifications>
-       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1000" set="NATURAL" apply="CHARACTER" />
+       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1" set="NATURAL" apply="CHARACTER" />
      </modifications>
    </quality>
    <quality id="permanent_damage" karma="5" pos="false" type="NORMAL">
