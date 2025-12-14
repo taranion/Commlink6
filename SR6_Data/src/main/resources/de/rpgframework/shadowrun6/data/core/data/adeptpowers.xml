@@ -87,7 +87,7 @@
    <power id="rapid_healing"   cost="0.5" hasLevel="true" act="PASSIVE"/>
    <power id="spell_resistance" cost="0.5" act="PASSIVE"/>
    <power id="traceless_walk"  cost="0.5"  act="PASSIVE"/>
-   <power id="vocal_control"   cost="0.5" hasLevel="true" act="PASSIVE"/>
+   <power id="vocal_control"   cost="0.5" act="PASSIVE"/>
    <power id="wall_running"    cost="0.5" act="MINOR_ACTION" />
 
 </powers>
