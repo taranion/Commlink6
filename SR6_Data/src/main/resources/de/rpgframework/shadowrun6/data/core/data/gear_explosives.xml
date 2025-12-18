@@ -29,7 +29,7 @@
 		<ammo />
 		<variant id="mini"/>
 	</item>
-	<item avail="4I" price="125" id="flash_pak" count="y" type="AMMUNITION" subtype="GRENADES">
+	<item avail="4L" price="125" id="flash_pak" count="y" type="AMMUNITION" subtype="GRENADES">
 		<ammo blast="10" />
 	</item>
 
