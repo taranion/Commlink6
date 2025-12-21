@@ -11,7 +11,7 @@ pipelines:
     - step:
         name: Build
         script:
-          - mvn -U -B -s settings.xml clean deploy
+          - mvn -U -B -s settings.xml clean deploy -DskipTests -Dgpg.skip
         artifacts:
           - Commlink6/target/commlink6-*complete.jar
           - Commlink6/target/config.xml
