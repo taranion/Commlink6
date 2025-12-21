@@ -48,6 +48,11 @@
 				<artifactId>simple-persist</artifactId>
 				<version>3.8.0</version>
 			</dependency>
+         <dependency>
+            <groupId>org.prelle</groupId>
+            <artifactId>javafx-extensions</artifactId>
+            <version>5.1.1-SNAPSHOT</version>
+         </dependency>
 			<dependency>
 				<groupId>de.rpgframework</groupId>
 				<artifactId>rpgframework-core</artifactId>
