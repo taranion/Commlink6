@@ -280,7 +280,7 @@
     <item avail="1" price="500" id="audio_enhancement" type="ACCESSORY" subtype="AUDIO_ENHANCEMENT">
 	  	<usage mode="EMBEDDED" slot="AUDIO" value="1"/>
    	<variant id="cyberear">
-		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="2"/>
+		  	<usage mode="EMBEDDED" slot="CYBEREAR_IMPLANT" value="1"/>
    		<attrdef id="PRICE" value="4000"/>
    		<flags><flag>AUGMENTATION</flag></flags>
    	</variant>
