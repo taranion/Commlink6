@@ -44,11 +44,26 @@ import de.rpgframework.shadowrun6.items.VehicleData.VehicleType;
 public class VehicleTools {
 
 	private final static Logger logger = System.getLogger("shadowrun6");
+	
+	//-------------------------------------------------------------------
+	private static CarriedItem<ItemTemplate> getControlRig(Shadowrun6Character model) {
+		CarriedItem<ItemTemplate> ctrlRig = model.getCarriedItem("control_rig");
+		CarriedItem<ItemTemplate> actRig = model.getCarriedItem("active_control_rig");
+		if (actRig==null) return ctrlRig;
+		if (ctrlRig==null) return actRig;
 
-//----------Calculate ram pools ------------------------------------------------
+		// Both present, return the one being actively used
+		int rtg = ctrlRig.getAsValue(SR6ItemAttribute.RATING).getModifiedValue();
+		int artg = actRig.getAsValue(SR6ItemAttribute.RATING).getModifiedValue();
+		if (artg>=rtg)
+			return actRig;
+		return ctrlRig;		
+	}
+	
+	//----------Calculate ram pools ------------------------------------------------
 	public static VehicleUnarmedAttack getVehicleUnarmed(Shadowrun6Character model, CarriedItem<ItemTemplate> vehicle, VehicleOperationMode mode) {
 		// Collect some necessary data
-		CarriedItem<ItemTemplate> ctrlRig = model.getCarriedItem("control_rig");
+		CarriedItem<ItemTemplate> ctrlRig = getControlRig(model);
 		int rigRating = (ctrlRig==null)?0:SR6GearTool.getRating( ctrlRig);
 		CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
 		CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
@@ -245,7 +260,7 @@ public class VehicleTools {
 		public static DronePool getDroneWeaponPool(Shadowrun6Character model, CarriedItem<ItemTemplate> drone, CarriedItem<ItemTemplate> rcc, CarriedItem<ItemTemplate> weapon) {
 			// Collect some necessary data
 			// logger.log(Level.WARNING, "TODO: getDroneWeaponPool not implemented yet");
-			CarriedItem<ItemTemplate> rig = model.getCarriedItem("control_rig");
+			CarriedItem<ItemTemplate> rig = getControlRig(model);
 			int rigRating = (rig==null)?0:rig.getDecision(ItemTemplate.UUID_RATING).getValueAsInt();
 
 			DronePool pool = new DronePool();
@@ -383,7 +398,7 @@ public class VehicleTools {
 			}
 
 			// Collect some necessary data
-			CarriedItem<ItemTemplate> ctrlRig = model.getCarriedItem("control_rig");
+			CarriedItem<ItemTemplate> ctrlRig = getControlRig(model);
 			int rigRating = (ctrlRig==null)?0:SR6GearTool.getRating( ctrlRig);
 			CarriedItem<ItemTemplate> rcc = Shadowrun6Tools.getBestRCC(model);
 			CarriedItem<ItemTemplate> simSenseOverdrive = model.getCarriedItem("simsense_overdrive");
