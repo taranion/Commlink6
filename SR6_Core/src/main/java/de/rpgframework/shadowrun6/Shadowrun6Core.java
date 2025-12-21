@@ -27,6 +27,7 @@ import de.rpgframework.core.RoleplayingSystem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.data.GenericCore;
+import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.GearTool;
 import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun.Priority;
@@ -176,9 +177,18 @@ public class Shadowrun6Core extends GenericCore {
 				json = gson.create().toJson(character.getCharGenSettings(Object.class));
 				logger.log(Level.TRACE, json);
 			}
+			
+			CarriedItem<ItemTemplate> software = character.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+			if (software!=null)
+				character.addCarriedItem(software); // Force update of software device content
+			
 			StringWriter out = new StringWriter();
 			serializer.write(character, out);
-			return out.toString().getBytes(Charset.forName("UTF-8"));
+			byte[] serial = out.toString().getBytes(Charset.forName("UTF-8"));
+			if (software!=null) {
+				character.removeCarriedItem(software);
+			}
+			return serial;
 		} catch (IOException e) {
 			logger.log(Level.ERROR, "Failed generating XML for char",e);
 			throw new CharacterIOException(ErrorCode.ENCODING_FAILED, "Failed generating XML", e);
@@ -189,7 +199,14 @@ public class Shadowrun6Core extends GenericCore {
 	public static Shadowrun6Character decode(byte[] rawData) throws CharacterIOException {
 		String data = new String(rawData, Charset.forName("UTF-8"));
 		try {
-			return serializer.read(Shadowrun6Character.class, data);
+			Shadowrun6Character model = serializer.read(Shadowrun6Character.class, data);
+			CarriedItem<ItemTemplate> software = model.getCarriedItem(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE);
+			if (software!=null) {
+				software.setInjectedBy("System");
+				model.removeCarriedItem(software);
+				model.addVirtualCarriedItem(software);
+			}
+			return model;
 		} catch (SerializationException e) {
 			logger.log(Level.ERROR, "Failed deocding XML from char, line "+e.getLine()+":"+e.getColumn(),e);
 			throw new CharacterIOException(ErrorCode.DECODING_FAILED, "Failed decoding XML: "+e.getMessage(), e);
