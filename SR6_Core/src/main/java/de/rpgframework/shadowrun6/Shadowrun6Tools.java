@@ -354,6 +354,8 @@ public class Shadowrun6Tools {
 			return attrib.getName(loc);
 		} else if (valMod.getRawValue().contains(".")) {
 			level = String.valueOf(valMod.getValueAsDouble());
+		} else if (valMod.getReferenceType()==ShadowrunReference.ITEM_ATTRIBUTE && valMod.getKey().equals("SOFTWARE_TYPES")) {
+			return valMod.getRawValue();
 		} else
 			level = String.valueOf(valMod.getValue());
 		return level;
@@ -650,6 +652,27 @@ public class Shadowrun6Tools {
 					return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" +"+valMod.getValue();
 				} else {
 					return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
+				}
+			case ITEM_ATTRIBUTE:
+				if (valMod.getConnectedChoice()!=null) {
+					Choice choice = data.getChoice(valMod.getConnectedChoice());
+					if (choice==null) {
+						return "Unknown choice "+valMod.getConnectedChoice();
+					}
+					if (ShadowrunReference.ATTRIBUTE==choice.getChooseFrom()) {
+						if (valMod.getValue()>0) {
+							return "ein beliebiges Attribut +"+valMod.getValue();
+						}
+					}
+					return "???"+choice.getChooseFrom()+"???";
+				}
+
+				if (valMod.getValue()>0) {
+					if (valMod.getSet()==ValueType.MAX)
+						return SR6ItemAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
+					return SR6ItemAttribute.valueOf(valMod.getKey()).getName(loc)+" +"+valMod.getValue();
+				} else {
+					return SR6ItemAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
 				}
 			case CRITTER_POWER:
 				return ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+valMod.getValue();
