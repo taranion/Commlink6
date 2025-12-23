@@ -64,7 +64,7 @@
 	</quality>
 	<quality id="polyglot" karma="4" pos="true" type="NORMAL">
 		<modifications>
-			<itemmod type="RULE" ref="MARTIAL_ARTS_PRODIGY"/>
+			<itemmod type="RULE" ref="POLYGLOT"/>
 		</modifications>
 	</quality>
 	<quality id="relentless_tracker" karma="6" pos="true" type="NORMAL">
