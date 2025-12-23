@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.items.ItemUtil;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
@@ -257,11 +258,11 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			 */
 			int nuyen = model.getNuyen();
 			for (CarriedItem<ItemTemplate> tmp : model.getCarriedItems()) {
-				if (ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE.equals(tmp.getUuid()))
-					continue;
+//				if (ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE.equals(tmp.getUuid()))
+//					continue;
 				if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
 					continue;
-				if (!tmp.isAutoAdded()) {
+				if (!tmp.isAutoAdded()|| tmp.getResolved()==ItemUtil.SOFTWARE_LIBRARY_ITEM) {
 					applyPriceModifiers(tmp);
 
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();

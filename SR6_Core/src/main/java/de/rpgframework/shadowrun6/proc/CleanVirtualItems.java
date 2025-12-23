@@ -63,6 +63,7 @@ public class CleanVirtualItems implements ProcessingStep {
 				missingUnarmed = false;
 			} else if (uuid.equals(ItemTemplate.UUID_UNUSED_SOFTWARE_DEVICE)) {
 				missingSoftware = false;
+				item.setAttribute(SR6ItemAttribute.PRICE, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.PRICE, 0));
 			} else {
 				model.removeVirtualCarriedItem(item);
 			}
