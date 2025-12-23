@@ -360,7 +360,7 @@
 	</itemenhancement>
 	<itemenhancement id="underbarrel_weapon_mount_attach" avail="3I" price="500" size="2">
 	  <requires>
-		<valuereq  type="ITEM_ATTRIBUTE" ref="HOOK" value="UNDER"/>
+		<!-- valuereq  type="ITEM_ATTRIBUTE" ref="HOOK" value="UNDER"/-->
 		<selreq>
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_ASSAULT"/>
 	    	<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="RIFLE_HUNTING"/>
