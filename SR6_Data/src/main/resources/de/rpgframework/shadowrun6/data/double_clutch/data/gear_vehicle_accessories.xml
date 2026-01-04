@@ -1367,7 +1367,7 @@
       <attrdef id="PRICE" value="$$BODY*250"/>
    </item>
 
-	<item id="push_bar" type="ARMOR" subtype="ARMOR_BODY"> <!-- used on dodge_rampart and golf_gti_duel so needs to be separate -->
+	<item id="push_bar" type="MOD_HARD" subtype="MOD_OTHERS" modonly="true"> <!-- used on dodge_rampart and golf_gti_duel so needs to be separate -->
       <usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1"/>
 		<weapon dmg="4P" attack="8,,,," skill="piloting"  />
 	</item>
