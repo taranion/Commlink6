@@ -291,43 +291,6 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 	}
 
 	//-------------------------------------------------------------------
-	private void applyPriceModifiers(CarriedItem<ItemTemplate> tmp) {
-
-		ItemAttributeNumericalValue<SR6ItemAttribute> priceVal = tmp.getAsValue(SR6ItemAttribute.PRICE);
-		if (priceVal==null) {
-			logger.log(Level.ERROR, "No PRICE attribute for {0}", tmp);
-		}
-
-		double baseCost = priceVal.getDistributed();
-		// Add price modifications that apply
-		for (ValueModification priceMod : priceMods) {
-			PriceModifiers pmType = priceMod.getResolvedKey();
-			ItemType type = tmp.getAsObject(SR6ItemAttribute.ITEMTYPE).getValue();
-			ItemSubType subtype = tmp.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getValue();
-			double factor = priceMod.getValueAsDouble();
-			int extraCost = (int)( factor*baseCost);
-			ValueModification toAdd = new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.PRICE.name(), extraCost, priceMod.getSource());
-			toAdd.setId(ItemTemplate.UUID_VOLATILE_PRICEMOD);
-			switch (pmType) {
-			case CLOTHING:
-				if (subtype==ItemSubType.ARMOR_CLOTHES)
-					priceVal.addIncomingModification(toAdd);
-				break;
-			case ARMOR:
-				if (type==ItemType.ARMOR || type==ItemType.ARMOR_ADDITION) {
-					System.err.println("CommonEquipmentGenerator: Add extra "+extraCost+" to "+tmp+"   factor="+factor);
-					priceVal.addIncomingModification(toAdd);
-				}
-				break;
-			case EVERYTHING:
-				priceVal.addIncomingModification(toAdd);
-				break;
-			}
-		}
-		logger.log(Level.ERROR, "applyPriceModifiers({0}: {1} ==> {2}", tmp, baseCost, priceVal.getModifiedValue());
-	}
-
-	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun6.chargen.charctrl.ISR6EquipmentController#getConvertedKarma()
 	 */
