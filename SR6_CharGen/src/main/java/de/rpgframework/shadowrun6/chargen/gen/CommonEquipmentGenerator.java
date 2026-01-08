@@ -298,7 +298,7 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			logger.log(Level.ERROR, "No PRICE attribute for {0}", tmp);
 		}
 
-		double baseCost = priceVal.getDistributed();
+		double baseCost = priceVal.getModifiedValue();
 		// Add price modifications that apply
 		for (ValueModification priceMod : priceMods) {
 			PriceModifiers pmType = priceMod.getResolvedKey();
