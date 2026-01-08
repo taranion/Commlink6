@@ -145,6 +145,10 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 			// Eventually record item in essence change list
 			if (mode==CarryMode.IMPLANTED) {
 				ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
+				if (aVal==null) {
+					logger.log(Level.ERROR, "No ESSENCECOST attribute in {0}", item);
+					return new OperationResult<CarriedItem<ItemTemplate>>(item);
+				}
 				double essence = aVal.getModifiedValueDouble();
 				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, item.getResolved().getId(), (int)(essence*1000));
 				mod.setId(item.getUuid());
@@ -263,6 +267,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 				if (ItemTemplate.UUID_UNARMED.equals(tmp.getUuid()))
 					continue;
 				if (!tmp.isAutoAdded()|| tmp.getResolved()==ItemUtil.SOFTWARE_LIBRARY_ITEM) {
+					// DOn't know how to solve it otherwise, so recalculate the item here again
+					SR6GearTool.recalculate("", null, model, tmp, true);
 					applyPriceModifiers(tmp);
 
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
