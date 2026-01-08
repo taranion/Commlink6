@@ -254,6 +254,7 @@
 
    <!-- Accessories -->
    <item id="external_program_carrier" price="150" avail="1" type="CYBERDECK" subtype="ACCESSORY">
+   	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
       <modifications>
          <valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="1"/>
       </modifications>
