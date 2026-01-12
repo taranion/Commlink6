@@ -135,7 +135,7 @@
         <skillspec id="spellcasting"/>
     </skill>
     <skill id="stealth"  attr="AGILITY" type="PHYSICAL" untr="y">
-        <skillspec id="disguise"/>
+        <skillspec id="disguise"/> <!-- error, disguise is with con, not stealth. However deleting this would break charcters that have this spec -->
         <skillspec id="palming"/>
         <skillspec id="sneaking"/>
         <skillspec id="camouflage"/>
