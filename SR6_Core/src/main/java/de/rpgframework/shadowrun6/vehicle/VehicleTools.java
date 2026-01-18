@@ -138,14 +138,17 @@ public class VehicleTools {
 			ret.setAttackRating(ar);
 			ret.setAttackRating(arPool);
 			// logger.info("Unarmed: "+vehicle.getName()+": Rigged "+arPool);
-			// The attempt to hit another being or vehicle is an Opposed test
-			// — Piloting + Intuition vs. opponent
+			// The attempt to hit another being or vehicle is an Opposed test Piloting + Intuition vs. opponent if using normal rig, Piloting+REA if using active rig
 			attPool = new ArrayList<>(driverPilotPool);
+			if (ctrlRig==model.getCarriedItem("active_control_rig")) {
+				attPool.addAll(model.getAttribute(ShadowrunAttribute.REACTION).getPool().getCalculation(ValueType.NATURAL));
+			} else {
 			attPool.addAll(model.getAttribute(ShadowrunAttribute.INTUITION).getPool().getCalculation(ValueType.NATURAL));
-			if (simSenseOverdrive!=null) {
-				int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
-				int add  = Math.min(maxAdd, simSenseOverdrive.getDistributed());
-				attPool.add(new PoolCalculation(add, simSenseOverdrive.getNameWithRating()));
+				if (simSenseOverdrive!=null) {
+					int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
+					int add  = Math.min(maxAdd, simSenseOverdrive.getDistributed());
+					attPool.add(new PoolCalculation(add, simSenseOverdrive.getNameWithRating()));
+				}
 			}
 			attPool.add(new PoolCalculation(rigRating, ctrlRig.getNameWithRating()));
 			//logger.info("Unarmed: "+vehicle.getName()+": Rigged "+attPool);
@@ -416,14 +419,18 @@ public class VehicleTools {
 				// Manually driven
 				pool.manual = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getValue(ValueType.NATURAL);
 
-				// Jumped In (Assumption: Use Piloting skill to evade when jumped in, use INTUITION instead REACTION as jumped in attribute)
+				// Jumped In (Assumption: Use Piloting skill to evade when jumped in, use INTUITION instead REACTION as jumped in attribute for normal rig, REA for active rig)
 				if (ctrlRig!=null) {
 					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					int maxRigBonus = Math.min( (4-modifier), rigRating);
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
-					if (simSenseOverdrive!=null) {
-						int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
-						pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
+					if (ctrlRig==model.getCarriedItem("active_control_rig")) {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
+						} else {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
+						if (simSenseOverdrive!=null) {
+							int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
+							pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
+						}
 					}
 				} else {
 					// Jumped in impossible without rig
@@ -545,7 +552,11 @@ public class VehicleTools {
 
 				// Jumped in (assume rig gives bonus to stealth in US "all tests involving operation of a vehicle" but not in German "bei Proben, bei denen es um das Steuern eines Fahrzeuges geht"
 				if (ctrlRig!=null) {
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC).getValue(ValueType.NATURAL);
+					if (ctrlRig==model.getCarriedItem("active_control_rig")) {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.AGILITY).getValue(ValueType.NATURAL);
+						} else {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC).getValue(ValueType.NATURAL);
+						}
 					if (Locale.getDefault()!=Locale.GERMAN) {
 						SR6SkillValue stealth = model.getSkillValue(Shadowrun6Core.getSkill("stealth"));
 						int cappedRigBonus = (stealth==null)?rigRating:Math.min( (4-stealth.getModifier()), rigRating);
@@ -585,15 +596,19 @@ public class VehicleTools {
 				// Manually driven
 				pool.manual = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getValue(ValueType.NATURAL);
 
-				// Jumped in (use INTUITION instead REACTION (jumped in attribute)
+				// Jumped in (use INTUITION instead REACTION (jumped in attribute) for normal rig, keep REA for active rig)
 				if (ctrlRig!=null) {
 					int modifier = (model.getSkillValue(pilotSkill)!=null)?model.getSkillValue(pilotSkill).getModifier():0;
 					int maxRigBonus = Math.min( (4-modifier), rigRating);
-					pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
-					if (simSenseOverdrive!=null) {
-						int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
-						pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
-					}
+					if (ctrlRig==model.getCarriedItem("active_control_rig")) {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.REACTION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
+						} else {
+						pool.rigged = Shadowrun6Tools.getSkillPool(model, pilotSkill, ShadowrunAttribute.INTUITION, specS).getValue(ValueType.NATURAL) + maxRigBonus;
+						if (simSenseOverdrive!=null) {
+							int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
+							pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
+							}
+						}
 				} else {
 					// Jumped in impossible without rig
 					pool.rigged = 0;
