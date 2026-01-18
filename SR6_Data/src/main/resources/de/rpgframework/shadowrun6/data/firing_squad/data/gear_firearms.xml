@@ -302,7 +302,6 @@
       <weapon dmg="3P" mode="BF/FA" attack="4,12,10,," ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
    <item id="ingram_black_knight" avail="3L" price="9200" type="WEAPON_FIREARMS" subtype="HMG">
-      <attrdef id="MODIFICATION_SLOTS" value="0"/>
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
