@@ -275,12 +275,10 @@ public class VehicleTools {
 				pool.rigged = 0;
 			} else {
 				pool.rigged = Shadowrun6Tools.getSkillPool(model, skill, "gunnery").getValue(ValueType.NATURAL);
-				// if not Germany, add rig rating
-				if (Locale.GERMAN != Locale.getDefault()) {
-					int modifier = (model.getSkillValue(skill)!=null)?model.getSkillValue(skill).getModifier():0;
-					int maxBonusRemain = (4-modifier);
-					pool.rigged += Math.min(maxBonusRemain, rigRating);
-				}
+				// add rig rating (German rules have changed to also include "alle Proben zum Betrieb des Fahrzeugs", thus no differentiation needed)
+				int modifier = (model.getSkillValue(skill)!=null)?model.getSkillValue(skill).getModifier():0;
+				int maxBonusRemain = (4-modifier);
+				pool.rigged += Math.min(maxBonusRemain, rigRating);
 			}
 
 			/*
@@ -469,11 +467,9 @@ public class VehicleTools {
 				// Jumped in (dont make an assumption about specializations, use INTUITION as jumped in attribute, same as usual)
 				if (ctrlRig!=null) {
 					pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("perception"), ShadowrunAttribute.INTUITION).getValue(ValueType.NATURAL);
-					if (Locale.getDefault()!=Locale.GERMAN) {
-						int modifier = (model.getSkillValue(Shadowrun6Core.getSkill("perception"))!=null)?model.getSkillValue(Shadowrun6Core.getSkill("perception")).getModifier():0;
-						int cappedRigBonus = Math.min( (4-modifier), rigRating);
-						pool.rigged += cappedRigBonus;
-					}
+					int modifier = (model.getSkillValue(Shadowrun6Core.getSkill("perception"))!=null)?model.getSkillValue(Shadowrun6Core.getSkill("perception")).getModifier():0;
+					int cappedRigBonus = Math.min( (4-modifier), rigRating);
+					pool.rigged += cappedRigBonus;
 					if (simSenseOverdrive!=null) {
 						int maxAdd = 4 - model.getAttribute(ShadowrunAttribute.INTUITION).getModifier();
 						pool.rigged += Math.min(maxAdd, SR6GearTool.getRating( simSenseOverdrive ));
@@ -550,18 +546,16 @@ public class VehicleTools {
 				// Manually driven
 				pool.manual = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.AGILITY).getValue(ValueType.NATURAL);
 
-				// Jumped in (assume rig gives bonus to stealth in US "all tests involving operation of a vehicle" but not in German "bei Proben, bei denen es um das Steuern eines Fahrzeuges geht"
+				// Jumped in (assume rig gives bonus to stealth in US "all tests involving operation of a vehicle" but not in German "bei Proben, bei denen es um das Steuern eines Fahrzeuges geht" UPDATE: German rules have changed to also include "alle Proben zum Betrieb des Fahrzeugs", thus no differentiation needed)
 				if (ctrlRig!=null) {
 					if (ctrlRig==model.getCarriedItem("active_control_rig")) {
 						pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.AGILITY).getValue(ValueType.NATURAL);
 						} else {
 						pool.rigged = Shadowrun6Tools.getSkillPool(model, Shadowrun6Core.getSkill("stealth"), ShadowrunAttribute.LOGIC).getValue(ValueType.NATURAL);
 						}
-					if (Locale.getDefault()!=Locale.GERMAN) {
-						SR6SkillValue stealth = model.getSkillValue(Shadowrun6Core.getSkill("stealth"));
-						int cappedRigBonus = (stealth==null)?rigRating:Math.min( (4-stealth.getModifier()), rigRating);
-						pool.rigged += cappedRigBonus;
-					}
+					SR6SkillValue stealth = model.getSkillValue(Shadowrun6Core.getSkill("stealth"));
+					int cappedRigBonus = (stealth==null)?rigRating:Math.min( (4-stealth.getModifier()), rigRating);
+					pool.rigged += cappedRigBonus;
 				} else {
 					// Jumped in impossible without rig
 					pool.rigged = 0;
