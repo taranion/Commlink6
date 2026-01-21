@@ -108,7 +108,7 @@ public class RiggerConsoleSection extends GearSection {
 			return;
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItemsRecursive()) {
 			ItemSubType subtype = item.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
-			if ("control_rig".equals(item.getKey())) {
+			if ("control_rig".equals(item.getKey())||"active_control_rig".equals(item.getKey())) {
 				rigItems.add(item);
 				if (item.hasFlag(SR6ItemFlag.PRIMARY) || primaryRig==null)
 					primaryRig = item;
