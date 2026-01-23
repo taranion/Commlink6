@@ -1012,7 +1012,7 @@
       	<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="3"/>
       </choices>
      	<usage mode="EMBEDDED" slot="VEHICLE_POWERTRAIN" value="$RATING*2"/>
-      <attrdef id="PRICE" value="$$BODY*7000"/>
+      <attrdef id="PRICE" value="$RATING*7000"/>
    </item>
 
    <item id="suspension_racing" avail="6L" price="20000" type="MOD_POWER" subtype="MOD_SPEED" >
