@@ -7,7 +7,7 @@
 
 	<item id="ballistic_hood" avail="2" price="300" type="ACCESSORY" subtype="ARMOR_BODY">
   		<usage mode="EMBEDDED" slot="ARMOR" value="0"/>
-  		<attrdef id="PRICE" value="$$PRICE*1.05"/>
+  		<attrdef id="PRICE" value="$$PRICE*0.05"/>
 		<modifications>
 			<itemmod type="GEAR" apply="CHARACTER" ref="ballistic_hood_armor" />
 		</modifications>
