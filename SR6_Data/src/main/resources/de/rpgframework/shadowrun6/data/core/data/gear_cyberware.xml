@@ -33,7 +33,8 @@
    </item>
    <item avail="1" price="100"   id="medkit_supplies"   subtype="BIOTECH" type="BIOLOGY" count="y"/>
    <item avail="3" price="150"   id="antidote_patch"    subtype="SLAP_PATCHES" type="BIOLOGY" count="y"/>
-   <item avail="3" price="20"    id="chem_patch"        subtype="SLAP_PATCHES" type="BIOLOGY" count="y"/>
+   <item avail="3" price="200"   id="chem_patch"        subtype="SLAP_PATCHES" type="BIOLOGY" count="y"/>
+   <item avail="3" price="20"    id="chem_patch"        subtype="SLAP_PATCHES" type="BIOLOGY" count="y" lang="de"/> <!-- DE rules state cost 20, US rules cost 200 -->
    <item avail="3" price="25"    id="stim_patch"   subtype="SLAP_PATCHES" type="BIOLOGY" count="y">
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
