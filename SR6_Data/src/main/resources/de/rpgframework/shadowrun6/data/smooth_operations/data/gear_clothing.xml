@@ -144,11 +144,11 @@
 		<attrdef id="DEFENSE_SOCIAL" value="1"/>
 	</item>
 	<item id="fashion_accessory_specialized" avail="3" price="200" type="ACCESSORY" subtype="ARMOR_BODY">
-		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<usage mode="EMBEDDED" slot="FASHION" value="1" />
 		<attrdef id="DEFENSE_SOCIAL" value="1"/>
 	</item>
 	<item id="fashion_accessory_tres_chic" avail="4" price="500" type="ACCESSORY" subtype="ARMOR_BODY"> <!-- not in US data table, thus using DE values -->
-		<usage mode="EMBEDDED" slot="FASHION" value="2" />
+		<usage mode="EMBEDDED" slot="FASHION" value="1" />
 		<attrdef id="DEFENSE_SOCIAL" value="1"/>
 	</item>
 	

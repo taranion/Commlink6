@@ -409,7 +409,6 @@
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
-         <itemmod type="QUALITY"  ref="biosonar"/>
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
          <itemmod type="CRITTER_POWER" ref="mimicry"/>
          <itemmod type="CRITTER_POWER" ref="natural_weapon">
@@ -426,7 +425,6 @@
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="10" set="MAX" when="CREATION"/>
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="10" set="MAX" when="CREATION"/>
-         <itemmod type="QUALITY"  ref="biosonar"/>
          <itemmod type="CRITTER_POWER" ref="dual_natured"/>
          <itemmod type="CRITTER_POWER" ref="mimicry"/>
          <itemmod type="CRITTER_POWER" ref="natural_weapon">
