@@ -254,16 +254,22 @@
 
    <!-- Accessories -->
    <item id="external_program_carrier" price="150" avail="1" type="CYBERDECK" subtype="ACCESSORY">
+      <requires>
+        <datareq type="ITEMSUBTYPE" ref="CYBERDECK" apply="DATA_ITEM"/>
+      </requires>
    	<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
       <modifications>
          <valmod type="ITEM_ATTRIBUTE" ref="CONCURRENT_PROGRAMS" value="1"/>
       </modifications>
    </item>
    <item id="cyberjack_booster" avail="4I" type="CYBERDECK" subtype="ACCESSORY" reqVariant="y">
-   	<choices>
+      <requires>
+        <datareq type="ITEMSUBTYPE" ref="CYBERDECK" apply="DATA_ITEM"/> 
+      </requires>
+   	  <choices>
    		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2"/>
-   	</choices>
-      <usage mode="EMBEDDED" value="4" slot="CORE_SLOTS"/>
+   	  </choices>
+      <usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
     	<attrdef id="AVAILABILITY" value="(2+($RATING*2)) I"/>
     	<variant id="data_processing">
 			<attrdef id="PRICE" value="$RATING*5000"/>
