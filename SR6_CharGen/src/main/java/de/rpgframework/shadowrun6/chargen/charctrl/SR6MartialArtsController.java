@@ -215,7 +215,7 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 					int karmaNeeded = 7;
 					logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, mVal.getKey());
 					model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
-					model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+//					model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 
 					for (TechniqueValue tVal : model.getTechniques()) {
 						if (mVal.isAutoAdded())
@@ -224,7 +224,7 @@ public class SR6MartialArtsController extends ControllerImpl<MartialArts> implem
 						karmaNeeded = 5;
 						logger.log(Level.INFO, "Pay {0} Karma for {1}", karmaNeeded, tVal.getKey());
 						model.setKarmaFree( model.getKarmaFree() - karmaNeeded);
-						model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
+//						model.setKarmaInvested( model.getKarmaInvested() - karmaNeeded);
 					}
 				}
 			}

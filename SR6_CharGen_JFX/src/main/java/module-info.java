@@ -17,7 +17,6 @@ module de.rpgframework.shadowrun6.chargen.jfx {
 	requires javafx.base;
 	requires javafx.controls;
 	requires transitive javafx.extensions;
-	requires javafx.fxml;
 	requires javafx.graphics;
 	requires org.controlsfx.controls;
 	requires shadowrun.common;
