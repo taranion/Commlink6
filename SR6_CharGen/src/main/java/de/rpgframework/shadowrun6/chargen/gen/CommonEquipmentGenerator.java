@@ -272,8 +272,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					applyPriceModifiers(tmp);
 
 					int cost = tmp.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
-					if (tmp.getCount()>1)
-						cost *= tmp.getCount();
+//					if (tmp.getCount()>1)
+//						cost *= tmp.getCount();
 					//if (logger.isLoggable(Level.TRACE))
 					logger.log(Level.INFO, "Pay {0} for {1}   (before {2})", cost, tmp.getKey(), nuyen);
 					nuyen -= cost;
