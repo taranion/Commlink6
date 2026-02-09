@@ -350,4 +350,35 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		return true;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.NumericalValueController#increase(de.rpgframework.genericrpg.NumericalValue)
+	 */
+	@Override
+	public OperationResult<CarriedItem<ItemTemplate>> increase(CarriedItem<ItemTemplate> value) {
+		int oldValue = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		OperationResult<CarriedItem<ItemTemplate>> after = super.increase(value);
+		if (after.hasError())
+			return after;
+
+		ValueModification logMod = new ValueModification(ShadowrunReference.CARRIED, value.getKey(), 0);
+		logMod.setId(after.get().getUuid());
+		logMod.setDate(new Date());
+		
+		Shadowrun6Character model = getModel();
+		boolean payGear = parent.getRuleController().getRuleValueAsBoolean(ShadowrunRules.CAREER_PAY_GEAR);
+		if (payGear) {
+			int newValue = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+			int nuyen = newValue - oldValue;
+			logger.log(Level.INFO, "Increasing {0} for {1} nuyen", value.getKey(), nuyen);
+			model.setNuyen( model.getNuyen() - nuyen );
+			logMod.setValue(nuyen);
+		}
+
+		model.addToHistory(logMod);
+		parent.runProcessors();
+		
+		return after;		
+	}
+
 }
