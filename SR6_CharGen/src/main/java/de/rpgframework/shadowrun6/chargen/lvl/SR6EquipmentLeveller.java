@@ -370,7 +370,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		if (payGear) {
 			int newValue = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			int nuyen = newValue - oldValue;
-			logger.log(Level.INFO, "Buy {0} for {1} nuyen", value.getKey(), nuyen);
+			logger.log(Level.INFO, "Increasing {0} for {1} nuyen", value.getKey(), nuyen);
 			model.setNuyen( model.getNuyen() - nuyen );
 			logMod.setValue(nuyen);
 		}
@@ -378,8 +378,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		model.addToHistory(logMod);
 		parent.runProcessors();
 		
-		return after;
-		
+		return after;		
 	}
 
 }
