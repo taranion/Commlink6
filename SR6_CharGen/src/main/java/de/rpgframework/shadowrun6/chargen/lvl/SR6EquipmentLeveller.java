@@ -25,6 +25,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6VariantMode;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -356,6 +357,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 	 */
 	@Override
 	public OperationResult<CarriedItem<ItemTemplate>> increase(CarriedItem<ItemTemplate> value) {
+		SR6GearTool.recalculate(null, getModel(), value);
 		int oldValue = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 		OperationResult<CarriedItem<ItemTemplate>> after = super.increase(value);
 		if (after.hasError())
@@ -370,6 +372,7 @@ public class SR6EquipmentLeveller extends CommonEquipmentController implements I
 		if (payGear) {
 			int newValue = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 			int nuyen = newValue - oldValue;
+			logger.log(Level.WARNING, "Old {0}   New {1} Diff {2}", oldValue, newValue, nuyen);
 			logger.log(Level.INFO, "Increasing {0} for {1} nuyen", value.getKey(), nuyen);
 			model.setNuyen( model.getNuyen() - nuyen );
 			logMod.setValue(nuyen);

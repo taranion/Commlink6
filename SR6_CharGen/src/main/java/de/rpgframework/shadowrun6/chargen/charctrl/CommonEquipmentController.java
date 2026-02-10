@@ -41,6 +41,7 @@ import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.ItemTypeFilter;
 import de.rpgframework.shadowrun6.items.ItemUtil;
+import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
@@ -503,6 +504,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 		logger.log(Level.INFO, "Increase count of {0} to {1}", value, value.getCount());
 
 		parent.runProcessors();
+//		SR6GearTool.recalculate(null, getModel(), value);
 		int price = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
 		logger.log(Level.INFO, "Price now {0}",price);
 		return new OperationResult<>(value);
