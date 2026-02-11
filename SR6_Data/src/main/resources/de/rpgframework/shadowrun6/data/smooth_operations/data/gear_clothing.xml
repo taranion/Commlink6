@@ -262,28 +262,28 @@
 		</modifications>
 	</item>
 
-	<item id="swarovski_eternity_ring" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
+	<item id="swarovski_eternity_ring" lang="de" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
 		<usage mode="EMBEDDED" slot="FASHION" value="1" />
 		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
 		<modifications>
 			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
 		</modifications>
 	</item>
-	<item id="swarovski_eternity_necklace" avail="2" price="50" type="ACCESSORY" subtype="ARMOR_BODY">
+	<item id="swarovski_eternity_necklace" lang="de" avail="2" price="50" type="ACCESSORY" subtype="ARMOR_BODY">
 		<usage mode="EMBEDDED" slot="FASHION" value="2" />
 		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
 		<modifications>
 			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
 		</modifications>
 	</item>
-	<item id="swarovski_eternity_belt" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
+	<item id="swarovski_eternity_belt" lang="de" avail="2" price="150" type="ACCESSORY" subtype="ARMOR_BODY">
 		<usage mode="EMBEDDED" slot="FASHION" value="2" />
 		<attrdef id="MAX_SENSOR_RATING" value="2"/> <!-- No max sensor rating stated, thus using data from Tarnbare Überwachungsausrüstung -->
 		<modifications>
 			<valmod type="HOOK" ref="SENSOR_HOUSING" value="1"/>
 		</modifications>
 	</item>
-	<item id="swarovski_eternity_bag" avail="2" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
+	<item id="swarovski_eternity_bag" lang="de" avail="2" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
 		<usage mode="EMBEDDED" slot="FASHION" value="2" />
 	</item>
 
