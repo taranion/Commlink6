@@ -1262,7 +1262,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 				break;
 			case "CHEMICALS":
 				items = Shadowrun6Core.getItemList(ItemTemplate.class);
-				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.CHEMICALS && i.getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue()==ItemSubType.INDUSTRIAL_CHEMICALS).collect(Collectors.toList());
+				items = items.stream().filter(i -> i.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue()==ItemType.CHEMICALS).collect(Collectors.toList());
 				break;
 			case "PARENT_OR_ALTERNATES":
 				logger.log(Level.WARNING, "TODO: Check this for item detection");
