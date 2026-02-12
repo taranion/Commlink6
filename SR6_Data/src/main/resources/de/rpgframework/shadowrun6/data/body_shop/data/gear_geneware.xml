@@ -200,12 +200,12 @@
      		<valmod type="PRICEMOD" ref="LIFESTYLE_NECESSITIES" value="5"/>
   		</modifications>
    </item>
-   <item id="increased_myelination" avail="9I" price="13000" type="GENEWARE" subtype="AUGMENTICS">
+   <item id="increased_myelination" avail="4L" price="13000" type="GENEWARE" subtype="AUGMENTICS"> <!-- no info in US rules, thus using DE numbers -->
       <usage mode="IMPLANTED" value="0.01"/>
       <flags><flag>AUGMENTATION</flag></flags>
   		<modifications>
-     		<!-- prevents Zapped status -->
-      	<relevancemod topic="COMBAT"/>
+     		<!-- TODO: prevents Zapped status -->
+			<relevancemod topic="COMBAT"/>
      		<checkmod type="ATTRIBUTE" ref="RESIST_DAMAGE" value="1" what="EDGE_ONLY_TEST"/>
   		</modifications>
    </item>
