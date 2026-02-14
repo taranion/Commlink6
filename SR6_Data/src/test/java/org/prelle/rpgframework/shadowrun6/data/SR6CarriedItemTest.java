@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.prelle.simplepersist.Persister;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.ApplyTo;
@@ -725,6 +727,8 @@ public class SR6CarriedItemTest {
 
 		AvailableSlot smallWeapon = mount.get().getSlot(ItemHook.VEHICLE_WEAPON_SMALL);
 		assertNotNull("Weapon mount misses slot",smallWeapon);
+		// 4 Items: anti_theft, 2x samurai_mount_small, spurs_samurai_oni
+		System.out.println("Effective accessories: "+item.getEffectiveAccessories());
 		assertEquals(4, item.getEffectiveAccessories().size());
 
 		// Create a weapon to add
@@ -733,18 +737,28 @@ public class SR6CarriedItemTest {
 		SR6GearTool.recalculate("", null, wItem);
 
 		mount.get().addAccessory(wItem, ItemHook.VEHICLE_WEAPON_SMALL);
+		System.out.println("Accessories in mount: "+mount.get().getEffectiveAccessories());
+		System.out.println("Accessories in item : "+item.getEffectiveAccessories());
 
 		assertEquals(1, smallWeapon.getAllEmbeddedItems().size());
 		Collection<CarriedItem<ItemTemplate>> allItems = item.getEffectiveAccessories();
 		System.out.println("All items: "+allItems);
-		assertEquals(5, allItems.size());
 
+		
+		Persister persister = new Persister();
+		try {
+			persister.write(item, System.out);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		System.out.println("----Recalculate 2----");
 		SR6GearTool.recalculate("", null, item);
 		System.out.println("----Recalculate 2 done----");
 		allItems = item.getEffectiveAccessories();
 		System.err.println("All items: "+allItems);
-		assertEquals(5,allItems.size());
+		assertEquals("Pistol vanished from factory weapon mount",5,allItems.size());
 		System.out.println(item.dump());
 
 	}

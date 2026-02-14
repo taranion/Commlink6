@@ -251,6 +251,12 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			if (mod.getId()!=null) {
 				accessory.setUuid(mod.getId());
 			}
+
+			// COM6-971: Check if we already have this accessory - if yes, skip it
+			if (model.hasAccessory((ItemTemplate)accessory.getResolved(), mod.getId(), hook)) {
+					return true;
+			}
+			
 			SR6GearTool.recalculate("", charac, accessory);
 			//if (mod.isIncludedInStats())
 			// Check if AvailableSlot already exists - if not, create one
