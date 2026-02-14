@@ -38,13 +38,25 @@ public class ReAddUserItemsInFactoryItems implements CarriedItemProcessor {
 
 		for (CarriedItem<?> userItem : model.getAccessoriesInFact()) {
 			logger.log(Level.INFO, "Re-adding user item {0} to {1}", userItem, model);
-			System.out.println(model.dump());
 			CarriedItem<ItemTemplate> toAdd = (CarriedItem<ItemTemplate>) userItem;
+			
+			SR6GearTool.recalculate("", charac, toAdd);
+			
 			UUID key = userItem.getInFactoryItem();
-			Optional<CarriedItem<ItemTemplate>> addTo = model.getEffectiveAccessories().stream()
+			Optional<CarriedItem<ItemTemplate>> addTo = Optional.empty();
+			// If a UUID is given, try to find the item with that UUID in the accessories of the model. 
+			// If no UUID is given, try to find the parent by the slot
+			if (key!=null) {
+				addTo = model.getEffectiveAccessories().stream()
 					.map(acc -> (CarriedItem<ItemTemplate>) acc)
 					.filter(acc -> key.equals(acc.getUuid()))
 					.findFirst();
+			} else {
+				addTo = findParentBySlot(model, userItem);
+				if (addTo.isEmpty()) {
+					logger.log(Level.WARNING, "Could not find parent item for user item {0} in {1} by slot {2}", userItem, model, userItem.getUsedSlot());
+				}
+			}
 			if (addTo.isPresent()) {
 				logger.log(Level.INFO, "Adding to {0}", addTo);
 				addTo.get().addAccessory(toAdd, userItem.getUsedSlot());
@@ -56,4 +68,22 @@ public class ReAddUserItemsInFactoryItems implements CarriedItemProcessor {
 		return new OperationResult<List<Modification>>(unprocessed);
 	}
 
+	//-------------------------------------------------------------------
+	private static Optional<CarriedItem<ItemTemplate>> findParentBySlot(CarriedItem<?> model, CarriedItem<?> userItem) {
+		Optional<CarriedItem<ItemTemplate>> ret = model.getEffectiveAccessories().stream()
+				.map(acc -> (CarriedItem<ItemTemplate>) acc)
+				.filter(acc -> userItem.getUsedSlot().equals(acc.getUsedSlot()))
+				.findFirst();
+		if (ret.isEmpty()) {
+			// Check accessories for a slot
+			for (CarriedItem<?> acc : model.getEffectiveAccessories()) {
+				Optional<CarriedItem<ItemTemplate>> found = findParentBySlot((CarriedItem<?>) acc, userItem);
+				if (found.isPresent()) {
+					return found;
+				}
+			}
+		}
+		
+		return ret;
+	}
 }
