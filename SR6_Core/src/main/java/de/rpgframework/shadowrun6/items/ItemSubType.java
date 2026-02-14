@@ -142,7 +142,6 @@ public enum ItemSubType {
 	TOXINS,
 	DRUGS,
 	PERFUME,
-	ESPIONAGE,
 	// Survival
 	SURVIVAL_GEAR,
 	WINTER_GEAR,

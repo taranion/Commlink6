@@ -180,8 +180,7 @@ public enum ItemType {
 			ItemSubType.INDUSTRIAL_CHEMICALS,
 			ItemSubType.TOXINS,
 			ItemSubType.DRUGS,
-			ItemSubType.PERFUME,
-			ItemSubType.ESPIONAGE
+			ItemSubType.PERFUME
 			),
 	SURVIVAL(
 			ItemSubType.SURVIVAL_GEAR,
