@@ -51,6 +51,7 @@ public class SR6GearTool extends GearTool {
 			new InsertDefaultAccessories(),
 			new CalculateUnarmedAttackRating(),
 			new ApplyGlobalItemModificationsStep(),
+			new ReAddUserItemsInFactoryItems(),
 			new HandleAugmentationGradeStep(),
 			new ApplyItemFlagsStep(),
 			new AddUpPricesStep(),
