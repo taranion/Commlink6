@@ -135,10 +135,10 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="rigger_cocoon"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="f420be75-b646-494a-b1e1-a5a497adf361"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="395e7108-e222-4514-9643-dfb2c997a644"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="a41d7bce-4f76-4f75-91cb-9f2770d05012"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="2eb024c1-e69b-4747-9fc9-8af740b3535d"/>
       </modifications>
    </item>
 

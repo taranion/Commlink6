@@ -26,7 +26,7 @@
    <item id="fire_x_rescue5" avail="2L"  price="22000" type="DRONE_MEDIUM" subtype="ANTHRO" >
       <vehicle han="3/4" acc="12" spdi="10" tspd="30" bod="5" arm="5" pil="3" sen="3" />
       <modifications>
-			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="d10c23fd-d93f-4514-9145-c79b3fc131c1"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="elemental_hardening" included="true">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c1804" value="FIRE"/>

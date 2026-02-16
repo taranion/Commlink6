@@ -13,8 +13,8 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
 			<embed type="GEAR" ref="enhanced_gecko" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0f887fdf-9003-4359-9a80-da902a010d47"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="e871a8c4-a518-484e-b2a9-49c448728417"/>
 		</modifications>
 	</item>
 

@@ -1588,8 +1588,8 @@
          	<decision choice="47d1e468-6df7-43ce-9651-44485cc78bb8" value="i18n.localArea"/>
          </embed>
          <itemmod type="GEAR" apply="CHARACTER" ref="climbing_gear" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" />
-         <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" />
+         <itemmod type="GEAR" apply="CHARACTER" ref="hermes_ikon" id="15b36b6a-a855-4998-8ba1-426cfc93e63c"/>
+         <itemmod type="GEAR" apply="CHARACTER" ref="meta_link" id="db2821a9-c081-427a-93a6-437099758520"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="long_haul" />
          <itemmod type="GEAR" apply="CHARACTER" ref="micro-transceiver" />
          <itemmod type="GEAR" apply="CHARACTER" ref="miniwelder" />

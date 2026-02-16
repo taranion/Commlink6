@@ -11,8 +11,8 @@
       <vehicle han="3/5" acc="25" spdi="28" tspd="220" bod="10" arm="8" pil="2" sen="2" sea="2"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="a4d4dfc6-0b3a-4a72-9aeb-4379717b7cd7"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="e10cbf77-3865-4966-a0b7-ac5dec784934"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="large" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
