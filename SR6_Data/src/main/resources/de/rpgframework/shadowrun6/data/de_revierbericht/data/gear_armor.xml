@@ -30,7 +30,7 @@
         <armor rating="4" social="-4" add="true"/>
         <modifications>
  			<valmod type="HOOK" ref="HELMET_ACCESSORY" value="0" />
-			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="myrmidon_commlink" included="true"/>
+			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="myrmidon_commlink" included="true" id="396052be-463c-421b-a785-55836b816b51"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="image_link" included="true"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="flare_compensation" included="true"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="HELMET_ACCESSORY" ref="thermographic_vision" included="true"/>

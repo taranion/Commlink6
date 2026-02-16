@@ -185,10 +185,10 @@
 		<vehicle han="3/4" acc="10" spdi="10" tspd="30" bod="6" arm="6" pil="3" sen="2" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" />
-			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="6941c14e-0357-48ab-9691-93d3106de028"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="e847c992-d8d5-4d5e-8e2d-4eb505a7490e"/>
+			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" id="192136c6-5ebd-43bd-8946-8bf832be9f8a"/>
+			<embed type="GEAR" ref="weapon_mount_small" intoType="HOOK" intoRef="VEHICLE_BODY" id="7bdb0c52-ee18-4ef3-93e5-76a754cdcaa2"/>
 		</modifications>
 	</item>
 	<item id="mct-nissan_roto_drone" avail="2" cost="5000" type="DRONE_MEDIUM" subtype="AIR">
@@ -236,10 +236,10 @@
 		<vehicle han="3/4" acc="10" spdi="8" tspd="30" bod="9" arm="10" pil="3" sen="2" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="spurs_samurai_oni" intoType="HOOK" intoRef="VEHICLE_BODY" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="650e82f8-556f-4486-b8c8-07cbeec45461"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="edc86f80-c90e-4b4a-94e5-2bdbb28eea4c"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="84c8730d-5416-4743-b8af-2d14a7f9ba5d"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="a5ad1486-a305-40e4-b1c4-6510fc5f5ef9"/>
 		</modifications>
 	</item>
 </items>

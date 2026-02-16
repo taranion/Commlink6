@@ -392,8 +392,8 @@
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="5945ea06-d6f5-4384-8750-02ae9a15daac"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="bd223147-ed2c-450c-895a-777f3b43c6b0"/>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -413,8 +413,8 @@
 			</embed>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6da9c813-5c1d-4665-9f90-7e36ae414fe3"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="854c29c2-8ddc-4750-97bf-e1fb52c0294d"/>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
@@ -428,8 +428,8 @@
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="f7b24168-9da3-45cc-914e-9651e7951d56"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="b239a414-6c32-4ba5-a203-a62d44b9d130"/>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -439,7 +439,7 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="f7b24168-9da3-45cc-914e-9651e7951d56"/>
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
@@ -462,11 +462,11 @@
 			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
 			</embed>
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="89ecfb83-8fdc-46a7-b1e8-8a5cba115837"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="bfe204eb-ecf8-4852-b940-2560acab4f48"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="24ba2e7b-85ed-4ec8-9285-779aa1cd19e7"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="fdddb2ac-bd48-470c-966e-ee58273ea816"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="02df9ffa-f8ec-41fd-955a-e8cc4df5b8da"/>
 		</modifications>
 	</item>
 
@@ -556,8 +556,8 @@
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="59cc2ba8-7a0b-437f-915e-8d02f50b7a68"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="527e407e-222f-47f4-8c34-7d2eedb07252"/>
 			<embed type="GEAR" ref="targeting" intoType="HOOK" intoRef="SOFTWARE">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 			</embed>
@@ -569,8 +569,8 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="59cc2ba8-7a0b-437f-915e-8d02f50b7a68"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="527e407e-222f-47f4-8c34-7d2eedb07252"/>
 			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
 			<embed type="GEAR" ref="targeting" intoType="HOOK" intoRef="SOFTWARE">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
@@ -735,10 +735,10 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
 			<embed type="GEAR" ref="hardpoint_concealment" variant="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="89b57f74-e645-4dea-a440-046a76b51c35"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6c54e3e3-67e8-48b6-b6cd-4c18bce1bc5d"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="70ca6c6c-e4e9-4177-902c-bfc369cb67c2"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="098ed286-cfab-4087-b80b-49deae04f622"/>
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /-->
 			<embed type="GEAR" ref="amenities" variant="squatter" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
@@ -763,10 +763,10 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
 			<embed type="GEAR" ref="hardpoint_concealment" variant="blow_away_panels" intoType="HOOK" intoRef="VEHICLE_HARDPOINT">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/></embed>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="89b57f74-e645-4dea-a440-046a76b51c35"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6c54e3e3-67e8-48b6-b6cd-4c18bce1bc5d"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="70ca6c6c-e4e9-4177-902c-bfc369cb67c2"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="098ed286-cfab-4087-b80b-49deae04f622"/>
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" /-->
 			<embed type="GEAR" ref="amenities" variant="squatter" intoType="HOOK" intoRef="VEHICLE_CF" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
@@ -901,7 +901,9 @@
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="3" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="3a6b8a84-b783-4c7a-b402-a9fbdea6f7d0"/>
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="a1521317-34f2-49a0-a023-41dda3ec794d"/>
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="e06d40e4-0e96-4fa1-b7a2-3bf5da6eb35d"/>
 			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 			</embed>
@@ -927,7 +929,9 @@
 		<modifications>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="3" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="3a6b8a84-b783-4c7a-b402-a9fbdea6f7d0"/>
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="a1521317-34f2-49a0-a023-41dda3ec794d"/>
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="e06d40e4-0e96-4fa1-b7a2-3bf5da6eb35d"/>
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
@@ -1027,7 +1031,10 @@
 			<embed type="GEAR" ref="searchlight" variant="normal" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" count="3" /> <!-- one RCC, 2x open slots -->
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="62d08eca-95f7-4c2c-9aa2-2cc0ec2de145" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="df576612-9af2-4fc1-8d65-48355e7bd458" />
+			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="8f58b7ce-6361-409b-ab47-42c35c71e312" />
+				<embed type="GEAR" ref="aztechnology_tlaloc" intoId="8f58b7ce-6361-409b-ab47-42c35c71e312" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY"/>
 			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="amenities" variant="luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
@@ -1244,8 +1251,8 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- No rating stated. Based on pilot 3 meaning expert console with sensor 3, improvent to level 6 is 3 -->
                 </embed>
 			<embed type="GEAR" ref="extreme_environment" variant="depth" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="3477e2df-2764-4453-a98c-47b053ba8395"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="9c2b883b-6592-456b-b4b9-e08caef27472"/>
 			<embed type="GEAR" ref="amenities" variant="low" intoType="HOOK" intoRef="VEHICLE_CF" />
 		</modifications>
 	</item>

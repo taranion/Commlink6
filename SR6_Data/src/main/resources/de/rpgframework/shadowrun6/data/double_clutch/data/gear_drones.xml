@@ -75,7 +75,7 @@
 	<item id="evo_proletarian" avail="2" price="8000" type="DRONE_SMALL" subtype="GROUND" >
 		<vehicle han="2/4" acc="5" spdi="10" tspd="5" bod="3" arm="1" pil="2" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="b0aa15f7-7f95-4bed-b9a7-c3857b8ddedf"/>
 			<embed type="GEAR" ref="tool_storage" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -87,8 +87,8 @@
 	<item id="vulcan_utility_one" avail="2" price="8500" type="DRONE_SMALL" subtype="GROUND" > <!-- US DC does not state price or avail, using DE info -->
 		<vehicle han="4/4" acc="4" spdi="5" tspd="4" bod="4" arm="2" pil="2" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="f30e2f1c-9596-483c-95c4-77ed54a0a748"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="03727b82-c2ab-49a9-af78-e7d734388b66"/>
 			<embed type="GEAR" ref="tool_storage" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<itemmod type="HOOK" ref="VEHICLE_TIRES" remove="true"/> <!-- As this is a walker, it does not have tires -->
 		</modifications>
@@ -169,7 +169,7 @@
 		</modifications>
 		<variant id="weapon" lang="de">
 			<modifications>
-				<embed type="GEAR" ref="weapon_turret_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="weapon_turret_small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="e35d2057-889b-4dca-8a87-5a3259ddb259"/>
 			</modifications>
 		</variant>
 		<variant id="drones" lang="de">
@@ -191,8 +191,8 @@
 		<vehicle han="5/5" acc="4" spdi="4" tspd="4" bod="10" arm="10" pil="2" sen="1" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="031a5dbc-0aac-42c2-8528-007ed939f623"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="cb5a3e6b-d562-4ed3-b65a-36712df90c8d"/>
 			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<!--attrdef id="CAPACITY" slot="VEHICLE_CF" val="2"/-->
@@ -202,10 +202,10 @@
 		<vehicle han="5/5" acc="4" spdi="4" tspd="4" bod="10" arm="10" pil="2" sen="1" />
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="031a5dbc-0aac-42c2-8528-007ed939f623"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="cb5a3e6b-d562-4ed3-b65a-36712df90c8d"/>
+			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="07dbc11e-367b-4923-b1a3-dce5664251d2"/>
+			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c349d9fa-086a-4804-8c15-858bf0ba27c5"/>
 			<!--attrdef id="CAPACITY" slot="VEHICLE_CF" val="2"/-->
 		</modifications>
 	</item>
@@ -283,8 +283,8 @@
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="weapon_turret_heavy" variant="manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="21dd7f2d-e0ba-4acd-ab26-24aa112d930b"/>
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c3507d5c-3ab7-425f-a028-beb94fc147f9"/>
 		</modifications>
 	</item>
 	<item id="ares_gunrunner" lang="de" avail="4I" price="30000" type="DRONE_LARGE" subtype="GROUND" >
@@ -303,8 +303,8 @@
 			<embed type="GEAR" ref="hardpoint_standard" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="weapon_turret_heavy" variant="manual" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="21dd7f2d-e0ba-4acd-ab26-24aa112d930b"/>
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c3507d5c-3ab7-425f-a028-beb94fc147f9"/>
 		</modifications>
 	</item>
 
@@ -383,8 +383,8 @@
 			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </embed>
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="62f740e7-731c-4838-9973-cb87e18dfa8f"/>
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="03df4256-1738-4d5c-9a28-4c77bbcace87"/>
 		</modifications>
 	</item>
 	<item id="essy_interceptor" lang="de" avail="3L" price="15000" type="DRONE_LARGE" subtype="GROUND" >
@@ -394,8 +394,8 @@
 			<embed type="GEAR" ref="improved_topspeed" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> <!-- No rating stated in DE, using same as in US -->
                 </embed>
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="62f740e7-731c-4838-9973-cb87e18dfa8f"/>
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="03df4256-1738-4d5c-9a28-4c77bbcace87"/>
 		</modifications>
 	</item>
 
@@ -717,8 +717,8 @@
 			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
 			</embed>
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="3c12a813-f259-43e0-b07c-4fcdc2adfcf7"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="48d11a61-ae93-4909-9205-785719853356"/>
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -729,8 +729,8 @@
 			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
 			</embed>
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="3c12a813-f259-43e0-b07c-4fcdc2adfcf7"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="48d11a61-ae93-4909-9205-785719853356"/>
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -765,10 +765,10 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 			</embed>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="8bcd21a4-7939-487e-aa29-d2bdaaf5fd17"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="381593f8-a302-42f3-bbf9-d7ae84d6092f"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="80f5e8d4-6659-4ae8-8062-09b7cfc80aad"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="cd6d1123-2be3-47d4-8e1b-6035c2fc361b"/>
 			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
 			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
@@ -790,10 +790,10 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 			</embed>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="8bcd21a4-7939-487e-aa29-d2bdaaf5fd17"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="381593f8-a302-42f3-bbf9-d7ae84d6092f"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="80f5e8d4-6659-4ae8-8062-09b7cfc80aad"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="cd6d1123-2be3-47d4-8e1b-6035c2fc361b"/>
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="expanded_ammo" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/></embed>
@@ -941,8 +941,8 @@
                 </embed>
 			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="71e677b2-a9e0-4f14-a072-e5ff9d580d10"/>
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="82d21e4a-7efd-4fef-90ea-716165eacc37"/>
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
@@ -958,9 +958,9 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>
 			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0745bfeb-f429-407c-9f4f-2e838ba3a001"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="4689b007-50e4-46f3-a816-da426c1de6e7"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ff7797ad-14c6-4482-a503-351d8e020ff5"/>
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_launcher" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
@@ -993,16 +993,16 @@
 	<item id="mitsuhama_bustAmove" avail="2" price="2500" type="DRONE_SMALL" subtype="ANTHRO" >
 		<vehicle han="4/4" acc="2" spdi="5" tspd="6" bod="2" arm="0" pil="3" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="b338ae13-4075-4b4e-939a-0ae86a9c086b"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="6fbcf222-34ee-4f64-845b-424d91e51d3f"/>
 		</modifications>
 	</item>
 
 	<item id="shiawase_BD_butler" avail="2" price="3000" type="DRONE_MEDIUM" subtype="ANTHRO" >
 		<vehicle han="4/5" acc="5" spdi="5" tspd="8" bod="4" arm="0" pil="2" sen="3" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="2896eda1-0320-466c-860d-b19eed16ff00"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="4f2a8d0b-381f-4464-b14b-ef5c6c6ef9bf"/>
 			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 			</embed>
@@ -1012,16 +1012,16 @@
 	<item id="shiawase_BD_man_at_arms" avail="3" price="4500" type="DRONE_MEDIUM" subtype="ANTHRO" >
 		<vehicle han="3/3" acc="5" spdi="5" tspd="10" bod="10" arm="8" pil="2" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="e6358fb9-51ab-48bb-9f7d-f073b08f2d2d"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="2a1dd5ab-475e-473e-9c45-7bd90f726f2b"/>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
 	<item id="shiawase_BD_man_at_arms" lang="de" avail="3L" price="4500" type="DRONE_MEDIUM" subtype="ANTHRO" >
 		<vehicle han="3/3" acc="5" spdi="5" tspd="10" bod="10" arm="8" pil="2" sen="2" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="d2831e45-ac77-4bb9-b9a9-1f1feb946ecc"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="e255fac6-dfd6-4f87-8539-57a35fe0ae7b"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications>
 	</item>
@@ -1030,8 +1030,8 @@
 		<vehicle han="3/3" acc="5" spdi="15" tspd="10" bod="14" arm="8" pil="3" sen="3" />
 		<modifications>
 			<!--embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  /-->
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="cd07822d-7ee6-46df-a0da-745ff2f46633"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="b2879094-ceb0-46a0-b924-b18e3c79480f"/>
 			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 			</embed>

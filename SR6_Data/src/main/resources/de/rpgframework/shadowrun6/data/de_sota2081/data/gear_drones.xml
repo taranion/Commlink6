@@ -64,7 +64,7 @@
    <item id="messerschmitt_kawasaki_heuschrecke_2" avail="5"  price="12000" type="DRONE_MEDIUM" subtype="AIR" >
       <vehicle han="3" acc="30" spdi="40" tspd="180" bod="6" arm="7" pil="4" sen="4" />
 	  <modifications>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="e9a00d82-e0a9-47e2-9b08-de45b8cc9d95"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
                 </embed>

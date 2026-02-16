@@ -4,8 +4,8 @@
 	<item id="mitsuhama_helping_hand" avail="4" price="3000" type="DRONE_SMALL" subtype="ANTHRO" >
 		<vehicle han="4/4" acc="2" spdi="5" tspd="6" bod="1" arm="0" pil="2" sen="1" />
 		<modifications>
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
-			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="de0c1808-a18c-409a-8580-9e252b789e93"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="4d91bff5-3c5d-4076-908d-c0459926bdb1"/>
 			<embed type="GEAR" ref="gecko_tips" variant="size2" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 		</modifications>
 	</item>
