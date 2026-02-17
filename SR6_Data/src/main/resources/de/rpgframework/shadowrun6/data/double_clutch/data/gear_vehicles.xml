@@ -1033,8 +1033,7 @@
 			<embed type="GEAR" ref="satellite_link" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="62d08eca-95f7-4c2c-9aa2-2cc0ec2de145" />
 			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="df576612-9af2-4fc1-8d65-48355e7bd458" />
-			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="8f58b7ce-6361-409b-ab47-42c35c71e312" />
-				<embed type="GEAR" ref="aztechnology_tlaloc" intoId="8f58b7ce-6361-409b-ab47-42c35c71e312" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY" id="f6762992-8e7e-40a8-a883-3aa6549d28d5"/>
+			<embed type="GEAR" ref="aztechnology_tlaloc" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="f6762992-8e7e-40a8-a883-3aa6549d28d5"/>
 			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="electronic_control_lockout" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="amenities" variant="luxury" intoType="HOOK" intoRef="VEHICLE_CF" />
