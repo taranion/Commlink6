@@ -66,7 +66,7 @@
 		</variant>
 		<variant id="weapon">
 			<modifications>
-				<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+				<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="2269d56d-12e6-4a44-90c4-424064db8e11"/>
 			</modifications>
 		</variant>
 	</item>
@@ -78,7 +78,7 @@
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 			</embed>
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_standard" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ae12e3ec-e65a-4c8f-a69f-ed57a9ba787a"/>
 		</modifications>
 	</item>
 	<item id="surfstar_marine_seacop" avail="62" price="20000" type="VEHICLES" subtype="BOATS" >
@@ -87,7 +87,7 @@
 			<embed type="GEAR" ref="electronic_warfare" intoType="HOOK" intoRef="SOFTWARE"  >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
 			</embed>
-			<embed type="GEAR" ref="weapon_turret_heavy" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6c73e81e-8846-4a38-9c32-13386a6dfbaa"/>
 		</modifications>
 	</item>
 

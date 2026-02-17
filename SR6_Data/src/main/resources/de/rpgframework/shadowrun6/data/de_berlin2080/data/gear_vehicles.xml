@@ -38,7 +38,7 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="fuel_converter"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="ram_plate"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual" id="3f90320f-f42f-4fe3-be56-7536be727a00"/>
       </modifications>
    </item>
 

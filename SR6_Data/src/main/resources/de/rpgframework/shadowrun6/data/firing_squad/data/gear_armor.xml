@@ -296,7 +296,7 @@
         <armor rating="4" social="4"/>
         <modifications>
             <valmod type="HOOK" value="10" ref="ARMOR"/>
-            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="renraku_sensei" included="true"/>
+            <embed intoType="HOOK" intoRef="ARMOR" type="GEAR" ref="renraku_sensei" included="true" id="f4561653-54cc-4221-a950-78922cef3be5"/>
         </modifications>
     </item>
     <item id="vi_synergist" avail="4" price="1900" type="ARMOR" subtype="ARMOR_SOCIAL">

@@ -34,7 +34,7 @@
 			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/></embed>
 			<embed type="GEAR" ref="integrated_matrix_device" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="9e905390-8401-41ca-9383-e8e82409982d"/>
-				<embed type="GEAR" ref="mtoc_mark1" intoId="9e905390-8401-41ca-9383-e8e82409982d" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY"/>
+				<embed type="GEAR" ref="mtoc_mark1" intoId="9e905390-8401-41ca-9383-e8e82409982d" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY" id="1acc7118-3171-4122-a15e-fc46b7f31d56"/>
 			<embed type="GEAR" ref="electromag_shielding" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/></embed>
 			<embed type="GEAR" ref="drone_rack" variant="large" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>

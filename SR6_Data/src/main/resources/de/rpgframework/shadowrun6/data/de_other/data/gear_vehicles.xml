@@ -24,7 +24,7 @@
       <vehicle han="4/5" acc="14" spdi="15" tspd="140" bod="8" arm="6" pil="2" sen="4" sea="5"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" /> <!-- text states rack for 2 small drones, however one drone_rack small already carries 3 small drones, thus only one rack added -->
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" variant="manual" id="ae59c12d-b3e3-4e0e-b159-898f3547117f"/>
       </modifications>
    </item>
 
@@ -40,8 +40,8 @@
    <item avail="8L"  price="58000" id="emc_2073_catcher" type="VEHICLES" subtype="CARS">
       <vehicle han="3/5" acc="25" spdi="30" tspd="250" bod="14" arm="4" pil="3" sen="3" sea="4"/>
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="552a6f56-7dda-43a5-81e6-4bf5e4adb9b3"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="8c37a861-3acf-4bd7-922f-29a8461b3ce2"/>
       </modifications>
    </item>
 
@@ -80,7 +80,7 @@
       <vehicle han="4/5" acc="12" spdi="20" tspd="180" bod="14" arm="14" pil="3" sen="4" sea="6"/>
       <modifications>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="armor_ceramic"/>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" variant="manual"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" variant="manual" id="26254bc2-f71e-40b4-ab3a-f44b18b6be3a"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="extra_entry_points"/>
       </modifications>
    </item>

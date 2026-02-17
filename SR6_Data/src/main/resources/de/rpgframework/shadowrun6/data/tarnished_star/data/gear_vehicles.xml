@@ -40,7 +40,7 @@
       		<itemmod type="CONSTRUCTION" ref="OPEN"/>
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="a7110406-2558-4023-afec-adecd7e3e037"/>
 			<embed type="GEAR" ref="extreme_environment" variant="cold" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 		</modifications> 
@@ -57,7 +57,7 @@
 			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 </embed>
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="7e8e694f-25b9-497a-a194-b872d0b157c8"/>
 		</modifications> 
 	</item>
 
@@ -68,7 +68,7 @@
 		<modifications>
       		<itemmod type="CONSTRUCTION" ref="OPEN"/>
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="27ff69a3-0e73-4b49-be65-a29e643d27ad"/>
 			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
 		</modifications> 
 	</item>
@@ -82,7 +82,7 @@
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
             <embed type="GEAR" ref="road_strip_ejector" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="b1aa7b7c-fbed-43be-ac89-982547981ee8"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 		</modifications> 
 	</item>
@@ -97,7 +97,7 @@
 			<embed type="GEAR" ref="improved_handling" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 				</embed>
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="291db3ab-c6a8-471b-8b3b-1186f25e8873"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 		</modifications> 
 	</item>
@@ -113,7 +113,7 @@
 			<embed type="GEAR" ref="passenger_prot_system" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 				</embed>
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="a2d16345-9c98-43fd-b9b0-ef7ced2e48c9"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- no rating stated in US or DE, assuming 2 as 4 would be to expensive -->
@@ -133,10 +133,10 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="0f539ae7-109e-44f7-8070-efd596321074"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="b093ec3a-365a-4c52-a64d-1e11fa38d0bc"/>
 		</modifications> 
 		<variant id="cargo" >
 			<modifications>
@@ -158,10 +158,10 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="e355ac5c-cee9-4370-ac28-563be139ef36"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ce92deca-027a-4303-bf4d-1dd64c51036f"/>
 		</modifications> 
 		<variant id="cargo" >
 			<modifications>
@@ -187,10 +187,10 @@
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="internal_security_gas" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="913b186c-e9ae-4424-9fbc-d1acf26a2d93"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="0ba222a4-8ff2-4124-a601-ee6bd05e5f5c"/>
 		</modifications> 
 		<!-- US version has choice of cargo or drones, but that is a copy&paste error from patrol-6 above. DE version does not have that choice. -->
    </item>
@@ -203,7 +203,7 @@
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="life_safety_system" variant="level1" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="0485237d-bdec-4dc7-ab1f-2c23e62e9361"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
@@ -211,7 +211,7 @@
 			</embed>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="79963edb-cef5-45b1-bdf9-ee3541ea7bd5"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="29f0b304-1838-45d2-80d6-40dee8d431b7"/>
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="e58e3787-d7c5-4fa3-92bb-c115662d080a"/>			
 		</modifications> 
 		<variant id="small_drones" >
 			<modifications>
@@ -235,9 +235,9 @@
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="d70dcdbd-94fc-4463-97ae-d9ec71e453a5"/>
+			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="adb4be4a-0bd5-4fcd-a004-70d7d931cab5"/>
+			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="6d1450a4-30d9-4946-b041-f28b42d9f346"/>
 			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
@@ -261,9 +261,9 @@
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="life_safety_system" variant="level2" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="ac60c637-57aa-4060-ad3a-d712d394fab0"/>
+			<embed type="GEAR" ref="renraku_kitsune" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="34904a23-a282-44cc-93a0-3175f24c2977"/>
+			<embed type="GEAR" ref="mtoc_mark1" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="9bd5ed2e-10e7-425f-9279-573cd19d938a"/>
 			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" >
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
@@ -271,7 +271,7 @@
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="9460ff22-365e-441a-9f9c-03d791df472e"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="12bb9003-9efa-4591-bc30-0e9b134642ef"/>
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="87a62187-ba69-4deb-8f6a-3be10b5b37dc"/>			
 			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
@@ -293,7 +293,7 @@
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="life_safety_system" variant="level1" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
-			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="06a204a5-a60c-44da-8879-7a4961a79066"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="ram_plate" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="d8f7167b-0c84-4cab-8ca5-02409cd9259a"/>
@@ -313,7 +313,7 @@
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="36b7756b-61d3-4495-9eed-e8b674f03854"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="38630fed-107c-4f1c-a1e4-bbcab543d09f"/>
@@ -331,7 +331,7 @@
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="ab10ec25-8e80-46ee-8da4-bb14146c1b58"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="searchlight" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" variant="regular" />
 			<embed type="GEAR" ref="winch" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" >
@@ -348,9 +348,9 @@
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="emergency_lightbars" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" />
-			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="transys_avalon" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="703b65c5-05d6-4abc-bb2c-e4b8ca211841"/>
 			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="fd5396b7-2983-4c27-aca4-b20b17e55af1"/>
 		</modifications>
    </item>
 	
@@ -505,7 +505,7 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="448e9034-0405-46d6-91cd-a9f8908bab33"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="16ef10bd-893b-4dfa-ba83-4a5e31d05a60"/>
-			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="62ba6a36-a1a0-45e9-b993-f9fa1f324f5c"/>
 		</modifications>
 	</item>
 

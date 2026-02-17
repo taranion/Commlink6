@@ -32,7 +32,7 @@
    <item avail="8L" price="12000" id="ruhrmetall_thraex"  type="DRONE_MEDIUM" subtype="GROUND">
       <vehicle han="3" acc="5" spdi="5" tspd="5" bod="10" arm="18" pil="2" sen="1" />
       <modifications>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="7939fac7-520d-4e62-a827-714d1fd52493"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="283b9bb6-5a16-4deb-86a7-6b0d9b603c88"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="283b9bb6-5a16-4deb-86a7-6b0d9b603c88" ref="armtech_mgl12" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="b176ab77-6869-4ddc-a36e-8f6c3367c8b7"/>
@@ -43,20 +43,20 @@
    <item avail="2" price="6000" id="sony_x_eco4"  type="DRONE_MEDIUM" subtype="ANTHRO">
       <vehicle han="4" acc="8" spdi="10" tspd="30" bod="4" arm="4" pil="3" sen="1" />
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" /> <!-- to represent ability of drone to handle weapons with both hands -->
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="f5fd68b1-e44d-4d29-a12b-192b5eedf637"/> <!-- to represent ability of drone to handle weapons with both hands -->
       </modifications>
    </item>
    <item avail="4" price="13500" id="sony_x_reliable4"  type="DRONE_MEDIUM" subtype="ANTHRO">
       <vehicle han="3/4" acc="12" spdi="10" tspd="40" bod="6" arm="6" pil="4" sen="2" />
       <modifications>
-		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- to represent ability of drone to handle weapons with both hands -->
+		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="9c9278f0-d238-48db-8ec1-3042bd18bb13"/> <!-- to represent ability of drone to handle weapons with both hands -->
 		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" /> <!-- For the underarm shield, stated by Raben AAS in Pegasus Forum -->
       </modifications>
    </item>
    <item avail="4L" price="18500" id="sony_x_reliable4_police"  type="DRONE_MEDIUM" subtype="ANTHRO">
       <vehicle han="3/4" acc="12" spdi="10" tspd="40" bod="6" arm="8" pil="4" sen="3" />
       <modifications>
-		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- to represent ability of drone to handle weapons with both hands -->
+		<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="491e7f84-e5db-4ab1-ac28-63f9545f7fc8"/> <!-- to represent ability of drone to handle weapons with both hands -->
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="emergency_lightbars" />
 		<valmod type="ATTRIBUTE" ref="DEFENSE_RATING_PHYSICAL" value="1" /> <!-- For the underarm shield, stated by Raben AAS in Pegasus Forum -->
       </modifications>
@@ -76,7 +76,7 @@
    <item avail="4" price="20000" id="mixcoatl_ii"  type="DRONE_LARGE" subtype="AIR">
       <vehicle han="3" acc="30" spdi="30" tspd="220" bod="8" arm="8" pil="3" sen="4" />
       <modifications>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="7b40bde5-a321-4bfe-bfd9-4227fa1d4737"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="walker" />
 	  </modifications>
    </item>
@@ -88,9 +88,9 @@
       <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="f2b0a298-438d-4d0d-bc45-0a87688e779d"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="4ade25ab-d363-4bd4-8b60-5520ee30c84a"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="27746b78-10ac-40d9-834f-7b998b371d93" />
 	  </modifications>
    </item>
 

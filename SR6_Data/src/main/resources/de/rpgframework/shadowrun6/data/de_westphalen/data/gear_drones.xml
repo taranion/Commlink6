@@ -5,7 +5,7 @@
    <item avail="2"  price="5000" id="cnh_g12" type="DRONE_MEDIUM" subtype="AIR">
       <vehicle han="2" acc="15" spdi="30" tspd="140" bod="4" arm="3" pil="3" sen="4" />
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="30aeabb1-87f5-4ddf-adab-d67d2b878c7a"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="secondary_propulsion_system" variant="walker" />
       </modifications>
    </item>
