@@ -640,7 +640,7 @@
 	</item>
 
 	<item id="hawker_harrier" avail="2" price="5500" type="DRONE_MEDIUM" subtype="AIR" >
-		<vehicle han="3" acc="15" spdi="25" tspd="180" bod="5" arm="5" pil="4" sen="2" id="e953bd33-9fa1-466a-ab96-671d489ed1c5"/>
+		<vehicle han="3" acc="15" spdi="25" tspd="180" bod="5" arm="5" pil="4" sen="2"/>
 		<modifications>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="2077b7d8-f65f-4404-a323-d6576a9fde61"/>
 		</modifications>
