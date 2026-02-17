@@ -301,7 +301,7 @@
    <item avail="3L" price="12000" id="remington_900" type="WEAPON_FIREARMS" subtype="RIFLE_HUNTING">
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="327a8e78-d058-437e-a1eb-9e2603c08b50"/>
       </modifications>
       <weapon attack="2,7,10,12,11" ammo="5(m)" dmg="5P" mode="SS" skill="firearms" spec="firearms/rifles"/>
    </item>
@@ -311,7 +311,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="8a2bf383-32ee-46bf-a6d3-8d37eb0a0c32"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="2,6,10,12,11"  ammo="8(m)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
@@ -386,7 +386,7 @@
       <modifications>
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="0492c8b5-d5e3-4d90-88cc-a69a59d61e60"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="3,10,10,10,10" ammo="14(c)" dmg="5P" mode="SA" skill="firearms" spec="firearms/rifles"/>
@@ -396,7 +396,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="bc738133-d897-49b9-be1f-94724546c271"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon attack="3,8,11,8,8" ammo="20(c)" dmg="5P" mode="SA/BF" skill="firearms" spec="firearms/rifles"/>
@@ -407,7 +407,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="28e891d5-0398-42d3-92cf-dfe866d8b50b"/>
          <embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
       </modifications>
@@ -493,7 +493,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
-          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+          <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="3fd521b0-83b8-42dd-bd74-6405be211f19"/>
       </modifications>
 		<attrdef id="WEAPON_SIZE" value="LARGE"/>
       <weapon attack="5,8,11,3," ammo="6(m)" dmg="1P" mode="SS" skill="exotic_weapons"/>

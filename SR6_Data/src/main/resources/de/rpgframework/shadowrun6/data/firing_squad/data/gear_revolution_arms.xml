@@ -115,7 +115,7 @@
 			<itemmod type="HOOK" ref="BARREL" />
 			<itemmod type="HOOK" ref="UNDER" />
 			<itemmod type="HOOK" ref="STOCK" />
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" />
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="979bde39-cbf0-4e65-8efc-07dcd1e2436d"/>
          <embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
 			<itemmod type="GEARMOD" ref="easy_breakdown" />
 		</modifications>

@@ -78,8 +78,9 @@
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="SIDE_L"/>
          <itemmod type="HOOK" ref="SIDE_R"/>
+         <itemmod type="HOOK" ref="STOCK"/>
          <itemmod type="GEARMOD" ref="foregrip"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon dmg="4P" attack="12,12,8,," ammo="40(c)" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
 		<attrdef id="AMMUNITION_CLASS" value="RIFLES" />
@@ -199,7 +200,7 @@
          <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="103e20c4-b886-4ae7-91a0-547178364382"/>
          <embed type="GEAR" ref="hkg12_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
          <itemmod type="GEARMOD" ref="rigid_stock"/>
@@ -222,7 +223,7 @@
          <itemmod type="HOOK" ref="SIDE_R"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="8201945b-69ee-40b4-88f3-0f3bf8c19b88"/>
          <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>
@@ -246,7 +247,7 @@
          <itemmod type="HOOK" ref="SIDE_R"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="e3ab2eda-c208-40b1-8620-b9cf59071a28"/>
          <embed type="GEAR" ref="hk223_grenade_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
          <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="SIDE_L" included="true"/>

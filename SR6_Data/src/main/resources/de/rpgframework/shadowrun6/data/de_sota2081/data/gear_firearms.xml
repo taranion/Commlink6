@@ -191,7 +191,7 @@
 			<itemmod type="HOOK" ref="BARREL" />
 			<itemmod type="HOOK" ref="UNDER" />
 			<itemmod type="HOOK" ref="STOCK" />
-			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="3aa5ffce-7a62-4c4f-9030-6ab175508c3f"/>
 			<embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
 			<embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" included="true"/>
 			<itemmod type="GEARMOD" ref="foregrip" />

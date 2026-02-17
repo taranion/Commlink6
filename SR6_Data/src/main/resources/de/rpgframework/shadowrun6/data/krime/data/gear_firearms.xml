@@ -213,7 +213,7 @@
         <itemmod type="HOOK" ref="TOP"/>
         <itemmod type="HOOK" ref="UNDER"/>
 		<itemmod type="GEARMOD" ref="metahuman_adaption"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="TOP" ref="imaging_scope" included="true"/>
+        <embed type="GEAR" intoType="HOOK" intoRef="TOP" ref="imaging_scope" included="true" id="32655a7a-f330-4bdd-9bf6-084c130e0ac6"/>
         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="krime_matrix_scanner"/>
       </modifications>
 		<geardef>

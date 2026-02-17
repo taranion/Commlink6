@@ -239,7 +239,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="9768952d-3a70-4385-a27c-432cda795c24"/>
       </modifications>
       <weapon dmg="5P" mode="SS" attack="1,8,12,12,6" ammo="12(c)/12(c)" skill="firearms" spec="firearms/rifles"/>
    </item>

@@ -48,7 +48,7 @@
 			<itemmod type="HOOK" ref="UNDER" />
 			<itemmod type="HOOK" ref="STOCK" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
-			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" />
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" id="48d71b3e-f0c5-46a0-ba1b-3892dddeaa44"/>
 			<embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" />
             <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
 			<itemmod type="GEARMOD" ref="trigger_removal" />
