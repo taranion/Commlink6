@@ -53,7 +53,7 @@
 			<itemmod type="GEARMOD" ref="heavy_weight"/>
 			<itemmod type="GEARMOD" ref="barrel_extension"/>
 			<itemmod type="GEARMOD" ref="nanoconstruction"/>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<requires>

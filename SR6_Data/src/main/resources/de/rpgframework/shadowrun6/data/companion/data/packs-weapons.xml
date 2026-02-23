@@ -6,7 +6,7 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="crossbow_light" id="ec3e1202-5df9-4700-9702-6b98c3c5e797" />
              <embed  type="GEAR" intoId="ec3e1202-5df9-4700-9702-6b98c3c5e797" intoType="HOOK" intoRef="TOP" ref="laser_sight" />
-             <embed  type="GEAR" intoId="ec3e1202-5df9-4700-9702-6b98c3c5e797" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="ec3e1202-5df9-4700-9702-6b98c3c5e797" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_injection_bolt" value="10" />
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="10" />
       </modifications>
@@ -55,7 +55,7 @@
    <item id="pack_holdout_needler" price="1335" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="fichetti_tiffani_needler" id="a1f6deba-21a1-49db-aec3-427b6f5bc3c7" />
-             <embed  type="GEAR" intoId="a1f6deba-21a1-49db-aec3-427b6f5bc3c7" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="a1f6deba-21a1-49db-aec3-427b6f5bc3c7" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="a1f6deba-21a1-49db-aec3-427b6f5bc3c7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="a1f6deba-21a1-49db-aec3-427b6f5bc3c7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" variant="caseless" value="2">
@@ -67,7 +67,7 @@
    <item id="pack_holdout_streetline" price="975" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="streetline_special" id="8006260b-343c-43af-9d1f-fdb5c01c97cf" />
-             <embed  type="GEAR" intoId="8006260b-343c-43af-9d1f-fdb5c01c97cf" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="8006260b-343c-43af-9d1f-fdb5c01c97cf" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="8006260b-343c-43af-9d1f-fdb5c01c97cf" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="8006260b-343c-43af-9d1f-fdb5c01c97cf" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="10">
@@ -79,7 +79,7 @@
    <item id="pack_holdout_palm" price="1095" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="walther_palm_pistol" id="6273c5b9-a668-4a96-9871-c12d9ae224a5" />
-             <embed  type="GEAR" intoId="6273c5b9-a668-4a96-9871-c12d9ae224a5" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="6273c5b9-a668-4a96-9871-c12d9ae224a5" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="6273c5b9-a668-4a96-9871-c12d9ae224a5" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_holdout_light_machine" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -105,7 +105,7 @@
    <item id="pack_light_beretta" price="1250" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="beretta_201T" id="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" />
-             <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
@@ -121,7 +121,7 @@
    <item id="pack_light_redhawk" price="1675" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="rudger_redhawk" id="e73763ff-b96a-4886-a38f-3c1b0886d65d" />
-             <embed  type="GEAR" intoId="e73763ff-b96a-4886-a38f-3c1b0886d65d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="e73763ff-b96a-4886-a38f-3c1b0886d65d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="e73763ff-b96a-4886-a38f-3c1b0886d65d" intoType="HOOK" intoRef="TOP" ref="laser_sight" />
              <embed  type="GEAR" intoId="e73763ff-b96a-4886-a38f-3c1b0886d65d" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
              <embed  type="GEAR" intoId="e73763ff-b96a-4886-a38f-3c1b0886d65d" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="speed_loader" count="5" />
@@ -151,7 +151,7 @@
    <item id="pack_mp_scorpion1" price="1860" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="ceska_black_scorpion" id="997354f9-723e-4e9e-a7a7-d0d544be18fc" />
-             <embed  type="GEAR" intoId="997354f9-723e-4e9e-a7a7-d0d544be18fc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="997354f9-723e-4e9e-a7a7-d0d544be18fc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="997354f9-723e-4e9e-a7a7-d0d544be18fc" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="997354f9-723e-4e9e-a7a7-d0d544be18fc" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="997354f9-723e-4e9e-a7a7-d0d544be18fc" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
@@ -228,7 +228,7 @@
    <item id="pack_heavy_viper" price="1675" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="ares_viper_slivergun" id="f4f92c59-39da-4fec-96a1-d6f37008b279" />
-             <embed  type="GEAR" intoId="f4f92c59-39da-4fec-96a1-d6f37008b279" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="f4f92c59-39da-4fec-96a1-d6f37008b279" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="f4f92c59-39da-4fec-96a1-d6f37008b279" intoType="HOOK" intoRef="TOP" ref="laser_sight" />
              <embed  type="GEAR" intoId="f4f92c59-39da-4fec-96a1-d6f37008b279" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="concealable_holster" />
              <embed  type="GEAR" intoId="f4f92c59-39da-4fec-96a1-d6f37008b279" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
@@ -315,7 +315,7 @@
    <item id="pack_shot_defiance2" price="1250" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="defiance_t250_shortbarrel" id="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" />
-             <embed  type="GEAR" intoId="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -341,7 +341,7 @@
    <item id="pack_shot_mossberg2" price="1970" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="mossberg_cmdt" id="0315ba76-45a5-47d6-8817-dda2ecf72b89" />
-             <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="detachable_drum_magazine" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -355,7 +355,7 @@
    <item id="pack_shot_roomsweeper" price="875" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="remington_roomsweeper" id="75aa5e8c-495c-4db6-a7a1-42e188811e98" />
-             <embed  type="GEAR" intoId="75aa5e8c-495c-4db6-a7a1-42e188811e98" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="75aa5e8c-495c-4db6-a7a1-42e188811e98" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -476,7 +476,7 @@
    <item id="pack_fn_har1" price="3075" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="fn_har" id="c0279344-a8ab-470b-9ac8-b5c43a04bb5c" />
-             <embed  type="GEAR" intoId="c0279344-a8ab-470b-9ac8-b5c43a04bb5c" intoType="HOOK" intoRef="UNDER" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="c0279344-a8ab-470b-9ac8-b5c43a04bb5c" intoType="HOOK" intoRef="UNDER" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="c0279344-a8ab-470b-9ac8-b5c43a04bb5c" intoType="HOOK" intoRef="STOCK" ref="shock_pad" />
              <embed  type="GEAR" intoId="c0279344-a8ab-470b-9ac8-b5c43a04bb5c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
@@ -553,7 +553,7 @@
    <item id="pack_crockett" price="10900" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="cavalier_arms_crocket_ebr" id="2eb96490-7c76-4e1d-91e2-c84950c66732" />
-             <embed  type="GEAR" intoId="2eb96490-7c76-4e1d-91e2-c84950c66732" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="2eb96490-7c76-4e1d-91e2-c84950c66732" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="2eb96490-7c76-4e1d-91e2-c84950c66732" intoType="HOOK" intoRef="UNDER" ref="laser_sight" />
              <embed  type="GEAR" intoId="2eb96490-7c76-4e1d-91e2-c84950c66732" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="2eb96490-7c76-4e1d-91e2-c84950c66732" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
@@ -569,7 +569,7 @@
    <item id="pack_valiant" price="5800" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="ingram_valiant" id="3246fc94-fe37-4359-a080-63ef988537e9" />
-             <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -759,7 +759,7 @@
    <item id="pack_light_beretta" lang="de" price="1710" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="beretta_201T" id="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" />
-             <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="hidden_arm_slide" />
              <embed  type="GEAR" intoId="9ca46d3e-444f-4876-90ab-d5c4f5f6a629" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
@@ -905,7 +905,7 @@
    <item id="pack_shot_defiance2" lang="de" price="1055" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="defiance_t250_shortbarrel" id="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" />
-             <embed  type="GEAR" intoId="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5f2bbd38-f7c0-4cb1-b51a-71e379b8c632" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -931,7 +931,7 @@
    <item id="pack_shot_mossberg2" lang="de" price="1055" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="mossberg_cmdt" id="0315ba76-45a5-47d6-8817-dda2ecf72b89" />
-             <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+             <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="0315ba76-45a5-47d6-8817-dda2ecf72b89" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="detachable_drum_magazine" count="4" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -945,7 +945,7 @@
    <item id="pack_shot_roomsweeper" lang="de" price="1050" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="remington_roomsweeper" id="75aa5e8c-495c-4db6-a7a1-42e188811e98" />
-             <embed  type="GEAR" intoId="75aa5e8c-495c-4db6-a7a1-42e188811e98" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="75aa5e8c-495c-4db6-a7a1-42e188811e98" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1062,7 +1062,7 @@
    <item id="pack_valiant" lang="de" price="5450" type="PACK" subtype="PACK_WEAPON" >
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="ingram_valiant" id="3246fc94-fe37-4359-a080-63ef988537e9" />
-             <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
              <embed  type="GEAR" intoId="3246fc94-fe37-4359-a080-63ef988537e9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="spare_clip_new" count="5" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="20">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>

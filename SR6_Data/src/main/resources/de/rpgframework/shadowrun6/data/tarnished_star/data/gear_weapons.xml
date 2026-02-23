@@ -20,7 +20,7 @@
 		<itemmod type="GEARMOD" ref="biometric_gun_lock"/>
 		<itemmod type="GEARMOD" ref="gas-vent_improved"/>
 		<itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
-		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
+		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		<itemmod type="GEARMOD" ref="weapon_security_system">
 			<decision choice="bbd4e50c-b717-4a16-a96a-963121b462c2" value="wss_taser"/>	
 		</itemmod>
@@ -38,7 +38,7 @@
 		<itemmod type="HOOK" ref="TOP"/>
 		<itemmod type="HOOK" ref="BARREL"/>
 		<itemmod type="GEARMOD" ref="biometric_gun_lock"/>
-		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
+		<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		<valmod type="ITEM_ATTRIBUTE" ref="CONCEALABILITY" value="1" />
       </modifications>
    </item>

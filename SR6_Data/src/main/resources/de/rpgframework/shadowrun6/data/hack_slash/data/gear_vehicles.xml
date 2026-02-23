@@ -10,7 +10,7 @@
 		</requires>
 		<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
 		<modifications>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<itemmod type="HOOK" ref="TOP"/>
 			<itemmod type="HOOK" ref="BARREL"/>
 			<itemmod type="HOOK" ref="UNDER"/>
@@ -73,11 +73,11 @@
 				<embed type="GEAR" ref="ranger_arms_aa16_warhammer" intoId="c00f397b-512a-4090-b508-c389e7562505" intoType="HOOK" intoRef="VEHICLE_WEAPON"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="f3ff4b94-2e04-4311-abe5-d373430b6209"/>
 				<embed type="GEAR" ref="armtech_mgl12" intoId="f3ff4b94-2e04-4311-abe5-d373430b6209" intoType="HOOK" intoRef="VEHICLE_WEAPON" id="36762f50-f83a-41b3-93b4-1373a1cb970c"/>
-					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="36762f50-f83a-41b3-93b4-1373a1cb970c" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="36762f50-f83a-41b3-93b4-1373a1cb970c" intoType="HOOK" intoRef="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="36762f50-f83a-41b3-93b4-1373a1cb970c" intoType="HOOK" intoRef="INTERNAL"/>
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6f58d91e-baa0-4c77-9472-7252ef1cdbc4"/>
 				<embed type="GEAR" ref="armtech_mgl12" intoId="6f58d91e-baa0-4c77-9472-7252ef1cdbc4" intoType="HOOK" intoRef="VEHICLE_WEAPON" id="c5b23269-a8be-479f-bf33-4b88e009a675"/>
-					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="c5b23269-a8be-479f-bf33-4b88e009a675" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="c5b23269-a8be-479f-bf33-4b88e009a675" intoType="HOOK" intoRef="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="c5b23269-a8be-479f-bf33-4b88e009a675" intoType="HOOK" intoRef="INTERNAL"/>
 		</modifications>
 	</item>
@@ -95,11 +95,11 @@
 			<embed type="GEAR" ref="hardpoint_large" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="b7539702-3f60-4daa-8a79-02b18070b2d3"/>
 				<embed type="GEAR" ref="aztechnology_striker" intoId="b7539702-3f60-4daa-8a79-02b18070b2d3" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" id="1129bea6-219c-4848-a0da-4b9b58a3e61c"/>
-					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="1129bea6-219c-4848-a0da-4b9b58a3e61c" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="1129bea6-219c-4848-a0da-4b9b58a3e61c" intoType="HOOK" intoRef="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 					<embed  type="GEAR" ref="airburst_link" variant="internal" intoId="1129bea6-219c-4848-a0da-4b9b58a3e61c" intoType="HOOK" intoRef="INTERNAL"/>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7789502c-e192-4bd7-b6b1-cfc4c851fc90"/>
 				<embed type="GEAR" ref="stoner_ares_m202" intoId="7789502c-e192-4bd7-b6b1-cfc4c851fc90" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" id="143f3c0b-a19f-4cd3-bd38-b886dc77a897"/>
-					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="143f3c0b-a19f-4cd3-bd38-b886dc77a897" intoType="HOOK" intoRef="INTERNAL"/>
+					<embed  type="GEAR" ref="smartgun_system" variant="internal" intoId="143f3c0b-a19f-4cd3-bd38-b886dc77a897" intoType="HOOK" intoRef="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		</modifications>
 	</item>
 
