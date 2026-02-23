@@ -10,7 +10,7 @@
 		</requires>
 		<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
 		<modifications>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
 			<itemmod type="HOOK" ref="TOP"/>
 			<itemmod type="HOOK" ref="BARREL"/>
 			<itemmod type="HOOK" ref="UNDER"/>

@@ -11,7 +11,7 @@
 	    </selreq>
 	  </requires>
 	  <modifications>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" apply="PARENT"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" apply="PARENT" variant="INTERNAL" />
 	  </modifications>
 	</itemenhancement>
 

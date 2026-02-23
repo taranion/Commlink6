@@ -61,11 +61,11 @@
              <embed  type="GEAR" intoId="0f888319-6429-46db-9a1e-8b5cdc863373" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <embed  type="GEAR" intoId="0f888319-6429-46db-9a1e-8b5cdc863373" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="a3676342-1849-4158-a9e4-37769df4ffcb" />
              <embed  type="GEAR" intoId="a3676342-1849-4158-a9e4-37769df4ffcb" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="5a14802e-bdca-46d6-9865-82f7d3199d9f" />
-             <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="ede17a04-9e7d-4191-bd24-ac756366eea9" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="d1c644fe-edb6-493a-ac9c-8064ae37d873" />
              <embed  type="GEAR" intoId="d1c644fe-edb6-493a-ac9c-8064ae37d873" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" />
-             <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -295,7 +295,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="chrysler-nissan_pursuit_v" id="b096b320-de88-47da-9868-a965f208a6c1" />
              <embed  type="GEAR" intoId="b096b320-de88-47da-9868-a965f208a6c1" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="04ef31ba-9b3e-4205-a42b-e52f2062fcb1" />
              <embed  type="GEAR" intoId="04ef31ba-9b3e-4205-a42b-e52f2062fcb1" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" ref="ares_viper_slivergun" id="688486da-070b-42d5-bcda-ae4a819a2636" />
-             <embed  type="GEAR" intoId="688486da-070b-42d5-bcda-ae4a819a2636" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="688486da-070b-42d5-bcda-ae4a819a2636" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -345,7 +345,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="gm-nissan_dobermann" id="6d172a33-7f04-41d4-8918-5a9e218e14fb" />
              <embed  type="GEAR" intoId="6d172a33-7f04-41d4-8918-5a9e218e14fb" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="d400a60b-0665-42af-83d7-80efc59a7451" />
              <embed  type="GEAR" intoId="d400a60b-0665-42af-83d7-80efc59a7451" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" />
-             <embed  type="GEAR" intoId="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -373,9 +373,9 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="nissan_samurai" id="62e85a8c-2521-4bb2-a4cc-7dff31d707b5" />
              <embed  type="GEAR" intoId="be2559d7-3ab9-4b94-abfa-97ba737aaefc" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="914cca15-563a-4597-8e42-fadda4ebc777" />
-             <embed  type="GEAR" intoId="914cca15-563a-4597-8e42-fadda4ebc777" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="914cca15-563a-4597-8e42-fadda4ebc777" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="ef965a1b-accb-4efd-a969-019c14333f7f" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" />
-             <embed  type="GEAR" intoId="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -390,7 +390,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="mct-nissan_roto_drone" id="6458a89b-7ff1-4cd4-b4a1-088a58b70028" />
              <embed  type="GEAR" intoId="6458a89b-7ff1-4cd4-b4a1-088a58b70028" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="299d5b85-4bb2-46be-b94f-3fa6f9f28bc8" />
              <embed  type="GEAR" intoId="299d5b85-4bb2-46be-b94f-3fa6f9f28bc8" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" />
-             <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -406,7 +406,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="mct-nissan_roto_drone" id="07c3e6e4-7572-4104-a782-cb27407be97d" />
              <embed  type="GEAR" intoId="07c3e6e4-7572-4104-a782-cb27407be97d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="f431c380-136e-457a-9079-9474a8a79eb7" />
              <embed  type="GEAR" intoId="f431c380-136e-457a-9079-9474a8a79eb7" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="f1868cb8-6c00-408a-80bc-952b35b4e6ca" />
-             <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" id="a830f0ff-710d-4b65-94aa-ec18461e11dd" />
+             <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="a830f0ff-710d-4b65-94aa-ec18461e11dd" />
              <embed  type="GEAR" intoId="a830f0ff-710d-4b65-94aa-ec18461e11dd" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
              <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="BARREL" ref="silencer" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
@@ -461,7 +461,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="steel_lynx_combat_drone" id="edafb2e8-5561-415a-85ea-97d01cc1a9a6" />
              <embed  type="GEAR" intoId="edafb2e8-5561-415a-85ea-97d01cc1a9a6" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="bd1f126f-fcf6-4dae-8a4b-4ac891e3e9f4" />
              <embed  type="GEAR" intoId="bd1f126f-fcf6-4dae-8a4b-4ac891e3e9f4" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="255d50cc-d16b-4f76-bb1b-87d4562c925c" />
-             <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="40">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -501,13 +501,13 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="steel_lynx_combat_drone" id="897172c0-dd65-465f-8f75-d0922071572d" />
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="059a51c7-94d9-4163-86b0-2396b9f344ad" />
              <embed  type="GEAR" intoId="059a51c7-94d9-4163-86b0-2396b9f344ad" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="0207141d-4568-485a-8fdb-ede7415cb717" />
-             <embed  type="GEAR" intoId="0207141d-4568-485a-8fdb-ede7415cb717" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="0207141d-4568-485a-8fdb-ede7415cb717" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="1c980a94-de7d-491f-9676-b754f78f3007" />
              <embed  type="GEAR" intoId="1c980a94-de7d-491f-9676-b754f78f3007" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" ref="ares_s3_super_squirt" id="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" />
-             <embed  type="GEAR" intoId="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_dmso" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="20" />
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="25cfe31b-091d-4d1d-a218-4b41a6bcf1df" />
@@ -928,11 +928,11 @@
              <embed  type="GEAR" intoId="0f888319-6429-46db-9a1e-8b5cdc863373" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface" />
              <embed  type="GEAR" intoId="0f888319-6429-46db-9a1e-8b5cdc863373" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="a3676342-1849-4158-a9e4-37769df4ffcb" />
              <embed  type="GEAR" intoId="a3676342-1849-4158-a9e4-37769df4ffcb" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="5a14802e-bdca-46d6-9865-82f7d3199d9f" />
-             <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="5a14802e-bdca-46d6-9865-82f7d3199d9f" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
              <embed  type="GEAR" intoId="ede17a04-9e7d-4191-bd24-ac756366eea9" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="d1c644fe-edb6-493a-ac9c-8064ae37d873" />
              <embed  type="GEAR" intoId="d1c644fe-edb6-493a-ac9c-8064ae37d873" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" />
-             <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
              <embed  type="GEAR" intoId="e44d34ab-5a82-45e0-a7aa-e7fc8b19200b" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -1140,7 +1140,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="chrysler-nissan_pursuit_v" id="b096b320-de88-47da-9868-a965f208a6c1" />
              <embed  type="GEAR" intoId="b096b320-de88-47da-9868-a965f208a6c1" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_small" id="04ef31ba-9b3e-4205-a42b-e52f2062fcb1" />
              <embed  type="GEAR" intoId="04ef31ba-9b3e-4205-a42b-e52f2062fcb1" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" ref="ares_viper_slivergun" id="688486da-070b-42d5-bcda-ae4a819a2636" />
-             <embed  type="GEAR" intoId="688486da-070b-42d5-bcda-ae4a819a2636" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="688486da-070b-42d5-bcda-ae4a819a2636" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_heavy_smg" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="flechette"/>
                 </valmod>
@@ -1176,7 +1176,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="gm-nissan_dobermann" id="6d172a33-7f04-41d4-8918-5a9e218e14fb" />
              <embed  type="GEAR" intoId="6d172a33-7f04-41d4-8918-5a9e218e14fb" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="d400a60b-0665-42af-83d7-80efc59a7451" />
              <embed  type="GEAR" intoId="d400a60b-0665-42af-83d7-80efc59a7451" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" />
-             <embed  type="GEAR" intoId="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="bda7da58-a201-4dc4-8bd6-6da3d770c6d3" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1190,9 +1190,9 @@
       <modifications>
          <itemmod type="GEAR" apply="CHARACTER" ref="nissan_samurai" id="62e85a8c-2521-4bb2-a4cc-7dff31d707b5" />
              <embed  type="GEAR" intoId="be2559d7-3ab9-4b94-abfa-97ba737aaefc" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="914cca15-563a-4597-8e42-fadda4ebc777" />
-             <embed  type="GEAR" intoId="914cca15-563a-4597-8e42-fadda4ebc777" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="914cca15-563a-4597-8e42-fadda4ebc777" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="ef965a1b-accb-4efd-a969-019c14333f7f" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" />
-             <embed  type="GEAR" intoId="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="4b1a6def-daef-43d9-9fd2-a6dc0bd213a9" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>
@@ -1207,7 +1207,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="mct-nissan_roto_drone" id="6458a89b-7ff1-4cd4-b4a1-088a58b70028" />
              <embed  type="GEAR" intoId="6458a89b-7ff1-4cd4-b4a1-088a58b70028" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="299d5b85-4bb2-46be-b94f-3fa6f9f28bc8" />
              <embed  type="GEAR" intoId="299d5b85-4bb2-46be-b94f-3fa6f9f28bc8" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" />
-             <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="2baa8399-5bb1-47f5-ae3d-72cc611e3ad2" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="15">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -1223,7 +1223,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="mct-nissan_roto_drone" id="07c3e6e4-7572-4104-a782-cb27407be97d" />
              <embed  type="GEAR" intoId="07c3e6e4-7572-4104-a782-cb27407be97d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="f431c380-136e-457a-9079-9474a8a79eb7" />
              <embed  type="GEAR" intoId="f431c380-136e-457a-9079-9474a8a79eb7" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="f1868cb8-6c00-408a-80bc-952b35b4e6ca" />
-             <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" id="a830f0ff-710d-4b65-94aa-ec18461e11dd" />
+             <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="TOP" ref="smartgun_system" id="a830f0ff-710d-4b65-94aa-ec18461e11dd" />
              <embed  type="GEAR" intoId="a830f0ff-710d-4b65-94aa-ec18461e11dd" intoType="HOOK" intoRef="OPTICAL" ref="vision_magnification" />
              <embed  type="GEAR" intoId="f1868cb8-6c00-408a-80bc-952b35b4e6ca" intoType="HOOK" intoRef="BARREL" ref="silencer" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
@@ -1244,7 +1244,7 @@
              <embed  type="GEAR" intoId="9431751f-7103-4be9-94fa-52f16d69b8db" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="567ab8b0-8bf0-43b9-8f63-5fee789960a7" />
              <embed  type="GEAR" intoId="567ab8b0-8bf0-43b9-8f63-5fee789960a7" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="aztechnology_striker" id="6305469c-a6be-4203-ab4e-9d7c7bfd7c19" />
              <embed  type="GEAR" intoId="6305469c-a6be-4203-ab4e-9d7c7bfd7c19" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="567ab8b0-8bf0-43b9-8f63-5fee789960a7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="567ab8b0-8bf0-43b9-8f63-5fee789960a7" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive" value="5" />
       </modifications>
    </item>
@@ -1255,7 +1255,7 @@
              <embed  type="GEAR" intoId="9aebb469-c6cc-4603-973d-673ac1139c22" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="d82326e8-9c7b-4912-ae9c-3854b3783ec4" />
              <embed  type="GEAR" intoId="d82326e8-9c7b-4912-ae9c-3854b3783ec4" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="5065bc7e-9b22-47fb-b96a-e8398296f9cd" />
              <embed  type="GEAR" intoId="5065bc7e-9b22-47fb-b96a-e8398296f9cd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="5065bc7e-9b22-47fb-b96a-e8398296f9cd" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5065bc7e-9b22-47fb-b96a-e8398296f9cd" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="6" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant="mini" value="6" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive_grenade" variant="mini" value="6" />
@@ -1278,7 +1278,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="steel_lynx_combat_drone" id="edafb2e8-5561-415a-85ea-97d01cc1a9a6" />
              <embed  type="GEAR" intoId="edafb2e8-5561-415a-85ea-97d01cc1a9a6" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="bd1f126f-fcf6-4dae-8a4b-4ac891e3e9f4" />
              <embed  type="GEAR" intoId="bd1f126f-fcf6-4dae-8a4b-4ac891e3e9f4" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="rpk_hmg" id="255d50cc-d16b-4f76-bb1b-87d4562c925c" />
-             <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
              <embed  type="GEAR" intoId="255d50cc-d16b-4f76-bb1b-87d4562c925c" intoType="HOOK" intoRef="BARREL" ref="gas-vent_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_machine_gun" value="40">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
@@ -1289,7 +1289,7 @@
              <embed  type="GEAR" intoId="edafb2e8-5561-415a-85ea-97d01cc1a9a6" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_standard" id="335cb49c-6e25-47e1-8f43-61b5d0923f53" />
              <embed  type="GEAR" intoId="335cb49c-6e25-47e1-8f43-61b5d0923f53" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="5216f2b0-1884-4ed6-a63d-0528169b6649" />
              <embed  type="GEAR" intoId="5216f2b0-1884-4ed6-a63d-0528169b6649" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="5216f2b0-1884-4ed6-a63d-0528169b6649" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="5216f2b0-1884-4ed6-a63d-0528169b6649" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="fragmentation_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="high_explosive_grenade" variant="mini" value="12" />
@@ -1318,19 +1318,19 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="steel_lynx_combat_drone" id="897172c0-dd65-465f-8f75-d0922071572d" />
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="059a51c7-94d9-4163-86b0-2396b9f344ad" />
              <embed  type="GEAR" intoId="059a51c7-94d9-4163-86b0-2396b9f344ad" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="mossberg_cmdt" id="0207141d-4568-485a-8fdb-ede7415cb717" />
-             <embed  type="GEAR" intoId="0207141d-4568-485a-8fdb-ede7415cb717" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="0207141d-4568-485a-8fdb-ede7415cb717" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_shotgun" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="gel"/>
                 </valmod>
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_small" id="1c980a94-de7d-491f-9676-b754f78f3007" />
              <embed  type="GEAR" intoId="1c980a94-de7d-491f-9676-b754f78f3007" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" ref="ares_s3_super_squirt" id="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" />
-             <embed  type="GEAR" intoId="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="bc93bc3b-6744-4f69-a20a-96b0cbae97d7" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_dmso" value="2" />
          <valmod type="GEAR" apply="CHARACTER" ref="narcoject" value="20" />
              <embed  type="GEAR" intoId="897172c0-dd65-465f-8f75-d0922071572d" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_standard" id="25cfe31b-091d-4d1d-a218-4b41a6bcf1df" />
              <embed  type="GEAR" intoId="25cfe31b-091d-4d1d-a218-4b41a6bcf1df" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="ad746e98-e318-4818-b9a5-d5286e81cb60" />
              <embed  type="GEAR" intoId="ad746e98-e318-4818-b9a5-d5286e81cb60" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="ad746e98-e318-4818-b9a5-d5286e81cb60" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="ad746e98-e318-4818-b9a5-d5286e81cb60" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" variant="mini" value="12" />
       </modifications>
@@ -1342,7 +1342,7 @@
              <embed  type="GEAR" intoId="67dfe28b-fdee-40b3-ba45-01191b359c84" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_heavy" id="105b2332-4f4a-4ea4-a689-62211b595341" />
              <embed  type="GEAR" intoId="105b2332-4f4a-4ea4-a689-62211b595341" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="armtech_mgl12" id="828949ad-9dfb-425d-b42a-3db4128baebd" />
              <embed  type="GEAR" intoId="828949ad-9dfb-425d-b42a-3db4128baebd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
-             <embed  type="GEAR" intoId="828949ad-9dfb-425d-b42a-3db4128baebd" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="828949ad-9dfb-425d-b42a-3db4128baebd" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="stun_grenade" variant="mini" value="12" />
          <valmod type="GEAR" apply="CHARACTER" ref="smoke_grenade" variant="mini" value="12" />
       </modifications>

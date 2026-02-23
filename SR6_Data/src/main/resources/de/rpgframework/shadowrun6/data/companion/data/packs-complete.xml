@@ -2858,7 +2858,7 @@
              <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="hardpoint_concealment" variant="standard" />
              <embed  type="GEAR" intoId="434fe0cc-9715-4a06-9b0e-858de23a50df" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="5ceddd69-b0c2-40e2-be83-af8f9b860398" />
              <embed  type="GEAR" intoId="5ceddd69-b0c2-40e2-be83-af8f9b860398" intoType="HOOK" intoRef="VEHICLE_WEAPON" ref="ak_97" id="34cf40fd-6923-4bf9-8d0f-b7ee1ac71d9e" />
-             <embed  type="GEAR" intoId="34cf40fd-6923-4bf9-8d0f-b7ee1ac71d9e" intoType="HOOK" intoRef="FIREARMS_EXTERNAL" ref="smartgun_system" />
+             <embed  type="GEAR" intoId="34cf40fd-6923-4bf9-8d0f-b7ee1ac71d9e" intoType="HOOK" intoRef="TOP" ref="smartgun_system" />
          <valmod type="GEAR" apply="CHARACTER" ref="ammo_rifles" value="10">
                 <decision choice="b015341d-24dc-42bb-a46b-781a5340e0b3" value="explosive"/>
                 </valmod>

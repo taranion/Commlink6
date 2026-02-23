@@ -47,7 +47,7 @@
 		<modifications>
 			<itemmod type="HOOK" ref="TOP"/>
 			<itemmod type="HOOK" ref="UNDER"/>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
 		</modifications>
 		<attrdef id="PRICE"         value="$RATING*10 +50" />
 		<attrdef id="DAMAGE"        value="$RATING/2 P" />

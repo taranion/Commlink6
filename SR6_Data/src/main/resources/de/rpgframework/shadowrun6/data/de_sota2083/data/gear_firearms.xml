@@ -36,7 +36,7 @@
 		 	<itemmod type="GEARMOD" ref="biometric_gun_lock" />
 		 	<itemmod type="GEARMOD" ref="easy_breakdown" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" id="21a97829-00ff-4725-b215-5c4d6b2e3249"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="21a97829-00ff-4725-b215-5c4d6b2e3249"/>
 			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
 		 	<itemmod type="GEARMOD" ref="weapon_commlink" />
 		</modifications>
@@ -53,7 +53,7 @@
 			<itemmod type="GEARMOD" ref="heavy_weight"/>
 			<itemmod type="GEARMOD" ref="barrel_extension"/>
 			<itemmod type="GEARMOD" ref="nanoconstruction"/>
-			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" />
 			<embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<requires>
