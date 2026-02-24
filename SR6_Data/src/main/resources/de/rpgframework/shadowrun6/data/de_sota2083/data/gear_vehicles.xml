@@ -37,7 +37,7 @@
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />			
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="39634788-b70e-419d-b791-52f0c641f8cf"/>			
 			<embed type="GEAR" ref="hardpoint_concealment" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" variant="huge" />
 			<embed type="GEAR" ref="tires_large" intoType="HOOK" intoRef="VEHICLE_TIRES" variant="smart" />
 			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
@@ -108,7 +108,7 @@
             	<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
 				</embed>
 			<embed type="GEAR" ref="gridlink" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
-			<embed type="GEAR" ref="sony_emporer" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="sony_emporer" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" id="9ea38d43-41a7-43e3-8011-76ba65d8596c"/>
 			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="trid_projector" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<valmod type="HOOK" ref="VEHICLE_CF" value="1"/> <!-- factory installed mods do not change base values, so installing an increase_cargo_space mod does not change CF -->

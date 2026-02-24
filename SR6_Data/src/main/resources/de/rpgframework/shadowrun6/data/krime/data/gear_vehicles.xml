@@ -173,8 +173,8 @@
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="rigger_interface"/>
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_heavy" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_heavy" id="1580f036-eeb1-4166-aead-6177219023e1" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="weapon_turret_standard" id="4c03d3f0-d9bd-442d-a6c3-05d78b00bc7f"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="meta_adjust_pilot" variant="driver_troll" included="true"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CF" ref="amenities" variant="street"/>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ACCESSORY" ref="searchlight" variant="thermo"/>

@@ -41,7 +41,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		 <itemmod type="GEARMOD" ref="easy_breakdown" />
       </modifications>
       <weapon dmg="2P" attack="10,8,5,," mode="SA" ammo="15(c)" skill="firearms" spec="firearms/pistols_light"/>
@@ -53,7 +53,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
 		 <embed type="GEAR" ref="variable_ammo" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
       </modifications>
       <weapon dmg="3P" attack="8,10,6," mode="SS/SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
    </item>
@@ -62,7 +62,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		 <itemmod type="GEARMOD" ref="easy_breakdown" />
       </modifications>
       <weapon dmg="3P" attack="9,10,6," mode="SA" ammo="15(c)" skill="firearms" spec="firearms/pistols_heavy"/>
@@ -71,7 +71,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <itemmod type="HOOK" ref="UNDER"/>
          <embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
       </modifications>
@@ -86,7 +86,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
       </modifications>
       <weapon dmg="3P" attack="8,9,8," mode="SA/BF/FA" ammo="30(c)" skill="firearms" spec="firearms/machine_pistols"/>
    </item>
@@ -103,7 +103,7 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <itemmod type="HOOK" ref="UNDER"/>
       </modifications>
       <weapon dmg="3P" attack="10,8,8," mode="BF/FA" ammo="32(c)" skill="firearms" spec="firearms/submachine_guns"/>
@@ -115,9 +115,10 @@
       <modifications>
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="BARREL"/>
+         <itemmod type="HOOK" ref="STOCK"/>
         <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
         <itemmod type="GEARMOD" ref="foregrip"/>
-        <itemmod type="GEARMOD" ref="folding_stock"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
       <weapon dmg="2P" mode="SA/BF/FA" attack="10,11,9," ammo="28(c)" skill="firearms" spec="firearms/submachine_guns"/>
    </item>
@@ -148,8 +149,8 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="26af8055-f8c2-41af-9409-aaf82ac097b2"/>
       </modifications>
       <weapon dmg="4P" mode="SA/BF" attack="4,11,6,," ammo="10(m)" skill="firearms" spec="firearms/shotguns"/>
    </item>
@@ -160,7 +161,7 @@
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <itemmod type="GEARMOD" ref="foregrip"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
       </modifications>
       <weapon dmg="5P" mode="SA/BF/FA" attack="5,11,7,," ammo="12(c)/32(d)" skill="firearms" spec="firearms/shotguns"/>
    </item>
@@ -188,7 +189,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
       </modifications>
       <weapon dmg="5P" mode="SA/BF" attack="1,8,12,8,8" ammo="26(m)" skill="firearms" spec="firearms/rifles"/>
    </item>
@@ -220,7 +221,7 @@
          <itemmod type="HOOK" ref="SIDE_L"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 		 <embed type="GEAR" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" ref="onotari_shotgun" included="true"/>
       </modifications>
       <weapon dmg="5P" mode="SA/BF/FA" attack="4,11,9,6,2" ammo="38(c)" skill="firearms" spec="firearms/rifles"/>
@@ -237,8 +238,8 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+         <embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="9768952d-3a70-4385-a27c-432cda795c24"/>
       </modifications>
       <weapon dmg="5P" mode="SS" attack="1,8,12,12,6" ammo="12(c)/12(c)" skill="firearms" spec="firearms/rifles"/>
    </item>
@@ -266,7 +267,7 @@
          <itemmod type="HOOK" ref="TOP"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
       </modifications>
       <weapon dmg="6P" mode="SA" attack="1,8,12,16,12" ammo="10(m)" skill="firearms" spec="firearms/rifles"/>
    </item>
@@ -308,9 +309,8 @@
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
          <embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
       </modifications>
       <weapon dmg="6P" mode="BF/FA" attack="1,10,11,8,8" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
    </item>
@@ -321,7 +321,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
          <itemmod type="GEARMOD" ref="rigid_stock"/>
       </modifications>
@@ -335,8 +335,8 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
-         <itemmod type="GEARMOD" ref="folding_stock"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+         <embed type="GEAR" ref="folding_stock" intoType="HOOK" intoRef="STOCK" included="true"/>
       </modifications>
 
       <variant id="model1">
@@ -358,7 +358,7 @@
          <itemmod type="HOOK" ref="BARREL"/>
          <itemmod type="HOOK" ref="UNDER"/>
          <itemmod type="HOOK" ref="STOCK"/>
-         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+         <embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
          <itemmod type="GEARMOD" ref="safe_firing_iff_system"/>
       </modifications>
       <weapon dmg="4P" mode="BF/FA" attack="4,11,11,8,2" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>

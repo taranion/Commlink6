@@ -48,9 +48,9 @@
 			<itemmod type="HOOK" ref="UNDER" />
 			<itemmod type="HOOK" ref="STOCK" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
-			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" />
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" id="48d71b3e-f0c5-46a0-ba1b-3892dddeaa44"/>
 			<embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<itemmod type="GEARMOD" ref="trigger_removal" />
 			<itemmod type="GEARMOD" ref="biometric_gun_lock" />
 			<itemmod type="GEARMOD" ref="easy_breakdown" />
@@ -70,7 +70,7 @@
 			<itemmod type="HOOK" ref="UNDER" />
 			<itemmod type="HOOK" ref="STOCK" />
 			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" />
-            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+            <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<itemmod type="GEARMOD" ref="trigger_removal" />
 			<itemmod type="GEARMOD" ref="biometric_gun_lock" />
 			<itemmod type="GEARMOD" ref="melee_hardening" />
@@ -133,7 +133,7 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
+         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" /> <!-- Smartgun is added versus Black Moon from Schattenload 2021-04 -->
 			<itemmod type="GEARMOD" ref="accessory_rail_left" />
       </modifications>
       <weapon dmg="4P" attack="11,9,7,," mode="SA" ammo="6(cy)" skill="firearms" spec="firearms/pistols_heavy"/>
@@ -143,7 +143,7 @@
       <modifications>
 			<itemmod type="HOOK" ref="TOP" />
 			<itemmod type="HOOK" ref="BARREL" />
-         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+         <embed type="GEAR" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<itemmod type="GEARMOD" ref="accessory_rail_left" />
 			<itemmod type="GEARMOD" ref="personalized_grip_ranged" />
 			<itemmod type="GEARMOD" ref="custom_style" />

@@ -12,7 +12,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="58356129-b483-4dfc-9b3d-1d840d51a0f5" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="58356129-b483-4dfc-9b3d-1d840d51a0f5" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" />
+             <embed  type="GEAR" intoId="58356129-b483-4dfc-9b3d-1d840d51a0f5" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="2c7e709b-167a-44a6-b911-9cdaa85090b3"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -30,7 +30,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="307f8ffd-f8bd-48b8-b0c5-7865178ef208"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -48,7 +48,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="2ecc38a4-b47d-4548-aa99-066ef78bdf1c" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="2ecc38a4-b47d-4548-aa99-066ef78bdf1c" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="2ecc38a4-b47d-4548-aa99-066ef78bdf1c" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="7cd28bf3-a839-41c7-b48d-5c3cc1083d89"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -66,7 +66,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="ed3c4dfa-d05e-4fb0-b335-829117304a90" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="77bf4cac-b029-487b-8513-5889bae356bf"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -84,7 +84,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d" intoType="HOOK" intoRef="CYBERDECK" ref="spinrad_falcon" />
+             <embed  type="GEAR" intoId="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d" intoType="HOOK" intoRef="CYBERDECK" ref="spinrad_falcon" id="01cf4534-d478-4a3d-a2c9-55539b2cb055"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -102,7 +102,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="ed3c4dfa-d05e-4fb0-b335-829117304a90" variant="bodyware">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
          </itemmod>
-         <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="erika_mcd6" />
+         <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="erika_mcd6" id="010eee1c-1c30-4e56-8ba0-6ef84f08a302"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack" id="df2df752-1127-4017-9b5f-a2d4d252c008">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
          </itemmod>
@@ -676,7 +676,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="58356129-b483-4dfc-9b3d-1d840d51a0f5">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="58356129-b483-4dfc-9b3d-1d840d51a0f5" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" />
+             <embed  type="GEAR" intoId="58356129-b483-4dfc-9b3d-1d840d51a0f5" intoType="HOOK" intoRef="CYBERDECK" ref="shiawase_cyber6" id="2c7e709b-167a-44a6-b911-9cdaa85090b3"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -694,7 +694,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="2e21bcf1-7fcf-4ac1-9af4-6a51a3e71385" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="307f8ffd-f8bd-48b8-b0c5-7865178ef208"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -712,7 +712,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="2ecc38a4-b47d-4548-aa99-066ef78bdf1c">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="2ecc38a4-b47d-4548-aa99-066ef78bdf1c" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="2ecc38a4-b47d-4548-aa99-066ef78bdf1c" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="7cd28bf3-a839-41c7-b48d-5c3cc1083d89"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -730,7 +730,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="ed3c4dfa-d05e-4fb0-b335-829117304a90">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" />
+             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="renraku_kitsune" id="77bf4cac-b029-487b-8513-5889bae356bf"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -748,7 +748,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d" intoType="HOOK" intoRef="CYBERDECK" ref="spinrad_falcon" />
+             <embed  type="GEAR" intoId="b5ef9697-d9c8-40b4-affc-9fb0ee809e8d" intoType="HOOK" intoRef="CYBERDECK" ref="spinrad_falcon" id="01cf4534-d478-4a3d-a2c9-55539b2cb055"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
@@ -766,7 +766,7 @@
          <itemmod type="GEAR" apply="CHARACTER" ref="cyberdeck" id="ed3c4dfa-d05e-4fb0-b335-829117304a90">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>
-             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="erika_mcd6" />
+             <embed  type="GEAR" intoId="ed3c4dfa-d05e-4fb0-b335-829117304a90" intoType="HOOK" intoRef="CYBERDECK" ref="erika_mcd6" id="010eee1c-1c30-4e56-8ba0-6ef84f08a302"/>
          <itemmod type="GEAR" apply="CHARACTER" ref="datajack">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170c" value="STANDARD"/>
                 </itemmod>

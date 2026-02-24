@@ -4,7 +4,7 @@
    <item id="ford_broadcast" avail="2"  price="50000" type="VEHICLES" subtype="VANS">
       <vehicle han="3/3" acc="12" spdi="20" tspd="180" bod="16" arm="10" pil="3" sen="3" sea="4"/>
       <modifications>
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="horizons_overseer"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="horizons_overseer" id="dfd096d9-91f2-47d0-8136-5f2e222a1a98"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="satellite_link"/>
       </modifications>
    </item>

@@ -79,12 +79,12 @@
 				</embed>
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="myrmidon_drone" />
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_small" id="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2"/>
-			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" intoId="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2" ref="armtech_mgl6" id="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" />
-            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" intoId="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2" ref="armtech_mgl6" id="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" />
+            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
             <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_small" id="2ebae10b-9e9e-4956-940a-b772adc1f0e1" />
-			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" intoId="2ebae10b-9e9e-4956-940a-b772adc1f0e1" ref="armtech_mgl6" id="22b1f566-a4ae-4520-8fff-3dc5b53714dd" />
-            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" intoId="2ebae10b-9e9e-4956-940a-b772adc1f0e1" ref="armtech_mgl6" id="22b1f566-a4ae-4520-8fff-3dc5b53714dd" />
+            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
             <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
         </modifications>
 		<geardef>
@@ -95,8 +95,8 @@
 				<vehicle han="0" acc="0" spdi="0" tspd="0" bod="0" arm="0" pil="0" sen="4" />
 				<modifications>
 					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_small" id="fe01d7e0-a730-4eb1-875e-30820952d08f"/>
-					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON" intoId="fe01d7e0-a730-4eb1-875e-30820952d08f" ref="steyr_tmp" id="3d818acd-d03e-4f87-8328-905ba1d5bacc"/>
-					<embed type="GEAR" intoId="3d818acd-d03e-4f87-8328-905ba1d5bacc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" />
+					<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" intoId="fe01d7e0-a730-4eb1-875e-30820952d08f" ref="steyr_tmp" id="3d818acd-d03e-4f87-8328-905ba1d5bacc"/>
+					<embed type="GEAR" intoId="3d818acd-d03e-4f87-8328-905ba1d5bacc" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 					<embed  type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="clearsight">
 						<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 						</embed>

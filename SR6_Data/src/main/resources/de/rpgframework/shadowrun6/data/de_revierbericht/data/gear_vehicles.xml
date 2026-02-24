@@ -40,7 +40,7 @@
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_large"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="small" />
 		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="drone_rack" variant="medium" />
-		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy"/>
+		<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_turret_heavy" id="4b1b0161-ac15-4cda-8f1d-07adbe72b765"/>
 		<embed  type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="electronic_countermeasures">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
                 </embed>

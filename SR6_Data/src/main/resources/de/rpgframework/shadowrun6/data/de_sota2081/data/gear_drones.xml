@@ -17,7 +17,7 @@
       <vehicle han="2/4" acc="30" spdi="50" tspd="200" bod="5" arm="7" pil="4" sen="3" />
 	  <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="hardpoint_standard" />
-        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" />
+        <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" ref="weapon_mount_standard" id="489c3d99-e7de-4c8a-a0f6-7481412b2d29"/>
 		<embed type="GEAR" intoType="HOOK" intoRef="SOFTWARE" ref="targeting">
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 </embed>

@@ -210,7 +210,7 @@
 		<vehicle han="3/5" acc="15" spdi="15" tspd="80" bod="12" arm="16" pil="4" sen="4" />
 		<modifications>
 			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS" rating="12" />
-			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_BODY" />
+			<embed type="GEAR" ref="weapon_turret_standard" intoType="HOOK" intoRef="VEHICLE_BODY" id="129f996c-e0d8-43e5-b419-ac0aad3964d3"/>
 		</modifications>
 	</item>
 	<item id="ares_packmule" avail="3" cost="10000" type="DRONE_LARGE" subtype="GROUND">

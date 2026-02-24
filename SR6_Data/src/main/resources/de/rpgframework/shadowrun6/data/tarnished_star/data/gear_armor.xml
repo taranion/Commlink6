@@ -75,7 +75,7 @@
 					</embed>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="gear_access" included="true"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
-				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true" id="d0215eb7-a040-42c9-9255-d25115521b77"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="basic" included="true" />
 			</modifications>
 		</variant>
@@ -96,7 +96,7 @@
 					</embed>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="mems_basic_harness" included="true"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
-				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true" id="de9c51e1-f710-4217-8e37-e7aa21d75879"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="basic" included="true" />
 			</modifications>
 		</variant>
@@ -115,7 +115,7 @@
 					</embed>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="mems_basic_harness" included="true"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="biomonitor" included="true" />
-				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true"/>
+				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="erika_elite" included="true" id="5c9ebb7b-3aed-4c34-8f30-3584069478dc"/>
 				<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="trauma_response_system" variant="advanced" included="true" />
 			</modifications>
 		</variant>

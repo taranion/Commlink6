@@ -86,7 +86,7 @@
 	<item avail="2" price="6500" id="gm-nissan_dobermann" type="DRONE_MEDIUM" subtype="GROUND">
 		<vehicle han="3/5" acc="10" spdi="15" tspd="100" bod="4" arm="6" pil="2" sen="3" />
 		<modifications>
-			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="76fa2c30-997e-4868-87f5-2c3163f992f9"/>
 		</modifications>
 	</item>
 
