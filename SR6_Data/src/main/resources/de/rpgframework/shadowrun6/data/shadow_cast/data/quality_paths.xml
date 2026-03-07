@@ -72,4 +72,137 @@
 		</step>
 	</qpath>
 
+	<!-- Private Investigator -->
+	<qpath id="private_investigator">
+		<step id="killing_the_pain" level="0">
+			<nextSteps>
+				<next>getting_help</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="killing_the_pain"/>
+			</modifications>
+		</step>
+		<step id="getting_help" level="1">
+			<nextSteps>
+				<next>pi_with_a_purpose</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="killing_the_pain" remove="true"/>
+				<itemmod type="QUALITY" ref="getting_help"/>
+			</modifications>
+		</step>
+		<step id="pi_with_a_purpose" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="getting_help" remove="true"/>
+				<itemmod type="QUALITY" ref="pi_with_a_purpose"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Racing Rigger: The Racing Family -->
+	<qpath id="the_racing_family">
+		<step id="society_of_speed" level="0">
+			<nextSteps>
+				<next>closer_contacts</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="society_of_speed"/>
+			</modifications>
+		</step>
+		<step id="closer_contacts" level="1">
+			<nextSteps>
+				<next>nothing_is_bigger_than_family</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="society_of_speed" remove="true"/>
+				<itemmod type="QUALITY" ref="closer_contacts"/>
+			</modifications>
+		</step>
+		<step id="nothing_is_bigger_than_family" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="closer_contacts" remove="true"/>
+				<itemmod type="QUALITY" ref="nothing_is_bigger_than_family"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Racing Rigger: Wreck and Recovery -->
+	<qpath id="wreck_and_recovery">
+		<step id="signature_vehicle" level="0">
+			<nextSteps>
+				<next>devastating_crash</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="signature_vehicle"/>
+			</modifications>
+		</step>
+		<step id="devastating_crash" level="1">
+			<nextSteps>
+				<next>rigger_equilibrium</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="signature_vehicle" remove="true"/>
+				<itemmod type="QUALITY" ref="devastating_crash"/>
+			</modifications>
+		</step>
+		<step id="rigger_equilibrium" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="devastating_crash" remove="true"/>
+				<itemmod type="QUALITY" ref="rigger_equilibrium"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Social Adept: Gestalt -->
+	<qpath id="gestalt">
+		<step id="social_adept_gestalt_0" level="0">
+			<nextSteps>
+				<next>social_adept_gestalt_1</next>
+			</nextSteps>
+		</step>
+		<step id="social_adept_gestalt_1" level="1">
+			<nextSteps>
+				<next>social_adept_gestalt_2</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="social_adept_gestalt_1"/>
+			</modifications>
+		</step>
+		<step id="social_adept_gestalt_2" level="2">
+			<modifications>
+				<itemmod type="QUALITY" ref="social_adept_gestalt_2"/>
+			</modifications>
+		</step>
+	</qpath>
+
+	<!-- Social Adept: Gestalt -->
+	<qpath id="operations_ace">
+		<step id="social_adept_operations_ace_0" level="0">
+			<nextSteps>
+				<next>social_adept_operations_ace_1</next>
+			</nextSteps>
+		</step>
+		<step id="social_adept_operations_ace_1" level="1">
+			<nextSteps>
+				<next>social_adept_operations_ace_2</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="social_adept_operations_ace_1"/>
+			</modifications>
+		</step>
+		<step id="social_adept_operations_ace_2" level="2">
+			<nextSteps>
+				<next>social_adept_operations_ace_3</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="social_adept_operations_ace_2"/>
+			</modifications>
+		</step>
+		<step id="social_adept_operations_ace_3" level="3">
+			<modifications>
+				<itemmod type="QUALITY" ref="social_adept_operations_ace_3"/>
+			</modifications>
+		</step>
+	</qpath>
+
 </qpaths>

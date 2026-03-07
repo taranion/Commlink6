@@ -9,7 +9,7 @@
 	</quality>
 	<quality id="reactive_counterspelling" karma="10" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="awakened_awareness" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="awakened_awareness" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="defensive_attunement" karma="5" pos="true" type="CHARACTER_TRAITS">
@@ -25,7 +25,7 @@
 	</quality>
 	<quality id="metaplanar_contract_lore" karma="10" pos="true" type="CHARACTER_TRAITS" multi="true">
 		<requires>
-			<valuereq type="QUALITY" ref="astral_resident" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="astral_resident" apply="CHARACTER"/>
 		</requires>
 		<choices>
 			<choice type="SPIRIT" uuid="809f9d8e-e97f-49e7-a937-0c9582bd40fd"/>
@@ -33,7 +33,7 @@
 	</quality>
 	<quality id="astral_gate_access" karma="3" pos="true" type="CHARACTER_TRAITS" multi="true">
 		<requires>
-			<valuereq type="QUALITY" ref="astral_resident" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="astral_resident" apply="CHARACTER"/>
 		</requires>
 		<choices>
 			<choice type="TEXT" uuid="9472f850-856d-4ec2-b574-d9404f1baf24"/>
@@ -46,27 +46,27 @@
 		</modifications>
 	</quality>
 	<quality id="counter_spirits" karma="15" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="spell_spoiler" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="astral_stealth" karma="7" pos="true" type="CHARACTER_TRAITS">
 		<requires>
 			<selreq>
-				<valuereq type="QUALITY" ref="ward_pusher" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="counter_spirits" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="spell_spoiler" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="known_astral_signature" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="ward_pusher" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="counter_spirits" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="spell_spoiler" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="known_astral_signature" apply="CHARACTER"/>
 			</selreq>
 		</requires>
 		<modifications>
 			<checkmod type="SKILL" ref="stealth" what="EDGE" value="1" apply="CHARACTER" cond="true"/>
 		</modifications>
 	</quality>
-	<quality id="spell_spoiler" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="known_astral_signature" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
 			<selreq>
-				<valuereq type="QUALITY" ref="ward_pusher" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="counter_spirits" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="spell_spoiler" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="astral_stealth" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="ward_pusher" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="counter_spirits" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="spell_spoiler" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="astral_stealth" apply="CHARACTER"/>
 			</selreq>
 		</requires>
 	</quality>
@@ -74,7 +74,7 @@
 	<quality id="entangled" karma="10" pos="false" type="CHARACTER_TRAITS"/>
 	<quality id="forbidden_lore" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="entangled" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="entangled" apply="CHARACTER"/>
 		</requires>
 		<modifications>
 			<valmod type="SKILL" ref="knowledge" value="1">
@@ -84,12 +84,12 @@
 	</quality>
 	<quality id="unwanted_protection" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="entangled" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="entangled" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="metagenic_alteration" karma="5" pos="true" type="CHARACTER_TRAITS" multi="true">
 		<requires>
-			<valuereq type="QUALITY" ref="entangled" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="entangled" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<!-- Academic Mage: Talismonger's best friend -->
@@ -104,7 +104,7 @@
 	<quality id="i_smell_weakness" karma="15" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="points_of_pressure" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="i_smell_weakness" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="i_smell_weakness" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<!-- Banshee Hitman: Polite, Efficient -->
@@ -147,7 +147,7 @@
 	<quality id="local_hero" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="my_neighborhood" karma="10" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="local_hero" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="local_hero" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="tragic_regrets" karma="5" pos="false" type="CHARACTER_TRAITS"/>
@@ -156,7 +156,7 @@
 	<quality id="magical_forgery" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="subtle_alchemy" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="magical_forgery" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="magical_forgery" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="long_fuse" karma="5" pos="true" type="CHARACTER_TRAITS"/>
@@ -195,17 +195,18 @@
 	<quality id="panopticon_awareness" karma="3" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="dirt_locker" karma="5" pos="true" type="CHARACTER_TRAITS" max="3">
 		<requires>
-			<valuereq type="QUALITY" ref="panopticon_awareness" apply="CHARACTER"/>
-			<valuereq type="QUALITY" ref="big_bad_brother" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="panopticon_awareness" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="big_bad_brother" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="big_bad_brother" karma="5" pos="false" type="CHARACTER_TRAITS"/>
 	<quality id="prescient_defender" karma="11" pos="true" type="CHARACTER_TRAITS"/>
 
+
 	<!-- Dissonant Technomancer -->
 	<quality id="dissonant_technomancer" karma="15" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="INITIATION_RANK" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="SUBMERSION_RANK" apply="CHARACTER" value="1"/>
 		</requires>
 		<choices>
 			<choice type="SUBSELECT" ref="variant" uuid="c4d72104-bd9a-49b4-b42a-7955e0b6d902">
@@ -217,59 +218,59 @@
 	</quality>
 	<quality id="dissonant_diffusion" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 			<datareq type="COMPLEX_FORM" ref="diffusion" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonance_spike" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 			<datareq type="COMPLEX_FORM" ref="resonance_spike" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="god_slayer" karma="10" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_gremlins" karma="10" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_static" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_compilation_error" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_sprite_lag" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_confusion" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_deletion" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_rage" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 	<quality id="dissonant_stigma" karma="5" pos="false" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="dissonant_technomancer" apply="CHARACTER"/>
 		</requires>
 	</quality>
 
@@ -277,12 +278,12 @@
 	<!-- Drone Rigger: Combat Coordination -->
 	<quality id="force_recon" karma="7" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="control_freak" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="control_freak" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="m_toc_mastery" karma="3" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="control_freak" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="control_freak" apply="CHARACTER"/>
 			<!-- cannot check for presence of 'small unit tactic' knowledge skill, as knowledge skills are text defined and may be written differently by different users in different languages -->
 			<selreq>
 				<datareq type="GEAR" ref="mtoc_mark1" apply="CHARACTER"/>
@@ -296,31 +297,31 @@
 	<quality id="scrapper" karma="10" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="scrappy_mod" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="scrappy_fab" karma="15" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="quick_and_dirty" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
 			<selreq>
-				<valuereq type="QUALITY" ref="scrappy_mod" apply="CHARACTER"/>
-				<valuereq type="QUALITY" ref="scrappy_fab" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="scrappy_mod" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="scrappy_fab" apply="CHARACTER"/>
 			</selreq>
 		</requires>
 	</quality>	
 	<quality id="scrappy_traps" karma="10" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
 			<datareq type="SKILLSPECIALIZATION" ref="engineering/demolitions" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="scrappy_tools" karma="5" pos="true" type="CHARACTER_TRAITS">
 		<requires>
-			<valuereq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="scrapper" apply="CHARACTER"/>
 			<datareq type="SKILL" ref="engineering" apply="CHARACTER"/>
 		</requires>
 	</quality>	
@@ -337,17 +338,102 @@
 			<choice type="TEXT" uuid="9472f850-856d-4ec2-b574-d9404f1baf24"/>
 		</choices>
 		<requires>
-			<valuereq type="QUALITY" ref="autosoft_unlock" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="autosoft_unlock" apply="CHARACTER"/>
 		</requires>
 	</quality>	
 	<quality id="teamwork_makes_drones_work" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="drone_patch" karma="5" pos="true" type="CHARACTER_TRAITS"/>
 	<quality id="at_home_in_machine" karma="10" pos="false" type="CHARACTER_TRAITS"/>
+
 	
 	<!-- Eagle Shaman: Eagle-Eyed Detective -->
+	<quality id="focus_the_senses" karma="5" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="quick_observation" karma="10" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="perceptive_defense" karma="10" pos="true" type="CHARACTER_TRAITS"/>
+	<!-- Eagle Shaman: Purifier -->
+	<quality id="sense_corruption" karma="8" pos="true" type="CHARACTER_TRAITS" max="3"/>
+	<quality id="clearing_presence" karma="5" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="sense_corruption" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+	<quality id="natural_alchemy" karma="12" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="sense_corruption" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+	<quality id="toxic_revenger" karma="5" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="toxic_vulnerability" karma="5" pos="false" type="CHARACTER_TRAITS"/>
+	<!-- Eagle Shaman: Eagles Ex Machina -->
+	<quality id="fresh_air_spirit" karma="10" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="mentor_spirit" apply="CHARACTER"/>
+			<datareq type="QUALITY" ref="spirit_affinity" apply="CHARACTER"/>			
+		</requires>
+	</quality>	
+	<quality id="breath_of_binding" karma="10" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="fresh_air_spirit" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+	<quality id="critters_love_me" karma="5" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="higher_expectations" karma="10" pos="false" type="CHARACTER_TRAITS"/>
+	<!-- Eagle Shaman: Winged Gunslinger -->
+	<quality id="eagles_talon" karma="7" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="default_to_pistols" karma="9" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="weak_spot" karma="15" pos="true" type="CHARACTER_TRAITS"/>
+	<quality id="wings_of_the_eagle" karma="10" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="shamanic_mask" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+	<quality id="eagles_flight" karma="10" pos="true" type="CHARACTER_TRAITS">
+		<requires>
+			<datareq type="QUALITY" ref="wings_of_the_eagle" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+
 	
+	<!-- The Face Fatal path relies solely on existing qualities -->
+
 	
+	<!-- The Gun-Fu Street Samurai path is solely role playing -->
+
+	
+	<!-- Private Investigator -->
+	<quality id="killing_the_pain" karma="4" pos="false" type="QUALITY_PATH"/>
+	<quality id="getting_help" karma="5" pos="true" type="QUALITY_PATH"/> <!-- price RAW is 10.000 nuyen, thus using 1:2.000 exchange rate to define 5 karma cost -->
+	<quality id="pi_with_a_purpose" karma="4" pos="true" type="QUALITY_PATH"/>
 
 
+	<!-- Racing Rigger: The Racing Family -->
+	<quality id="society_of_speed" karma="5" pos="true" type="QUALITY_PATH"/>
+	<quality id="closer_contacts" karma="6" pos="true" type="QUALITY_PATH"/>
+	<quality id="nothing_is_bigger_than_family" karma="6" pos="true" type="QUALITY_PATH"/>
+	
+	<!-- Racing Rigger: Wreck and Recovery -->
+	<quality id="signature_vehicle" karma="12" pos="true" type="QUALITY_PATH"/>
+	<quality id="devastating_crash" karma="4" pos="false" type="QUALITY_PATH"/>
+	<quality id="rigger_equilibrium" karma="8" pos="true" type="QUALITY_PATH"/>
+
+	<!-- The sniper path is solely role playing -->
+
+	<!-- Social Adept: Gestalt -->
+	<quality id="social_adept_gestalt_1" karma="10" pos="true" type="QUALITY_PATH"/>
+	<quality id="social_adept_gestalt_2" karma="0" pos="true" type="QUALITY_PATH">
+		<requires>
+			<valuereq type="ADEPT_POWER" ref="improved_ability" value="2" apply="CHARACTER"/>
+		</requires>
+	</quality>	
+	<!-- Social Adept: Operations Ace -->
+	<quality id="social_adept_operations_ace_1" karma="10" pos="true" type="QUALITY_PATH"/>
+	<quality id="social_adept_operations_ace_2" karma="15" pos="true" type="QUALITY_PATH"/>
+	<quality id="social_adept_operations_ace_3" karma="15" pos="true" type="QUALITY_PATH"/>
+
+	<!-- The street doc path is solely role playing -->
+
+	<!-- The street samurai blade fighter path is solely role playing -->
+	
+	
 
 </qualities>
