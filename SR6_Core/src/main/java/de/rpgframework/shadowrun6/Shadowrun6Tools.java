@@ -793,6 +793,8 @@ public class Shadowrun6Tools {
 			case MARTIAL_ART:
 			case METATYPE:
 			case QUALITY:
+			case COMPLEX_FORM:
+			case SPELL:
 			case TECHNIQUE:
 				DataItem data = ShadowrunReference.resolve((ShadowrunReference)tmp.getType(), tmp.getKey());
 				if (data==null)
