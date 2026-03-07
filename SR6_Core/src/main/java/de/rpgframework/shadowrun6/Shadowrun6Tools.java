@@ -1101,6 +1101,9 @@ public class Shadowrun6Tools {
 			case ADEPT_POWER:
 				if (negated) return !model.hasAdeptPower(req.getKey());
 				return model.hasAdeptPower(req.getKey());
+			case COMPLEX_FORM:
+				if (negated) return !model.hasComplexForm(req.getKey());
+				return model.hasComplexForm(req.getKey());
 			case DRAKE_TYPE:
 				if (negated) return model.getDrakeType()==null || item!=model.getDrakeType().getResolved();
 				return model.getDrakeType()!=null || item==model.getDrakeType().getResolved();
@@ -1121,6 +1124,9 @@ public class Shadowrun6Tools {
 			case METAECHO:
 				if (negated) return !model.hasMetamagicOrEcho(req.getKey());
 				return model.hasMetamagicOrEcho(req.getKey());
+//			case SPELL:
+//				if (negated) return !model.hasSpell(req.getKey());
+//				return model.hasSpell(req.getKey());
 			case GEAR:
 			case CARRIED:
 				// Character needs to have a specific gear
