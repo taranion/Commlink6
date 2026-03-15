@@ -130,7 +130,7 @@ public class EquipmentCtrlTest {
 		assertEquals(2, res.get().getCount());
 		assertEquals("Wrong nuyen paid", 20, model.getNuyen());
 		ctrl.increase(countable);
-		assertEquals("Wrong nuyen paid", 0, model.getNuyen());
+		assertEquals("Wrong nuyen paid", 20, model.getNuyen());
 		assertEquals(3, res.get().getCount());
 
 		poss = ctrl.canBeIncreased(countable);

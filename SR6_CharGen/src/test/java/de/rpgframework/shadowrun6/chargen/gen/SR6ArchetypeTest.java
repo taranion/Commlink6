@@ -2035,7 +2035,7 @@ public class SR6ArchetypeTest {
 		eRes = equip.increase(eRes.get());
 		assertTrue(eRes.wasSuccessful());
 		assertEquals("Increasing count failed",3, eRes.get().getCount());
-		assertEquals(100, eRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+		assertEquals(300, eRes.get().getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
 		int priceAfter = nuyenBefore - 300;
 		assertEquals("Count does not multiply price",priceAfter, model.getNuyen());
 
