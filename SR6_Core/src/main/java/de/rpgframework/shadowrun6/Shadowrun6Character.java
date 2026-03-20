@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.prelle.simplepersist.Element;
 import org.prelle.simplepersist.ElementList;
@@ -231,7 +232,13 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public List<CarriedItem<ItemTemplate>> getCarriedItems(ItemType... types) {
 		CarriedItemItemTypeFilter filter = new CarriedItemItemTypeFilter(null, types);
-		return getCarriedItems().stream()
+		
+		List<CarriedItem<ItemTemplate>> ret = new ArrayList<>();
+		for (CarriedItem<ItemTemplate> item : getCarriedItems()) {
+			ret.add(item);
+			item.getAlternates().forEach(i -> ret.add((CarriedItem<ItemTemplate>) i));
+		}
+		return ret.stream()
 			.filter(filter)
 			.collect(Collectors.toList())
 			;
