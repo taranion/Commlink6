@@ -256,19 +256,16 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	/**
 	 * @see org.prelle.javafx.Section#refresh()
 	 */
-	@SuppressWarnings("unchecked")
 	public void refresh() {
-//		logger.log(Level.DEBUG, "refresh");
-//		logger.log(Level.WARNING, "GearSection("+getTitle()+": "+filter);
 		if (model==null) return;
 
 		// If  a model and a filter exists, update automatically
 		if (filter!=null) {
 			List<CarriedItem<ItemTemplate>> data = null;
 			data = ((List<CarriedItem<ItemTemplate>>)model.getCarriedItemsRecursive())
-			.stream()
-			.filter(filter)
-			.collect(Collectors.toList());
+					.stream()
+					.filter(filter)
+					.collect(Collectors.toList());
 			list.getItems().setAll(data);
 		}
 
