@@ -95,10 +95,9 @@ public class GetModificationsFromGear implements ProcessingStep {
 	//-------------------------------------------------------------------
 	private void checkAlternateUsages(CarriedItem<ItemTemplate> item) {
 		for (CarriedItem<?> alt : item.getAlternates()) {
-			logger.log(Level.WARNING, "Found alternate item {0} of {1}", alt, item);
-			alt.setInjectedBy(item);
-			logger.log(Level.TRACE, "{0}",alt.dump());
-			model.addVirtualCarriedItem((CarriedItem<ItemTemplate>) alt);
+			logger.log(Level.WARNING, "Found alternate item {0} of {1} - injected by {2}", alt, item, alt.getInjectedBy());
+//			logger.log(Level.TRACE, "{0}",alt.dump());
+//			model.addVirtualCarriedItem((CarriedItem<ItemTemplate>) alt);
 		}
 	}
 
