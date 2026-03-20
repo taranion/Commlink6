@@ -83,8 +83,10 @@ public class CreateAlternatesStep implements CarriedItemProcessor {
 		if (model.hasAutoFlag(SR6ItemFlag.MELEE_HARDENING_ALTERNATE)) {
 			CarriedItem<ItemTemplate> asMelee = new CarriedItem<ItemTemplate>();
 			asMelee.setResolved(model.getResolved());
-			asMelee.setInjectedBy(model);
+			asMelee.setInjectedBy(Shadowrun6Core.getItem(SR6ItemEnhancement.class, "melee_hardening"));
 			asMelee.setParent(model);
+			if (model.getCustomName()!=null)
+				asMelee.setCustomName(model.getCustomName());
 			//asMelee.setCustomName(model.getNameWithoutRating());
 			asMelee.setAttribute(SR6ItemAttribute.ITEMTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMTYPE, ItemType.WEAPON_CLOSE_COMBAT));
 			asMelee.setAttribute(SR6ItemAttribute.ITEMSUBTYPE, new ItemAttributeObjectValue<>(SR6ItemAttribute.ITEMSUBTYPE, ItemSubType.CLUBS));
