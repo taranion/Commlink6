@@ -463,7 +463,7 @@ public abstract class CommonEquipmentController extends ControllerImpl<ItemTempl
 //		if (!value.getModifyable().isCountable())
 //			return Possible.FALSE;
 
-		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue();
+		int nuyen = value.getAsValue(SR6ItemAttribute.PRICE).getDistributed();
 		if (getModel().getNuyen()<nuyen) {
 			boolean allowNegative = parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_NEGATIVE_NUYEN);
 			if (!allowNegative) {

@@ -5,6 +5,7 @@ import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 
@@ -49,16 +51,16 @@ public abstract class CommonMetatypeGenerator extends ControllerImpl<SR6MetaType
 	 */
 	@Override
 	public List<MetaTypeOption> getAvailable() {
-//		return new ArrayList<MetaTypeOption>(availableOptions.values().stream()
+		return availableOptions.values().stream()
 //				.filter(p -> parent.showDataItem(p))
-//				.collect(Collectors.toMap(
-//						MetaTypeOption::getId,          // Key-Mapper: ID as Key
-//                        item -> item,             // Value-Mapper: The item as value
-//                        (existing, replacement) -> // Merge-Function for duplicates:
-//                            existing.getLanguage() != null ? existing : replacement  // prefer Item with Locale
-//                )).values());
-		List<MetaTypeOption> ret = new ArrayList<>(availableOptions.values());
-		return ret;
+				.collect(Collectors.toMap(
+						p -> p.getResolved().getId(),
+						p -> p,
+						(existing, replacement) -> replacement
+				))
+				.values()
+				.stream()
+				.toList();
 	}
 
 	//-------------------------------------------------------------------

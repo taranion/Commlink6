@@ -62,15 +62,15 @@ public class FilteredDatasetTest {
 		charGen.runProcessors();
 		List<String> ids = new ArrayList<String>( charGen.getMetatypeController().getAvailable().stream().map(m -> m.getId()).toList() );
 		assertTrue("Nartaki with 6 arms missing", ids.contains("nartaki2"));
-//		// Ogre exists in two language variants, but only one is returned as available
-//		Collections.sort(ids);
-//		for (String id : ids) {
-//			System.out.println("FilteredDatasetTest: "+id);
-//		}
+		// Ogre exists in two language variants, but only one is returned as available
+		Collections.sort(ids);
+		for (String id : ids) {
+			System.out.println("FilteredDatasetTest: "+id);
+		}
 		assertEquals("Ogre should only appear once",1, ids.stream().filter(id -> "ogre".equals(id)).toList().size());
 
 		control.mode = DataSetMode.SELECTED;
-		//control.selected.add("CORE");
+		control.selected.add("CORE");
 		charGen.runProcessors();
 		assertEquals(5, charGen.getMetatypeController().getAvailable().size());
 	}

@@ -129,13 +129,15 @@ public class EquipmentCtrlTest {
 		ctrl.increase(countable);
 		assertEquals(2, res.get().getCount());
 		assertEquals("Wrong nuyen paid", 20, model.getNuyen());
+		poss = ctrl.canBeIncreased(countable);
+		assertTrue("Expected to be increasable: "+poss.getMostSevere(),poss.get());
 		ctrl.increase(countable);
+		assertEquals("Increasing did not work",3, res.get().getCount());
 		assertEquals("Wrong nuyen paid", 0, model.getNuyen());
-		assertEquals(3, res.get().getCount());
 
 		poss = ctrl.canBeIncreased(countable);
 		// Should not be possible due to not enough nuyen
-		assertFalse("Increasing above Nuyen limit not detected", poss.get());
+		assertFalse("Increasing above Nuyen limit not detected: "+poss.getMostSevere(), poss.get());
 		assertEquals(IRejectReasons.IMPOSS_NOT_ENOUGH_NUYEN, poss.getI18NKey().get(0).getKey());
 		poss = ctrl.canBeDecreased(countable);
 		assertTrue(poss.get());
