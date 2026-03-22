@@ -26,7 +26,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.25</client.plugin.version>
 		<attach.version>4.0.22</attach.version>
-		<rpgfw.version>5.4.0-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.4.0</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
@@ -111,13 +111,13 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.40</version>
+			<version>1.18.42</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle</groupId>
 			<artifactId>javafx-extensions</artifactId>
-			<version>[5.1.1-SNAPSHOT,5.99)</version>
+			<version>[5.1.1,5.99)</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openjfx</groupId>
