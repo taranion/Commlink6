@@ -12,7 +12,7 @@
 
 	<groupId>de.rpgframework.shadowrun6</groupId>
 	<artifactId>commlink6</artifactId>
-	<version>1.12.4-SNAPSHOT</version>
+	<version>1.13.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>Commlink6</name>
@@ -26,7 +26,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.25</client.plugin.version>
 		<attach.version>4.0.22</attach.version>
-		<rpgfw.version>5.4.0-SNAPSHOT</rpgfw.version>
+		<rpgfw.version>5.4.1</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
@@ -75,7 +75,7 @@
       <dependency>
          <groupId>com.gluonhq.attach</groupId>
          <artifactId>settings</artifactId>
-         <version>4.0.22</version>
+         <version>${attach.version}</version>
          <classifier>desktop</classifier>
       </dependency>
 		<dependency>
@@ -111,13 +111,12 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.40</version>
+			<version>1.18.42</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.prelle</groupId>
 			<artifactId>javafx-extensions</artifactId>
-			<version>[5.1.1-SNAPSHOT,5.99)</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openjfx</groupId>
@@ -128,17 +127,17 @@
       <dependency>
          <groupId>de.rpgframework</groupId>
          <artifactId>eden-api</artifactId>
-         <version>0.1.0-SNAPSHOT</version>
+         <version>0.1.0</version>
       </dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>eden-client</artifactId>
-			<version>0.1.0-SNAPSHOT</version>
+			<version>0.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
          <artifactId>eden-client-jfx</artifactId>
-         <version>0.0.8-SNAPSHOT</version>
+         <version>0.0.8</version>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>

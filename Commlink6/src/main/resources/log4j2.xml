@@ -14,7 +14,7 @@
     <Logger name="jdk" level="warn"/>
     <Logger name="javafx" level="info"/>
     <Logger name="prelle.jfx" level="WARN"/>
-    <Logger name="de.rpgframework.genericrpg.chargen.main" level="DEBUG"/>
+    <Logger name="de.rpgframework.genericrpg.chargen.main" level="ERROR"/>
     <Logger name="de.rpgframework.genericrpg.items" level="WARN"/>
     <Logger name="de.rpgframework.shadowrun.chargen" level="INFO"/>
     <Logger name="de.rpgframework.shadowrun6.chargen" level="INFO"/>
@@ -28,5 +28,6 @@
     <Logger name="de.rpgframework.shadowrun6.data" level="DEBUG"/>
     <Logger name="de.rpgframework.shadowrun6.items" level="INFO"/>
     <Logger name="de.rpgframework.shadowrun6.proc" level="WARN"/>
+    <Logger name="de.rpgframework.shadowrun6.proc.drake" level="TRACE"/>
 	</Loggers>
 </Configuration>
