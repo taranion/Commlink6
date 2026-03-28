@@ -8,4 +8,52 @@
    	<attrdef id="PRICE" value="$RATING*$RATING*150"/>
    </item>
    
+<!-- Schmutzige Tricks -->
+   
+	<item id="sleeper_tag" avail="8" price="250" subtype="RFID" type="ELECTRONICS" count="y"/>
+
+	<item id="shiawase_kagizume_s79" avail="2" price="175" type="ELECTRONICS" subtype="COMMLINK"> <!-- basing data on CRB metalink -->
+		<usage mode="CARRIED"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item id="cmt_clip_mini_z3" avail="2" price="58" type="ELECTRONICS" subtype="COMMLINK"> <!-- basing data on CRB metalink -->
+		<usage mode="CARRIED"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item id="meta_link_lumio_now" avail="2" price="35" type="ELECTRONICS" subtype="COMMLINK"> <!-- basing data on CRB metalink -->
+		<usage mode="CARRIED"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item id="sony_cyclops" avail="2" price="135" type="ELECTRONICS" subtype="COMMLINK"> <!-- basing data on CRB metalink -->
+		<usage mode="CARRIED"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+		</modifications>
+		<matrix d="1" f="0" programs="0" devrat="1" />
+ 		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+
+	<item id="kkm" avail="1" price="3" type="SOFTWARE" subtype="BASIC_PROGRAM">
+		<usage mode="EMBEDDED" slot="SOFTWARE"/>
+	</item>
+
+	<item id="distance_alert" avail="1" price="3" type="ELECTRONICS" subtype="SENSOR"/>
+
+
 </items>

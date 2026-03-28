@@ -265,6 +265,22 @@
    </item>
 
 
+<!-- Exotic Weapons -->
+
+	<item id="magic_glitter_scent" avail="1" price="9" type="WEAPON_SPECIAL" subtype="THROWERS" count="y" >
+		<weapon dmg="3P" mode="SS" attack="4,,,," ammo="1(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/> <!-- no AR stated, estimating based on Hell Turtle -->
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+	</item>
+	<item id="magic_glitter_rx2000" avail="1" price="250" type="WEAPON_SPECIAL" subtype="THROWERS" count="y" >
+		<weapon dmg="5P" mode="SS" attack="4,1,,," ammo="1(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/> <!-- no AR stated, estimating based on Hell Turtle -->
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+	</item>
+	<item id="kaercher_pressure_cleaner" avail="1" price="187" type="WEAPON_SPECIAL" subtype="THROWERS">
+		<weapon dmg="3P" mode="SS" attack="4,2,,," ammo="10(m)" skill="exotic_weapons" spec="exotic_weapons/spray"/> <!-- no data stated, estimating based on Hell Turtle and Blazer -->
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
+	</item>
+
 <!-- Projectile Weapons -->
 
    <item id="crossbow_hunting" avail="2L" price="300" type="WEAPON_RANGED" subtype="CROSSBOWS">
