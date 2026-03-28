@@ -827,6 +827,10 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" software");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_chemicals.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"de_other/data/gear_tools.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 	}
 
 	//-------------------------------------------------------------------

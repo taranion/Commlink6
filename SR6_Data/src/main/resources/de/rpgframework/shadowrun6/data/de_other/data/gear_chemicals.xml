@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Schmutzige Tricks -->
+    
+	<item id="drink_ipsum" avail="1" price="6" type="CHEMICALS" subtype="DRUGS" count="y" />
+	<item id="drink_vitmoe" avail="1" price="5" type="CHEMICALS" subtype="DRUGS" count="y" />
+	<item id="renraku_rush" avail="1"  price="150" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/> <!-- using price of spray glue -->
+	<item id="leuna_c4k" avail="1"  price="150" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/> <!-- using price of spray glue -->
+	<item id="enso_instaward" avail="4"  price="550" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/> <!-- using price of magic preparation spell shield -->
+	<item id="leuna_h2a" avail="1"  price="80" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="flackermann_frosty" avail="1"  price="9" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="qore_intensiv" avail="1" price="8" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="wifi_briquette" avail="1" price="4" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="duct_tape" avail="1" price="5" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="pipe_free" avail="1" price="8" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="grendel_cleaner" avail="1" price="8" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="multi_purpose_grease" avail="1" price="39" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+	<item id="nano_stain_remover" avail="1" price="7" type="CHEMICALS" subtype="INDUSTRIAL_CHEMICALS" count="y"/>
+		
+</items>
