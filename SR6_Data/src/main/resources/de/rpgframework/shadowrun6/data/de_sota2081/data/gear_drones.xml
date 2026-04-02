@@ -30,7 +30,7 @@
       <vehicle han="4" acc="15" spdi="20" tspd="120" bod="3" arm="2" pil="3" sen="3" />
 	  <modifications>
         <embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" >
-                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
                 </embed>
       </modifications>
    </item>
