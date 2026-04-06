@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Anti-Spirit Explosives (From SRM Guide 1.6 page 48, DE page 19) Normal Size -->
+	<item avail="4" price="250" id="grenade_ferrous" count="y" type="AMMUNITION" subtype="GRENADES" >
+		<ammo />
+		<variant id="mini"/>
+	</item>
+	<item avail="5" price="700" id="grenade_gold" count="y" type="AMMUNITION" subtype="GRENADES">
+		<ammo />
+		<variant id="mini"/>
+	</item>
+	<item avail="5" price="500" id="grenade_silver" count="y"  type="AMMUNITION" subtype="GRENADES">
+		<ammo />
+		<variant id="mini"/>
+	</item>
+	<item avail="4" price="250" id="grenade_wood" count="y"  type="AMMUNITION" subtype="GRENADES">
+		<ammo />
+		<variant id="mini"/>
+	</item>
+
+<!-- Seoul Survivor -->
+   <item id="faraday_pocket" avail="3" price="250" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="2" />
+   </item>
+   <item id="type_81_gwisin" avail="2" price="300" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
+      <weapon dmg="2P" attack="12,7,,," mode="SS/BF" ammo="6(b)" skill="firearms" spec="firearms/holdouts"/>
+   </item>
+   <item id="type_81_gwisin_silenced" avail="2" price="800" type="WEAPON_FIREARMS" subtype="HOLDOUTS">
+      <weapon dmg="2P" attack="12,7,,," mode="SS/BF" ammo="6(b)" skill="firearms" spec="firearms/holdouts"/>
+   </item>
+   <item id="bujeok" avail="5" price="500" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+   	</choices>
+   	<attrdef id="PRICE" value="500*$RATING"/>
+   </item>
+
+</items>
