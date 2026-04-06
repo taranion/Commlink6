@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+<!-- Seoul Survivor -->
+   <quality id="ghost_in_the_shell" karma="5" pos="true" type="NORMAL">
+     <requires>
+   		<datareq type="QUALITY" ref="possession_tradition" apply="CHARACTER"/>
+     </requires>
+   </quality>
+
+   <quality id="spirits_be_gone" karma="12" pos="true" type="NORMAL"/>
+
+</qualities>

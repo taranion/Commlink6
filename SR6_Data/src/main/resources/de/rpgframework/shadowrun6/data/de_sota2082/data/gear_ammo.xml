@@ -57,10 +57,10 @@
     
 <!-- Ammo: Tasers for Walther ESG-1 -->
 	
-	<item id="walther_esg_taser" avail="6" price="150" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" >
+	<item id="walther_esg_taser" avail="6" price="150" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" >
 	</item>
 
-	<item id="walther_esg_battery" avail="6" price="500" count="y" units="100" type="AMMUNITION" subtype="AMMUNITION" >
+	<item id="walther_esg_battery" avail="6" price="500" count="y" units="100" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" >
 	</item>
 
 </items>

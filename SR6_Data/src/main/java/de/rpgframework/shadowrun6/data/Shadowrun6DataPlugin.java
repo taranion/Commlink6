@@ -742,12 +742,20 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.INFO, "START ------------------------------ Other US -----------------------------------");
 		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "OTHER_US", "other_us.i18n", Locale.ENGLISH, Locale.GERMAN);
 		set.setType(DataSetType.BACKGROUND);
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_ammunition.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" grenades");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_various.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" various gear");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"other_us/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,("other_us/data/mentorspirits.xml"));
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirits");
+		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"other_us/data/ammunition_types.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,("other_us/data/qualities.xml"));
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "other_us/data/critterpower.xml");
+		logger.log(Level.DEBUG, "Loaded {0} critter powers", list.size());
+		list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "other_us/data/metatypes.xml");
+		logger.log(Level.DEBUG, "Loaded {0} metatypes", list.size());
 	}
 
 	//-------------------------------------------------------------------
@@ -921,7 +929,7 @@ public class Shadowrun6DataPlugin  {
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "astral_ways/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded {0} actions", list.size());
 		list = Shadowrun6Core.loadDataItems(CritterPowerList.class, CritterPower.class, set, clazz, "astral_ways/data/critterpower.xml");
-		logger.log(Level.DEBUG, "Loaded {0} critter powe", list.size());
+		logger.log(Level.DEBUG, "Loaded {0} critter powers", list.size());
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"astral_ways/data/gear_vehicles.xml");
 		logger.log(Level.DEBUG, "Loaded {0} vehicles", list.size());
 		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz, "astral_ways/data/metamagics.xml");

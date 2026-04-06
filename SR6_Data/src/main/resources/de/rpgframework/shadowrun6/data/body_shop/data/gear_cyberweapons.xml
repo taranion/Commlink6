@@ -70,7 +70,7 @@
             <flag>AUGMENTATION</flag>
         </flags>
     </item>
-	<item id="ammo_flametosser" price="200" avail="3I" type="AMMUNITION" subtype="AMMUNITION" count="y">
+	<item id="ammo_flametosser" price="200" avail="3I" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
       <requires>
 			<datareq type="GEAR" ref="cyberweapon_flametosser" apply="DATA_ITEM"/>
       </requires>

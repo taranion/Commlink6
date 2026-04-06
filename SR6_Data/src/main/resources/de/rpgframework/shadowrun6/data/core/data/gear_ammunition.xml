@@ -56,13 +56,13 @@
 			<attrdef id="PRICE" value="40"/>
 		</variant>
 	</item>
-	<item id="ammo_taser" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
+	<item id="ammo_taser" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION_SPECIAL">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="TASER" apply="DATA_ITEM"/>
 		</requires>
 	</item>
-	<item id="ammo_darts" price="5" avail="2" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
+	<item id="ammo_darts" price="5" avail="2" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION_SPECIAL">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="INJECTION_DART" apply="DATA_ITEM"/>
@@ -92,7 +92,7 @@
 			<attrdef id="PRICE" value="30"/>
 		</variant>
 	</item>
-	<item id="ammo_dmso" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION" >
+	<item id="ammo_dmso" price="10" avail="1" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" >
 		<attrdef id="DAMAGE" value="0"/>
         <requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="DMSO" apply="DATA_ITEM"/>

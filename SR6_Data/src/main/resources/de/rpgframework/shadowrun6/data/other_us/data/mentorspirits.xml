@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mentorspirits>
 
+<!-- Adversary -->
   <mentorspirit id="adversary">
 		<modifications>
 			<checkmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" what="EDGE" value="1" apply="CHARACTER"/> <!-- Gain a point of Edge when targeted by enemy spells -->
