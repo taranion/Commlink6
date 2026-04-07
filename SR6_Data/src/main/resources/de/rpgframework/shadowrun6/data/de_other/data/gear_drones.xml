@@ -21,7 +21,7 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="plastic_drone"/>
 		</modifications>
 	</item>
-	<item avail="2"  price="198" id="black_mamba"  type="DRONE_MICRO" subtype="AIR">
+	<item avail="2"  price="198" id="black_mamba_drone"  type="DRONE_MICRO" subtype="AIR">
 		<vehicle han="4" acc="3" spdi="6" tspd="15" bod="0" arm="0" pil="2" sen="2" sea="0" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="plastic_drone"/>
