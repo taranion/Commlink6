@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -38,6 +39,7 @@ import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
@@ -51,6 +53,7 @@ import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
+import de.rpgframework.shadowrun6.proc.CalculateMeleeAndUnarmed;
 
 /**
  * @author prelle
@@ -761,6 +764,38 @@ public class SR6CarriedItemTest {
 		assertEquals("Pistol vanished from factory weapon mount",5,allItems.size());
 		System.out.println(item.dump());
 
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testAlternateUsage() {
+		ItemTemplate riot = Shadowrun6Core.getItem(ItemTemplate.class, "riot_shield");
+		assertNotNull(riot);
+
+		CarriedItem<ItemTemplate> item = new CarriedItem<ItemTemplate>(riot, null, CarryMode.CARRIED);
+		assertNotNull(item);
+		OperationResult<List<Modification>> modR = SR6GearTool.recalculate("", null, item);
+		assertTrue(modR.wasSuccessful());
+		
+		List<CarriedItem<?>> alts = item.getAlternates();
+		assertFalse("No alternates found",alts.isEmpty());
+		CarriedItem alt = alts.get(0);
+		
+		assertNotNull(alt.getAsObject(SR6ItemAttribute.DAMAGE));
+		assertEquals(4, ((Damage)alt.getAsObject(SR6ItemAttribute.DAMAGE).getModifiedValue()).getValue());
+		
+		ItemTemplate melee =  new ItemTemplate();
+		melee.setId("unarmed");
+		melee.setAttribute(SR6ItemAttribute.DAMAGE, new Damage(3, DamageType.STUN, null));
+		CarriedItem<ItemTemplate> meleeItem = new CarriedItem<ItemTemplate>(melee, null, CarryMode.CARRIED);
+		meleeItem.setUuid(ItemTemplate.UUID_UNARMED);
+		meleeItem.setInjectedBy("UnitTest");
+		SR6GearTool.recalculate("", null, meleeItem);
+		Shadowrun6Character model = new Shadowrun6Character();
+		model.addCarriedItem(item);
+		model.addVirtualCarriedItem(meleeItem);
+		CalculateMeleeAndUnarmed calc = new CalculateMeleeAndUnarmed(model);
+		calc.process(new ArrayList<>());
 	}
 
 }
