@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>   
+ 
  <!-- Age of Rust -->
    <item avail="6"  price="70000" id="buzzard_transit" type="VEHICLES" subtype="BUS">
       <vehicle han="5/7" acc="8" spdi="15" tspd="130" bod="18" arm="10" pil="5" sen="4" sea="15"/>
@@ -32,5 +33,30 @@
    <item id="hitch_construction" avail="5" price="2000" type="MOD_HARD" subtype="MOD_OTHERS">
 		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="3"/>
    </item> 
+
+<!-- Seoul Survivor -->
+	<item id="samsung_jind_o" avail="2" price="3500" type="DRONE_SMALL" subtype="ANTHRO" >
+		<vehicle han="3/3" acc="6" spdi="12" tspd="36" bod="2" arm="0" pil="2" sen="3" />
+		<modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+		</modifications>
+	</item>
+	<item id="samsung_jind_o_sporting" avail="2" price="5000" type="DRONE_SMALL" subtype="ANTHRO" >
+		<vehicle han="3/3" acc="6" spdi="12" tspd="36" bod="3" arm="0" pil="2" sen="3" />
+		<modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_CHASSIS" ref="realistic_features" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+		</modifications>
+	</item>
+	<item id="kwonsham_dream_genie" avail="2"  price="2000" type="DRONE_SMALL" subtype="GROUND" >
+		<vehicle han="2/4" acc="5" spdi="10" tspd="10" bod="2" arm="0" pil="1" sen="1" />
+		<modifications>
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_TIRES" ref="tires_small" variant="smart" />
+			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" ref="trid_projector" />
+		</modifications>
+	</item>
 
 </items>

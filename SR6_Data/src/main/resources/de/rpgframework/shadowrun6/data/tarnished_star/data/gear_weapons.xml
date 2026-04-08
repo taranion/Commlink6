@@ -81,20 +81,20 @@
 
    <!-- Ammunition -->
 
-	<item id="ammo_foam_carbine" price="200" avail="4L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+	<item id="ammo_foam_carbine" price="200" avail="4L" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="FOAM" apply="DATA_ITEM"/>
 		</requires>
 	</item>
 
-	<item id="ammo_foam_cannon" price="1000" avail="6L" type="AMMUNITION" subtype="AMMUNITION" count="y">
+	<item id="ammo_foam_cannon" price="1000" avail="6L" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="FOAM" apply="DATA_ITEM"/>
 		</requires>
 	</item>
-	<item id="ammo_battery_zapgun" price="120" avail="4" type="AMMUNITION" subtype="AMMUNITION" count="y">
+	<item id="ammo_battery_zapgun" price="120" avail="4" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>

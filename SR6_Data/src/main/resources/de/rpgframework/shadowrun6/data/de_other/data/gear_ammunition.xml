@@ -10,5 +10,20 @@
     </item>
 
     <item id="ammo_bolt_shattering" price="25" avail="4L" type="AMMUNITION" subtype="CROSSBOWS" count="y" units="1" />
+
+<!-- Schmutzige Tricks -->
     
+	<item id="drink_boom" avail="1" price="5" type="AMMUNITION" subtype="GRENADES" count="y" >
+		<ammo gz="0S" close="0S" near="0S" blast="5" />
+	</item>
+	<item id="tusk_musk" avail="1" price="12" type="AMMUNITION" subtype="GRENADES" count="y" >
+		<ammo gz="3P" close="3P" near="3P" blast="5" />
+	</item>
+	<item id="odorax" avail="1" price="150" type="AMMUNITION" subtype="GRENADES" count="y" > <!-- tripple price of gas grenade -->
+		<ammo />
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+	</item>
+	
 </items>

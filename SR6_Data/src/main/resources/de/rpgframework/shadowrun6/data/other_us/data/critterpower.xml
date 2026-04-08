@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<critterpowers>
+
+<!-- Seoul Survivor -->
+
+    <critterpower id="concealment_dokkaebi"      type="PHYSICAL" action="MAJOR"  range="SELF" dur="SUSTAINED"/>
+    <critterpower id="cosmetic_control_dokkaebi" type="PHYSICAL" action="MAJOR"  range="SELF" dur="ALWAYS"/>
+
+</critterpowers>

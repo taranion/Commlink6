@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Schmutzige Tricks -->
+
+	<item id="monobe_hpi4" avail="1" price="800" type="TOOLS" subtype="TOOLS"/>
+	<item id="microtronics_engineering" avail="1" price="150" type="TOOLS" subtype="TOOLS"/>
+	<item id="microtronics_electronics" avail="1" price="300" type="TOOLS" subtype="TOOLS"/>
+	<item id="renraku_fastload" avail="1" price="750" type="TOOLS" subtype="TOOLS"/>
+	<item id="trading_card" avail="1" price="5" type="TOOLS" subtype="TOOLS" count="true"/>
+	<item id="pet_playing_ball" avail="1" price="2" type="TOOLS" subtype="TOOLS" count="true"/>
+
+	<item id="duffle_bag" avail="1" price="98" type="SURVIVAL" subtype="SURVIVAL_GEAR"/>
+	<item id="duffle_bag_deluxe" avail="1" price="500" type="SURVIVAL" subtype="SURVIVAL_GEAR"/>
+	<item id="prolife_mask" avail="1" price="3" type="SURVIVAL" subtype="SURVIVAL_GEAR" count="y"/>
+	<item id="freeze_bag" avail="1" price="4" type="SURVIVAL" subtype="SURVIVAL_GEAR" count="y"/>
+	<item id="animal_whistle" avail="1" price="16" type="SURVIVAL" subtype="SURVIVAL_GEAR"/>
+
+	<item id="rain_hoodie" avail="1" price="36" type="ARMOR" subtype="ARMOR_HELMET" count="y">
+		<armor rating="0" social="0" add="true"/>
+	</item>
+
+</items>

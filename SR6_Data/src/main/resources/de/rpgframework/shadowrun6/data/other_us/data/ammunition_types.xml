@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+
+<!-- Seoul Survivor -->
+	
+	<ammotype id="polymer" cmult="2">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,-2,-2,-2,-2" apply="DATA_ITEM"/>
+		</modifications>
+	</ammotype>
+
+</ammotypes>

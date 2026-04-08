@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <items>
-	<item id="ammo_sabot" price="500" avail="8I" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION">
+	<item id="ammo_sabot" price="500" avail="8I" count="y" units="10" type="AMMUNITION" subtype="AMMUNITION_SPECIAL">
 		<attrdef id="DAMAGE" value="0"/>
 		<requires>
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON" apply="DATA_ITEM"/>
