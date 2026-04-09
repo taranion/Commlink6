@@ -8,7 +8,7 @@
 		<requires>
 			<valuereq type="ATTRIBUTE" ref="BODY" value="16" apply="PARENT"/>
 		</requires>
-		<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/machine_guns"/>
+		<weapon attack="15,22,15,12,9" ammo="20(c)" dmg="9P" mode="SS" skill="firearms" spec="firearms/assault_cannons"/>
 		<modifications>
 			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
 			<itemmod type="HOOK" ref="TOP"/>
