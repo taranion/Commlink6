@@ -143,7 +143,7 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	 */
 	@SuppressWarnings("unchecked")
 	public SR6MetaType getMetatype() {
-		return Shadowrun6Core.getItem(SR6MetaType.class, metatype);
+		return Shadowrun6Core.getItem(SR6MetaType.class, metatype, Locale.getDefault().getLanguage());
 	}
 
 	//-------------------------------------------------------------------
