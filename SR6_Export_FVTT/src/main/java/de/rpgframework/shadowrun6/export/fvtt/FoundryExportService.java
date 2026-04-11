@@ -415,6 +415,7 @@ public class FoundryExportService {
 				case FULL_AUTO : modes.FA=true; break;
 				case SEMI_AUTOMATIC: modes.SA=true; break;
 				case SINGLE_SHOT: modes.SS=true; break;
+				case ROTARY_BARREL: modes.RB=true; break;
 				}
 			}
 		}

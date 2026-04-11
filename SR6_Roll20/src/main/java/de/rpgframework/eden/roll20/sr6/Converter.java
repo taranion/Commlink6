@@ -557,6 +557,7 @@ public class Converter {
 		case FULL_AUTO: return "FA";
 		case SEMI_AUTOMATIC: return "SA";
 		case SINGLE_SHOT: return "SS";
+		case ROTARY_BARREL: return "RB";
 		default:
 		return value.name();
 		}

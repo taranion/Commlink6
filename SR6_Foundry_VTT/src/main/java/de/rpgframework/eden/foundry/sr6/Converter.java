@@ -115,6 +115,7 @@ public class Converter {
 			case BURST_FIRE : ret.BF = true;
 			case FULL_AUTO  : ret.FA = true;
 			case SEMI_AUTOMATIC: ret.SA = true;
+			case ROTARY_BARREL  : ret.RB = true;
 			}
 		}
 		return ret;
