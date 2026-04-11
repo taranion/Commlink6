@@ -2048,6 +2048,7 @@ public class Shadowrun6Tools {
 					logger.log(Level.WARNING, sa.toString());
 					ret.add(sa);
 				}
+				// RB firing mode (deadly arts 152) in base variant does not change DV or AR, thus needs no extra calculations shown
 			} // FireModes!=null
 		}
 
