@@ -472,7 +472,7 @@
       <requires>
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="5" apply="CHARACTER"/>
       </requires>
-      <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/machine_guns"/>
+      <weapon attack="1,9,12,8,6" ammo="15(c)" dmg="7P" mode="SA" skill="firearms" spec="firearms/assault_cannons"/>
    </item>
 
    <!-- Exotic Weapons -->
