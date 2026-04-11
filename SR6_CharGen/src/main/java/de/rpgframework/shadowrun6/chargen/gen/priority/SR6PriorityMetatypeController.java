@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.CommonMetatypeGenerator;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -54,9 +55,23 @@ public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 
 			for (Modification mod : previous) {
 				if (mod.getReferenceType()==ShadowrunReference.METATYPE) {
-					if (mod instanceof ValueModification) {
-						ValueModification vMod = (ValueModification)mod;
+					if (mod instanceof ValueModification vMod) {
+						// Maybe there are multiple languages - we need to check all of them
+						List<SR6MetaType> opts = Shadowrun6Core.getItemList(SR6MetaType.class).stream()
+							.filter(m -> m.getId().equals(vMod.getKey()))
+							// Either no language or the current one
+							.filter(m -> m.getLanguage()==null || m.getLanguage().equals(Locale.getDefault().getLanguage()))
+							.toList();
 						SR6MetaType meta = vMod.getResolvedKey();
+						if (!opts.isEmpty()) {
+							meta = opts.get(0);
+						}
+						// Pick the one with a language
+						if (opts.size()>1) {
+							meta = opts.stream().filter(m -> m.getLanguage()!=null).findFirst().get();
+							System.err.printf("+++++++++++++++++++++++++++Multiple metatypes with id ''%s'' found - use language to determine the correct one:  %s", vMod.getKey(), meta.getLanguage());
+						}
+						
 						if (meta!=null) {
 							if (!parent.showDataItem(meta))
 								continue;
@@ -64,7 +79,7 @@ public class SR6PriorityMetatypeController extends CommonMetatypeGenerator {
 							opt.setSpecialAttributePoints(vMod.getValue());
 							availableOptions.put(meta, opt);
 							if (logger.isLoggable(Level.TRACE))
-								logger.log(Level.TRACE, "Allow {0} for {1} cust. Karma and {2} AP", vMod.getKey(), opt.getAdditionalKarmaKost(), opt.getSpecialAttributePoints());
+								logger.log(Level.TRACE, "Allow {0} for {1} cust. Karma and {2} AP   lang={3}", vMod.getKey(), opt.getAdditionalKarmaKost(), opt.getSpecialAttributePoints(), opt.getLanguage());
 						}
 					}
 				} else {
