@@ -9,7 +9,7 @@
 			<valmod type="HOOK" ref="ARMOR" value="2" />
 		</modifications>
 		<alternate mode="WEAPON" id="melee" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-			<weapon dmg="1S" attack="3,,,," skill="exotic_weapons" />
+			<weapon dmg="1S" attack="3,,,," skill="exotic_weapons" spec="exotic_weapons/brawling" />
 		</alternate>
 	</item>
 
@@ -19,7 +19,7 @@
 			<valmod type="HOOK" ref="ARMOR" value="0" />
 		</modifications>
 		<alternate mode="WEAPON" id="melee" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
-			<weapon dmg="4S(e)" attack="3,,,," ammo="10(m)" skill="exotic_weapons" />
+			<weapon dmg="4S(e)" attack="3,,,," ammo="10(m)" skill="exotic_weapons" spec="exotic_weapons/brawling" />
 		</alternate>
 	</item>
 
