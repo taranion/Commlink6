@@ -12,12 +12,12 @@
    </item>
    <item id="cypher_leech" avail="5" price="35000" type="BIOWARE" subtype="SYMBIONTS">
 		<choices>
-           <choice type="CARRIED" ref="DEVICE" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+           <choice type="CARRIED" ref="DEVICE" uuid="2bf14940-a66b-4da6-be3e-8c317ed9cc89"/>
     	</choices>
       <usage mode="IMPLANTED" value="0.2"/>
       <flags><flag>AUGMENTATION</flag></flags>
       <modifications>
-      	<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="1" id="c50abe3b-2ba9-4b91-8509-e46605adf82c"/>
+      	<valmod type="ITEM_ATTRIBUTE" ref="FIREWALL" value="1" id="4d4d1102-846b-42f8-b8b7-62347d77021b"/>
       </modifications>
    </item>
    <item id="glow_leech" avail="6" price="40000" type="BIOWARE" subtype="SYMBIONTS">
