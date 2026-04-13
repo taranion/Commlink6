@@ -81,11 +81,11 @@
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_small" id="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2"/>
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" intoId="d7919fa1-ff4d-4110-8cdd-2a5b22088ec2" ref="armtech_mgl6" id="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" />
             <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
-            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
+            <embed type="GEAR" intoId="e0e8e692-fbfa-4df3-8170-77e0ff4f2c7d" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
 			<embed type="GEAR" intoType="HOOK" intoRef="ARMOR" ref="weapon_mount_small" id="2ebae10b-9e9e-4956-940a-b772adc1f0e1" />
 			<embed type="GEAR" intoType="HOOK" intoRef="VEHICLE_WEAPON_SMALL" intoId="2ebae10b-9e9e-4956-940a-b772adc1f0e1" ref="armtech_mgl6" id="22b1f566-a4ae-4520-8fff-3dc5b53714dd" />
             <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="smartgun_system" variant="internal" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
-            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" variant="internal" />
+            <embed type="GEAR" intoId="22b1f566-a4ae-4520-8fff-3dc5b53714dd" intoType="HOOK" intoRef="INTERNAL" ref="airburst_link" />
         </modifications>
 		<geardef>
 			<item id="thermal_damping" type="ACCESSORY" subtype="ARMOR_BODY" >
