@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ammotypes>
-    <ammotype id="barbed" cmult="2">
+    <ammotype id="ballista_barbed" cmult="2">
       <modifications>
         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-2,-2,-2,-2,-2"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="-1"/>
       </modifications>
       <requires>
-      	<datareq type="ITEMSUBTYPE" ref="BALLISTA"/>
+      	<datareq type="ITEMSUBTYPE" ref="BALLISTAS"/>
       </requires>
     </ammotype>
-    <ammotype id="high_explosive" cmult="1" price="500">
+    <ammotype id="ballista_high_explosive" cmult="1" price="500">
       <modifications>
         <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="-4,-4,-4,-4,-4"/>
         <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="8P"/>
       </modifications>
       <requires>
-      	<datareq type="ITEMSUBTYPE" ref="BALLISTA"/>
+      	<datareq type="ITEMSUBTYPE" ref="BALLISTAS"/>
       </requires>
     </ammotype>
 </ammotypes>
