@@ -62,12 +62,21 @@
    <!-- Ballista Ammunition -->
    <item id="ballista_bolt_light"  price="25" avail="2" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
 		<attrdef id="DAMAGE" value="0"/>
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
    </item>
    <item id="ballista_bolt_standard"  price="50" avail="2" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
 		<attrdef id="DAMAGE" value="0"/>
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
    </item>
    <item id="ballista_bolt_heavy"  price="100" avail="3" type="AMMUNITION" subtype="BALLISTAS" count="y" units="1">
 		<attrdef id="DAMAGE" value="0"/>
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
    </item>
 
 </items>

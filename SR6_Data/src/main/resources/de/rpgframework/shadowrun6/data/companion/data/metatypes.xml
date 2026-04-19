@@ -214,6 +214,16 @@
           <itemmod type="QUALITY" ref="mad_eyes"/>
 		</modifications>
 	</metatype>
+	<metatype id="hobgoblin" variantof="ork" size="180" weight="98" karma="5" lang="de">
+		<modifications>
+         <valmod ref="STRENGTH" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+         <valmod ref="CHARISMA" type="ATTRIBUTE" value="7" set="MAX" when="CREATION"/>
+          <itemmod type="QUALITY" ref="fangs"/>
+          <itemmod type="QUALITY" ref="low-light_vision"/>
+          <itemmod type="QUALITY" ref="mad_eyes"/>
+		  <valmod type="QUALITY"   ref="built_tough" value="1" set="NATURAL"/>
+		</modifications>
+	</metatype>
 	<metatype id="ogre" variantof="ork" size="170" weight="101" karma="5">
 		<modifications>
          <valmod type="ATTRIBUTE" ref="BODY"      value="9" set="MAX" when="CREATION"/>
@@ -255,6 +265,7 @@
          <itemmod type="QUALITY" ref="low-light_vision"/>
          <itemmod type="QUALITY" ref="striking_skin"/>
          <itemmod type="QUALITY" ref="mad_eyes"/>
+		 <valmod type="QUALITY"   ref="built_tough" value="1" set="NATURAL"/>
 		</modifications>
 	</metatype>
 	<metatype id="satyr" variantof="ork" size="160" weight="69" karma="10">
@@ -264,6 +275,16 @@
          <valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" when="CREATION"/>
           <itemmod type="QUALITY" ref="low-light_vision"/>
           <itemmod type="QUALITY" ref="satyr_legs"/>
+		</modifications>
+	</metatype>
+	<metatype id="satyr" variantof="ork" size="160" weight="69" karma="10" lang="de">
+		<modifications>
+         <valmod type="ATTRIBUTE" ref="BODY"      value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="REACTION"  value="7" set="MAX" when="CREATION"/>
+         <valmod type="ATTRIBUTE" ref="STRENGTH"  value="7" set="MAX" when="CREATION"/>
+          <itemmod type="QUALITY" ref="low-light_vision"/>
+          <itemmod type="QUALITY" ref="satyr_legs"/>
+		 <valmod type="QUALITY"   ref="built_tough" value="1" set="NATURAL"/>
 		</modifications>
 	</metatype>
 

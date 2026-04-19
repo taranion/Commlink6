@@ -307,10 +307,14 @@
     	<variant id="bolt"/>
     	<variant id="dart"/>
     	<variant id="shuriken">
-			<!-- <alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING"> <weapon dmg="1P" attack="9,11,4,,"  skill="athletics" spec="athletics/throwing"/> </alternate> Alternate inside variants not supported by code -->
+			<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING" id="weapon">
+				<weapon dmg="1P" attack="9,11,4,,"  skill="athletics" spec="athletics/throwing"/>
+			</alternate>
     	</variant>
     	<variant id="knife">
-			<!-- <alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING"> <weapon dmg="1P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/> </alternate> Alternate inside variants not supported by code -->
+			<alternate mode="WEAPON" type="WEAPON_RANGED" subtype="THROWING" id="weapon">
+				<weapon dmg="1P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
+			</alternate>
     	</variant>
    </item>
 
