@@ -67,7 +67,7 @@ public abstract class DataStructuresSection extends ComplexDataItemListSection<D
 			DataStructure data = selector.getSelected();
 			logger.log(Level.INFO, "Selected focus: "+data);
 			OperationResult<DataStructureValue> result = null;
-			if (data.getChoices().isEmpty()) {
+			if (data.getChoices().isEmpty() && !data.hasLevel()) {
 				result = control.getDataStructureController().select(data);
 			} else {
 				Decision[] dec = requestUserDecisions(data);
