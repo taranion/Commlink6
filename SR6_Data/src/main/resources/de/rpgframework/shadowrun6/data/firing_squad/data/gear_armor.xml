@@ -116,7 +116,7 @@
     <item id="armante_suitdress" avail="7" price="5000" type="ARMOR" subtype="ARMOR_SOCIAL">
         <armor rating="3" social="+10"/>
         <modifications>
-            <valmod type="HOOK" value="7" ref="ARMOR"/>
+            <valmod type="HOOK" value="4" ref="ARMOR"/>
         </modifications>
     </item>
     <item id="av_big_game_hunter" avail="3" price="3500" type="ARMOR" subtype="ARMOR_SOCIAL">
