@@ -60,6 +60,7 @@ import de.rpgframework.shadowrun6.foundry.FVTTSpell;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicle;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
 import de.rpgframework.shadowrun6.foundry.Shadowrun6FoundryCharacter;
+import de.rpgframework.shadowrun6.foundry.Shadowrun6FoundryCharacter.SpecialTraits;
 import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -686,6 +687,10 @@ public class FoundryExportService {
 			ItemData<FVTTMetamagic> item = new ItemData<FVTTMetamagic>(val.getNameWithoutRating(), "metamagic", fVal);
 			actor.addItem(item);
 		}
+		// Initiation level
+		if (actor.system.specialTraits==null)
+			actor.system.specialTraits = new SpecialTraits();
+		actor.system.specialTraits.initiation = model.getAttribute(ShadowrunAttribute.INITIATION_RANK).getModifiedValue();
 	}
 
 	//-------------------------------------------------------------------
@@ -747,6 +752,10 @@ public class FoundryExportService {
 			ItemData<FVTTEcho> item = new ItemData<FVTTEcho>(val.getNameWithoutRating(), "echo", fVal);
 			actor.addItem(item);
 		}
+		// Submersion level
+		if (actor.system.specialTraits==null)
+			actor.system.specialTraits = new SpecialTraits();
+		actor.system.specialTraits.submersion = model.getAttribute(ShadowrunAttribute.SUBMERSION_RANK).getModifiedValue();
 	}
 
 	//-------------------------------------------------------------------
