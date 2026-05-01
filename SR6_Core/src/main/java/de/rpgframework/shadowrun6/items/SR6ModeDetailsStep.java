@@ -29,6 +29,7 @@ public class SR6ModeDetailsStep implements CarriedItemProcessor {
 		switch (type) {
 		case WEAPON_CLOSE_COMBAT:
 		case WEAPON_FIREARMS:
+		case WEAPON_VEHICLE:
 		case WEAPON_RANGED:
 		case WEAPON_SPECIAL:
 //			model.addOperationMode(ItemTemplate.MODE_WIRELESS);

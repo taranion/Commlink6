@@ -72,6 +72,7 @@ public class GearPage extends Page {
 			case CYBERDECK:
 			case DATATERM:
 			case CYBERTERM:
+			case COMMNODE:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				return false;

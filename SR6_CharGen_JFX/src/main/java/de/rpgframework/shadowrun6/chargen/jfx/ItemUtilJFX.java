@@ -312,6 +312,7 @@ public class ItemUtilJFX {
 			switch (item.getItemType(carry)) {
 			case WEAPON_CLOSE_COMBAT:
 			case WEAPON_FIREARMS:
+			case WEAPON_VEHICLE:
 			case WEAPON_RANGED:
 			case WEAPON_SPECIAL:
 				addWeaponColumns(item, model, carry, table, possibilities);

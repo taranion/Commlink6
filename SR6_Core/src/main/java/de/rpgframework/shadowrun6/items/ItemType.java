@@ -77,6 +77,7 @@ public enum ItemType {
 			ItemSubType.CYBERDECK,
 			ItemSubType.DATATERM,
 			ItemSubType.CYBERTERM,
+			ItemSubType.COMMNODE,
 			ItemSubType.RIGGER_CONSOLE,
 			ItemSubType.ELECTRONIC_ACCESSORIES,
 			ItemSubType.RFID,
@@ -142,7 +143,8 @@ public enum ItemType {
 	WEAPON_RANGED(
 			ItemSubType.BOWS,
 			ItemSubType.CROSSBOWS,
-			ItemSubType.THROWING
+			ItemSubType.THROWING,
+			ItemSubType.BALLISTAS
 			),
 	WEAPON_FIREARMS(
 			ItemSubType.TASERS,
@@ -160,6 +162,10 @@ public enum ItemType {
 			ItemSubType.HMG,
 			ItemSubType.ASSAULT_CANNON
 			),
+	WEAPON_VEHICLE(
+			ItemSubType.CANNON,
+			ItemSubType.VEHICLE_MILITARY
+			),
 	WEAPON_SPECIAL(
 			ItemSubType.LAUNCHERS,
 			ItemSubType.THROWERS,
@@ -174,6 +180,7 @@ public enum ItemType {
 			ItemSubType.CROSSBOWS,
 			ItemSubType.BALLISTAS,
 			ItemSubType.ROCKETS,
+			ItemSubType.SHELLS,
 			ItemSubType.EXPLOSIVES,
 			ItemSubType.GRENADES
 			),
@@ -329,7 +336,7 @@ public enum ItemType {
     }
 
     public static ItemType[] weaponTypes() {
-    	return new ItemType[]{WEAPON_CLOSE_COMBAT, WEAPON_RANGED, WEAPON_FIREARMS, WEAPON_SPECIAL};
+    	return new ItemType[]{WEAPON_CLOSE_COMBAT, WEAPON_RANGED, WEAPON_FIREARMS, WEAPON_SPECIAL, WEAPON_VEHICLE};
     }
 
     public static List<ItemType> getWeaponTypes() {

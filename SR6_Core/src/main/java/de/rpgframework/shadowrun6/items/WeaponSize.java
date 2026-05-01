@@ -17,6 +17,8 @@ public enum WeaponSize {
 	LARGE,
 	/** (for weapon_mount_heavy) = LMG, MMG, HMG, ASSAULT_CANNON, LAUNCHERS, THROWERS, BALLISTAS, CANNON */
 	BIG,
+	/** (for Deadly Arts military weapons with size >0) = VEHICLE_MILITARY */
+	MILITARY,
 	/** (only for buildings) = WEAPON_SPECIAL - OTHER_SPECIAL - guizhen_2_hall_of_tears */
 	BUILDING
 	;

@@ -281,6 +281,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				case ASSAULT_CANNON:
 				case THROWERS:
 					implantUse.setSlot(ItemHook.IMPLANT_HEAVY); break;
+					// not assessing BALLISTAS, CANNON and VEHICLE_MILITARY, as those cannot be implanted
 				case OTHER_SPECIAL:
 					WeaponSize size = (this.getAttribute(SR6ItemAttribute.WEAPON_SIZE)!=null)?this.getAttribute(SR6ItemAttribute.WEAPON_SIZE).getValue():null;
 					if (size!=null) {
@@ -293,7 +294,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 							implantUse.setSlot(ItemHook.IMPLANT_SMG); break;
 						case LARGE: // SHOTGUNS sized
 							implantUse.setSlot(ItemHook.IMPLANT_SHOTGUN); break;
-						// not assessing BIG, as this contains BALLISTAS and CANNONS, which will not be able to be implanted
+						// not assessing sizes BIG or MILITARY, as those cannot be implanted
 						}
 					}
 					break;
@@ -387,7 +388,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		default:
 			logger.log(Level.WARNING, "No autodetection of ammunition for firearm {0}",subtype);
 		}
-		} // End of ammunition check
+		} // End of ammunition check, not assessing OTHER_SPECIAL and VEHICLE_MILITARY as those have unique ammo per weapon
 	}
 
 	//-------------------------------------------------------------------
@@ -423,6 +424,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		case CANNON:
 			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.BIG);
 			break;
+		case VEHICLE_MILITARY:
+			this.setAttribute(SR6ItemAttribute.WEAPON_SIZE, WeaponSize.MILITARY);
+			break;
 		default:
 			logger.log(Level.WARNING, "No autodetection of weapon size for firearm {0}",subtype);
 		}
@@ -437,11 +441,15 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		ItemSubType carriedSubtype = this.getItemSubtype(CarryMode.CARRIED);
 
 		// define firearms based on weapon size		
-		if (carriedType==ItemType.WEAPON_FIREARMS || carriedType==ItemType.WEAPON_SPECIAL) {
+		if (carriedType==ItemType.WEAPON_FIREARMS || carriedType==ItemType.WEAPON_SPECIAL || carriedType==ItemType.WEAPON_VEHICLE) {
 		WeaponSize size = (this.getAttribute(SR6ItemAttribute.WEAPON_SIZE)!=null)?this.getAttribute(SR6ItemAttribute.WEAPON_SIZE).getValue():null;
 			if (size!=null) {
 			switch (size) {
 				case BUILDING: // Kechibi hall of tears 
+					break;
+
+				case MILITARY: // military weapons from Deadly Arts having Size 1+
+					this.addUsage(new Usage(CarryMode.EMBEDDED, ItemHook.VEHICLE_WEAPON_MILITARY)); // TODO: need 1 military hardpoint per weapon size, but not representing size yet
 					break;
 			
 				case BIG: // all other
@@ -536,6 +544,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 			case MMG           : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
 			case HMG           : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
 			case ASSAULT_CANNON: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 4); break;
+			case VEHICLE_MILITARY: setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
 			case BALLISTAS     : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
 			case CANNON        : setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0); break;
 			}
@@ -800,7 +809,7 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		ItemAttributeDefinition attr = getAttribute(SR6ItemAttribute.ITEMTYPE);
 		ItemSubType sub = getAttribute(SR6ItemAttribute.ITEMSUBTYPE).getValue();
 		return hasFlag(SR6ItemFlag.MATRIX_DEVICE.name()) || attr.getValue()==ItemType.ELECTRONICS &&
-				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.DATATERM ||  sub==ItemSubType.CYBERTERM ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
+				( sub==ItemSubType.COMMLINK ||  sub==ItemSubType.CYBERDECK ||  sub==ItemSubType.DATATERM ||  sub==ItemSubType.CYBERTERM ||  sub==ItemSubType.COMMNODE ||  sub==ItemSubType.RIGGER_CONSOLE  ||  sub==ItemSubType.TAC_NET );
 	}
 
 	//-------------------------------------------------------------------

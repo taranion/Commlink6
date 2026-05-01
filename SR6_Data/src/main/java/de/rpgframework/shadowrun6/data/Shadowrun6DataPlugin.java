@@ -195,7 +195,8 @@ public class Shadowrun6DataPlugin  {
 			initTarnishedStar();
 			initDPSOTA2083();
 			initDealersOfDeath();
-			initShadowCast();			
+			initShadowCast();
+			//initDeadlyArts();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -316,6 +317,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" matrix actions");
 		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, core, clazz, "core/data/actions_edge.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_firearms_accessories.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon accessories");
 		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, core, clazz,"core/data/weapon_modifications.xml");
@@ -346,8 +349,6 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" cyberware");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_bioware.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" bioware");
-		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_vehicles.xml");
-		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_drones.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, core, clazz,"core/data/gear_magical.xml");
@@ -1173,6 +1174,64 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
 		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"shadow_cast/data/quality_paths.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+	}
+
+	//-------------------------------------------------------------------
+	private void initDeadlyArts() throws IOException {
+		logger.log(Level.INFO, "START -------------------------------Deadly Arts---------------------------------------");
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DEADLY_ARTS", "deadly_arts.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202504);
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_melee.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" melee weapons");
+		list = Shadowrun6Core.loadDataItems(ItemEnhancementList.class, SR6ItemEnhancement.class, set, clazz,"deadly_arts/data/weapon_modifications.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" weapon modifications");
+		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "deadly_arts/data/actions_edge.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
+		list = Shadowrun6Core.loadDataItems(TechniqueList.class, Technique.class, set, clazz,"deadly_arts/data/techniques.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art techniques");
+		list = Shadowrun6Core.loadDataItems(MartialArtsList.class, MartialArts.class, set, clazz,"deadly_arts/data/martialarts.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" martial art styles");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_firearms_accessories.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms accessories");
+		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"deadly_arts/data/ammunition_types.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_ammunition.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunitions");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_firearms.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" firearms");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_electronics.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" electronic items");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_vehicle_mods.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicle mods");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_drones.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"deadly_arts/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_vehicles.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" vehicles");
+		list = Shadowrun6Core.loadDataItems(DesignModList.class, DesignMod.class, set, clazz, "deadly_arts/data/designMods.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" design mods");
+		list = Shadowrun6Core.loadDataItems(FocusList.class, Focus.class, set, clazz, "deadly_arts/data/foci.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" foci");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_magical.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" magic gear");
+		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz, "deadly_arts/data/spells.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "deadly_arts/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"deadly_arts/data/metamagics.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" metamagics");
+		list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, set, clazz, "deadly_arts/data/rituals.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_armor_accessories.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor accessories");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_armor.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_biotech.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" biotech");
 	}
 
 }

@@ -41,10 +41,9 @@ public enum SR6ItemAttribute implements IItemAttribute {
 	BLAST_CLOSE(new WeaponDamageConverter()),
 	BLAST_NEAR(new WeaponDamageConverter()),
 	BLAST_RANGE,
-	// Vehicle Body
-	BODY,
-	// Vehicle Cargo Factor (CF)
-	CARGO,
+	BODY, // Vehicle Body
+	BUILD_POINTS, // Vehicle build points
+	CARGO, // Vehicle Cargo Factor (CF)
 	CAPACITY,
 	CONCEALABILITY,
 	DAMAGE(new WeaponDamageConverter()),

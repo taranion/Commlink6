@@ -90,6 +90,7 @@ public class AddMissingStandardSlots implements CarriedItemProcessor {
 			case COMMLINK:
 			case DATATERM:
 			case CYBERTERM:
+			case COMMNODE:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				if (model.getSlot(ItemHook.ELECTRONIC_ACCESSORY)==null) {

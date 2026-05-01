@@ -74,6 +74,7 @@
 		<skillspec id="spray"/>
 		<skillspec id="spitter"/>
 		<skillspec id="laser"/>
+		<skillspec id="linear"/> <!-- from Deadly Arts page 155 -->
 		<skillspec id="emitter"/>
 		<skillspec id="thagomizer"/>
 		<skillspec id="tongue"/>

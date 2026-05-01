@@ -404,6 +404,8 @@ public class Converter {
 			row.createCell(x++, CellType.STRING).setCellValue( "Dataterm"); break;
 		case CYBERTERM:
 			row.createCell(x++, CellType.STRING).setCellValue( "Cyberterm"); break;
+		case COMMNODE:
+			row.createCell(x++, CellType.STRING).setCellValue( "Commnode"); break;
 		case RIGGER_CONSOLE:
 			row.createCell(x++, CellType.STRING).setCellValue( "Command Console"); break;
 		case TAC_NET:
@@ -570,13 +572,15 @@ public class Converter {
 			return "?";
 		}
 		switch (value.getType()) {
-		case BELT: return value.getAmount()+"(b)";
-		case BREAK_ACTION: return value.getAmount()+"(ba)";
+		case BELT: return value.getAmount()+"(belt)";
+		case BREAK_ACTION: return value.getAmount()+"(b)";
 		case CLIP: return value.getAmount()+"(c)";
 		case CYLINDER: return value.getAmount()+"(cy)";
 		case DRUM: return value.getAmount()+"(d)";
 		case MAGAZINE: return value.getAmount()+"(m)";
 		case MUZZLE_LOADER: return value.getAmount()+"(ml)";
+		case BREACH_LOADED: return value.getAmount()+"(br)";
+		case TANK: return value.getAmount()+"(tank)";
 		default:
 		return value.getType().name();
 		}

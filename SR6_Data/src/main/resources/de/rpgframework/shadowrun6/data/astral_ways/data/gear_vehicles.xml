@@ -49,13 +49,13 @@
       	<valuereq type="ATTRIBUTE" ref="STRENGTH" value="8" apply="CHARACTER"/>
       </requires>
    </item>
-   <item id="cannon_light" avail="6" price="15000" type="WEAPON_RANGED" subtype="CANNON">
+   <item id="cannon_light" avail="6" price="15000" type="WEAPON_VEHICLE" subtype="CANNON">
       <weapon dmg="6P" attack="1,10,11,7,6" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
    </item>
-   <item id="cannon_standard" avail="7" price="25000" type="WEAPON_RANGED" subtype="CANNON">
+   <item id="cannon_standard" avail="7" price="25000" type="WEAPON_VEHICLE" subtype="CANNON">
       <weapon dmg="7P" attack="1,10,12,8,7" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
    </item>
-   <item id="cannon_heavy" avail="8" price="50000" type="WEAPON_RANGED" subtype="CANNON">
+   <item id="cannon_heavy" avail="8" price="50000" type="WEAPON_VEHICLE" subtype="CANNON">
       <weapon dmg="8P" attack="1,11,12,9,8" ammo="1(m)" mode="SS" skill="engineering" spec="engineering/gunnery"/>
    </item>
 

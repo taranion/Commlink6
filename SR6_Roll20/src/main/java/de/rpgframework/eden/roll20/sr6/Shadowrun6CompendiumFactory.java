@@ -141,6 +141,7 @@ public class Shadowrun6CompendiumFactory {
 				ItemSubType.MMG,
 				ItemSubType.HMG,
 				ItemSubType.ASSAULT_CANNON,
+				ItemSubType.VEHICLE_MILITARY,
 				ItemSubType.LAUNCHERS,
 				ItemSubType.THROWERS,
 				ItemSubType.DMSO,
@@ -165,6 +166,7 @@ public class Shadowrun6CompendiumFactory {
 				ItemSubType.MMG,
 				ItemSubType.HMG,
 				ItemSubType.ASSAULT_CANNON,
+				ItemSubType.VEHICLE_MILITARY,
 				ItemSubType.LAUNCHERS,
 				ItemSubType.THROWERS,
 				ItemSubType.DMSO,
@@ -1105,6 +1107,7 @@ public class Shadowrun6CompendiumFactory {
 			case CYBERDECK:
 			case DATATERM:
 			case CYBERTERM:
+			case COMMNODE:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				continue;
@@ -1187,6 +1190,7 @@ public class Shadowrun6CompendiumFactory {
 			case CYBERDECK:
 			case DATATERM:
 			case CYBERTERM:
+			case COMMNODE:
 			case RIGGER_CONSOLE:
 			case TAC_NET:
 				break;
@@ -1216,6 +1220,8 @@ public class Shadowrun6CompendiumFactory {
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-dataterm"); break;
 			case CYBERTERM:
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-cyberterm"); break;
+			case COMMNODE:
+				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-commnode"); break;
 			case RIGGER_CONSOLE:
 				row.createCell(4+blobOffset, CellType.STRING).setCellValue( "gear-command_console"); break;
 			case TAC_NET:
