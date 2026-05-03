@@ -68,6 +68,7 @@ public enum ItemSubType {
 //	AMMO_CANNONS,
 	GRENADES,
 	ROCKETS,
+	MILITARY,
 	// ARMOR
 	ARMOR_BODY,
 	ARMOR_SOCIAL,

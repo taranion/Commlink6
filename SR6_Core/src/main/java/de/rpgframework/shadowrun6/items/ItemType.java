@@ -175,7 +175,8 @@ public enum ItemType {
 			ItemSubType.BALLISTAS,
 			ItemSubType.ROCKETS,
 			ItemSubType.EXPLOSIVES,
-			ItemSubType.GRENADES
+			ItemSubType.GRENADES,
+			ItemSubType.MILITARY
 			),
 	CHEMICALS(
 			ItemSubType.INDUSTRIAL_CHEMICALS,
