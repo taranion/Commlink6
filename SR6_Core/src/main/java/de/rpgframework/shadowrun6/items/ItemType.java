@@ -351,6 +351,9 @@ public enum ItemType {
     public static boolean isDrone(ItemType type) {
     	return List.of(droneTypes()).contains(type);
     }
+    public static boolean isArmor(ItemTemplate item) {
+    	return ItemType.ARMOR==item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
+    }
 
     public static List<ItemSubType> getWeaponSubTypes() {
     	List<ItemSubType> ret = new ArrayList<ItemSubType>();
