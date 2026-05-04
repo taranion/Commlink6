@@ -182,7 +182,8 @@ public enum ItemType {
 			ItemSubType.ROCKETS,
 			ItemSubType.SHELLS,
 			ItemSubType.EXPLOSIVES,
-			ItemSubType.GRENADES
+			ItemSubType.GRENADES,
+			ItemSubType.MILITARY
 			),
 	CHEMICALS(
 			ItemSubType.INDUSTRIAL_CHEMICALS,
@@ -357,6 +358,9 @@ public enum ItemType {
     }
     public static boolean isDrone(ItemType type) {
     	return List.of(droneTypes()).contains(type);
+    }
+    public static boolean isArmor(ItemTemplate item) {
+    	return ItemType.ARMOR==item.getAttribute(SR6ItemAttribute.ITEMTYPE).getValue();
     }
 
     public static List<ItemSubType> getWeaponSubTypes() {

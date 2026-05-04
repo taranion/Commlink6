@@ -70,6 +70,7 @@ public enum ItemSubType {
 	GRENADES,
 	SHELLS,
 	ROCKETS,
+	MILITARY,
 	// ARMOR
 	ARMOR_BODY,
 	ARMOR_SOCIAL,
