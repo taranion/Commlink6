@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<techniques>
+
+	<technique cat="WEAPON" id="adders_ambush" />
+	<technique cat="WEAPON" id="area_awareness" />
+	<technique cat="WEAPON" id="multiple_opponent_offense" />
+	<technique cat="WEAPON" id="whirlwind_slash" />
+
+</techniques>

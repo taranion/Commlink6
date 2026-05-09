@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="mtoc_fob" avail="99I" price="0" type="ELECTRONICS" subtype="TAC_NET" modonly="true"/>
+   
+	<item id="citadel_commander" avail="7I" price="355000" type="ELECTRONICS" subtype="COMMNODE">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY" id="9a2a538d-0c28-4ea5-9e49-ac12ec541a8f"/>
+		</modifications>
+		<matrix a="4" s="8" d="8" f="9" programs="8" devrat="6"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item id="citadel_outrider" avail="6I" price="235000" type="ELECTRONICS" subtype="COMMNODE">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY" id="9a2a538d-0c28-4ea5-9e49-ac12ec541a8f"/>
+		</modifications>
+		<matrix a="3" s="7" d="7" f="8" programs="6" devrat="5"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+	<item id="citadel_guardian" avail="5I" price="115000" type="ELECTRONICS" subtype="COMMNODE">
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+			<embed type="GEAR" ref="mtoc_mark2" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY" id="9a2a538d-0c28-4ea5-9e49-ac12ec541a8f"/>
+		</modifications>
+		<matrix a="2" s="6" d="6" f="7" programs="5" devrat="4"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+   
+	<item id="microdeck_ranger" avail="4I" price="73000" subtype="COMMLINK" type="ELECTRONICS">
+		<usage mode="CARRIED"/>
+		<usage mode="EMBEDDED" slot="COMMLINK"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+			<embed type="GEAR" ref="mtoc_fob" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY"/>
+		</modifications>
+		<matrix d="2" f="2" programs="3" devrat="5"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+      
+	<item id="mtoc_hopper" avail="5I" price="300" type="SOFTWARE" subtype="TAC_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
+	</item>
+	<item id="mtoc_flicker" avail="5I" price="300" type="SOFTWARE" subtype="TAC_APP">
+		<usage mode="EMBEDDED" slot="SOFTWARE" value="1"  />
+		<requires><valuereq type="ITEM_ATTRIBUTE" ref="SOFTWARE_TYPES" value="TAC_APP" apply="DATA_ITEM"/></requires>
+	</item>
+
+</items>

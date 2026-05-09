@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Walking Vehicles -->
+
+	<item id="ares_shadowdancer" avail="7L"  price="73500" type="VEHICLES" subtype="WALKER">
+		<vehicle han="2/2" acc="15" spdi="20" tspd="70" bod="5" arm="10" pil="1" sen="4" sea="1" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="7e5f560c-7352-4e9f-aa45-1adcd86b5cad"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="d667d94f-de23-401c-b8d4-1bce2f0febbf"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="2a08a436-3d39-4853-9496-1473f1c7a457"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="22bc48f0-6f78-4f67-98b8-d885bcd9cbe1"/>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="removed_manuals" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="ares_shadowstrider" avail="8L"  price="115000" type="VEHICLES" subtype="WALKER">
+		<vehicle han="2/2" acc="10" spdi="15" tspd="80" bod="14" arm="16" pil="3" sen="4" sea="1" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="7e5f560c-7352-4e9f-aa45-1adcd86b5cad"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="d667d94f-de23-401c-b8d4-1bce2f0febbf"/>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="easy_assembly" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c8dd59ed-8a35-4f8e-9fa9-0f715640f30b"/>
+			<embed type="GEAR" ref="fuel_converter" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"/>
+			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+<!-- Wheeled Vehicles -->
+
+	<item id="bae_archer" avail="8I"  price="1120000" type="VEHICLES" subtype="GROUND">
+		<vehicle han="5/4" acc="10" spdi="15" tspd="110" bod="24" arm="16" pil="3" sen="4" sea="4" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="bae_lg155" />
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c8dd59ed-8a35-4f8e-9fa9-0f715640f30b"/>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+		</modifications>
+	</item>
+
+	<item id="hua_tuo_mash" avail="5"  price="872000" type="VEHICLES" subtype="GROUND">
+		<vehicle han="4/6" acc="6" spdi="15" tspd="120" bod="18" arm="18" pil="2" sen="2" sea="8" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vindicator" />
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- 2 = low, 8 persons -->
+			</embed>
+			<embed type="GEAR" ref="missile_defense_system" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="citadel_outrider" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="valkyrie_module_milspec" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module_milspec" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module_milspec" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="valkyrie_module_milspec" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="portable_facility" intoType="HOOK" intoRef="VEHICLE_CF" /> <!-- biotech -->
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+		</modifications>
+	</item>
+
+	<item id="otokar_jamal" avail="6I"  price="115000" type="VEHICLES" subtype="GROUND">
+		<vehicle han="3/5" acc="20" spdi="20" tspd="140" bod="24" arm="20" pil="3" sen="3" sea="10" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="multi_terrain_active" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+		</modifications>
+	</item>
+
+	<item id="omukade_command" avail="6L"  price="645000" type="VEHICLES" subtype="GROUND">
+		<vehicle han="3/5" acc="10" spdi="25" tspd="120" bod="16" arm="16" pil="4" sen="4" sea="2" type="GROUND"/>
+		<modifications>
+			<!-- cargo hauler is a design option, not a mod -->
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+			<embed type="GEAR" ref="citadel_outrider" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="multi_terrain_active" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+<!-- Tracked Vehicles -->
+
+	<item id="ares_vicksburg" avail="6I"  price="1745000" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="4/2" acc="10" spdi="20" tspd="120" bod="34" arm="24" pil="3" sen="3" sea="3" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6ef32596-c1b1-4245-b07b-d757302da238"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="gdc_140" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="23e0b75e-3d4f-47a2-bf4a-960f42277283"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="ares_victory" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="10"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="devil_rat_apc" avail="6L"  price="775000" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="4/2" acc="10" spdi="15" tspd="120" bod="18" arm="18" pil="3" sen="2" sea="12" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="secondary_propulsion_system" variant="boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="gun_ports" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="dassault_shadowstriker" avail="14I"  price="5855000" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="4/2" acc="20" spdi="40" tspd="180" bod="30" arm="20" pil="5" sen="6" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>			
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6ef32596-c1b1-4245-b07b-d757302da238"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="aztech_mixcoatl" />
+			<embed type="GEAR" ref="electromag_shielding" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gmc_transcendent_c3" avail="12I"  price="3495000" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="3/2" acc="10" spdi="30" tspd="120" bod="22" arm="24" pil="6" sen="6" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>			
+			<embed type="GEAR" ref="command_control" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="expanded_drone_storage" variant="medium" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="expanded_drone_storage" variant="medium" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="expanded_drone_storage" variant="medium" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="micromini" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Micromini drone racks carry five drones each -->
+			<embed type="GEAR" ref="expanded_drone_storage" variant="micromini" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
+			<embed type="GEAR" ref="expanded_drone_storage" variant="small" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_firebird" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vindicator" />
+			<embed type="GEAR" ref="ares_red_dog_series" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ares_red_dog_series" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="2">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- 2 = low -->
+			</embed>
+			<embed type="GEAR" ref="missile_defense_system" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="missile_defense_system" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="citadel_commander" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Using 2 due to 2 rigger consoles in vehicle -->
+                </embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="retrans_unit" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="krupp_lamplighter" avail="8I"  price="98500" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="5/3" acc="15" spdi="15" tspd="90" bod="20" arm="16" pil="3" sen="3" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7e05f3de-3af4-470d-a5c6-363f19c74d97"/>
+				<embed type="GEAR" intoId="7e05f3de-3af4-470d-a5c6-363f19c74d97" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_unguided_launcher">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="65f7a67d-2301-4c8b-ba33-1ee1578a940c"/>
+				<embed type="GEAR" intoId="65f7a67d-2301-4c8b-ba33-1ee1578a940c" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_unguided_launcher">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7be70b97-c151-46d7-9743-a6bc414a8ba0"/>
+				<embed type="GEAR" intoId="7be70b97-c151-46d7-9743-a6bc414a8ba0" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_unguided_launcher">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="dd781982-b4f8-4378-ab27-bebf6ca0ca59"/>
+				<embed type="GEAR" intoId="dd781982-b4f8-4378-ab27-bebf6ca0ca59" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_unguided_launcher">
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+				</embed>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="ruhrmetall_groundshaker" avail="6I"  price="855000" type="VEHICLES" subtype="TRACKED">
+		<vehicle han="5/3" acc="5" spdi="15" tspd="60" bod="30" arm="24" pil="3" sen="3" sea="2" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
+				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="bae_lg203" />
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+<!-- Main Battle Tanks -->
+
+	<item id="bae_centurion" avail="8I" price="2000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="20" spdi="30" tspd="150" bod="30" arm="20" pil="3" sen="3" sea="3" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="drone_rack" variant="medium" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="2c244c3c-da2d-4ab7-8f7d-a83577154708"/>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gd_macarthur" avail="9I" price="4000000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="25" spdi="30" tspd="160" bod="34" arm="20" pil="4" sen="4" sea="3" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="2173d2ab-2423-40c7-83d2-8c1fcb4b68a7"/>
+				<embed type="GEAR" intoId="2173d2ab-2423-40c7-83d2-8c1fcb4b68a7" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_vls_cell_hot" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="742f5e07-863d-4fa9-8149-f853bd2218a2"/>
+				<embed type="GEAR" intoId="742f5e07-863d-4fa9-8149-f853bd2218a2" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_vls_cell_hot" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="24ba2e7b-85ed-4ec8-9285-779aa1cd19e7"/>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="fdddb2ac-bd48-470c-966e-ee58273ea816"/>
+			<embed type="GEAR" ref="citadel_outrider" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gd_stonewall" avail="6I" price="1985000" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="5/5" acc="20" spdi="30" tspd="140" bod="26" arm="20" pil="3" sen="3" sea="3" type="GROUND"/>
+		<modifications>
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="24ba2e7b-85ed-4ec8-9285-779aa1cd19e7"/>
+			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+<!-- Rumors and Ghosts -->
+
+	<item id="sukhoi_evo" avail="18I" price="6950000" type="VEHICLES" subtype="FIXED_WING" >
+		<vehicle han="3" acc="180" spdi="200" tspd="2000" bod="20" arm="12" pil="8" sen="5" sea="2" type="AIR"/> <!-- US rules has seating 1, but 2 cocoons and network sharing, which makes no sense. DE corrected to seating 2, thus using seating of 2 -->
+		<modifications>
+			<embed type="GEAR" ref="ceramic_plate_airframe" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>
+			</embed>
+			<embed type="GEAR" ref="electronic_countermeasures" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="05256402-fda9-49fd-b3c6-0c08b4e6c590"/>
+				<embed type="GEAR" intoId="05256402-fda9-49fd-b3c6-0c08b4e6c590" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="gl_diamondback"/>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="d4357565-563f-4274-96ac-b32221352796"/>
+				<embed type="GEAR" intoId="d4357565-563f-4274-96ac-b32221352796" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_launch_rack" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="1ab67fc4-f4cb-4d01-a51e-06c74747a70f"/>
+				<embed type="GEAR" intoId="1ab67fc4-f4cb-4d01-a51e-06c74747a70f" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_launch_rack" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+				</embed>
+             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="improved_stability">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+                </embed>
+			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="citadel_outrider" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="nanomaintenance_repair" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+                </embed>
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- No rating stated. Using 2 due to 2 rigger cocoons in vehicle -->
+                </embed>
+			<embed type="GEAR" ref="nitro_boost" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="b08d3ebd-f861-4e6f-863a-11fa11ef3a34"/>
+				<embed type="GEAR" intoId="b08d3ebd-f861-4e6f-863a-11fa11ef3a34" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_launch_rack" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				</embed>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6e1ed9b1-acc9-4eab-b6de-e0d61482df1c"/>
+				<embed type="GEAR" intoId="6e1ed9b1-acc9-4eab-b6de-e0d61482df1c" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_launch_rack" >
+					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				</embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="sk_cyclops" avail="99I" price="999999999" type="VEHICLES" subtype="TRACKED" >
+		<vehicle han="4/2" acc="5" spdi="20" tspd="60" bod="44" arm="28" pil="9" sen="9" sea="18" type="GROUND"/>
+		<geardef>
+			<item id="kali_vajra" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY" modonly="true" >
+				<weapon dmg="50P" mode="SS" attack=",28,32,28,20" ammo="0(i)" skill="engineering" spec="engineering/gunnery"/>
+				<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+				<modifications>
+					<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+					<embed type="GEAR" ref="slow_rof_ss1_6" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+				</modifications>
+			</item>
+		</geardef>
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7de284dc-93bf-4c29-9f32-5e15d29dd544"/>
+				<embed type="GEAR" intoId="7de284dc-93bf-4c29-9f32-5e15d29dd544" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="kali_vajra" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="692327d9-64b1-492a-abda-05c5330f3274"/>
+				<embed type="GEAR" intoId="692327d9-64b1-492a-abda-05c5330f3274" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="692327d9-64b1-492a-abda-05c5330f3274"/>
+				<embed type="GEAR" intoId="692327d9-64b1-492a-abda-05c5330f3274" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
+				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
+				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
+				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
+				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="citadel_commander" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/> <!-- No rating stated. Using 6 due to 6 rigger cocoons in vehicle -->
+                </embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+	<item id="gti_anubis" avail="99I"  price="450000000" type="VEHICLES" subtype="GRAV">
+		<vehicle han="2" acc="120" spdi="300" tspd="5000" bod="60" arm="32" pil="8" sen="7" sea="120" type="AIR"/>
+		<modifications>
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>			
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="f0b92208-f97b-43e1-9b47-68123bde9b4f"/>
+				<embed type="GEAR" intoId="f0b92208-f97b-43e1-9b47-68123bde9b4f" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_svetlyak" />
+			<embed type="GEAR" ref="electromag_shielding" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/> <!-- 2 = low, 20 persons -->
+			</embed>
+			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/> <!-- 3 = medium, 10 persons -->
+			</embed>
+			<embed type="GEAR" ref="citadel_commander" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="8"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+			</embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="ram_plating" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="network_sharing" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="10"/> <!-- No rating stated. Using 10 due to 10 rigger cocoons in vehicle -->
+                </embed>
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_cocoon" intoType="HOOK" intoRef="VEHICLE_CF" />
+			<embed type="GEAR" ref="rigger_interface" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+
+</items>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<powers>
+
+	<power id="bloodhound" cost="0.25" act="PASSIVE"/>
+	<power id="command_presence" cost="0.5" act="PASSIVE">
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="charisma" value="4" apply="CHARACTER"/>
+			<valuereq type="SKILL" ref="influence" value="4" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<valmod type="SKILL" ref="influence" value="2" cond="y"/>
+			<checkmod type="SKILL" ref="influence" what="EDGE" value="1" apply="CHARACTER"/>
+		</modifications>
+	</power>
+	<power id="fortitude" cost="1" act="MINOR_ACTION"/>
+	<power id="hip_shooter" cost="0.5" hasLevel="true" max="3" act="PASSIVE">
+		<requires>
+			<datareq type="ADEPT_POWER" ref="quick_draw"/>
+		</requires>
+	</power>
+	<power id="knife_fighter" cost="0.5" hasLevel="true" max="3" act="PASSIVE">
+		<requires>
+			<datareq type="ADEPT_POWER" ref="quick_draw"/>
+		</requires>
+	</power>
+	<power id="long_gunner" cost="0.5" hasLevel="true" max="3" act="MINOR_ACTION"/>
+	<power id="motion_sense" cost="0.5" act="MAJOR_ACTION"/>
+	<power id="multi_targeting" cost="0.5" hasLevel="true" max="4" act="PASSIVE">
+		<requires>
+			<datareq type="ADEPT_POWER" ref="improved_reflexes"/>
+		</requires>
+	</power>
+   <power id="multitasking" cost="1" act="PASSIVE">
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="MINOR_ACTION_PHYSICAL" value="2"/>
+     </modifications>
+   </power>
+	<power id="nail_driver" cost="1" act="PASSIVE"/>
+	<power id="quick_march" cost="0.5" act="MINOR_ACTION"/>
+	<power id="radar_sense_astral" cost="0.5" act="MAJOR_ACTION">
+		<requires>
+			<datareq type="ADEPT_POWER" ref="astral_perception"/>
+		</requires>
+	</power>
+	<power id="radar_sense_mundane" cost="0.5" act="MAJOR_ACTION">
+		<requires>
+			<datareq type="ADEPT_POWER" ref="motion_sense"/>
+		</requires>
+	</power>
+	<power id="starlight_sight" cost="0.5" act="MINOR_ACTION"/>
+	<power id="stillness" cost="0.25" act="MINOR_ACTION"/>
+
+</powers>

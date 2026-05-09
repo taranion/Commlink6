@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Drugs -->
+	
+	<item id="crash_plus" avail="5L" price="800" count="y" type="CHEMICALS" subtype="DRUGS"/>
+	<item id="cryo" avail="7I" price="1000" count="y" type="CHEMICALS" subtype="DRUGS"/>
+	<item id="hemosynth" avail="4L" price="2000" count="y" type="CHEMICALS" subtype="DRUGS"/>
+	<item id="neostigmine" avail="3L" price="100" count="y" type="CHEMICALS" subtype="DRUGS"/>
+	<item id="ondansetron" avail="3L" price="50" count="y" type="CHEMICALS" subtype="DRUGS"/>
+	<item id="wraith_paint" avail="2L" price="100" count="y" type="CHEMICALS" subtype="DRUGS"/>
+
+   <!-- Biotech -->
+
+	<item id="artificial_skin" avail="3" price="50" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="hemostatix_dressing" avail="3" price="500" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="ge_statscan" avail="4" price="2500" type="BIOLOGY" subtype="BIOTECH" count="y">
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+	</item>
+	<item id="medkit_advanced" avail="4" price="300" type="BIOLOGY" subtype="BIOTECH" count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*300"/>
+	</item>
+	<item id="medkit_milspec" avail="5" price="500" type="BIOLOGY" subtype="BIOTECH" count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*500"/>
+	</item>
+	<item id="medkit_pocket" avail="4" price="350" type="BIOLOGY" subtype="BIOTECH" count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*350"/>
+	</item>
+	<item id="medkit_tuckable" avail="3" price="300" type="BIOLOGY" subtype="BIOTECH" count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6"/>
+		</choices>
+		<attrdef id="PRICE" value="$RATING*300"/>
+	</item>
+	<item id="mage_pen" avail="2" price="20" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="monofil_tourniquet" avail="4" price="500" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<!-- valkyrie module milspec see gear_vehicle_mods -->
+	<item id="valkyrie_pack" avail="6" price="6000" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="vasotech_md9" avail="2" price="1000" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="vasotech_md3x" avail="3" price="1500" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+	<item id="vasotech_infuser" avail="3" price="1000" type="BIOLOGY" subtype="BIOTECH" count="y"/>
+
+</items>

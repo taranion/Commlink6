@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<martialarts>
+
+  <martialart cat="WEAPON" id="european_polearm" sign="multiple_opponent_offense" />
+  <martialart cat="WEAPON" id="naginatajutsu" sign="adders_ambush" />
+  <martialart cat="WEAPON" id="tokushinryu" sign="whirlwind_slash" />
+
+</martialarts>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spells>
+
+   <spell id="aerial_flare" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="LIMITED" drain="8" />
+   <spell id="astral_flare" cat="DETECTION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="INSTANTANEOUS" drain="5" />
+   <spell id="bridge_layer" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="6" />
+   <spell id="dead_weight" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="4" />
+   <spell id="designate_target" cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="3" />
+   <spell id="dirt_wave" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="PHYSICAL">
+      <spellfeature ref="indirect"/>
+      <spellfeature ref="area"/>
+   </spell>
+   <spell id="earthworks" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="5" />
+   <spell id="emergency_stretcher" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="2" />
+   <spell id="fog_of_war" cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" > <!-- as this affects sensors, it should be physical -->
+      <spellfeature ref="sense_single"/>
+   </spell>
+   <spell id="forced_march" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" />
+   <spell id="gale_force" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" />
+   <spell id="iff" cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
+   <spell id="practical_camouflage" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="2" />
+   <spell id="pit_trap" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" />
+   <spell id="say_again" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" />
+   <spell id="sound_barrier" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="2" /> <!-- no area size stated -->
+   <spell id="starlight_sight" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="2" /> <!-- as this affects one metahuman, it should be mana -->
+   <spell id="treacherous_path" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="PERMANENT" drain="3" />
+   <spell id="tyee" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="3" />
+
+   <spell id="death_replay" cat="DETECTION" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="4" />
+   <spell id="incision" cat="MANIPULATION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" />
+
+</spells>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rituals>
+
+   <ritual id="circle_of_defense" thr="8">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+   <ritual id="triage" thr="6">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="spell"/>
+   </ritual>
+
+</rituals>

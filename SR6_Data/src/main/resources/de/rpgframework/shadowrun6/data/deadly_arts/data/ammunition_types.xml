@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ammotypes>
+
+	<ammotype id="warhead_hex" cmult="1">
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_frag" cmult="1">
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="0.75"/> <!-- reduce damage by 25% -->
+			<valmod type="ITEM_ATTRIBUTE" ref="BLAST_RANGE"  value="2"/>    <!-- double blast range -->
+			<!-- TODO: Increase cost by given fixed number depending on capacity of parent item, see deadly arts 145 -->
+			<!-- TODO: Increase availability by +1 to +2 depending on capacity of parent item, see deadly arts 145  -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_apds" cmult="2">
+		<modifications>
+			<!-- TODO: Increase availability by 1, see deadly arts 145  -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_cbu" cmult="2">
+		<modifications>
+			<!-- TODO: Increase availability by 2, see deadly arts 145  -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_chem" cmult="0.5">
+    	<choices>
+           <choice type="GEAR" ref="CHEMICALS" uuid="c50abe3b-2ba9-4b91-8509-e46605adf82c"/> 
+    	</choices>
+		<modifications>
+			<!-- TODO: Increase availability by 1, see deadly arts 145  -->
+			<!-- TODO: Increase cost by 'cost of one dose' x 5 x capacity of parent item, see deadyl arts 145 -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_ill" cmult="0.5">
+		<modifications>
+			<!-- TODO: Decrease availability by 1, see deadly arts 145  -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="warhead_smok" cmult="0.5">
+		<modifications>
+			<!-- TODO: Decrease availability by 2, see deadly arts 145  -->
+		</modifications>
+		<requires>
+			<datareq type="ITEMSUBTYPE" ref="ROCKETS"/>
+		</requires>
+	</ammotype>
+
+	<ammotype id="railgun" cmult="3"> <!-- for railgun and linear kinetic weapons -->
+	</ammotype>
+
+</ammotypes>

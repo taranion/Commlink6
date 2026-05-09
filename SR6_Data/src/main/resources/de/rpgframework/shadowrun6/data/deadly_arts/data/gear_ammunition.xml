@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Larger Assault Cannon Ammo -->
+
+	<item id="ammo_cannon_B25" price="130" avail="3I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B25" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_B30" price="350" avail="4I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B30" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_B40" price="800" avail="6I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B40" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_B50" price="1250" avail="7I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B50" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<!-- HEX Assault Cannon Ammo -->
+
+	<item id="ammo_cannon_hex" price="50" avail="4I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="6P" close="4P" near="4P" blast="3" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B25" price="450" avail="5I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="7P" close="4P" near="4P" blast="3" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B25" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B30" price="1200" avail="6I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="8P" close="5P" near="1P" blast="4" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B30" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B40" price="2600" avail="7I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="9P" close="5P" near="1P" blast="4" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B40" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B50" price="4400" avail="8I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="10P" close="6P" near="1P" blast="5" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B50" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<!-- Flame Thrower Fuel page 55, 142 -->
+
+	<item id="ammo_inferno" avail="5L" price="200" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y" units="10">
+		<requires>
+			<datareq type="GEAR" ref="ares_inferno" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<item id="ammo_hellfire" avail="6I" price="300" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y" units="1">
+		<requires>
+			<datareq type="GEAR" ref="ares_hellfire" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+    <!-- Rockets and Missiles -->
+	
+	<item id="standard_rocket" avail="5I" price="2000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="16P" close="10P" near="4P" blast="16" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	<item id="standard_missile" avail="6I" price="4500" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="16P" close="10P" near="4P" blast="16" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="al_assad_rocket" avail="5I" price="2000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="16P" close="10P" near="4P" blast="16" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	<item id="ballista_ii_rocket" avail="5I" price="2000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="16P" close="10P" near="4P" blast="16" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	<item id="carl_gustaf_shell" avail="5I" price="1800" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="pilum_missile" avail="7I" price="12500" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_2" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	<item id="vespae_missile" avail="8I" price="11000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_5" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Weapon Power Supplies -->
+	
+	<item id="ammo_battery_clip" avail="4L" price="500" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_battery_satchel" avail="5L" price="1200" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_battery_backpack" avail="5L" price="2500" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_battery_bank" avail="7L" price="10000" type="AMMUNITION" subtype="AMMUNITION_SPECIAL" count="y">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="BATTERY" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<!-- Cannon MILITARY -->
+
+	<item id="cannon_105" avail="8I" price="1900" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_105" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<item id="cannon_120" avail="8I" price="2600" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="25P" close="17P" near="7P" blast="25" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_120" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<item id="cannon_130" avail="9I" price="3400" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_130" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<item id="cannon_140" avail="10I" price="4200" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="35P" close="23P" near="10P" blast="35" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_140" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<!-- Artillery Shells -->
+
+	<item id="artillery_a105" avail="8I" price="1500" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A105" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<item id="artillery_a155" avail="9I" price="2200" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A155" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+	<item id="artillery_a203" avail="10I" price="3100" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="40P" close="26P" near="12P" blast="40" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A203" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+		<variant id="rocket_assist">
+			<attrdef id="AVAILABILITY" value="2"/>
+		</variant>
+	</item>
+
+    <!-- Mortar Shells page 60 -->
+
+	<item id="mortar_m40" avail="4L" price="750" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="16P" close="10P" near="4P" blast="16" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M40" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="mortar_m60" avail="5L" price="900" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_7" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M60" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="mortar_m80" avail="7I" price="1600" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="25P" close="17P" near="7P" blast="25" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M80" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+    <!-- Mortar Bombs page 142 -->
+
+	<item id="mortar_mb80" avail="7I" price="1200" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M80" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="mortar_mb120" avail="8I" price="1800" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="25P" close="17P" near="7P" blast="25" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M120" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+	<item id="mortar_mb160" avail="9I" price="2600" type="AMMUNITION" subtype="SHELLS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M160" apply="DATA_ITEM"/>
+		</requires>
+		<variant id="guided">
+			<attrdef id="PRICE" value="2500"/>
+			<attrdef id="AVAILABILITY" value="1"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
+	</item>
+
+    <!-- Railgun and Linear Kinetic Ammo pages 142, 149 -->
+
+	<item id="railgun_lk1" avail="6I" price="40" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK1" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk2" avail="6I" price="90" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK2" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk3" avail="6I" price="210" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK3" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk4" avail="6I" price="600" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK4" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk5" avail="6I" price="1400" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK5" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk7" avail="99I" price="4200" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK7" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk8" avail="99I" price="9500" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK8" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="railgun_lk10" avail="99I" price="24000" type="AMMUNITION" subtype="MILITARY"  count="y" units="1">
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="RAILGUN_LK10" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+    <!-- Vehicle Rockets and Missiles page 143 -->
+
+	<item id="loral_pit_viper" avail="12I" price="112000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_7" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_5" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_40" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="saab_aim_11v" avail="15I" price="145500" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="25P" close="17P" near="7P" blast="25" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_8" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_7" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="mct_gm_kiba" avail="6I" price="4200" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="20P" close="14P" near="5P" blast="20" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="northrop_scorpio" avail="10I" price="45500" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_5" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="krupp_bombard" avail="11I" price="47000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="40P" close="26P" near="12P" blast="40" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_5" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_160" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="krupp_onager" avail="7I" price="9800" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="range_40" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="krupp_trebuchet" avail="9I" price="27000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="30P" close="20P" near="8P" blast="30" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_2" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_40" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ares_warhawk" avail="14I" price="82500" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
+    	<ammo gz="25P" close="17P" near="7P" blast="25" />
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<modifications>
+			<embed type="GEAR" ref="missile_pilot_7" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="missile_sensor_5" intoType="HOOK" intoRef="INTERNAL"/>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+    <!-- Naval Autocannon Ammo -->
+	
+	<item id="ammo_cannon_B60" price="2500" avail="8I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B60" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_B75" price="4500" avail="9I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B75" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_B90" price="6500" avail="10I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+		<choices>
+			<choice uuid="b015341d-24dc-42bb-a46b-781a5340e0b3" type="AMMUNITION_TYPE" ref="AMMOTYPE" />
+		</choices>
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B90" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+	<item id="ammo_cannon_hex_B60" price="7500" avail="6I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="12P" close="6P" near="1P" blast="6" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B60" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B75" price="14000" avail="7I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="15P" close="7P" near="2P" blast="8" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B75" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+	<item id="ammo_cannon_hex_B90" price="22000" avail="8I" count="y" type="AMMUNITION" subtype="MILITARY"  units="10">
+    	<ammo gz="18P" close="11P" near="3P" blast="10" />
+		<requires>
+			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ASSAULT_CANNON_B90" apply="DATA_ITEM"/>
+		</requires>
+	</item>
+
+</items>

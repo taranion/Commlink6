@@ -196,7 +196,7 @@ public class Shadowrun6DataPlugin  {
 			initDPSOTA2083();
 			initDealersOfDeath();
 			initShadowCast();
-			//initDeadlyArts();
+			initDeadlyArts();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
