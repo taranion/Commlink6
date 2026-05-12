@@ -310,9 +310,9 @@
 		<attrdef id="SIZE" value="1"/>
 		<usage mode="EMBEDDED" slot="SKILLJACK"/>
        <modifications>
-         <itemmod type="SKILL" ref="knowledge" set="ARTIFICIAL">
+         <valmod type="SKILL" ref="knowledge" value="1" set="ARTIFICIAL">
 			<decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="choice:44f263ec-dcb7-4377-b110-0b9c3c53aa28" />
-		</itemmod>
+		</valmod>
        </modifications>
 	</item>
    <item avail="1" id="linguasoft" type="SOFTWARE" subtype="SKILLSOFT" >

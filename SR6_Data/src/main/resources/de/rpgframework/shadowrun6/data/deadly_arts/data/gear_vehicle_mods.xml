@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- New vehicle mods -->
+
+	<item id="weapon_mount_military" avail="99I"  price="0" type="MOD_HARD" subtype="MOD_MOUNT">
+		<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="5"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_WEAPON_MILITARY" value="1" />
+		</modifications>
+		<requires>
+ 			<datareq type="GEAR" ref="milspec_hardpoint" apply="PARENT"/> <!-- TODO: Restricting milspec mount to vehicles with milspec hardpoint does not work -->
+		</requires>
+	</item>
+	
+	<item id="missile_defense_system" avail="6L" price="15000" type="MOD_ELEC" subtype="MOD_MISC">
+		<usage mode="EMBEDDED" value="2" slot="VEHICLE_ELECTRONICS"/>
+	</item>
+
+	<item id="valkyrie_module_milspec" avail="5" price="4500" type="MOD_CHASSIS" subtype="MOD_CARGO">
+		<usage mode="EMBEDDED" value="2" slot="VEHICLE_CF"/>
+		<usage mode="EMBEDDED" value="1" slot="VEHICLE_CHASSIS"/>
+	</item>
+
+	<item id="mobile_lodge" avail="9" price="80000" type="MOD_CHASSIS" subtype="MOD_CARGO">
+		<usage mode="EMBEDDED" value="50" slot="VEHICLE_CF"/>
+		<usage mode="EMBEDDED" value="25" slot="VEHICLE_CHASSIS"/>
+	</item>
+
+
+
+<!-- New design options -->
+	<!-- TODO: The items below are design options, but as longs as 'build your dream' is not supported by commlink, doing them as mods to enable showing them on vehicles -->
+	
+	<item id="ceramic_plate_airframe" avail="99I" price="0" type="MOD_CHASSIS" subtype="MOD_CORE" modonly="true">
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
+		<!-- bp="ARMOR*2" -->
+	</item>
+
+	<item id="milspec_plate_heavy" avail="99I" price="0" type="MOD_SKIN" subtype="MOD_ARMOR" modonly="true">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
+		</choices>
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
+		<!-- bp="RATING*5" -->
+	</item>
+	
+	<item id="milspec_frame" avail="99I" price="0" type="MOD_CHASSIS" subtype="MOD_CORE" modonly="true">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="99"/>
+		</choices>
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
+		<!-- bp="10+RATING*5" -->
+	</item>
+	
+	<item id="milspec_hardpoint" avail="99I" price="0" type="MOD_CHASSIS" subtype="MOD_CORE" modonly="true">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="9"/>
+		</choices>
+		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
+		<modifications>
+			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="RATING*5" />
+		</modifications>
+		<!-- bp="RATING*5" -->
+	</item>
+
+</items>

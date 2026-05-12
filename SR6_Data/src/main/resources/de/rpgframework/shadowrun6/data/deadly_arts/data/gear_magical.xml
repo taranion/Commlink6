@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="vault_of_ages_small" avail="3L" price="5000" type="MAGICAL" subtype="MAGICAL_SUPPLIES"/>
+   <item id="vault_of_ages_large" avail="4L" price="7000" type="MAGICAL" subtype="MAGICAL_SUPPLIES"/>
+   <item id="vault_of_ages_cabinet" avail="4L" price="12000" type="MAGICAL" subtype="MAGICAL_SUPPLIES"/>
+
+</items>

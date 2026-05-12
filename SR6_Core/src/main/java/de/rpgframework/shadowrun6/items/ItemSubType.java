@@ -48,11 +48,12 @@ public enum ItemSubType {
 	HMG,
 	ASSAULT_CANNON,
 	OTHER_FIREARM,
-	LAUNCHERS,
+	LAUNCHERS, // also used for mortars
 	THROWERS,
 	DMSO,
 	DART,
 	OTHER_SPECIAL,
+	VEHICLE_MILITARY, // weapons for military vehicles
 	WEAPON_ACCESSORY,
 	EXPLOSIVES,
 	WEAPON_SECURITY, // Firing squad, slot depreciated, replaced by choices
@@ -67,8 +68,9 @@ public enum ItemSubType {
 //	AMMO_DMSO,
 //	AMMO_CANNONS,
 	GRENADES,
+	SHELLS,
 	ROCKETS,
-	MILITARY,
+	MILITARY, // ammo for military weapons
 	// ARMOR
 	ARMOR_BODY,
 	ARMOR_SOCIAL,
@@ -103,6 +105,7 @@ public enum ItemSubType {
 	COMMLINK,
 	DATATERM,
 	CYBERTERM,
+	COMMNODE,
 	ELECTRONIC_ACCESSORIES,
 	RFID,
 	COMMUNICATION,
@@ -246,5 +249,5 @@ public enum ItemSubType {
 		return Shadowrun6Core.getI18nResources().getString("itemsubtype."+this.name().toLowerCase());
 	}
 
-	public static ItemSubType[] matrixDevices() { return new ItemSubType[]{COMMLINK, CYBERDECK, DATATERM, CYBERTERM, RIGGER_CONSOLE, TAC_NET};}
+	public static ItemSubType[] matrixDevices() { return new ItemSubType[]{COMMLINK, CYBERDECK, DATATERM, CYBERTERM, COMMNODE, RIGGER_CONSOLE, TAC_NET};}
 }

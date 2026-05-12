@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="c_clamp" />
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="escord_hold" />
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="feint_and_strike" />
+  <action type="EDGE" cat="COMBAT" cost="3" apply="MELEE"  id="haymaker" />
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="joint_lock" />
+  <action type="EDGE" cat="COMBAT" cost="3" apply="ATTACK" id="knee_targeting" />
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="nerd_slap" />
+  <action type="EDGE" cat="COMBAT" cost="4" apply="MELEE"  id="nose_strike" />
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="see_it_coming" />
+  <action type="EDGE" cat="COMBAT" cost="2" apply="MELEE"  id="shin_rake" />
+
+  <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="called_shot_indirect_fire"/> 
+  <action type="MAJOR" cat="COMBAT" time="INITIATIVE" id="called_shot_targeted_fire"/> 
+
+  <action type="EDGE" cat="COMBAT" cost="4" apply="RANGED"  id="called_shot_weak_point" />
+  <action type="EDGE" cat="COMBAT" cost="4" apply="RANGED"  id="called_shot_lucky_shot" />
+
+</actions>

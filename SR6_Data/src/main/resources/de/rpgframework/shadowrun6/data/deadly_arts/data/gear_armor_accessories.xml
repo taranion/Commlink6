@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<item id="flotation_collar" avail="3" price="100" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="ARMOR" value="3" />
+	</item>
+	<item id="groin_panel" avail="2" price="75" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="ARMOR" value="2" />
+	</item>
+   <item id="paraplate" avail="9I" price="3000" count="y" type="ACCESSORY" subtype="ARMOR_BODY">
+      <usage mode="EMBEDDED" slot="ARMOR" value="$RATING*2" />
+      <usage mode="EMBEDDED" slot="ARMOR_REACTIVE" value="1" />
+   </item>
+	<item id="quick_release" avail="2" price="400" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="ARMOR" value="3" />
+	</item>
+
+</items>

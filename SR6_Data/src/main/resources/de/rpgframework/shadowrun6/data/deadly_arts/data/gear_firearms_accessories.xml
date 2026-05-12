@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<items>
+
+<!-- New accessories -->
+
+	<item id="ar_interface" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" >
+		<usage mode="EMBEDDED" slot="INTERNAL"/>
+	</item>
+
+	<item id="under_carbine" avail="3I" price="1875" type="ACCESSORY" subtype="WEAPON_ACCESSORY" >
+		<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
+		<weapon dmg="4P" attack="4,9,7,7," mode="SA/BF/FA" ammo="20(c)" skill="firearms" spec="firearms/rifles"/>
+	</item>
+
+	<item id="ares_battle_buddy" avail="2L" price="700" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="FIREARMS_EXTERNAL"/>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="AMMUNITION" value="1000(belt)" apply="PARENT"/> <!-- TODO: Enable change of ammo of parent weapon -->
+		</modifications>
+	</item>
+
+	<item id="personal_drone_rack" avail="3" price="2200" type="ACCESSORY" subtype="ARMOR_BODY">
+  		<usage mode="EMBEDDED" slot="ARMOR"/>
+	</item>
+
+	<item id="tripod_powered_adapter" avail="3L" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER"/>
+	</item>
+	<item id="smart_firing_reinforced_adapter" avail="6L" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER"/>
+	</item>
+	<item id="tripod_wheeled_adapter" avail="5L" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER"/>
+	</item>
+
+<!-- New weapon related items -->
+
+	<item id="control_wire_1500" avail="6" price="900" type="TOOLS" subtype="SPARE_PARTS" count="true" />
+	<item id="control_wire_5000" avail="7" price="1500" type="TOOLS" subtype="SPARE_PARTS" count="true" />
+
+<!-- Items to represent special rules for modified rate of fire (ROF) page 152 and crew served loading page 153 -->
+
+	<item id="crew_served_2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="crew_served_3" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="crew_served_4" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+
+	<item id="slow_rof_ss1_2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_ss1_3" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_ss1_4" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_ss1_6" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_ss1" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_sa2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_bf4" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="slow_rof_fa10" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+
+	<item id="missile_pilot_3" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_pilot_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_pilot_7" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_pilot_8" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_sensor_2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_sensor_3" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_sensor_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="missile_sensor_7" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	
+	<item id="range_1_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_3" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_4" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_7" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_9" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_10" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_14" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_16" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_20" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_24" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_25" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_30" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_32" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_40" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="range_160" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	
+	<item id="energy_0_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="energy_1" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="energy_2" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="energy_4" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="energy_5" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+	<item id="energy_10" avail="99" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true" ><usage mode="EMBEDDED" slot="INTERNAL"/></item>
+
+</items>

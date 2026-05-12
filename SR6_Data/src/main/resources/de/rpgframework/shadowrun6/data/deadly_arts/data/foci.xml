@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<foci>
+	<focus id="foundation_focus" karma="2" cost="4000" hasLevel="true"/>
+	<focus id="spotting_focus" karma="2" cost="4000" hasLevel="true"/>
+</foci>

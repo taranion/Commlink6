@@ -586,7 +586,6 @@
 		<modifications>
 			<embed type="GEAR" ref="hardpoint_small" intoType="HOOK" intoRef="VEHICLE_CHASSIS" />
 			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ed3f15e6-9fae-4007-904c-cda8be2e2afb"/>
-			<embed type="GEAR" ref="secondary_propulsion_system" variant="walker" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN"  />
 		</modifications>
 	</item>
 	<item id="hawker_bat" lang="de" avail="2" price="5500" type="DRONE_SMALL" subtype="AIR" >

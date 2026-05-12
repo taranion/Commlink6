@@ -173,17 +173,29 @@
          </selreq>
       </requires>
    </item>
-   <item avail="5" price="2500" id="smart_firing_platform" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+	<!-- depreciated variant -->
+   <item avail="5" price="2500" id="smart_firing_platform" type="ACCESSORY" subtype="WEAPON_ACCESSORY" modonly="true">
       <usage mode="EMBEDDED" slot="UNDER"/>
       <alternate mode="VEHICLE" id="drone" type="DRONE_MINI" subtype="GROUND">
       	<usage mode="CARRIED" />
-			<vehicle bod="3" arm="3" pil="3" sen="3"/>
+			<vehicle bod="1" arm="0" pil="3" sen="3"/> <!-- body and armor based on mini drone, double clutch page 150 -->
 			<modifications>
-				<embed type="GEAR" ref="LINK" link="$$UUID" intoType="HOOK" intoRef="INTERNAL"/>
+				<!-- <embed type="GEAR" ref="LINK" link="$$UUID" intoType="HOOK" intoRef="INTERNAL"/> -->
 				<valmod type="HOOK" ref="SOFTWARE" value="3"/>
 			</modifications>
       </alternate>
    </item>
+	<!-- above concept of alternate mode  drone does not work, thus splitting item in an 'adapter' that informs on finding the real thing under drones -->
+	<item id="smart_firing_platform_adapter" avail="5" price="0" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
+		<usage mode="EMBEDDED" slot="UNDER"/>
+	</item>
+	<item id="smart_firing_platform_drone" avail="5" price="2500" type="DRONE_MINI" subtype="GROUND" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="1" arm="0" pil="3" sen="3" /> <!-- body and armor based on mini drone, double clutch page 150 -->
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ff659965-4715-4f58-a562-77de4286715e"/>
+		</modifications>
+	</item>
+	
 	<item id="smartgun_system" avail="2L" price="200" type="ACCESSORY" subtype="WEAPON_ACCESSORY">
 		<usage mode="EMBEDDED" slot="TOP" />
 		<usage mode="EMBEDDED" slot="UNDER" />

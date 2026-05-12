@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- Stationary Drones -->
+
+	<item id="tripod_powered" avail="3L" price="3500" type="DRONE_SMALL" subtype="GROUND" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="0" sen="0" /> <!-- body and armor based on small drone, double clutch page 150 -->
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="be66fbfb-d33d-4557-851c-8415d5f4e5fa"/>
+		</modifications>
+	</item>
+
+	<item id="smart_firing_reinforced" avail="6L" price="12000" type="DRONE_SMALL" subtype="GROUND" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="5" sen="5" /> <!-- body and armor based on small drone, double clutch page 150 -->
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="8010c36a-6b2b-48b1-b0a4-8c77d300272d"/>
+		</modifications>
+	</item>
+
+	<item id="tripod_wheeled" avail="5L" price="4500" type="DRONE_SMALL" subtype="GROUND" >
+		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="0" sen="0" /> <!-- body and armor based on small drone, double clutch page 150 -->
+		<modifications>
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="3e3ea0b6-2823-4b56-93e7-c2c81cf3db9c"/>
+		</modifications>
+	</item>
+
+<!-- New Drones -->
+
+	<item id="aztech_centipede" avail="4L" price="19250" type="DRONE_MINI" subtype="GROUND" >
+		<vehicle han="3/4" acc="6" spdi="15" tspd="30" bod="1" arm="0" pil="4" sen="4" />
+		<geardef>
+			<item id="centipede_fangs" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed" />
+			</item>
+		</geardef>
+		<modifications>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="centipede_fangs" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+	<item id="evo_nightwing" avail="4L" price="12500" type="DRONE_MINI" subtype="AIR">
+		<vehicle han="4" acc="15" spdi="30" tspd="90" bod="1" arm="0" pil="4" sen="4" />
+		<modifications>
+			<embed type="GEAR" ref="improved_economy" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN">
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/> <!-- rating not stated. Not really needed for fluff range, thus choosing rating 1 -->
+                </embed>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="smartlink" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="mtoc_fob" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+		</modifications>
+	</item>
+	
+	<item id="renraku_kitsune_drone" avail="8L" price="65000" type="DRONE_MEDIUM" subtype="GROUND" >
+		<vehicle han="3/4" acc="10" spdi="15" tspd="30" bod="5" arm="5" pil="6" sen="6" />
+		<geardef>
+			<item id="kitsune_fangs" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="0.5"/>
+				<weapon dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed" />
+			</item>
+			<item id="kitsune_spurs" type="WEAPON_CLOSE_COMBAT" subtype="BLADES" modonly="true" >
+				<usage mode="EMBEDDED" slot="VEHICLE_HARDPOINT" value="1" />
+				<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/blades"/>
+			</item>
+			<item id="kitsune_cyberarms" type="MOD_CHASSIS" subtype="MOD_INTERIOR" modonly="true">
+				<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="5"/>
+			</item>
+		</geardef>
+		<modifications>
+			<embed type="GEAR" ref="chameleon_coating" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="kitsune_fangs" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="kitsune_cyberarms" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="f30e2f1c-9596-483c-95c4-77ed54a0a748"/>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="kitsune_spurs" intoType="HOOK" intoRef="VEHICLE_HARDPOINT"/>
+			<embed type="GEAR" ref="weapon_mount_standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7c380d14-3326-4e98-8b11-d833e1017bee"/>
+			<embed type="GEAR" ref="hardpoint_concealment" variant="standard" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+		</modifications>
+	</item>
+
+<!-- Drone Vehicles -->
+
+	<item id="bae_ammo_drone" avail="5" price="18000" type="DRONE_LARGE" subtype="GROUND" >
+		<vehicle han="4/3" acc="10" spdi="15" tspd="90" bod="10" arm="10" pil="3" sen="2" />
+		<modifications>
+			<embed type="GEAR" ref="increase_cargo_space" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+                <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="20"/>
+                </embed>
+			<embed type="GEAR" ref="mechanical_arm" variant="huge" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="mechanical_arm" variant="huge" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" />
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="omukade_support" avail="6L"  price="27000" type="DRONE_LARGE" subtype="GROUND">
+		<vehicle han="4/5" acc="15" spdi="15" tspd="75" bod="12" arm="12" pil="4" sen="4"/>
+		<modifications>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+	<item id="omukade_battle" avail="6L"  price="43500" type="DRONE_LARGE" subtype="GROUND">
+		<vehicle han="4/5" acc="15" spdi="15" tspd="75" bod="16" arm="16" pil="4" sen="4"/>
+		<modifications>
+			<embed type="GEAR" ref="armor_ceramic" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
+			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_hardpoint" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="tires_large" variant="smart" intoType="HOOK" intoRef="VEHICLE_TIRES" />
+			<embed type="GEAR" ref="suncell_power" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
+		</modifications>
+	</item>
+
+
+	<item id="combat_maid" avail="4I"  price="50000" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="3/4" acc="5" spdi="5" tspd="10" bod="8" arm="6" pil="4" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="biotech"/>
+			</embed>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="combat_maid_troll" avail="5I"  price="55000" type="DRONE_LARGE" subtype="ANTHRO">
+		<vehicle han="3/3" acc="5" spdi="5" tspd="10" bod="10" arm="8" pil="4" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="biotech"/>
+			</embed>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="milspec_plate_heavy" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="nurse_maid" avail="4I"  price="57500" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="3/4" acc="5" spdi="5" tspd="15" bod="8" arm="6" pil="4" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="biotech"/>
+			</embed>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="close_combat"/>
+			</embed>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="nurse_maid_troll" avail="5I"  price="62500" type="DRONE_LARGE" subtype="ANTHRO">
+		<vehicle han="3/3" acc="5" spdi="5" tspd="15" bod="10" arm="8" pil="4" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="biotech"/>
+			</embed>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="close_combat"/>
+			</embed>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="nurse_maid_troll" avail="5I"  price="62500" type="DRONE_LARGE" subtype="ANTHRO" lang="de">
+		<vehicle han="3/3" acc="5" spdi="5" tspd="15" bod="10" arm="8" pil="4" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="6"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="biotech"/>
+			</embed>
+			<embed type="GEAR" ref="activesoft" intoType="HOOK" intoRef="SOFTWARE" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+				<decision choice="2baf4c6e-417b-4d1a-943c-edfa816d50bf" value="close_combat"/>
+			</embed>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="evo_orderly" avail="4"  price="5500" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="4/5" acc="5" spdi="5" tspd="10" bod="4" arm="2" pil="3" sen="2"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="medkit" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
+			</embed>
+			<embed type="GEAR" ref="realistic_features" intoType="HOOK" intoRef="VEHICLE_CHASSIS"  >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
+			</embed>
+		</modifications>
+	</item>
+
+	<item id="renraku_attendant" avail="2"  price="3500" type="DRONE_MEDIUM" subtype="ANTHRO">
+		<vehicle han="4/5" acc="2" spdi="2" tspd="3" bod="3" arm="0" pil="2" sen="3"/>
+		<modifications>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="0ff486ec-1478-4ec5-8b44-c44f8732a3a2"/>
+			<embed type="GEAR" ref="integrated_cyberarm" intoType="HOOK" intoRef="VEHICLE_CHASSIS" id="20705fa0-d6b0-46a0-b71e-4c212c0ae69d"/>
+			<embed type="GEAR" ref="passive_stealth" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
+			<embed type="GEAR" ref="powered_breakdown" intoType="HOOK" intoRef="VEHICLE_CHASSIS" >
+				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="2"/>
+			</embed>
+		</modifications>
+	</item>
+
+</items>

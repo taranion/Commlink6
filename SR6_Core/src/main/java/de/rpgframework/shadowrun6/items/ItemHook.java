@@ -44,6 +44,7 @@ public enum ItemHook implements Hook {
 	CYBERDECK,
 	DATATERM,
 	CYBERTERM,
+	COMMNODE,
 	RCC,
 	MEDKIT,
 	HEADWARE_IMPLANT(true),
@@ -71,6 +72,7 @@ public enum ItemHook implements Hook {
 	VEHICLE_WEAPON(true),
 	VEHICLE_WEAPON_SMALL(true),
 	VEHICLE_WEAPON_LARGE(true),
+	VEHICLE_WEAPON_MILITARY(true),
 	VEHICLE_ACCESSORY(true),
 	VEHICLE_TIRES ,
 	KOMMODORE_MODULE(true), // for EMC Kommodore from SOTA 2083

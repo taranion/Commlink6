@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+<!-- gear for unarmed combat -->
+
+	<item id="krime_gloves" avail="2" price="1050" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED">
+		<weapon  dmg="4S(e)" attack="5,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="3P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+      	</alternate>
+	</item>
+
+	<item id="cyber_canines" avail="3L" price="750" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+		<usage mode="EMBEDDED" value="3" slot="HEADWARE_IMPLANT"/>
+		<usage mode="IMPLANTED" value="0.15"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="3P" attack="4,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		</alternate>
+	</item>
+	
+	<item id="densiplast_reinforcement" avail="5L" price="3500" type="ACCESSORY" subtype="ARMOR_BODY">
+		<usage mode="EMBEDDED" slot="ARMOR" value="3" />
+		<modifications>
+			<itemmod type="RULE" ref="UNARMED_DAMAGE_IS_PHYSICAL" apply="CHARACTER"/>
+		</modifications>
+	</item>
+
+<!-- extreme cyberweapons -->
+
+	<!-- rules are unclear in US and DE, with no help from SRM or RunnerNET, thus simplifying concept to 1 enhancement with 1 feature as variant -->
+	
+	<item id="xcw_starting" avail="2I" price="500" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+		<usage mode="IMPLANTED" value="0.1"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="2P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		</alternate>
+		<variant id="buzzsaw">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="cattle_prod">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="electrocutioner">
+			<attrdef id="PRICE" value="1300"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+		<variant id="four_thousand_newtons">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="meat_grinder">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="10" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="red_hot_poker">
+			<attrdef id="PRICE" value="1200"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+		<variant id="original_claw">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="wicked_flail">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="wild_wave">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="wrecking_crew">
+			<attrdef id="PRICE" value="1000"/>
+			<usage mode="EMBEDDED" value="5" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+	</item>
+	
+	<item id="xcw_hardened" avail="2I" price="800" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON"> <!-- using DV & AR from Buzzsaw example and cost & essence from melee hardening (firing squad 61) -->
+		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+		<usage mode="IMPLANTED" value="0.1"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="4P" attack="3,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		</alternate>
+		<variant id="buzzsaw">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="cattle_prod">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="electrocutioner">
+			<attrdef id="PRICE" value="1600"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+		<variant id="four_thousand_newtons">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="meat_grinder">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="10" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="red_hot_poker">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+		<variant id="original_claw">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="8" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="wicked_flail">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="wild_wave">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.5"/>
+		</variant>
+		<variant id="wrecking_crew">
+			<attrdef id="PRICE" value="1300"/>
+			<usage mode="EMBEDDED" value="5" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.4"/>
+		</variant>
+	</item>
+
+	<item id="xcw_hurt_locker1" avail="2I" price="800" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+		<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
+		<usage mode="IMPLANTED" value="0.3"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="5P" attack="6,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		</alternate>
+		<variant id="buzzsaw">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="cattle_prod">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="electrocutioner">
+			<attrdef id="PRICE" value="1600"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="four_thousand_newtons">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="meat_grinder">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="11" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="red_hot_poker">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="original_claw">
+			<attrdef id="PRICE" value="2300"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="wicked_flail">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="wild_wave">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="wrecking_crew">
+			<attrdef id="PRICE" value="1300"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+	</item>
+
+	<item id="xcw_hurt_locker2" avail="2I" price="1000" type="CYBERWARE" subtype="CYBER_IMPLANT_WEAPON">
+		<usage mode="EMBEDDED" value="3" slot="CYBERLIMB_IMPLANT"/>
+		<usage mode="IMPLANTED" value="0.3"/>
+		<flags><flag>AUGMENTATION</flag></flags>
+		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="melee">
+			<weapon  dmg="6P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
+		</alternate>
+		<variant id="buzzsaw">
+			<attrdef id="PRICE" value="2500"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="cattle_prod">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="electrocutioner">
+			<attrdef id="PRICE" value="1800"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="four_thousand_newtons">
+			<attrdef id="PRICE" value="2500"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="meat_grinder">
+			<attrdef id="PRICE" value="2500"/>
+			<usage mode="EMBEDDED" value="11" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="red_hot_poker">
+			<attrdef id="PRICE" value="1700"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+		<variant id="original_claw">
+			<attrdef id="PRICE" value="2500"/>
+			<usage mode="EMBEDDED" value="9" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.8"/>
+		</variant>
+		<variant id="wicked_flail">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="wild_wave">
+			<attrdef id="PRICE" value="2000"/>
+			<usage mode="EMBEDDED" value="7" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.7"/>
+		</variant>
+		<variant id="wrecking_crew">
+			<attrdef id="PRICE" value="1500"/>
+			<usage mode="EMBEDDED" value="6" slot="CYBERLIMB_IMPLANT"/>
+			<usage mode="IMPLANTED" value="0.6"/>
+		</variant>
+	</item>
+
+<!-- new exotic weapons -->
+
+	<item id="chakram" avail="3L" price="200" type="WEAPON_RANGED" subtype="THROWING"> <!-- same data as zoe heritage in firing squad page 16, but close combat use added -->
+		<weapon dmg="2P" attack="10,9,3,,"  skill="athletics" spec="athletics/throwing"/>
+		<modifications>
+			<itemmod type="GEARMOD" ref="personalized_grip_melee"/>   <!-- based on zoe heritage line, firing squad page 16 -->
+			<itemmod type="GEARMOD" ref="metahuman_adaption_close"/>  <!-- based on zoe heritage line, firing squad page 16 -->
+		</modifications>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="melee">
+			<weapon dmg="2P" attack="10,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+      	</alternate>
+	</item>
+	
+	<item id="chakri" avail="3L" price="75" type="WEAPON_RANGED" subtype="THROWING">
+		<weapon dmg="2P" attack="5,4,1,,"  skill="athletics" spec="athletics/throwing"/>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE" id="melee">
+			<weapon dmg="2P" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+      	</alternate>
+	</item>
+	
+	<item id="garotte" avail="4L" price="200" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="3P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+	</item>
+	<item id="garotte_razorwire" avail="6I" price="500" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="4P" attack="10,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+	</item>
+	<item id="garotte_monowire" avail="6I" price="1000" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="6P" attack="10,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+	</item>
+
+	<item id="goblin_stomper" avail="4L" price="125" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="2P" attack="3,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+	
+	<item id="kusarigama" avail="4L" price="150" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="3S" attack="5,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+
+	<item id="meteoric_hammer_single" avail="5I" price="450" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="4P" attack="8,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+	<item id="meteoric_hammer_double" avail="5I" price="500" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="2P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+
+	<item id="sai" avail="4L" price="125" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">
+		<weapon dmg="2P" attack="4,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+
+	<!-- war fan is same as the Zoe heritage line one on firing squad page 16 -->
+
+	<item id="urumi" avail="4I" price="500" type="WEAPON_CLOSE_COMBAT" subtype="OTHER_CLOSE">   <!-- no data in US Deadly Arts, thus using data from DE version -->
+		<weapon dmg="3P" attack="6,,,," skill="exotic_weapons" spec="exotic_weapons/brawling"/>
+	</item>
+
+<!-- cougar polearm -->	
+	
+	<!-- costs and avail are unclear, neither the US nor the DE rules make any sense, thus using two sizes with the two given cost and avail -->
+	
+	<item id="cougar_polearm_small" avail="4L" price="900" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+		<weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
+			<weapon  dmg="3P" attack="9,,,," skill="close_combat" spec="close_combat/blades"/>
+			<attrdef id="WEAPON_SIZE" value="LARGE"/>
+      	</alternate>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
+			<weapon  dmg="4P" attack="10,6,,," skill="close_combat" spec="close_combat/blades"/>
+			<attrdef id="WEAPON_SIZE" value="BIG"/>
+		</alternate>
+	</item>
+
+	<item id="cougar_polearm_large" avail="5I" price="1000" type="WEAPON_CLOSE_COMBAT" subtype="BLADES">
+		<weapon  dmg="3P" attack="8,,,," skill="close_combat" spec="close_combat/blades"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
+			<weapon  dmg="4P" attack="10,6,,," skill="close_combat" spec="close_combat/blades"/>
+			<attrdef id="WEAPON_SIZE" value="BIG"/>
+		</alternate>
+      	<alternate type="WEAPON_CLOSE_COMBAT" subtype="BLADES" id="melee">
+			<weapon  dmg="4P" attack="11,7,,," skill="close_combat" spec="close_combat/blades"/>
+			<attrdef id="WEAPON_SIZE" value="BIG"/>
+		</alternate>
+	</item>
+
+</items>

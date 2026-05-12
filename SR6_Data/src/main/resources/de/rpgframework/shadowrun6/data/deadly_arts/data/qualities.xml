@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+	<quality id="trusted_veteran" karma="8" pos="true" type="NORMAL"/>
+	<quality id="black_mark_discharge" karma="8" pos="false" type="NORMAL"/>
+	<quality id="military_medicine" karma="10" pos="false" type="NORMAL"/>
+
+</qualities>

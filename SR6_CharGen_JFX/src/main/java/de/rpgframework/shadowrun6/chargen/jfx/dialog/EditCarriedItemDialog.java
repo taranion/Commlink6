@@ -72,6 +72,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case WEAPON_CLOSE_COMBAT:
 		case WEAPON_RANGED:
 		case WEAPON_FIREARMS:
+		case WEAPON_VEHICLE:
 		case AMMUNITION: // to enable modifications for grenades
 		case WEAPON_SPECIAL:
 			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
@@ -211,6 +212,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		case WEAPON_CLOSE_COMBAT:
 		case WEAPON_RANGED:
 		case WEAPON_FIREARMS:
+		case WEAPON_VEHICLE:
 		case AMMUNITION: // to enable modifications for grenades
 		case WEAPON_SPECIAL:
 			logger.log(Level.WARNING, "Show modifications for "+type);

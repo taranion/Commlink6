@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+	<!-- Small Arms: Assault Rifles -->
+
+	<item id="easifat_ramlia_a" avail="5L" price="4200" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+		<weapon attack="4,10,10,7,2" ammo="50(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="easifat_launcher" type="WEAPON_FIREARMS" subtype="LAUNCHERS">
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
+				<weapon attack="4,10,6,2," ammo="6(c)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+			</item>
+		</geardef>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="0492c8b5-d5e3-4d90-88cc-a69a59d61e60"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="easifat_launcher" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="easifat_ramlia_b" avail="4L" price="3150" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+		<weapon attack="2,11,12,11,5" ammo="50(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="GEARMOD" ref="barrel_extension"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="0492c8b5-d5e3-4d90-88cc-a69a59d61e60"/>
+			<itemmod type="GEARMOD" ref="rigid_stock"/>
+			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<item id="easifat_ramlia_c" avail="4L" price="3700" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+		<weapon attack="7,13,9,7," ammo="50(c)" dmg="4P" mode="SA/BF/FA" skill="firearms" spec="firearms/rifles"/>
+		<geardef>
+			<item id="easifat_shotgun" type="WEAPON_FIREARMS" subtype="SHOTGUNS">
+				<usage mode="EMBEDDED" slot="UNDER_WEAPON_MOUNT"/>
+				<weapon attack="7,10,6,," ammo="6(c)" dmg="3P" mode="SS/SA" skill="firearms" spec="firearms/shotguns"/>
+			</item>
+		</geardef>
+		<modifications>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<itemmod type="GEARMOD" ref="foregrip"/>
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="0492c8b5-d5e3-4d90-88cc-a69a59d61e60"/>
+			<itemmod type="GEARMOD" ref="short_barrel" />
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="easifat_shotgun" intoType="HOOK" intoRef="UNDER_WEAPON_MOUNT" included="true"/>
+		</modifications>
+	</item>
+	
+	<!-- Small Arms: Pistols and SMGs -->
+
+	<item id="caracal_aswad" avail="3L" price="550" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+		<weapon attack="9,10,9,," ammo="14(c)" dmg="3P" mode="SA/BF" skill="firearms" spec="firearms/pistols_heavy"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+	
+	<item id="sitat_nujum" avail="3L" price="350" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+		<weapon attack="8,11,8,," ammo="6(cy)" dmg="4P" mode="SA" skill="firearms" spec="firearms/pistols_heavy"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+		</modifications>
+	</item>
+
+	<item id="rhipsalis" avail="5L" price="850" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+		<weapon attack="12,11,10,," ammo="80(c)" dmg="3P" mode="SA/BF/FA" skill="firearms" spec="firearms/submachine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="GEARMOD" ref="gas-vent_improved"/>
+			<embed type="GEAR" ref="flashlight" intoType="HOOK" intoRef="TOP" included="true"/>
+			<embed type="GEAR" ref="silencer" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<!-- Machine Guns -->
+
+	<item id="ghadab_shadid" avail="4L" price="4600" type="WEAPON_FIREARMS" subtype="LMG">
+		<weapon dmg="4P" mode="BF/FA" attack="2,12,12,8,2" ammo="100(d)/300(d)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" included="true"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="imaging_scope" intoType="HOOK" intoRef="TOP" included="true" id="0492c8b5-d5e3-4d90-88cc-a69a59d61e60"/>
+		</modifications>
+	</item>
+
+	<item id="fn_mag_6" avail="4L" price="7600" type="WEAPON_FIREARMS" subtype="MMG">
+		<weapon dmg="5P" mode="BF/FA" attack="2,11,11,8,7" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<item id="ultimax_mmg" avail="4L" price="6600" type="WEAPON_FIREARMS" subtype="MMG">
+		<weapon dmg="5P" mode="BF/FA" attack="2,12,12,9,7" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<itemmod type="GEARMOD" ref="foregrip"/>
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ruhrmetall_sf_10" avail="4L" price="7300" type="WEAPON_FIREARMS" subtype="MMG">
+		<weapon dmg="5P" mode="BF/FA" attack="4,11,11,11,6" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="hip_bad_bracing_system" intoType="HOOK" intoRef="STOCK" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<item id="ruhrmetall_sf_20" avail="5L" price="10700" type="WEAPON_FIREARMS" subtype="HMG">
+		<weapon dmg="6P" mode="BF/FA" attack="3,12,12,9,7" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="hip_bad_bracing_system" intoType="HOOK" intoRef="STOCK" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<item id="stoner_ares_m107" avail="5L" price="9300" type="WEAPON_FIREARMS" subtype="HMG">
+		<weapon dmg="6P" mode="BF/FA" attack=",9,10,12,5" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+			<embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+			<embed type="GEAR" ref="tripod" intoType="HOOK" intoRef="UNDER" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ruhrmetall_stachel" avail="5L" price="8900" type="WEAPON_FIREARMS" subtype="HMG">
+		<weapon dmg="6P" mode="BF/FA" attack="1,10,10,7,7" ammo="50(c)/100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="gas-vent_system" intoType="HOOK" intoRef="BARREL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Miniguns -->
+
+	<item id="ge_vindicator" avail="7I" price="5600" type="WEAPON_FIREARMS" subtype="LMG">
+		<weapon dmg="6P" mode="RB" attack="3,12,13,9,5" ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="3" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ge_vengeance" avail="7I" price="5600" type="WEAPON_FIREARMS" subtype="MMG">
+		<weapon dmg="7P" mode="RB" attack="2,11,12,8,4" ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="5" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="5" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ge_vanquisher" avail="7I" price="10600" type="WEAPON_FIREARMS" subtype="HMG">
+		<weapon dmg="8P" mode="RB" attack="2,11,12,9,5" ammo="100(belt)" skill="firearms" spec="firearms/machine_guns"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="7" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="7" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<!-- Assault Cannons -->
+
+	<item id="irm_sabretooth" avail="7I" price="17500" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+		<weapon dmg="7P" mode="SS/BF" attack="1,10,11,9,9" ammo="32(d)" skill="firearms" spec="firearms/assault_cannons"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="6" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="6" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ares_vigilant" avail="6I" price="19000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="7P" mode="BF/FA" attack=",12,10,8,8" ammo="10(c)/50(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="crew_served_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<item id="ares_victory" avail="8I" price="23500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="8P" mode="BF/FA" attack=",8,12,12,10" ammo="10(c)/50(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B25"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="crew_served_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Flame Throwers -->
+
+	<item id="ares_inferno" avail="5L" price="3400" type="WEAPON_SPECIAL" subtype="THROWERS">
+		<weapon dmg="7P" mode="SS" attack="15,13,,," ammo="20(tank)" skill="exotic_weapons" spec="exotic_weapons/spray"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
+	</item>
+
+	<!-- Grenade Launchers -->
+
+	<item id="armtech_mgl24" avail="4I" price="17500" type="WEAPON_SPECIAL" subtype="LAUNCHERS"> <!-- no avail in US rules, using DE avail -->
+		<weapon attack=",8,9,7,6" ammo="18(d)" dmg="0P" mode="SA/BF" skill="exotic_weapons" spec="exotic_weapons/launchers"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="2" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="armtech_mgl48" avail="9I" price="27500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",8,9,9,7" ammo="30(belt)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="2" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<!-- Rocket and Missile Launchers -->
+
+	<item id="al_assad" avail="6I" price="13500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",4,10,8,6" ammo="4(ml)" dmg="0P" mode="SS/BF" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<modifications>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+			<embed type="GEAR" ref="ar_interface" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+	</item>
+
+	<item id="ballista_ii" avail="6I" price="11900" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",5,9,9,8" ammo="4(cy)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<modifications>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+			<embed type="GEAR" ref="ar_interface" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+	</item>
+
+	<item id="carl_gustaf" avail="6I" price="6500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",6,10,9,9" ammo="1(br)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<modifications>
+			<embed type="GEAR" ref="crew_served_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+	</item>
+
+	<item id="pilum_mpat" avail="7I" price="95000" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",8,8,10,10" ammo="1(br)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<modifications>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+			<embed type="GEAR" ref="ar_interface" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+	</item>
+
+	<item id="vespae_mpat" avail="8I" price="83000" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",,6,8,10" ammo="1(br)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<modifications>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<embed type="GEAR" ref="airburst_link" intoType="HOOK" intoRef="INTERNAL" included="true" />
+			<embed type="GEAR" ref="ar_interface" intoType="HOOK" intoRef="INTERNAL" included="true" />
+		</modifications>
+	</item>
+
+	<!-- Mortars -->
+
+	<item id="mortar_m1330" avail="5L" price="5500" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",,5,10,10" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M60"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="mortar_m8330" avail="7I" price="9250" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,,10,12" ammo="1(ml)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M80"/>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="onotari_trebuchet" avail="6I" price="12750" type="WEAPON_SPECIAL" subtype="LAUNCHERS">
+		<weapon attack=",4,7,12,12" ammo="6(cy)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M40"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Railguns -->
+
+	<item id="ferrus_minor" avail="3L" price="850" type="WEAPON_FIREARMS" subtype="PISTOLS_HEAVY">
+		<weapon attack="12,12,10,," ammo="20(c)" dmg="2P" mode="SA/BF" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_0_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<item id="ferrus_major" avail="4L" price="875" type="WEAPON_FIREARMS" subtype="SUBMACHINE_GUNS">
+		<weapon attack="16,12,8,," ammo="40(c)" dmg="2P" mode="SA/BF/FA" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<itemmod type="GEARMOD" ref="collapsible_stock"/>
+			<itemmod type="GEARMOD" ref="foregrip"/>
+			<itemmod type="GEARMOD" ref="short_barrel" />
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+	
+	<item id="ferrus_prime" avail="5L" price="2350" type="WEAPON_FIREARMS" subtype="RIFLE_ASSAULT">
+		<weapon attack="7,12,11,9,4" ammo="40(c)" dmg="3P" mode="SA/BF/FA" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+			<itemmod type="HOOK" ref="UNDER_WEAPON_MOUNT"/>
+		</modifications>
+	</item>
+
+	<item id="ferrus_maximus" avail="7L" price="16850" type="WEAPON_FIREARMS" subtype="RIFLE_SNIPER">
+		<weapon attack=",11,15,22,19" ammo="12(c)" dmg="5P" mode="SA" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN"/>
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="UNDER"/>
+			<embed type="GEAR" ref="slow_rof_sa2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<itemmod type="GEARMOD" ref="barrel_extension"/>
+			<embed type="GEAR" ref="bipod" intoType="HOOK" intoRef="UNDER" included="true"/>
+			<itemmod type="GEARMOD" ref="rigid_stock"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+
+	<!-- Linear Kinetic Weapons -->
+
+	<item id="thunderstruck" avail="6I" price="14200" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+		<weapon dmg="7P" mode="SA" attack="3,11,12,10,6" ammo="10(c)" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="slow_rof_sa2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="laser_sight" intoType="HOOK" intoRef="TOP" included="true"/>
+			<embed type="GEAR" ref="shock_pad" intoType="HOOK" intoRef="STOCK" included="true"/>
+		</modifications>		
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="4" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ynt_nashorn" avail="8I" price="27400" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+		<weapon dmg="5P" mode="BF" attack="3,12,14,11,11" ammo="40(d)" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>		
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="10" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="8" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<item id="ynt_colossus" avail="9I" price="31000" type="WEAPON_FIREARMS" subtype="ASSAULT_CANNON">
+		<weapon dmg="9P" mode="SS" attack="5,16,17,17,17" ammo="10(d)" skill="exotic_weapons" spec="exotic_weapons/linear" />
+		<modifications>
+			<itemmod type="HOOK" ref="TOP"/>
+			<itemmod type="HOOK" ref="BARREL"/>
+			<itemmod type="HOOK" ref="STOCK"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="crew_served_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<itemmod type="GEARMOD" ref="barrel_extension"/>
+			<itemmod type="GEARMOD" ref="foregrip"/>			
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>		
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="10" apply="CHARACTER"/>
+			<valuereq type="ATTRIBUTE" ref="BODY" value="8" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<!-- Small Arms Laser Weapons -->
+	
+	<item id="ares_firebolt" avail="5I" price="1250" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="SMALL"/>
+		<weapon dmg="5P" mode="SA/BF" attack="16,14,10,," ammo="10(c)" skill="exotic_weapons" spec="exotic_weapons/laser"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+	
+	<item id="ares_firebrand" avail="5I" price="2750" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="LARGE"/>
+		<weapon dmg="6P" mode="SA/BF" attack="18,16,12,6," ammo="5(c)/20(d)" skill="exotic_weapons" spec="exotic_weapons/laser"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+	</item>
+	
+	<item id="ares_firebird" avail="6I" price="9300" type="WEAPON_SPECIAL" subtype="OTHER_SPECIAL">
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<attrdef id="WEAPON_SIZE" value="BIG"/>
+		<weapon dmg="8P" mode="SA/BF" attack="18,18,14,10," ammo="20(belt)" skill="exotic_weapons" spec="exotic_weapons/laser"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="smartgun_system" intoType="HOOK" intoRef="INTERNAL" included="true" variant="INTERNAL" id="749d1e33-d2bf-4ff0-922e-a64589eee298" />
+		</modifications>
+		<requires>
+			<valuereq type="ATTRIBUTE" ref="STRENGTH" value="3" apply="CHARACTER"/>
+		</requires>
+	</item>
+
+	<!-- Vehicle Automatic Assault Cannons	-->
+	
+	<item id="gl_bushmaster" avail="8I" price="23500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="8P" mode="FA" attack=",4,8,12,14" ammo="300(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B25"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<item id="gl_copperhead" avail="8I" price="27000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="9P" mode="BF" attack=",2,10,12,14" ammo="250(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B30"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+	
+	<item id="gl_black_mamba" avail="9I" price="32500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="10P" mode="BF" attack=",,12,14,14" ammo="200(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B40"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<item id="gl_king_cobra" avail="10I" price="39000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="11P" mode="SA" attack=",,12,14,14" ammo="150(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B50"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_sa2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<!-- Vehicle Rotary Assault Cannons	-->
+
+	<item id="gl_sidewinder" avail="8I" price="28500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="12P" mode="RB" attack="8,10,12,12,9" ammo="1600(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON"/>
+		<modifications>
+			<embed type="GEAR" ref="range_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<item id="gl_massasauga" avail="9I" price="42000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="14P" mode="RB" attack="5,9,12,12,12" ammo="1200(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B30"/>
+		<modifications>
+			<embed type="GEAR" ref="range_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+
+	<item id="gl_diamondback" avail="10I" price="64000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="18P" mode="RB" attack=",4,8,12,14" ammo="1000(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B40"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>		
+	</item>
+	
+	<!-- Vehicle Cannons	-->
+
+	<item id="gdc_105" avail="8I" price="59500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",2,10,12,14" ammo="60(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="CANNON_105"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="gdc_120" avail="8I" price="71000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,12,14,14" ammo="50(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="CANNON_120"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="gdc_130" avail="9I" price="84000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,12,14,14" ammo="40(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="CANNON_130"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	
+	<item id="gdc_140" avail="10I" price="117500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,14,15,16" ammo="30(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="CANNON_140"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Vehicle  Howitzers	-->
+
+	<item id="bae_lg105" avail="8I" price="45000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",2,6,8,10" ammo="40(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ARTILLERY_A105"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_20" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="bae_lg155" avail="9I" price="85000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,4,10,12" ammo="35(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ARTILLERY_A155"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_20" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="bae_lg203" avail="10I" price="135000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,2,10,14" ammo="30(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ARTILLERY_A203"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1_6" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="range_20" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	
+	<!-- Vehicle Mortars	-->
+	
+	<item id="ruhrmetal_hammerschlag" avail="7I" price="32000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",4,9,12,12" ammo="80(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M80"/>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ruhrmetal_donnergrollen" avail="8I" price="48000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",2,6,12,12" ammo="60(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M120"/>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ruhrmetal_erdbeben" avail="10I" price="85000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,4,10,12" ammo="40(br)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M160"/>
+		<modifications>
+			<embed type="GEAR" ref="range_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_6" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Vehicle Railguns	-->
+
+	<item id="aztech_estolica" avail="8I" price="32000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",6,7,12,10" ammo="20(c)" dmg="9P" mode="SA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK1"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_sa2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+	
+	<item id="aztech_xicohtencatl" avail="9I" price="148000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",4,7,12,11" ammo="50(br)" dmg="11P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK2"/>
+		<modifications>
+			<embed type="GEAR" ref="range_9" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="aztech_relampago" avail="9I" price="282000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,10,12,12" ammo="40(br)" dmg="11P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK3"/>
+		<modifications>
+			<embed type="GEAR" ref="range_16" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="aztech_mixcoatl" avail="10I" price="345000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,8,14,12" ammo="40(br)" dmg="24P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK4"/>
+		<modifications>
+			<embed type="GEAR" ref="range_24" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Vehicle Lasers	-->
+
+	<item id="ares_firelance2" avail="9I" price="43500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack="16,18,20,18,14" ammo="0(i)" dmg="12P" mode="SA/BF" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="energy_10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ares_fireblossom" avail="10I" price="97000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack="18,18,18,16,12" ammo="0(i)" dmg="12P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_fa10" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ares_fireserpent" avail="10I" price="126000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",16,22,20,16" ammo="0(i)" dmg="16P" mode="SA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<modifications>
+			<embed type="GEAR" ref="range_2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_sa2" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="ares_firestorm" avail="12I" price="172500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",14,20,22,18" ammo="0(i)" dmg="20P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="BATTERY"/>
+		<modifications>
+			<embed type="GEAR" ref="range_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Vehicle Flame Thrower	-->
+
+	<item id="ares_hellfire" avail="14I" price="83500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",18,12,," ammo="20(tank)" dmg="10P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="FUEL"/>
+		<modifications>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Vehicle Rocket and Missile Launchers	-->
+
+	<item id="vehicle_unguided_launcher" avail="6I" price="16000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",8,12,12,10" ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="$RATING+5 I" />
+		<attrdef id="PRICE" value="12000 + $RATING*4000" />
+	</item>
+
+	<item id="vehicle_launch_rack" avail="5I" price="1500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="4 + $RATING I" />
+		<attrdef id="PRICE" value="1000 + $RATING*500" />
+	</item>
+
+	<item id="vehicle_vls_cell_hot" avail="7I" price="4500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="6 + $RATING I" />
+		<attrdef id="PRICE" value="3000 + $RATING*1500" />
+	</item>
+
+	<item id="vehicle_vls_cell_cold" avail="9I" price="26000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
+		</choices>
+		<attrdef id="AVAILABILITY" value="8 + $RATING I" />
+		<attrdef id="PRICE" value="18000 + $RATING*8000" />
+	</item>
+
+	<!-- Naval Autocannons	-->
+
+	<item id="dauntless" avail="6I" price="34500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="12P" mode="SS/BF" attack="6,6,8,12,14" ammo="100(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B60"/>
+		<modifications>
+			<embed type="GEAR" ref="range_14" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="super_rapid_75" avail="7I" price="49000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="15P" mode="SS/BF" attack="4,6,10,12,14" ammo="75(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B75"/>
+		<modifications>
+			<embed type="GEAR" ref="range_20" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="oerlikon90" avail="8I" price="63500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="18P" mode="SS/BF" attack=",5,12,12,16" ammo="50(belt)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="ASSAULT_CANNON_B90"/>
+		<modifications>
+			<embed type="GEAR" ref="range_32" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_bf4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<!-- Naval Linear Kinetics -->
+
+	<item id="naval_dornenwerfer" avail="16I" price="4800000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="26P" mode="SS" attack=",8,10,12,14" ammo="200(br)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK4"/>
+		<modifications>
+			<embed type="GEAR" ref="range_20" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="naval_vaporizer" avail="14I" price="1720000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="30P" mode="SS" attack=",,5,11,11" ammo="100(br)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK5"/>
+		<modifications>
+			<embed type="GEAR" ref="range_25" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="naval_tetsu_no_yari" avail="99I" price="8000000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="43P" mode="SS" attack=",,,14,16" ammo="80(br)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK7"/>
+		<modifications>
+			<embed type="GEAR" ref="range_25" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_4" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="naval_svetlyak" avail="99I" price="17000000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="46P" mode="SS" attack=",,,14,14" ammo="60(br)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK8"/>
+		<modifications>
+			<embed type="GEAR" ref="range_30" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="naval_kazan_ho" avail="99I" price="32000000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
+		<weapon dmg="75P" mode="SS" attack=",,,14,16" ammo="40(br)" skill="engineering" spec="engineering/gunnery"/>
+		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
+		<attrdef id="AMMUNITION_CLASS" value="RAILGUN_LK10"/>
+		<modifications>
+			<embed type="GEAR" ref="range_40" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+			<embed type="GEAR" ref="slow_rof_ss1_6" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+</items>

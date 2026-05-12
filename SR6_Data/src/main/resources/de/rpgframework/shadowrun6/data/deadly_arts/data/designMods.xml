@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<designmods>
+
+	<!-- TODO: activate ITEM_ATTRIBUTE" named BUILD_POINTS for calculation in 'build your dream' vehicles -->
+
+	<designmod id="airframe_ceramic_plate" bp="2" >
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BUILD_POINTS" value="$ARMOR*2" />
+		</modifications>
+	</designmod>
+	<designmod id="mil_spec_plate" bp="5" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="12"/>
+		</choices>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BUILD_POINTS" value="$RATING*5" />
+		</modifications>
+	</designmod>
+	<designmod id="mil_spec_comms1" bp="5" />
+	<designmod id="mil_spec_comms2" bp="20" />
+	<designmod id="mil_spec_comms3" bp="30" />
+	<designmod id="mil_spec_frame" bp="15" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="12" />
+		</choices>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BUILD_POINTS" value="$RATING*5+10" />
+		</modifications>
+	</designmod>
+	<designmod id="mil_spec_hardpoint" bp="5" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="10" />
+		</choices>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BUILD_POINTS" value="$RATING*5" />
+		</modifications>
+	</designmod>
+	<designmod id="pop_out_weapon_mount" bp="5" >
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="10" />
+		</choices>
+		<modifications>
+			<valmod type="ITEM_ATTRIBUTE" ref="BUILD_POINTS" value="$RATING*5" />
+		</modifications>
+	</designmod>
+	<designmod id="twin_linked" bp="3" />
+	<designmod id="quad_linked" bp="5" />
+	
+</designmods>
