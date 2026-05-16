@@ -279,6 +279,15 @@ public class SR6WizardPageMagicOrResonance extends WizardPageMagicOrResonance {
 			super.handleControllerEvent(type, param);
 		}
 	}
+	
+	//-------------------------------------------------------------------
+	/**
+	 * @see org.prelle.javafx.WizardPage#pageLeft()
+	 */
+	@Override
+	public void pageLeft() {
+		charGen.runProcessors();
+	}
 
 }
 

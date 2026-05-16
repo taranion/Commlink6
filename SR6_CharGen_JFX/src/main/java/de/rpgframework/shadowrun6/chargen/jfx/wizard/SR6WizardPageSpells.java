@@ -12,15 +12,16 @@ import de.rpgframework.jfx.wizard.NumberUnitBackHeader;
 import de.rpgframework.shadowrun.chargen.charctrl.ISpellController;
 import de.rpgframework.shadowrun.chargen.jfx.wizard.WizardPageSpells;
 import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.ISR6PointBuyGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSpellGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySpellGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySpellGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -34,11 +35,15 @@ public class SR6WizardPageSpells extends WizardPageSpells<SR6Spell> {
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
 
 	protected NumberUnitBackHeader backHeaderCP;
+	private Label lbWarning;
 
 	//-------------------------------------------------------------------
 	public SR6WizardPageSpells(Wizard wizard, SR6CharacterController charGen) {
 		super(wizard, charGen);
-		// TODO Auto-generated constructor stub
+		lbWarning = new Label(ResourceI18N.get(RES, "page.spells.sorceryRequirment"));
+		lbWarning.setStyle("-fx-text-fill: red;");
+		lbWarning.setWrapText(true);
+		selection.setSelectedListHead(lbWarning);
 	}
 
 	//-------------------------------------------------------------------
@@ -78,6 +83,14 @@ public class SR6WizardPageSpells extends WizardPageSpells<SR6Spell> {
 		super.refresh();
 		ISpellController<SR6Spell> spellCtrl = charGen.getSpellController();
 		SR6CharacterGenerator real = (SR6CharacterGenerator) charGen;
+		
+		Shadowrun6Character model = (Shadowrun6Character) charGen.getModel();
+		if ( model.getSkillValue("sorcery")!=null && model.getSkillValue("sorcery").getModifiedValue()>0 ) {
+			lbWarning.setVisible(false);
+		} else {
+			lbWarning.setVisible(true);
+		}
+		
 		if (charGen instanceof GeneratorWrapper)
 			real = ((GeneratorWrapper)charGen).getWrapped();
 
