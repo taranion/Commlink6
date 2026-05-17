@@ -2271,9 +2271,20 @@ public class Shadowrun6Tools {
 			// Only evaluate RIGGER_CONSOLEs
 			if (getItemSubType(item)!=ItemSubType.RIGGER_CONSOLE)
 				continue;
+			// If the RCC is the "Living Command Console", derive matrix attributes from character
+			if ("living_console".equals(item.getKey())) {
+				// Device rating equals to resonance attribute
+				int rating = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
+				item.setAttribute(SR6ItemAttribute.DEVICE_RATING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEVICE_RATING, rating));
+				item.setAttribute(SR6ItemAttribute.DATA_PROCESSING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING, model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()));
+				item.setAttribute(SR6ItemAttribute.FIREWALL, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
+			}
+
 			if (ret==null || ret.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()<item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue())
 				ret = item;
 		}
+		
+		
 		return ret;
 	}
 
