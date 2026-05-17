@@ -35,6 +35,8 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
+import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @author prelle
@@ -163,6 +165,9 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(skills);
+			// Re-run those steps to recalculate after skills and attributes have been copied over from priority settings
+			processChain.add(new CalculateAttributePools(model, locale));
+			processChain.add(new CalculateSkillPools(model, locale));
 			processChain.add(spells);
 			processChain.add(rituals);
 			processChain.add(adeptPowers);
