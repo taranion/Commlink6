@@ -374,6 +374,22 @@
 		</modifications>
 	</item>
 
+	<item id="mortar_m1330" avail="5L" price="5500" type="WEAPON_SPECIAL" subtype="LAUNCHERS" lang="de">
+		<weapon attack=",,5,10,10" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M40"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="mortar_m2330" avail="5L" price="5500" type="WEAPON_SPECIAL" subtype="LAUNCHERS" lang="de">
+		<weapon attack=",,5,10,10" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M60"/>
+		<modifications>
+			<embed type="GEAR" ref="range_7" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
 	<item id="mortar_m8330" avail="7I" price="9250" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
 		<weapon attack=",,,10,12" ammo="1(ml)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
