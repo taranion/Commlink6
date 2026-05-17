@@ -421,11 +421,6 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	}
 
 	//-------------------------------------------------------------------
-	public int getMaximumValue(ShadowrunAttribute key) {
-		return parent.getModel().getAttribute(key).getMaximum();
-	}
-
-	//-------------------------------------------------------------------
 	protected List<ShadowrunAttribute> getMaximizedAttributes() {
 		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
 		Shadowrun6Character model = parent.getModel();
