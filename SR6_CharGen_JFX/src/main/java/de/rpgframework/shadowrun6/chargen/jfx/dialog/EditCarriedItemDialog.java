@@ -83,6 +83,7 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		}
 
 		switch ((ItemSubType)data.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue()) {
+		case CYBER_IMPLANT_WEAPON: // to allow installation of 'ergonomic_optimization' from Deadly Arts 31
 		case CYBER_LIMBS:
 			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
 			view.getList(2).setAll(selectedItem.getEnhancements());
@@ -224,6 +225,24 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 				public ListCell<Object> call(ListView<Object> lv) {
 					ListCell<?> cell =  new ItemEnhancementValueListCell<SR6ItemEnhancement>(control, selectedItem, (c) -> refresh());
 //					ListCell<?> cell = new ComplexDataItemValueListCell<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>( () -> control.getEquipmentController().getItemEnhancementController(selectedItem));
+					return (ListCell<Object>) cell;
+				}
+			});
+			view.setOnAddAction(2, ev -> addModificationClicked());
+			break;
+		}
+		ItemSubType subtype = selectedItem.getAsObject(SR6ItemAttribute.ITEMSUBTYPE).getModifiedValue();
+		switch (subtype) {
+		case CYBER_IMPLANT_WEAPON: // to allow installation of 'ergonomic_optimization' from Deadly Arts 31
+		case CYBER_LIMBS:
+			logger.log(Level.WARNING, "Show modifications for "+subtype);
+			view.setName(2, ResourceI18N.get(UI, "label.modifications"));
+			view.getList(2).setAll(selectedItem.getEnhancements());
+			view.setCellFactory(2, new Callback<ListView<Object>, ListCell<Object>>() {
+
+				@Override
+				public ListCell<Object> call(ListView<Object> lv) {
+					ListCell<?> cell =  new ItemEnhancementValueListCell<SR6ItemEnhancement>(control, selectedItem, (c) -> refresh());
 					return (ListCell<Object>) cell;
 				}
 			});
