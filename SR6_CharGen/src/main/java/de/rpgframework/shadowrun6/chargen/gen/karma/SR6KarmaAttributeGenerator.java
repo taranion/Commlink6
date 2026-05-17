@@ -47,6 +47,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 		Possible possible = super.canBeIncreased(value);
 		if (!possible.get()) {
 			logger.log(Level.WARNING, "Cannot increase {0} because {1}", value.getModifyable(), possible);
+			super.canBeIncreased(value);
 			return possible;
 		}
 
@@ -115,11 +116,6 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 	}
 
 	//-------------------------------------------------------------------
-	public int getMaximumValue(ShadowrunAttribute key) {
-		return parent.getModel().getAttribute(key).getMaximum();
-	}
-
-	//-------------------------------------------------------------------
 	protected List<ShadowrunAttribute> getMaximizedAttributes() {
 		List<ShadowrunAttribute> maxed = new ArrayList<ShadowrunAttribute>();
 		Shadowrun6Character model = parent.getModel();
@@ -183,7 +179,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 				if (tmp.getReferenceType()==ShadowrunReference.ATTRIBUTE) {
 					ValueModification mod = (ValueModification)tmp;
 					ShadowrunAttribute attr = mod.getResolvedKey();
-					logger.log(Level.INFO, "Consume {0}",mod);
+					logger.log(Level.WARNING, "Consume {0}",mod);
 					switch (mod.getSet()) {
 					case MAX:
 						// Optional: Allow adjustment points on lowered maximum
@@ -192,6 +188,7 @@ public class SR6KarmaAttributeGenerator extends CommonAttributeGenerator impleme
 							allowedAdjust.add(attr);
 						}
 						getModel().getAttribute(attr).addIncomingModification(mod);
+						logger.log(Level.WARNING, "  max now {0}",getModel().getAttribute(attr).getMaximum());
 						break;
 					case NATURAL:
 						// Update base
