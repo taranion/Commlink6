@@ -114,6 +114,14 @@
 		<modifications>
 			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
+		<variant id="guided">
+			<attrdef id="PRICE" value="4500"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
 	</item>
 	<item id="ballista_ii_rocket" avail="5I" price="2000" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
     	<ammo gz="16P" close="10P" near="4P" blast="16" />
@@ -123,6 +131,14 @@
 		<modifications>
 			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
+		<variant id="guided">
+			<attrdef id="PRICE" value="4500"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
+			<modifications>
+				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
+				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
+			</modifications>
+		</variant>
 	</item>
 	<item id="carl_gustaf_shell" avail="5I" price="1800" type="AMMUNITION" subtype="ROCKETS" count="y" units="1">
     	<ammo gz="20P" close="14P" near="5P" blast="20" />
@@ -133,8 +149,8 @@
 			<embed type="GEAR" ref="range_1_5" intoType="HOOK" intoRef="INTERNAL" included="true"/>
 		</modifications>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4300"/>
+			<attrdef id="AVAILABILITY" value="6I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -199,15 +215,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_105" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4400"/>
+			<attrdef id="AVAILABILITY" value="9I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 		</variant>
 	</item>
 
@@ -220,15 +236,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_120" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="5100"/>
+			<attrdef id="AVAILABILITY" value="9I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 		</variant>
 	</item>
 
@@ -241,15 +257,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_130" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="5900"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="11I"/>
 		</variant>
 	</item>
 
@@ -262,15 +278,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="CANNON_140" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="6700"/>
+			<attrdef id="AVAILABILITY" value="11I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="12I"/>
 		</variant>
 	</item>
 
@@ -285,15 +301,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A105" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4000"/>
+			<attrdef id="AVAILABILITY" value="9I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 		</variant>
 	</item>
 
@@ -306,15 +322,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A155" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4700"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="11I"/>
 		</variant>
 	</item>
 
@@ -327,15 +343,15 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="ARTILLERY_A203" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="5600"/>
+			<attrdef id="AVAILABILITY" value="11I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
 			</modifications>
 		</variant>
 		<variant id="rocket_assist">
-			<attrdef id="AVAILABILITY" value="2"/>
+			<attrdef id="AVAILABILITY" value="12I"/>
 		</variant>
 	</item>
 
@@ -353,8 +369,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M40" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="3270"/>
+			<attrdef id="AVAILABILITY" value="5L"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -374,8 +390,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M60" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="3400"/>
+			<attrdef id="AVAILABILITY" value="6L"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -395,8 +411,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M80" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4100"/>
+			<attrdef id="AVAILABILITY" value="8I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -415,8 +431,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M80" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="3700"/>
+			<attrdef id="AVAILABILITY" value="8I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -433,8 +449,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M120" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="4300"/>
+			<attrdef id="AVAILABILITY" value="9I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>
@@ -451,8 +467,8 @@
 			<valuereq type="ITEM_ATTRIBUTE" ref="AMMUNITION_CLASS" value="MORTAR_M160" apply="DATA_ITEM"/>
 		</requires>
 		<variant id="guided">
-			<attrdef id="PRICE" value="2500"/>
-			<attrdef id="AVAILABILITY" value="1"/>
+			<attrdef id="PRICE" value="5100"/>
+			<attrdef id="AVAILABILITY" value="10I"/>
 			<modifications>
 				<embed type="GEAR" ref="missile_pilot_3" intoType="HOOK" intoRef="INTERNAL"/>
 				<embed type="GEAR" ref="missile_sensor_3" intoType="HOOK" intoRef="INTERNAL"/>

@@ -192,6 +192,7 @@
 	<item id="smart_firing_platform_drone" avail="5" price="2500" type="DRONE_MINI" subtype="GROUND" >
 		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="1" arm="0" pil="3" sen="3" /> <!-- body and armor based on mini drone, double clutch page 150 -->
 		<modifications>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT"/>
 			<embed type="GEAR" ref="weapon_mount_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ff659965-4715-4f58-a562-77de4286715e"/>
 		</modifications>
 	</item>

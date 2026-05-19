@@ -34,7 +34,20 @@
 		<flags><flag>MATRIX_DEVICE</flag></flags>
 	</item>
    
-	<item id="microdeck_ranger" avail="4I" price="73000" subtype="COMMLINK" type="ELECTRONICS">
+	<item id="microdeck_ranger" avail="4I" price="7300" subtype="COMMLINK" type="ELECTRONICS">
+		<usage mode="CARRIED"/>
+		<usage mode="EMBEDDED" slot="COMMLINK"/>
+		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
+		<modifications>
+			<valmod type="HOOK" ref="ELECTRONIC_ACCESSORY" value="99"/>
+			<valmod type="HOOK" ref="SOFTWARE" value="$CONCURRENT_PROGRAMS"/>
+			<embed type="GEAR" ref="mtoc_fob" intoType="HOOK" intoRef="ELECTRONIC_ACCESSORY"/>
+		</modifications>
+		<matrix d="2" f="2" programs="3" devrat="5"/>
+		<flags><flag>MATRIX_DEVICE</flag></flags>
+	</item>
+      
+	<item id="microdeck_ranger" avail="4I" price="7300" subtype="COMMNODE" type="ELECTRONICS" lang="de">
 		<usage mode="CARRIED"/>
 		<usage mode="EMBEDDED" slot="COMMLINK"/>
 		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP"/>
