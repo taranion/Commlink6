@@ -279,8 +279,8 @@ public class CommonEquipmentGenerator extends CommonEquipmentController  {
 					nuyen -= cost;
 				}
 
-				// If it is an weapon, check if ammunition is present, warn otherwise
-				if (getItemType(tmp)==ItemType.WEAPON_FIREARMS) {
+				// If item has an ammunition_class, check if ammunition is present, warn otherwise
+				if (tmp.hasAttribute(SR6ItemAttribute.AMMUNITION_CLASS)) {
 					if (Shadowrun6Tools.getAmmunitionsFor(model, tmp).isEmpty()) {
 						todos.add(new ToDoElement(Severity.INFO, IRejectReasons.RES, IRejectReasons.TODO_NO_AMMUNITION, tmp.getNameWithoutRating()));
 					}

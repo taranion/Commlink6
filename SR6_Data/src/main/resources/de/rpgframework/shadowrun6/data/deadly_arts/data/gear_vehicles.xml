@@ -44,7 +44,7 @@
 
 <!-- Wheeled Vehicles -->
 
-	<item id="bae_archer" avail="8I"  price="1120000" type="VEHICLES" subtype="GROUND">
+	<item id="bae_archer" avail="8I"  price="1120000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
 		<vehicle han="5/4" acc="10" spdi="15" tspd="110" bod="24" arm="16" pil="3" sen="4" sea="4" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
@@ -57,7 +57,7 @@
 		</modifications>
 	</item>
 
-	<item id="hua_tuo_mash" avail="5"  price="872000" type="VEHICLES" subtype="GROUND">
+	<item id="hua_tuo_mash" avail="5"  price="872000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
 		<vehicle han="4/6" acc="6" spdi="15" tspd="120" bod="18" arm="18" pil="2" sen="2" sea="8" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
@@ -77,7 +77,7 @@
 		</modifications>
 	</item>
 
-	<item id="otokar_jamal" avail="6I"  price="115000" type="VEHICLES" subtype="GROUND">
+	<item id="otokar_jamal" avail="6I"  price="115000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
 		<vehicle han="3/5" acc="20" spdi="20" tspd="140" bod="24" arm="20" pil="3" sen="3" sea="10" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="secondary_propulsion_system" variant="boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
@@ -99,7 +99,7 @@
 		</modifications>
 	</item>
 
-	<item id="omukade_command" avail="6L"  price="645000" type="VEHICLES" subtype="GROUND">
+	<item id="omukade_command" avail="6L"  price="645000" type="VEHICLES" subtype="SPECIAL_VEHICLES">
 		<vehicle han="3/5" acc="10" spdi="25" tspd="120" bod="16" arm="16" pil="4" sen="4" sea="2" type="GROUND"/>
 		<modifications>
 			<!-- cargo hauler is a design option, not a mod -->
@@ -123,9 +123,9 @@
 		<vehicle han="4/2" acc="10" spdi="20" tspd="120" bod="34" arm="24" pil="3" sen="3" sea="3" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6ef32596-c1b1-4245-b07b-d757302da238"/>
-				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="gdc_140" />
+				<embed type="GEAR" intoId="6ef32596-c1b1-4245-b07b-d757302da238" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="gdc_140" />
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="23e0b75e-3d4f-47a2-bf4a-960f42277283"/>
-				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="ares_victory" />
+				<embed type="GEAR" intoId="23e0b75e-3d4f-47a2-bf4a-960f42277283" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="ares_victory" />
 			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
 				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
 			<embed type="GEAR" ref="microdeck_ranger" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
@@ -139,7 +139,7 @@
 		</modifications>
 	</item>
 
-	<item id="devil_rat_apc" avail="6L"  price="775000" type="VEHICLES" subtype="TRACKED">
+	<item id="devil_rat_apc" avail="6L"  price="77500" type="VEHICLES" subtype="TRACKED">
 		<vehicle han="4/2" acc="10" spdi="15" tspd="120" bod="18" arm="18" pil="3" sen="2" sea="12" type="GROUND"/>
 		<modifications>
 			<embed type="GEAR" ref="secondary_propulsion_system" variant="boat" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" />
@@ -160,7 +160,7 @@
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="4"/>
 			</embed>			
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6ef32596-c1b1-4245-b07b-d757302da238"/>
-				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="aztech_mixcoatl" />
+				<embed type="GEAR" intoId="6ef32596-c1b1-4245-b07b-d757302da238" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="aztech_mixcoatl" />
 			<embed type="GEAR" ref="electromag_shielding" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="1"/>
 			</embed>
@@ -204,10 +204,10 @@
 			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
 			<embed type="GEAR" ref="drone_rack" variant="small" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" /> <!-- Small drone racks carry three drones each -->
 			<embed type="GEAR" ref="expanded_drone_storage" variant="small" intoType="HOOK" intoRef="VEHICLE_CHASSIS"/>
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
-				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_firebird" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="edf5058a-49a0-4507-9d92-881d398a5751"/>
-				<embed type="GEAR" intoId="edf5058a-49a0-4507-9d92-881d398a5751" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vindicator" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="89ee2cf1-dc29-42b4-8954-431dc3fd30c4"/>
+				<embed type="GEAR" intoId="89ee2cf1-dc29-42b4-8954-431dc3fd30c4" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ares_firebird" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="02b32816-2938-4330-a8f8-dbd1402e0bf9"/>
+				<embed type="GEAR" intoId="02b32816-2938-4330-a8f8-dbd1402e0bf9" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vindicator" />
 			<embed type="GEAR" ref="ares_red_dog_series" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="ares_red_dog_series" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="living_space" intoType="HOOK" intoRef="VEHICLE_CF" included="true" count="2">
@@ -371,7 +371,7 @@
 				<embed type="GEAR" intoId="1ab67fc4-f4cb-4d01-a51e-06c74747a70f" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="vehicle_launch_rack" >
 					<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="5"/>
 				</embed>
-             <embed  type="GEAR" intoId="" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" ref="improved_stability">
+             <embed type="GEAR" ref="improved_stability" intoType="HOOK" intoRef="VEHICLE_POWERTRAIN" >
                 <decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="3"/>
                 </embed>
 			<embed type="GEAR" ref="increased_integrity" intoType="HOOK" intoRef="VEHICLE_CHASSIS" included="true" >
@@ -402,7 +402,7 @@
 		</modifications>
 	</item>
 
-	<item id="sk_cyclops" avail="99I" price="999999999" type="VEHICLES" subtype="TRACKED" >
+	<item id="sk_cyclops" avail="99I" price="0" type="VEHICLES" subtype="TRACKED" >
 		<vehicle han="4/2" acc="5" spdi="20" tspd="60" bod="44" arm="28" pil="9" sen="9" sea="18" type="GROUND"/>
 		<geardef>
 			<item id="kali_vajra" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY" modonly="true" >
@@ -415,20 +415,20 @@
 			</item>
 		</geardef>
 		<modifications>
-			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="7de284dc-93bf-4c29-9f32-5e15d29dd544"/>
-				<embed type="GEAR" intoId="7de284dc-93bf-4c29-9f32-5e15d29dd544" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="kali_vajra" />
-			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="692327d9-64b1-492a-abda-05c5330f3274"/>
-				<embed type="GEAR" intoId="692327d9-64b1-492a-abda-05c5330f3274" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
-			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="692327d9-64b1-492a-abda-05c5330f3274"/>
-				<embed type="GEAR" intoId="692327d9-64b1-492a-abda-05c5330f3274" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
-				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
-				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
-				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
-			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="ef9b59ce-d2f8-49eb-87f7-51541db65b26"/>
-				<embed type="GEAR" intoId="ef9b59ce-d2f8-49eb-87f7-51541db65b26" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="dc23a474-f0bf-4192-ab02-7dc8abe9f759"/>
+				<embed type="GEAR" intoId="dc23a474-f0bf-4192-ab02-7dc8abe9f759" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="kali_vajra" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="9f240e46-81a7-4de9-9243-010a37b40206"/>
+				<embed type="GEAR" intoId="9f240e46-81a7-4de9-9243-010a37b40206" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
+			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="6b24c219-87a3-4e25-bc60-20207b4221b5"/>
+				<embed type="GEAR" intoId="6b24c219-87a3-4e25-bc60-20207b4221b5" intoType="HOOK" intoRef="VEHICLE_WEAPON_MILITARY" ref="naval_dornenwerfer" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="11d77eed-7a64-45a7-911e-d09319f4cca6"/>
+				<embed type="GEAR" intoId="11d77eed-7a64-45a7-911e-d09319f4cca6" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="dbf84a1b-9dc2-4123-a305-2a199cc1e73b"/>
+				<embed type="GEAR" intoId="dbf84a1b-9dc2-4123-a305-2a199cc1e73b" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="bfb2a048-8320-44fd-af70-5e854a93aee1"/>
+				<embed type="GEAR" intoId="bfb2a048-8320-44fd-af70-5e854a93aee1" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
+			<embed type="GEAR" ref="weapon_turret_heavy" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="c70f633c-ff7b-4db3-ab0e-0d464a9d975e"/>
+				<embed type="GEAR" intoId="c70f633c-ff7b-4db3-ab0e-0d464a9d975e" intoType="HOOK" intoRef="VEHICLE_WEAPON_LARGE" ref="ge_vanquisher" />
 			<embed type="GEAR" ref="citadel_commander" intoType="HOOK" intoRef="VEHICLE_ELECTRONICS" />
 			<embed type="GEAR" ref="milspec_frame" intoType="HOOK" intoRef="VEHICLE_CHASSIS">
 				<decision choice="c2d17c87-1cfe-4355-9877-a20fe09c170d" value="12"/>

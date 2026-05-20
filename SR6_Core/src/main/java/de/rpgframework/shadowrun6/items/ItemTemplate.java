@@ -556,6 +556,13 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 2);
 			}
 			break;
+		case CYBERWARE: // to allow installation of 'ergonomic_optimization' from Deadly Arts 31 
+			if (subtype==ItemSubType.CYBER_IMPLANT_WEAPON) {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 1);
+			} else {
+				setAttribute(SR6ItemAttribute.MODIFICATION_SLOTS, 0);
+			}
+			break;
 		case AMMUNITION:
 			switch (subtype) {
 			case GRENADES:

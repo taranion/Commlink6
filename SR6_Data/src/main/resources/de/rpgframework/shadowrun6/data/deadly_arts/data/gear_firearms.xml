@@ -374,6 +374,22 @@
 		</modifications>
 	</item>
 
+	<item id="mortar_m1330" avail="5L" price="5500" type="WEAPON_SPECIAL" subtype="LAUNCHERS" lang="de">
+		<weapon attack=",,5,10,10" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M40"/>
+		<modifications>
+			<embed type="GEAR" ref="range_3" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
+	<item id="mortar_m2330" avail="5L" price="5500" type="WEAPON_SPECIAL" subtype="LAUNCHERS" lang="de">
+		<weapon attack=",,5,10,10" ammo="1(ml)" dmg="0P" mode="SS" skill="exotic_weapons" spec="exotic_weapons/launchers" />
+		<attrdef id="AMMUNITION_CLASS" value="MORTAR_M60"/>
+		<modifications>
+			<embed type="GEAR" ref="range_7" intoType="HOOK" intoRef="INTERNAL" included="true"/>
+		</modifications>
+	</item>
+
 	<item id="mortar_m8330" avail="7I" price="9250" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
 		<weapon attack=",,,10,12" ammo="1(ml)" dmg="0P" mode="SS" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
@@ -818,7 +834,7 @@
 	<!-- Vehicle Rocket and Missile Launchers	-->
 
 	<item id="vehicle_unguided_launcher" avail="6I" price="16000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
-		<weapon attack=",8,12,12,10" ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<weapon attack=",8,12,12,10" ammo="0(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
@@ -828,7 +844,7 @@
 	</item>
 
 	<item id="vehicle_launch_rack" avail="5I" price="1500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
-		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<weapon attack=",,,," ammo="0(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
@@ -838,7 +854,7 @@
 	</item>
 
 	<item id="vehicle_vls_cell_hot" avail="7I" price="4500" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
-		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<weapon attack=",,,," ammo="0(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />
@@ -848,7 +864,7 @@
 	</item>
 
 	<item id="vehicle_vls_cell_cold" avail="9I" price="26000" type="WEAPON_VEHICLE" subtype="VEHICLE_MILITARY">
-		<weapon attack=",,,," ammo="10(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
+		<weapon attack=",,,," ammo="0(br)" dmg="0P" mode="SA/BF/FA" skill="engineering" spec="engineering/gunnery"/>
 		<attrdef id="WEAPON_SIZE" value="MILITARY"/>
 		<choices>
 			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" max="6" />

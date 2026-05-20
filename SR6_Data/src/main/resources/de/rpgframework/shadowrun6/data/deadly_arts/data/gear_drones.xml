@@ -6,6 +6,7 @@
 	<item id="tripod_powered" avail="3L" price="3500" type="DRONE_SMALL" subtype="GROUND" >
 		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="0" sen="0" /> <!-- body and armor based on small drone, double clutch page 150 -->
 		<modifications>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT" />
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="be66fbfb-d33d-4557-851c-8415d5f4e5fa"/>
 		</modifications>
 	</item>
@@ -13,6 +14,7 @@
 	<item id="smart_firing_reinforced" avail="6L" price="12000" type="DRONE_SMALL" subtype="GROUND" >
 		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="5" sen="5" /> <!-- body and armor based on small drone, double clutch page 150 -->
 		<modifications>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT"/>
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="8010c36a-6b2b-48b1-b0a4-8c77d300272d"/>
 		</modifications>
 	</item>
@@ -20,6 +22,7 @@
 	<item id="tripod_wheeled" avail="5L" price="4500" type="DRONE_SMALL" subtype="GROUND" >
 		<vehicle han="0" acc="0" spdi="0" tspd="0" bod="2" arm="1" pil="0" sen="0" /> <!-- body and armor based on small drone, double clutch page 150 -->
 		<modifications>
+			<itemmod type="HOOK" ref="VEHICLE_HARDPOINT"/>
 			<embed type="GEAR" ref="weapon_mount_military" intoType="HOOK" intoRef="VEHICLE_HARDPOINT" id="3e3ea0b6-2823-4b56-93e7-c2c81cf3db9c"/>
 		</modifications>
 	</item>

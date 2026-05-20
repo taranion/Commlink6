@@ -3,8 +3,10 @@
 
 	<itemenhancement id="ergonomic_optimization" avail="3" price="350">
 		<requires>
-			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="CYBER_IMPLANT_WEAPON"/>
-			<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="UNARMED"/>
+			<selreq>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="CYBER_IMPLANT_WEAPON"/>
+				<valuereq type="ITEM_ATTRIBUTE" ref="ITEMTYPE" value="WEAPON_CLOSE_COMBAT"/>
+			</selreq>
 		</requires>
 		<modifications>
 			<valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="+2,0,0,0,0" />
