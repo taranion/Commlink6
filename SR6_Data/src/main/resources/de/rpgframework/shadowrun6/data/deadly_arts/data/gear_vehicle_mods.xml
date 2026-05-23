@@ -59,7 +59,7 @@
 		</choices>
 		<usage mode="EMBEDDED" slot="VEHICLE_CHASSIS" value="0"/>
 		<modifications>
-			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="RATING*5" />
+			<valmod type="HOOK" ref="VEHICLE_HARDPOINT" value="$RATING*5" />
 		</modifications>
 		<!-- bp="RATING*5" -->
 	</item>
