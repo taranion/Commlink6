@@ -480,7 +480,7 @@ public class CalculateDerivedAttributes implements ProcessingStep {
 		// Find best shield
 		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_SHIELD);
 		// Find best other cumulative armor
-		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_BODY); // note that ARMOR_CLOTHES and ARMOR_SOCIAL are not searched for cumulative armor
+		Shadowrun6Tools.getSecondaryArmor(model, ItemSubType.ARMOR_BODY); // note that ARMOR_CLOTHES, ARMOR_SOCIAL and ARMOR_EXO are not searched for cumulative armor
 		
 		// Add values of armor pieces to get total defense rating
 		for (CarriedItem<ItemTemplate> item : model.getCarriedItems()) {

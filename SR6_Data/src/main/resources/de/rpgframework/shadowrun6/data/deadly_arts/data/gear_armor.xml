@@ -43,20 +43,20 @@
         </modifications>
 	</item>
 
-    <item id="soldier_basic" avail="5I" price="45000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_basic" avail="5I" price="45000" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="4" social="-7" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="0"/>
             <valmod type="ATTRIBUTE" ref="STRENGTH" value="1"/>
         </modifications>
     </item>
-    <item id="soldier_recovery" avail="6I" price="100000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_recovery" avail="6I" price="100000" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="4" social="-8" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="4"/>
         </modifications>
     </item>
-    <item id="soldier_shield" avail="6I" price="47500" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_shield" avail="6I" price="47500" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="6" social="-8" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="2"/>
@@ -64,7 +64,7 @@
 			<embed type="GEAR" ref="ares_rampart_mk3" intoType="HOOK" intoRef="ARMOR"/>
         </modifications>
     </item>
-    <item id="soldier_twitch" avail="5I" price="35000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_twitch" avail="5I" price="35000" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="2" social="-7" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="0"/>
@@ -72,7 +72,7 @@
             <valmod type="ATTRIBUTE" ref="REACTION" value="1"/>
         </modifications>
     </item>
-    <item id="soldier_vulture" avail="8I" price="110000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_vulture" avail="8I" price="110000" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="2" social="-8" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="2"/>
@@ -81,7 +81,7 @@
 			<embed type="GEAR" ref="cyberwings" intoType="HOOK" intoRef="ARMOR"/>
         </modifications>
     </item>
-    <item id="soldier_wrecker" avail="7I" price="105000" type="ARMOR" subtype="ARMOR_BODY">
+    <item id="soldier_wrecker" avail="7I" price="105000" type="ARMOR" subtype="ARMOR_EXO">
         <armor rating="4" social="-8" />
         <modifications>
        		<valmod type="HOOK" ref="ARMOR" value="4"/>

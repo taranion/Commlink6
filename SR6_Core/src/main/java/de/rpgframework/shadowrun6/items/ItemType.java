@@ -36,7 +36,8 @@ public enum ItemType {
 			ItemSubType.ARMOR_SOCIAL,
 			ItemSubType.ARMOR_CLOTHES,
 			ItemSubType.ARMOR_HELMET,
-			ItemSubType.ARMOR_SHIELD
+			ItemSubType.ARMOR_SHIELD,
+			ItemSubType.ARMOR_EXO
 			),
 	ARMOR_ADDITION,
 	BIOWARE(
