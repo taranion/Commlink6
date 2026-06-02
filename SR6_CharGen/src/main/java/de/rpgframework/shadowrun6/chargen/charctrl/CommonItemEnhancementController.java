@@ -128,7 +128,7 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 		ItemAttributeNumericalValue<SR6ItemAttribute> val = toModify.getAsValue(SR6ItemAttribute.MODIFICATION_SLOTS);
 		if (val==null) {
 			logger.log(Level.ERROR, "No information about modification slots for {0}", toModify);
-			return Possible.FALSE;
+			return Possible.TRUE;
 		}
 		// Enough space
 		if (val.getModifiedValue() < (toModify.getModificationSlotsUsed()+value.getSize()))
