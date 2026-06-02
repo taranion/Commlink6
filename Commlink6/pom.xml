@@ -342,6 +342,13 @@
 			<id>gluon-releases</id>
 			<url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
 		</pluginRepository>
+		<pluginRepository>
+            <name>Central Portal Snapshots</name>
+             <id>central-portal-snapshots</id>
+             <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+             <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+      </pluginRepository>
 	</pluginRepositories>
 
  	<!--<distributionManagement>
