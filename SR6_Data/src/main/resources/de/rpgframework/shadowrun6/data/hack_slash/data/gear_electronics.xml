@@ -358,7 +358,14 @@
 	<attrdef id="PRICE" value="$RATING*100"/>
    </item>
 
-   <item avail="4L" price="100" id="rfid_software_tags" type="ELECTRONICS" subtype="RFID"/>
+   <item avail="4L" price="100" id="rfid_software_tags" type="ELECTRONICS" subtype="RFID">
+		<usage mode="CARRIED"/>
+		<usage mode="EMBEDDED" slot="ELECTRONIC_ACCESSORY"/>
+   		<attrdef id="SOFTWARE_TYPES" value="BASIC,COMMLINK_APP,HACKING,AUTOSOFT"/>
+		<modifications>
+			<valmod type="HOOK" ref="SOFTWARE" value="1"/>
+		</modifications>
+   </item>
    <item avail="2L" id="rfid_spy_tags" type="ELECTRONICS" subtype="RFID">
    	<choices>
 		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6"/>
