@@ -76,7 +76,7 @@
       <vehicle han="5/7" acc="8" spdi="10" tspd="120" bod="18" arm="16" pil="2" sen="2" sea="12"/>
    </item>
 
-<!-- Boats -->
+    <!-- Boats -->
    <item avail="2"  price="25000" id="samuvani_criscraft_otter" type="VEHICLES" subtype="BOATS">
       <vehicle han="4" acc="10" spdi="15" tspd="90" bod="6" arm="4" pil="2" sen="2" sea="6"/>
    </item>
@@ -95,7 +95,7 @@
       <vehicle han="5" acc="18" spdi="10" tspd="70" bod="6" arm="12" pil="3" sen="3" sea="3"/>
    </item>
 
-<!-- Fixed wing aircrafts -->
+    <!-- Fixed wing aircrafts -->
    <item avail="2"  price="20000" id="artemis_industries_nightwing" type="VEHICLES" subtype="FIXED_WING">
       <vehicle han="4" acc="15" spdi="25" tspd="150" bod="2" arm="0" pil="1" sen="1" sea="1"/>
    </item>
@@ -106,7 +106,7 @@
       <vehicle han="5" acc="30" spdi="50" tspd="500" bod="12" arm="4" pil="2" sen="2" sea="8"/>
    </item>
 
-<!-- Rotorcraft -->
+    <!-- Rotorcraft -->
    <item avail="2"  price="360000" id="ares_dragon" type="VEHICLES" subtype="ROTORCRAFT">
       <vehicle han="4" acc="10" spdi="30" tspd="260" bod="22" arm="10" pil="2" sen="3" sea="16"/>
    </item>
@@ -117,7 +117,7 @@
       <vehicle han="3" acc="25" spdi="30" tspd="330" bod="10" arm="8" pil="3" sen="3" sea="2"/>
    </item>
 
-<!-- VTOL/VSTOL -->
+    <!-- VTOL/VSTOL -->
    <item avail="2"  price="350000" id="federated_boeing_commuter" type="VEHICLES" subtype="VTOL">
       <vehicle han="3" acc="35" spdi="60" tspd="420" bod="16" arm="10" pil="2" sen="2" sea="10"/>
    </item>
@@ -125,7 +125,7 @@
       <vehicle han="3" acc="35" spdi="80" tspd="420" bod="16" arm="16" pil="4" sen="4" sea="10"/>
    </item>
 
-<!-- LAV -->
+    <!-- LAV -->
    <item avail="3"  price="400000" id="ares_venture" type="VEHICLES" subtype="LAV">
       <vehicle han="4" acc="40" spdi="60" tspd="680" bod="16" arm="12" pil="2" sen="2" sea="8"/>
    </item>

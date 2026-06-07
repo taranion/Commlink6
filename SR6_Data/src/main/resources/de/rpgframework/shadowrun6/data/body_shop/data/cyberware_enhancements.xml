@@ -9,7 +9,7 @@
 		<valuereq type="ITEM_ATTRIBUTE" ref="ITEMSUBTYPE" value="CYBER_LIMBS"/>
 	  </requires>
 	  <modifications>
-         <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="$RATING"/>
+         <valmod type="HOOK" ref="CYBERLIMB_IMPLANT" value="2"/>
 	  </modifications>
 	</itemenhancement>
 </itemenhancements>
