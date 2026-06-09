@@ -668,7 +668,7 @@ public class SR6PrioritySkillGenerator extends CommonSkillGenerator implements N
 						pay = per.points3*3;
 					}
 					model.setKarmaFree( model.getKarmaFree() - pay );
-					logger.log(Level.DEBUG, "  Pay {0} karma for {1}", pay, key);
+					logger.log(Level.INFO, "  Pay {0} karma for {1}", pay, key);
 				}
 
 				if (per.karmaSpec>0) {
