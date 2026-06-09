@@ -256,12 +256,14 @@ public class SR6DataStructureController extends ControllerImpl<DataStructure> im
 		for (DataStructureValue ds : getModel().getDataStructures()) {
 			int level = ds.getDistributed();
 			remain -= level;
-			int nuyen = level*5000;
-			logger.log(Level.INFO, "Pay {0} and {1} karma nuyen for {2}", nuyen, level, ds.getKey());
-			// Pay money
-			model.setNuyen( model.getNuyen() - nuyen );
-			// Pay Karma
-			model.setKarmaFree( model.getKarmaFree() - level );
+			if (parent instanceof SR6CharacterGenerator) {
+				int nuyen = level*5000;
+				logger.log(Level.INFO, "Pay {0} and {1} karma nuyen for {2}", nuyen, level, ds.getKey());
+				// Pay money
+				model.setNuyen( model.getNuyen() - nuyen );
+				// Pay Karma
+				model.setKarmaFree( model.getKarmaFree() - level );
+			}
 		}
 
 		return unprocessed;
