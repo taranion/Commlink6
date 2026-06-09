@@ -26,7 +26,7 @@
 		<javafx.plugin.version>0.0.8</javafx.plugin.version>
 		<client.plugin.version>1.0.25</client.plugin.version>
 		<attach.version>4.0.22</attach.version>
-		<rpgfw.version>5.4.3</rpgfw.version>
+		<rpgfw.version>5.4.5</rpgfw.version>
 	</properties>
 	<!-- Comment for no real purpose -->
 
@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.42</version>
+			<version>1.18.46</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -137,7 +137,7 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
          <artifactId>eden-client-jfx</artifactId>
-         <version>0.0.8</version>
+         <version>0.0.9</version>
 		</dependency>
       <dependency>
         <groupId>org.prelle</groupId>
@@ -193,7 +193,7 @@
       <dependency>
          <groupId>org.bouncycastle</groupId>
          <artifactId>bcutil-jdk18on</artifactId>
-         <version>1.80</version>
+         <version>1.84</version>
          <scope>runtime</scope>
       </dependency>
 	</dependencies>
