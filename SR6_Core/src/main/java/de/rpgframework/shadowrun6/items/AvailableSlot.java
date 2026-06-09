@@ -7,6 +7,8 @@ import org.prelle.simplepersist.Attribute;
 
 import de.rpgframework.genericrpg.items.AAvailableSlot;
 import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 
 /**
  * @author prelle
@@ -40,6 +42,17 @@ public class AvailableSlot extends AAvailableSlot<ItemHook, ItemTemplate>  {
 	public AvailableSlot(ItemHook hook, float capacity) {
 		super(capacity);
 		this.ref = hook;
+	}
+	@Override
+	public void addIncomingModification(Modification mod) {
+		if (mod.getOrigin()==null)
+			throw new RuntimeException("Modifications without origin are not allowed");
+		if (mod instanceof ValueModification vm) {
+			if (vm.getFormula()!=null) {
+				logger.log(Level.DEBUG, "Adding size modification {0} to slot {1}", vm, this);
+			}
+		}
+		incomingModifications.add(mod);
 	}
 
 	//-------------------------------------------------------------------

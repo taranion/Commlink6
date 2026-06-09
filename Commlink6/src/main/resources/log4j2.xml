@@ -19,6 +19,7 @@
     <Logger name="de.rpgframework.shadowrun.chargen" level="INFO"/>
     <Logger name="de.rpgframework.shadowrun6.chargen" level="INFO"/>
 
+    <Logger name="de.rpgframework.shadowrun6.chargen.gen.priority" level="TRACE"/>
     <Logger name="de.rpgframework.shadowrun6.chargen.charctrl" level="DEBUG"/>
     <Logger name="de.rpgframework.shadowrun6.chargen.gen" level="INFO"/>
     <Logger name="de.rpgframework.shadowrun6.chargen.gen.karma" level="DEBUG"/>

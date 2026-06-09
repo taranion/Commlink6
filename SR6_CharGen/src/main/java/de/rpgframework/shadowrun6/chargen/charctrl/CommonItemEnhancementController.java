@@ -153,6 +153,9 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 		}
 
 		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);
+		for (Decision dec : decisions) {
+			iVal.addDecision(dec);
+		}
 		toModify.addEnhancement(iVal);
 		logger.log(Level.INFO, "Added ItemEnhancement {0} to {1}", iVal, toModify);
 

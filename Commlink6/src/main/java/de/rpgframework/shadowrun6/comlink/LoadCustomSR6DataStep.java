@@ -9,6 +9,10 @@ import java.util.List;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
 import de.rpgframework.core.StartupStep;
+import de.rpgframework.genericrpg.SetItem;
+import de.rpgframework.genericrpg.SetItemList;
+import de.rpgframework.genericrpg.chargen.RuleInterpretation;
+import de.rpgframework.genericrpg.chargen.RuleInterpretationList;
 import de.rpgframework.genericrpg.data.CustomDataSetHandle;
 import de.rpgframework.genericrpg.data.CustomDataSetHandle.DataSetEntry;
 import de.rpgframework.genericrpg.data.CustomDataSetManager;
@@ -16,59 +20,66 @@ import de.rpgframework.genericrpg.data.CustomDataSetManagerLoader;
 import de.rpgframework.genericrpg.data.DataItem;
 import de.rpgframework.genericrpg.data.DataSet;
 import de.rpgframework.genericrpg.data.GenericCore;
-import de.rpgframework.shadowrun6.items.ItemTemplate;
-import de.rpgframework.shadowrun6.items.ItemTemplateList;
-
-import de.rpgframework.shadowrun6.Shadowrun6Action;
-import de.rpgframework.shadowrun6.ActionList;
 import de.rpgframework.shadowrun.AdeptPower;
 import de.rpgframework.shadowrun.AdeptPowerList;
-import de.rpgframework.shadowrun6.items.AmmunitionType;
-import de.rpgframework.shadowrun6.items.AmmunitionTypeList;
 import de.rpgframework.shadowrun.ComplexForm;
 import de.rpgframework.shadowrun.ComplexFormList;
-import de.rpgframework.shadowrun6.SR6NPC;
-import de.rpgframework.shadowrun6.NPCList;
+import de.rpgframework.shadowrun.ContactType;
+import de.rpgframework.shadowrun.ContactTypeList;
 import de.rpgframework.shadowrun.CritterPower;
 import de.rpgframework.shadowrun.CritterPowerList;
-import de.rpgframework.shadowrun.MetamagicOrEcho;
-import de.rpgframework.shadowrun.MetamagicOrEchoList;
 import de.rpgframework.shadowrun.Focus;
 import de.rpgframework.shadowrun.FocusList;
-import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
-import de.rpgframework.shadowrun6.items.ItemEnhancementList;
 import de.rpgframework.shadowrun.LifestyleQuality;
 import de.rpgframework.shadowrun.LifestyleQualityList;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.MagicOrResonanceTypeList;
 import de.rpgframework.shadowrun.MentorSpirit;
 import de.rpgframework.shadowrun.MentorSpiritList;
-import de.rpgframework.shadowrun6.SR6MetaType;
-import de.rpgframework.shadowrun6.MetaTypeList;
-import de.rpgframework.shadowrun6.SR6Quality;
-import de.rpgframework.shadowrun6.QualityList;
+import de.rpgframework.shadowrun.MetamagicOrEcho;
+import de.rpgframework.shadowrun.MetamagicOrEchoList;
+import de.rpgframework.shadowrun.PriorityTableEntryList;
+import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualFeature;
 import de.rpgframework.shadowrun.RitualFeatureList;
-import de.rpgframework.shadowrun.Ritual;
 import de.rpgframework.shadowrun.RitualList;
-import de.rpgframework.genericrpg.chargen.RuleInterpretation;
-import de.rpgframework.genericrpg.chargen.RuleInterpretationList;
-import de.rpgframework.shadowrun6.Sense;
-import de.rpgframework.shadowrun6.SenseList;
-import de.rpgframework.shadowrun6.SR6Skill;
-import de.rpgframework.shadowrun6.SkillList;
 import de.rpgframework.shadowrun.SpellFeature;
 import de.rpgframework.shadowrun.SpellFeatureList;
-import de.rpgframework.shadowrun6.SR6Spell;
-import de.rpgframework.shadowrun6.SR6SpellList;
 import de.rpgframework.shadowrun.Tradition;
 import de.rpgframework.shadowrun.TraditionList;
-
-import de.rpgframework.shadowrun6.Technique;
-import de.rpgframework.shadowrun6.TechniqueList;
+import de.rpgframework.shadowrun6.ActionList;
+import de.rpgframework.shadowrun6.DataStructure;
+import de.rpgframework.shadowrun6.DataStructureList;
+import de.rpgframework.shadowrun6.DrakeType;
+import de.rpgframework.shadowrun6.DrakeTypeList;
+import de.rpgframework.shadowrun6.LifepathModule;
+import de.rpgframework.shadowrun6.LifepathModuleList;
 import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsList;
-
+import de.rpgframework.shadowrun6.MetaTypeList;
+import de.rpgframework.shadowrun6.NPCList;
+import de.rpgframework.shadowrun6.QualityList;
+import de.rpgframework.shadowrun6.QualityPath;
+import de.rpgframework.shadowrun6.QualityPathList;
+import de.rpgframework.shadowrun6.SR6MetaType;
+import de.rpgframework.shadowrun6.SR6NPC;
+import de.rpgframework.shadowrun6.SR6Quality;
+import de.rpgframework.shadowrun6.SR6Skill;
+import de.rpgframework.shadowrun6.SR6Spell;
+import de.rpgframework.shadowrun6.SR6SpellList;
+import de.rpgframework.shadowrun6.Sense;
+import de.rpgframework.shadowrun6.SenseList;
+import de.rpgframework.shadowrun6.Shadowrun6Action;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.SkillList;
+import de.rpgframework.shadowrun6.Technique;
+import de.rpgframework.shadowrun6.TechniqueList;
+import de.rpgframework.shadowrun6.items.AmmunitionType;
+import de.rpgframework.shadowrun6.items.AmmunitionTypeList;
+import de.rpgframework.shadowrun6.items.ItemEnhancementList;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemTemplateList;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
 import de.rpgframework.shadowrun6.vehicle.ChassisType;
 import de.rpgframework.shadowrun6.vehicle.ChassisTypeList;
 import de.rpgframework.shadowrun6.vehicle.ConsoleType;
@@ -81,22 +92,6 @@ import de.rpgframework.shadowrun6.vehicle.Powertrain;
 import de.rpgframework.shadowrun6.vehicle.PowertrainList;
 import de.rpgframework.shadowrun6.vehicle.QualityFactor;
 import de.rpgframework.shadowrun6.vehicle.QualityFactorList;
-
-import de.rpgframework.shadowrun6.DataStructure;
-import de.rpgframework.shadowrun6.DataStructureList;
-import de.rpgframework.shadowrun6.QualityPath;
-import de.rpgframework.shadowrun6.QualityPathList;
-
-import de.rpgframework.shadowrun.ContactType;
-import de.rpgframework.shadowrun.ContactTypeList;
-import de.rpgframework.genericrpg.SetItem;
-import de.rpgframework.genericrpg.SetItemList;
-
-import de.rpgframework.shadowrun6.DrakeType;
-import de.rpgframework.shadowrun6.DrakeTypeList;
-
-import de.rpgframework.shadowrun6.LifepathModule;
-import de.rpgframework.shadowrun6.LifepathModuleList;
 
 
 /**
@@ -280,6 +275,9 @@ public class LoadCustomSR6DataStep implements StartupStep {
 		if (name.startsWith("lifepath"))
 			return LifepathModuleList.class;
 
+		if (name.startsWith("priorities"))
+			return PriorityTableEntryList.class;
+
 		return null;
 	}
 
@@ -296,8 +294,12 @@ public class LoadCustomSR6DataStep implements StartupStep {
 		Class<? extends List<E>> clsList = file.listClazz();
 		if (clsItem==null) clsItem = (Class<E>) guessItemType(file.key());
 		if (clsList==null) clsList = (Class<? extends List<E>>) guessListType(file.key());
+		if (clsItem!=null && clsItem.isAssignableFrom(PriorityTableEntryList.class)) {
+			return (List<E>) Shadowrun6Core.loadPriorityTableEntries(set, data);
+			
+		}
 		if (clsItem==null) {
-			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Missing class type for custom data "+file.key());
+			BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, "Don't know what to do for custom data '"+file.key()+"'");
 			return null;
 		}
 		if (clsList==null) {
