@@ -16,6 +16,7 @@
 	<item id="hemostatix_dressing" avail="3" price="500" type="BIOLOGY" subtype="BIOTECH" count="y"/>
 	<item id="ge_statscan" avail="4" price="2500" type="BIOLOGY" subtype="BIOTECH" count="y">
 		<usage mode="EMBEDDED" value="2" slot="CYBERLIMB_IMPLANT"/>
+		<usage mode="CARRIED"/>
 	</item>
 	<item id="medkit_advanced" avail="4" price="300" type="BIOLOGY" subtype="BIOTECH" count="y">
 		<choices>

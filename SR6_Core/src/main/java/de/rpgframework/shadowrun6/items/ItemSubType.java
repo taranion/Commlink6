@@ -77,6 +77,7 @@ public enum ItemSubType {
 	ARMOR_CLOTHES,
 	ARMOR_HELMET,
 	ARMOR_SHIELD,
+	ARMOR_EXO,
 	// Cyberware
 	CYBER_COSMETICS,
 	CYBER_HEADWARE,

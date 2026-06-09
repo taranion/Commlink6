@@ -56,7 +56,7 @@
 		</geardef>
     </item>
 
-    <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_BODY" >
+    <item id="myrmidon" avail="9I" price="105000"  type="ARMOR" subtype="ARMOR_EXO" >
         <armor rating="8" social="-8" dr="3" />
         <modifications>
 			<itemmod type="GEAR" apply="CHARACTER" ref="myrmidon_helmet" />

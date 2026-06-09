@@ -21,7 +21,7 @@
    <spell id="practical_camouflage" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="2" />
    <spell id="pit_trap" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" />
    <spell id="say_again" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" />
-   <spell id="sound_barrier" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="2" /> <!-- no area size stated -->
+   <spell id="sound_barrier" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="3" /> <!-- no area size stated -->
    <spell id="starlight_sight" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="2" /> <!-- as this affects one metahuman, it should be mana -->
    <spell id="treacherous_path" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="PERMANENT" drain="3" />
    <spell id="tyee" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="3" />
