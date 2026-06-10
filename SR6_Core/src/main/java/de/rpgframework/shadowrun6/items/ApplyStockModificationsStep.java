@@ -273,7 +273,7 @@ public class ApplyStockModificationsStep implements CarriedItemProcessor {
 			slot.addEmbeddedItem(accessory);
 
 			// Now apply modifications that the new accessory provides
-			for (Modification mod2 : accessory.getOutgoingModifications()) {
+			for (Modification mod2 : accessory.getIncomingModifications()) {
 				if (mod2 instanceof DataItemModification) {
 					applyModification(false, charac, (CarriedItem<ItemTemplate>) model, (DataItemModification)mod2);
 				}

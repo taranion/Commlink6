@@ -20,6 +20,7 @@ import org.prelle.javafx.ScreenManagerProvider;
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.core.BabylonEventBus;
 import de.rpgframework.core.BabylonEventType;
+import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
@@ -394,25 +395,37 @@ public class EditCarriedItemDialog extends ACarriedItemPage<ItemTemplate, ItemHo
 		NavigButtonControl btnCtrl = new NavigButtonControl();
 		selector.setButtonControl(btnCtrl);
 		CloseType closed = getAppLayout().getApplication().showAlertAndCall(dialog, btnCtrl);
-//		SelectPluginDataDialog<ItemEnhancement> dialog = new SelectPluginDataDialog<ItemEnhancement>(
-//				ResourceI18N.get(UI, "dialog.add.enhancement.title"),
-//				data,
-//				lv -> new ItemEnhancementListCell(control.getCharacter(), control.getEquipmentController(), selectedItem),
-//				CloseType.CANCEL, CloseType.OK);
-//		CloseType closed = provider.getScreenManager().showAlertAndCall(dialog, dialog.getButtonControl());
-		logger.log(Level.INFO, "Closed via "+closed);
+		logger.log(Level.DEBUG, "Closed via "+closed);
 		if (closed==CloseType.OK) {
 			SR6ItemEnhancement master = selector.getSelected();
-//			for (SR6ItemEnhancement master : dialog.getSelection()) {
+			// Do we need to configure the enhancement?
+			boolean needToAsk = !master.getChoices().isEmpty();
+			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS))
+				needToAsk |= !master.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
+			
+			ComplexDataItemController<SR6ItemEnhancement,ItemEnhancementValue<SR6ItemEnhancement>> enhCtrl = control.getEquipmentController().getItemEnhancementController(selectedItem);
+			OperationResult<ItemEnhancementValue<SR6ItemEnhancement>> result = null;
+			if (needToAsk) {
+				logger.log(Level.WARNING, "Select with choices or variants or flags");
+				ItemHook slot = null;
+				ChoiceSelectorDialog<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>> dia2 = new ChoiceSelectorDialog<SR6ItemEnhancement, ItemEnhancementValue<SR6ItemEnhancement>>(enhCtrl, CarryMode.CARRIED, slot, selectedItem);
+				Decision[] dec = dia2.apply(master, master.getChoices());
+				if (dec!=null) {
+					// Not cancelled
+					String variantID = dia2.getSelectedVariant();
+					logger.log(Level.DEBUG, "After dialog: variant   = "+variantID);
+					logger.log(Level.DEBUG, "After dialog: decisions = "+Arrays.toString(dec));
+					result = enhCtrl.select(master, dec);
+				}
+			} else {
      			logger.log(Level.DEBUG, "add modification "+master+" to "+selectedItem);
-     			OperationResult<ItemEnhancementValue<SR6ItemEnhancement>> result = control.getEquipmentController().getItemEnhancementController(selectedItem).select(master);
-     			logger.log(Level.DEBUG, "embedding "+master+" in "+selectedItem+" returned "+result);
-    			view.getList(2).setAll(selectedItem.getEnhancements());
-    			refresh();
-     			if (result.hasError()) {
-     				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, ResourceI18N.format(UI, "dialog.add.enhancement.fail", master.getName(), result.getError()));
-     			}
-//			}
+     			result = enhCtrl.select(master);
+			}
+			view.getList(2).setAll(selectedItem.getEnhancements());
+			refresh();
+   			if (result.hasError()) {
+   				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 0, ResourceI18N.format(UI, "dialog.add.enhancement.fail", master.getName(), result.getError()));
+   			}
 		}
 	}
 

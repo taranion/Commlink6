@@ -70,7 +70,7 @@ public class Shadowrun6Core extends GenericCore {
 	}
 
 	//-------------------------------------------------------------------
-	public static void loadPriorityTableEntries(DataSet plugin, InputStream in) {
+	public static PriorityTableEntryList loadPriorityTableEntries(DataSet plugin, InputStream in) {
 		logger.log(Level.DEBUG, "Load priority table entries (Plugin="+plugin.getID()+")");
 		try {
 			PriorityTableEntryList toAdd = (PriorityTableEntryList)serializer.read(PriorityTableEntryList.class, in);
@@ -87,10 +87,10 @@ public class Shadowrun6Core extends GenericCore {
 				PriorityTableEntry mergeTo = prioTable.get(tmp.getType()).get(tmp.getPriority());
 				mergeTo.mergeFrom(tmp);
 			}
-
+			return toAdd;
 		} catch (Exception e) {
 			logger.log(Level.ERROR, "Failed deserializing priority table entries",e);
-			return;
+			return null;
 		}
 	}
 

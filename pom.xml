@@ -25,7 +25,7 @@
 		<log4j.version>2.25.4</log4j.version>
 		<maven.compiler.release>17</maven.compiler.release>
 		<revision>0.0.3-SNAPSHOT</revision>
-		<rpgfw.version>5.4.2</rpgfw.version>
+		<rpgfw.version>5.4.5</rpgfw.version>
 		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 

@@ -131,8 +131,10 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 			return Possible.TRUE;
 		}
 		// Enough space
-		if (val.getModifiedValue() < (toModify.getModificationSlotsUsed()+value.getSize()))
+		if (val.getModifiedValue() < (toModify.getModificationSlotsUsed()+value.getSize())) {
+			logger.log(Level.ERROR, "Not enough modification slots for {0} (used: {1}, needed: {2})", toModify, toModify.getModificationSlotsUsed(), value.getSize());
 			return new Possible(IRejectReasons.IMPOSS_CAPACITY);
+		}
 
 		return Possible.TRUE;
 	}
@@ -151,6 +153,9 @@ public class CommonItemEnhancementController extends ControllerImpl<SR6ItemEnhan
 		}
 
 		ItemEnhancementValue<SR6ItemEnhancement> iVal = new ItemEnhancementValue<SR6ItemEnhancement>(value);
+		for (Decision dec : decisions) {
+			iVal.addDecision(dec);
+		}
 		toModify.addEnhancement(iVal);
 		logger.log(Level.INFO, "Added ItemEnhancement {0} to {1}", iVal, toModify);
 

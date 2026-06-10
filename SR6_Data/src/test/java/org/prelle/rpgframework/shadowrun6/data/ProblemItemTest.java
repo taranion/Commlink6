@@ -2,18 +2,18 @@ package org.prelle.rpgframework.shadowrun6.data;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.prelle.simplepersist.Persister;
-import org.prelle.simplepersist.SerializationException;
 
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.data.Choice;
@@ -21,20 +21,23 @@ import de.rpgframework.genericrpg.data.Decision;
 import de.rpgframework.genericrpg.items.CarriedItem;
 import de.rpgframework.genericrpg.items.CarryMode;
 import de.rpgframework.genericrpg.items.GearTool;
-import de.rpgframework.genericrpg.items.ItemAttributeDefinition;
 import de.rpgframework.genericrpg.items.ItemAttributeFloatValue;
 import de.rpgframework.genericrpg.items.ItemAttributeValue;
+import de.rpgframework.genericrpg.items.ItemEnhancementValue;
+import de.rpgframework.genericrpg.items.PieceOfGearVariant;
+import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.items.AugmentationQuality;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.Legality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 import de.rpgframework.shadowrun6.items.AvailableSlot;
-import de.rpgframework.shadowrun6.items.Damage;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.items.SR6ItemEnhancement;
+import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
@@ -425,6 +428,41 @@ public class ProblemItemTest {
 
 		assertEquals(4, carried.getAsValue(SR6ItemAttribute.RATING).getModifiedValue());
 		assertEquals(4000, carried.getAsValue(SR6ItemAttribute.PRICE).getModifiedValue());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void bulkModifications() {
+		ItemTemplate item = Shadowrun6Core.getItem(ItemTemplate.class, "cyberarm");
+		Choice choice2 = new Choice(ItemTemplate.UUID_AUGMENTATION_QUALITY, null);
+
+		// New normal item
+		SR6PieceOfGearVariant variant = item.getVariant("fullarm_synthetic");
+		OperationResult<CarriedItem<ItemTemplate>> result = GearTool.buildItem(item, CarryMode.IMPLANTED, variant,null, true,
+				new Decision(choice2, "STANDARD")
+				);
+		assertTrue(result.isPresent());
+		CarriedItem<ItemTemplate> carried = result.get();
+		assertNotNull("CarriedItem not created",carried);
+		// Check capacity
+		assertNotNull(carried.getSlot(ItemHook.CYBERLIMB_IMPLANT));
+		assertEquals(8.0, carried.getSlot(ItemHook.CYBERLIMB_IMPLANT).getCapacity(), 0.0);
+		
+		// Now add a bulk modification
+		SR6ItemEnhancement enhancement = Shadowrun6Core.getItem(SR6ItemEnhancement.class, "bulk_modification");
+		Choice choice3 = enhancement.getChoices().get(0);
+		ItemEnhancementValue<SR6ItemEnhancement> enhVal = new ItemEnhancementValue<SR6ItemEnhancement>(enhancement);
+		enhVal.addDecision(new Decision(choice3, "3"));
+		
+		assertEquals(1, enhVal.getOutgoingModifications().size());
+		carried.addEnhancement(enhVal);
+		SR6GearTool.recalculate("", null, carried);
+		
+		List<Modification> mods = carried.getOutgoingModifications();
+		System.err.println("Modifications: "+mods);
+		assertFalse(mods.isEmpty());
+		assertEquals(11.0, carried.getSlot(ItemHook.CYBERLIMB_IMPLANT).getCapacity(), 0.0);
+
 	}
 
 }

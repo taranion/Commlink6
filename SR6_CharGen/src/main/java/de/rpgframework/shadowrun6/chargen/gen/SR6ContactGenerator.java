@@ -1,5 +1,6 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
+import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
  *
  */
 public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6ContactController {
+
+	protected static Logger logger = System.getLogger(ControllerImpl.class.getPackageName()+".contact");
 
 	private static Random random = new Random();
 
@@ -303,7 +306,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 				if ((tmp.getLoyalty()+tmp.getRating())>perContactMax) {
 					if (parent.getRuleController().getRuleValueAsBoolean(Shadowrun6Rules.CHARGEN_EXTENDED_CONTACT)) {
 						int pay = (tmp.getLoyalty() + tmp.getRating()) - perContactMax;
-						logger.log(Level.INFO, "Pay {0} karma {for cap increase of (R={2}/L={3})", pay,
+						logger.log(Level.INFO, "Pay {0} karma (for cap increase of (R={2}/L={3})", pay,
 								tmp.getName(), tmp.getRating(), tmp.getLoyalty());
 						karmaRequired += pay;
 					} else {
@@ -323,6 +326,9 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 				pointsLeft=0;
 			}
 			// Pay Karma
+			if (karmaRequired>0) {
+				logger.log(Level.WARNING, "Need {0} karma to pay for contacts", karmaRequired);
+			}
 			getModel().setKarmaFree( getModel().getKarmaFree() - karmaRequired );
 
 			logger.log(Level.INFO, "Contact points remaining: {0}", pointsLeft);
