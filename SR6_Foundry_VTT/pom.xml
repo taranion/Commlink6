@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>foundryvtt-documents</artifactId>
-			<version>13.0</version>
+			<version>13.1</version>
 		</dependency>
 
 		<dependency>
