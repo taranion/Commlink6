@@ -2793,7 +2793,7 @@ public class Shadowrun6Tools {
 				ValueModification vmod = (ValueModification)tmp;
 				if (vmod.getReferenceType()==ShadowrunReference.ATTRIBUTE && (vmod.getKey().equals("ESSENCE") || vmod.getKey().equals("ESSENCE_HOLE"))) {
 					double essence = vmod.getValueAsDouble();
-					if (essence<100)
+					if (Math.abs(essence)<100)
 						essence *= 1000;
 					if (vmod.getKey().equals("ESSENCE_HOLE"))
 						essence *= -1;
@@ -2816,7 +2816,7 @@ public class Shadowrun6Tools {
 			CarriedItem<ItemTemplate> item = (CarriedItem<ItemTemplate>) value;
 			if (item.hasAttribute(SR6ItemAttribute.ESSENCECOST)) {
 				double essence = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValue();
-				if (essence<100)
+				if (Math.abs(essence)<100)
 					essence *= 1000;
 				ValueModification mod = new ValueModification(ShadowrunReference.CARRIED, value.getResolved().getId(), (int)(essence));
 				mod.setId(value.getUuid());
@@ -2835,7 +2835,7 @@ public class Shadowrun6Tools {
 				ValueModification vmod = (ValueModification)tmp;
 				if (vmod.getReferenceType()==ShadowrunReference.ATTRIBUTE && (vmod.getKey().equals("ESSENCE") || vmod.getKey().equals("ESSENCE_HOLE"))) {
 					double essence = vmod.getValueAsDouble();
-					if (essence<100)
+					if (Math.abs(essence)<100)
 						essence *= 1000;
 					if (vmod.getKey().equals("ESSENCE_HOLE"))
 						essence *= -1;
