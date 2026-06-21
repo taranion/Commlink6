@@ -7,7 +7,7 @@
 			<choice type="TEXT" ref="description" uuid="6a8484c5-043d-4ec7-bbb2-f56d3c51f72b" />
    	</choices>
      <modifications>
-       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1" set="NATURAL" apply="CHARACTER" />
+       <valmod type="ATTRIBUTE" ref="ESSENCE" value="-1000" set="NATURAL" apply="CHARACTER" />
      </modifications>
    </quality>
    <quality id="permanent_damage" karma="5" pos="false" type="NORMAL">
@@ -97,7 +97,7 @@
    </quality>
 	<quality id="chronic_dissociation_syndrome" karma="10" pos="false" type="NORMAL">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3000"/>
 		</requires>
 		<modifications>
       	<checkmod type="ATTRIBUTE" ref="WILLPOWER" value="-3" apply="CHARACTER" what="DICE"/>
@@ -129,7 +129,7 @@
    </quality>
 	<quality id="tlex" karma="10" pos="false" type="NORMAL">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3000"/>
 		</requires>
 	</quality>
 	<quality id="uncontrolled_metastasis" karma="10" pos="false" type="NORMAL" max="2">
@@ -152,7 +152,7 @@
 	</quality>
 	<quality id="will_to_die" karma="10" pos="false" type="NORMAL">
 		<requires>
-			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+			<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2000"/>
 		</requires>
 		<modifications>
       	<valmod type="ATTRIBUTE" ref="DAMAGE_OVERFLOW" value="-2" apply="CHARACTER"/>

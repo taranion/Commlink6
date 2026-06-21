@@ -80,7 +80,7 @@
    </quality>
    <quality id="shifter_dual_natured" karma="0" pos="true" type="SHIFTER" selectable="false">
       <requires>
-         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6000" />
       </requires>
      <modifications>
        <itemmod type="CRITTER_POWER" ref="dual_natured" apply="ANIMAL" />
@@ -201,7 +201,7 @@
    </quality>
    <quality id="supernatural_recovery" karma="0" pos="true" type="SHIFTER" selectable="false">
       <requires>
-         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6000" />
       </requires>
    </quality>
    <quality id="sharpened_natural_weapon"  karma="8" pos="true" type="SHIFTER" >
@@ -212,7 +212,7 @@
    </quality>
    <quality id="shift" karma="0" pos="true" type="SHIFTER" selectable="false">
       <requires>
-         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6" />
+         <valuereq type="ATTRIBUTE" ref="ESSENCE" value="6000" />
       </requires>
    </quality>
    <quality id="shifter_grace"  karma="5" pos="true" type="SHIFTER" max="4">

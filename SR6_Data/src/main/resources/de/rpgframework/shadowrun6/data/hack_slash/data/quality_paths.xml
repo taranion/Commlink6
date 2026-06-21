@@ -20,7 +20,7 @@
 		</step>
 		<step id="cyberadept_disciple" level="1" cost="10">
 			<requires>
-				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="4"/>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="4000"/>
 			</requires>
 			<nextSteps>
 				<next>cyberadept_master</next>
@@ -32,7 +32,7 @@
 		</step>
 		<step id="cyberadept_master" level="2" cost="10">
 			<requires>
-				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3"/>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="3000"/>
 			</requires>
 			<nextSteps>
 				<next>cyberadept_transcendent</next>
@@ -44,7 +44,7 @@
 		</step>
 		<step id="cyberadept_transcendent" level="3" cost="10">
 			<requires>
-				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2"/>
+				<valuereq type="ATTRIBUTE" ref="ESSENCE" apply="CHARACTER" max="2000"/>
 			</requires>
 			<modifications>
 				<itemmod type="QUALITY" ref="cyberadept_master" remove="true"/>
