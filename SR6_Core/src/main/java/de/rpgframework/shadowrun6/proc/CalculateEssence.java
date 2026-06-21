@@ -18,7 +18,9 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -99,6 +101,14 @@ public class CalculateEssence implements ProcessingStep {
 					break;
 				case QUALITY:
 					QualityValue quality = model.getQuality(mod.getKey());
+					if (quality==null) {
+						logger.log(Level.WARNING, "Removed quality found: "+mod.getKey()+" / "+mod.getSource());
+						// Try to find the quality by other means
+						SR6Quality temp = Shadowrun6Core.getItem(SR6Quality.class, mod.getKey());
+						name = (temp!=null)?temp.getName():"BOOM";
+						brokenEssenceChanges.add(mod);
+						continue;
+					}
 					name = quality.getNameWithRating();
 					break;
 				}
