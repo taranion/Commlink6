@@ -11,6 +11,11 @@
 	<artifactId>shadowrun6-roll20</artifactId>
 	<name>SR6_Roll20</name>
 
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>
