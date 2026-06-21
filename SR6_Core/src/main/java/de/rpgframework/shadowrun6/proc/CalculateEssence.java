@@ -38,62 +38,6 @@ public class CalculateEssence implements ProcessingStep {
 		this.model = model;
 	}
 
-//	//-------------------------------------------------------------------
-//	private BigDecimal getOverriddenEssenceCost(CarriedItem<ItemTemplate> item) {
-//		double old = item.getAsFloat(SR6ItemAttribute.ESSENCECOST).getModifiedValueDouble();
-//		AugmentationQuality effectiveQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
-//		// Check if this is a cyberadept
-//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_NOVICE)) {
-//			switch (effectiveQuality) {
-//			case USED    : effectiveQuality = AugmentationQuality.STANDARD; break;
-//			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
-//			default:
-//			}
-//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_NOVICE", item.getNameWithoutRating(), effectiveQuality);
-//		}
-//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_DISCIPLE)) {
-//			switch (effectiveQuality) {
-//			case STANDARD: effectiveQuality = AugmentationQuality.ALPHA; break;
-//			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
-//			default:
-//			}
-//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
-//		}
-//		if (model.hasRuleFlag(SR6RuleFlag.CYBERADEPT_MASTER)) {
-//			switch (effectiveQuality) {
-//			case ALPHA  : effectiveQuality = AugmentationQuality.BETA; break;
-//			case BETA  : effectiveQuality = AugmentationQuality.DELTA; break;
-//			default:
-//			}
-//			logger.log(Level.TRACE, "Raise effective quality of {0} from {1} due to CYBERADEPT_DISCIPLE", item.getNameWithoutRating(), effectiveQuality);
-//		}
-//
-//		AugmentationQuality regularQuality = item.getAsObject(SR6ItemAttribute.QUALITY).getModifiedValue();
-//		if (regularQuality!=effectiveQuality) {
-//			logger.log(Level.INFO, "Due to cyberadept quality of {0} changes from {1} to {2}", item.getNameWithoutRating(), regularQuality, effectiveQuality);
-//			CarriedItem<ItemTemplate> copy = new CarriedItem<ItemTemplate>(item);
-//			copy.removeDecision(ItemTemplate.UUID_AUGMENTATION_QUALITY);
-//			copy.addDecision(new Decision(ItemTemplate.UUID_AUGMENTATION_QUALITY, effectiveQuality.name()));
-//			SR6GearTool.recalculate("", null, model, copy);
-//			ItemAttributeFloatValue<SR6ItemAttribute> aVal = copy.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-//			double ess = aVal.getModifiedValueDouble();
-//			logger.log(Level.INFO, "Essence changes from {0} to {1}", old, ess);
-//			item.getAsObject(SR6ItemAttribute.QUALITY).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.QUALITY.name(), effectiveQuality.name(), SR6RuleFlag.CYBERADEPT_NOVICE));
-//			double diff = ess - old;
-//			item.getAsFloat(SR6ItemAttribute.ESSENCECOST).addIncomingModification(new ValueModification(ShadowrunReference.ITEM_ATTRIBUTE, SR6ItemAttribute.ESSENCECOST.name(), (int)(diff*1000), SR6RuleFlag.CYBERADEPT_NOVICE));
-////			System.out.println("A "+aVal);
-////			logger.log(Level.INFO, "A {0}", aVal);
-////			logger.log(Level.INFO, "B {0}", aVal.getModifiedValueDouble());
-//			System.err.println(item.dump());
-////			System.err.println(copy.dump());
-////			System.exit(1);
-//			return aVal.getModifiedValueBigDecimal();
-//		}
-//
-//		ItemAttributeFloatValue<SR6ItemAttribute> aVal = item.getAsFloat(SR6ItemAttribute.ESSENCECOST);
-//		return aVal.getModifiedValueBigDecimal();
-//	}
-
 	//-------------------------------------------------------------------
 	private void makeSureAllGearRecorded() {
 		Map<UUID, CarriedItem<ItemTemplate>> essenceGear = new HashMap<>();
@@ -158,25 +102,6 @@ public class CalculateEssence implements ProcessingStep {
 					name = quality.getNameWithRating();
 					break;
 				}
-
-				// The following code block deducts ESSENCE_HOLE from the quality
-//				if (change==0) {
-//					logger.log(Level.WARNING, "Essence 0 for "+mod);
-//					switch ( (ShadowrunReference)mod.getReferenceType()) {
-//					case QUALITY:
-//						QualityValue quality = model.getQuality(mod.getKey());
-//						System.err.println(quality.getOutgoingModifications());
-//						Optional<ValueModification> valMod = quality.getOutgoingModifications()
-//								.stream()
-//								.filter(m -> m instanceof ValueModification && ((ValueModification)m).getKey().equals("ESSENCE_HOLE"))
-//								.map(m -> (ValueModification)m)
-//								.findFirst();
-//						if (valMod.isPresent()) {
-//							change = - valMod.get().getValue();
-//						} else
-//							logger.log(Level.ERROR, "Did not find ESSENCE_HOLE for quality {0}", quality);
-//					}
-//				}
 
 				if (change<0) {
 					hole -= change;
