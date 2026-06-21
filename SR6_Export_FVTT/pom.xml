@@ -13,6 +13,11 @@
 	<name>Shadowrun 6 Export FVTT</name>
 	<description>Export character to Foundry VTT</description>
 
+    <properties>
+        <maven.test.skip>true</maven.test.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>

@@ -8,6 +8,10 @@
   <artifactId>shadowrun6-chargen-jfx</artifactId>
   <name>SR6_CharGen_JFX</name>
 
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.prelle</groupId>
