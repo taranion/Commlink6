@@ -486,6 +486,12 @@ public class FoundryExportService {
 				if (!accList.isEmpty()) {
 					gear.accessories = String.join(", ", accList);
 				}
+				// Modifications
+				List<String> modList = new ArrayList<>();
+				item.getEnhancements().forEach( ci -> modList.add(ci.getNameWithRating()));
+				if (!modList.isEmpty()) {
+					gear.gearMods = String.join(", ", modList);
+				}
 
 				if (ItemType.isWeapon(type)) {
 					if (item.hasAttribute(SR6ItemAttribute.SKILL)) {
