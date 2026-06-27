@@ -7,7 +7,7 @@
       	<allowmod type="ATTRIBUTE" ref="STRENGTH" what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="AGILITY"  what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="LOGIC"    what="DRACOFORM"/>
-      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+        <itemmod type="QUALITY" apply="CHARACTER" ref="pc_dual_natured"/>
       	<itemmod type="CRITTER_POWER" ref="elemental_attack">
       		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
       	</itemmod>
@@ -29,7 +29,7 @@
       	<allowmod type="ATTRIBUTE" ref="STRENGTH"  what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="WILLPOWER" what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="CHARISMA"  what="DRACOFORM"/>
-      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+        <itemmod type="QUALITY" apply="CHARACTER" ref="pc_dual_natured"/>
       	<itemmod type="CRITTER_POWER" ref="elemental_attack">
       		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
       	</itemmod>
@@ -51,7 +51,7 @@
       	<allowmod type="ATTRIBUTE" ref="STRENGTH"  what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="AGILITY" what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="WILLPOWER"  what="DRACOFORM"/>
-      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+        <itemmod type="QUALITY" apply="CHARACTER" ref="pc_dual_natured"/>
       	<itemmod type="CRITTER_POWER" ref="elemental_attack">
       		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
       	</itemmod>
@@ -73,7 +73,7 @@
       	<allowmod type="ATTRIBUTE" ref="STRENGTH"  what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="REACTION" what="DRACOFORM"/>
       	<allowmod type="ATTRIBUTE" ref="INTUITION"  what="DRACOFORM"/>
-      	<itemmod type="CRITTER_POWER" ref="dual_natured"/>
+        <itemmod type="QUALITY" apply="CHARACTER" ref="pc_dual_natured"/>
       	<itemmod type="CRITTER_POWER" ref="elemental_attack">
       		<decision choice="6a8584c5-043d-4e37-bbb2-f56d3c51f72c" value="FIRE"/>
       	</itemmod>

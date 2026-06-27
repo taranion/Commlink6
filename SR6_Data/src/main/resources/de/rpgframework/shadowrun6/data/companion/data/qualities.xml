@@ -265,4 +265,15 @@
       </choices>
    </quality>
 
+   <quality id="pc_dual_natured" karma="0" pos="true" type="NORMAL" selectable="false"> <!-- to allow dual natured player characters to learn astral skill -->
+     <modifications>
+       <allowmod type="SKILL" ref="astral" />
+     </modifications>
+   </quality>
+   <quality id="astral_perception" karma="0" pos="true" type="NORMAL" selectable="false"> <!-- to allow pixie characters to learn astral skill -->
+     <modifications>
+       <allowmod type="SKILL" ref="astral" />
+     </modifications>
+   </quality>
+
 </qualities>
