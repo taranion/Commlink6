@@ -13,6 +13,7 @@
 	<focus id="centering_focus" karma="3" cost="9000" hasLevel="true">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
+			<valmod type="ATTRIBUTE" ref="RESIST_DRAIN" value="$LEVEL" />
 		</modifications>
 	</focus>
 	<focus id="flexible_signature_focus" karma="3" cost="9000" hasLevel="true">
