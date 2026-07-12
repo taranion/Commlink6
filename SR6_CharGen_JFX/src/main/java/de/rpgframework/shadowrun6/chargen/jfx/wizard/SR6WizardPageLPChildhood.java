@@ -239,7 +239,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 			}
 		});
 		taDescription.textProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.WARNING, "ToDo: Store description");
+			charGen.getModel().setLifepathChildhoodBackground(n);
 		});
 		tfArea.textProperty().addListener( (ov,o,n) -> {
 			childhood.selectChildhoodArea(n);
@@ -350,6 +350,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 			return;
 
 		backHeader.setValue(charGen.getModel().getKarmaFree());
+		setTextIfChanged(taDescription, charGen.getModel().getLifepathChildhoodBackground());
 
 
 		lvSkills.getItems().setAll(childhood.getAvailableSkills());
@@ -457,6 +458,13 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 	    	}
 		}
 		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private void setTextIfChanged(TextArea area, String value) {
+		String text = value!=null?value:"";
+		if (!text.equals(area.getText()))
+			area.setText(text);
 	}
 
 	//-------------------------------------------------------------------

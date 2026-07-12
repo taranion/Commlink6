@@ -485,6 +485,8 @@ public class Shadowrun6Tools {
 					}
 				case CREATION_POINTS:
 					return RES.format("modification.creation_points."+((CreatePoints)valMod.getResolvedKey()).name().toLowerCase(), loc, level);
+				case CONTACT_TYPES:
+					return RES.format("modification.contact_type_points", loc, ((DataItem)valMod.getResolvedKey()).getName(loc), level);
 				case CRITTER_POWER:
 					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc)+" "+level);
 				case HOOK:
@@ -551,6 +553,12 @@ public class Shadowrun6Tools {
 						return RES.format("modification.forbid.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
 					} else {
 						return RES.format("modification.allow.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					}
+				case CONTACT_TYPES:
+					if (valMod.isNegate()) {
+						return RES.format("modification.forbid.contact_type", loc, ((DataItem)valMod.getResolvedKey()).getName(loc));
+					} else {
+						return RES.format("modification.allow.contact_type", loc, ((DataItem)valMod.getResolvedKey()).getName(loc));
 					}
 				case SKILL:
 					if (valMod.isNegate()) {
@@ -655,6 +663,10 @@ public class Shadowrun6Tools {
 				} else {
 					return ShadowrunAttribute.valueOf(valMod.getKey()).getName(loc)+" "+valMod.getValue();
 				}
+			case CREATION_POINTS:
+				return RES.format("modification.creation_points."+((CreatePoints)valMod.getResolvedKey()).name().toLowerCase(), loc, String.valueOf(valMod.getValue()));
+			case CONTACT_TYPES:
+				return RES.format("modification.contact_type_points", loc, ((DataItem)valMod.getResolvedKey()).getName(loc), String.valueOf(valMod.getValue()));
 			case ITEM_ATTRIBUTE:
 				if (valMod.getConnectedChoice()!=null) {
 					Choice choice = data.getChoice(valMod.getConnectedChoice());
@@ -792,6 +804,7 @@ public class Shadowrun6Tools {
 					return "Unknown drake type "+tmp.getKey();
 				return prefix+ResourceI18N.get(RES, loc, "label.draketype")+" "+data2.getName(loc);
 			case MAGIC_RESO:
+			case LIFEMOD:
 			case MARTIAL_ART:
 			case METATYPE:
 			case QUALITY:
@@ -1123,6 +1136,9 @@ public class Shadowrun6Tools {
 				return false;
 			case MAGIC_RESO:
 				return model.getMagicOrResonanceType()!=null && model.getMagicOrResonanceType()==item;
+			case LIFEMOD:
+				boolean hasLifeModule = hasSelectedLifepathModule(model, req.getKey());
+				return negated?!hasLifeModule:hasLifeModule;
 			case METAECHO:
 				if (negated) return !model.hasMetamagicOrEcho(req.getKey());
 				return model.hasMetamagicOrEcho(req.getKey());
@@ -1286,6 +1302,26 @@ public class Shadowrun6Tools {
 		Possible p2 = GenericRPGTools.areAllDecisionsPresent(data, decisions);
 
 		return new Possible(p1, p2);
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	private static boolean hasSelectedLifepathModule(Shadowrun6Character model, String key) {
+		Object settings = model.getCharGenSettings(Object.class);
+		if (settings==null)
+			return false;
+		try {
+			Object modules = settings.getClass().getMethod("getModules").invoke(settings);
+			if (!(modules instanceof Collection<?>))
+				return false;
+			for (Object moduleValue : (Collection<Object>)modules) {
+				if (moduleValue instanceof ComplexDataItemValue<?> value && key.equals(value.getKey()))
+					return true;
+			}
+		} catch (ReflectiveOperationException e) {
+			logger.log(Level.DEBUG, "Active chargen settings have no lifepath modules");
+		}
+		return false;
 	}
 
 	//-------------------------------------------------------------------

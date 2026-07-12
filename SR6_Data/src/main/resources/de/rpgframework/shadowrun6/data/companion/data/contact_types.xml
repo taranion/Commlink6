@@ -4,6 +4,7 @@
 	<contacttype id="CORPORATE" />
 	<contacttype id="CRIMINAL" />
 	<contacttype id="ENGINEERING" />
+	<contacttype id="EXISTING" />
 	<contacttype id="GOVERNMENT" />
 	<contacttype id="MAGIC" />
 	<contacttype id="MATRIX" />

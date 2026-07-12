@@ -1448,6 +1448,7 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		List<SR6Quality> items = Shadowrun6Core.getItemList(SR6Quality.class)
 				.stream()
 				.filter( q -> (choice.getChoiceOptions()==null) || List.of(choice.getChoiceOptions()).contains(q.getId()))
+				.filter( q -> matchesQualityChoiceReference(q, choice.getTypeReference()))
 				.toList();
 		// Eventually sort
 		choicebox.getItems().addAll(items);
@@ -1466,6 +1467,15 @@ public class ChoiceSelectorDialog<T extends ComplexDataItem, V extends ComplexDa
 		content.getChildren().add(choicebox);
 
 		return choicebox;
+	}
+
+	//-------------------------------------------------------------------
+	private boolean matchesQualityChoiceReference(SR6Quality quality, String reference) {
+		if ("POSITIVE".equalsIgnoreCase(reference))
+			return quality.isPositive();
+		if ("NEGATIVE".equalsIgnoreCase(reference))
+			return !quality.isPositive();
+		return true;
 	}
 
 	//-------------------------------------------------------------------

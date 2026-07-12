@@ -32,6 +32,39 @@ public class LifepathModule extends ComplexDataItem {
 	}
 
 	//-------------------------------------------------------------------
+	@Override
+	public String getName() {
+		return getName(Locale.getDefault());
+	}
+
+	//-------------------------------------------------------------------
+	@Override
+	public String getName(Locale loc) {
+		String ret = super.getName(loc);
+		if (ret!=null && !ret.equals(getTypeString()+":"+id) && !ret.equals(getTypeString()+"."+id))
+			return ret;
+		return formatId(id);
+	}
+
+	//-------------------------------------------------------------------
+	private static String formatId(String id) {
+		String normalized = id.replace('_', ' ').replace('-', ' ');
+		StringBuilder buf = new StringBuilder(normalized.length());
+		boolean capitalize = true;
+		for (int i=0; i<normalized.length(); i++) {
+			char c = normalized.charAt(i);
+			if (Character.isLetter(c) && capitalize) {
+				buf.append(Character.toUpperCase(c));
+				capitalize = false;
+			} else {
+				buf.append(c);
+				capitalize = Character.isWhitespace(c) || c=='(' || c=='/';
+			}
+		}
+		return buf.toString();
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.data.ComplexDataItem#validate()
 	 */

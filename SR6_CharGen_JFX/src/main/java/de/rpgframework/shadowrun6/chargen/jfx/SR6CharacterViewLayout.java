@@ -32,6 +32,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
 import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
@@ -201,6 +202,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			logger.log(Level.WARNING, "Wizard closed via "+close);
 			//		controller.refresh();
 			if (close==CloseType.FINISH) {
+				wrapper.finish();
+				switchToCareerController(wrapper.getModel());
 				refreshPages();
 					return;
 			}
@@ -213,6 +216,19 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			}
 		}
 
+	}
+
+	//-------------------------------------------------------------------
+	@SuppressWarnings("unchecked")
+	private void switchToCareerController(Shadowrun6Character model) {
+		CommonSR6GeneratorSettings settings = model.getCharGenSettings(CommonSR6GeneratorSettings.class);
+		if (settings==null) {
+			logger.log(Level.ERROR, "Cannot switch to career controller without chargen settings");
+			return;
+		}
+		control = new SR6CharacterLeveller(model, handle, (Class<? extends CommonSR6GeneratorSettings>) settings.getClass());
+		control.addListener(this);
+		refreshController(true);
 	}
 
 	//-------------------------------------------------------------------

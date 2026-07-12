@@ -1,6 +1,7 @@
 package de.rpgframework.shadowrun6.chargen.gen;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -68,7 +69,8 @@ public class LifepathGenTest {
 		assertNotNull("No metatype controller found", charGen.getMetatypeController());
 		charGen.getMetatypeController().canBeSelected(human);
 		charGen.getMetatypeController().select(human);
-		assertEquals(50, model.getKarmaFree());
+		int expectedKarma = 50 - charGen.getMetatypeController().getKarmaCost(human);
+		assertEquals(expectedKarma, model.getKarmaFree());
 		assertEquals(1, model.getAttribute(ShadowrunAttribute.AGILITY).getModifiedValue());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.STRENGTH).getModifiedValue());
 		assertEquals(2, model.getAttribute(ShadowrunAttribute.EDGE    ).getModifiedValue());
@@ -78,11 +80,18 @@ public class LifepathGenTest {
 		 * this character feels they were born with is Tough as Nails at level 2, which costs us 8 Karma.
 		 */
 		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "built_tough"));
+		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "sinner"));
 		charGen.getBornThisWayGenerator().selectNativeLanguage("English");
+		expectedKarma -= Shadowrun6Core.getItem(SR6Quality.class, "built_tough").getKarmaCost();
+		expectedKarma += Shadowrun6Core.getItem(SR6Quality.class, "sinner").getKarmaCost();
+		assertEquals(expectedKarma, model.getKarmaFree());
+		assertTrue(model.hasQuality("built_tough"));
+		assertTrue(model.hasQuality("sinner"));
+		assertEquals(2, charGen.getBornThisWayGenerator().getQualityController().getSelected().size());
 
 		// Modules
 		SR6LifePathModuleGenerator modules = charGen.getModuleGenerator();
-		OperationResult<LifepathModuleValue> res = modules.select(Shadowrun6Core.getItem(LifepathModule.class, "ganger"),
+		OperationResult<LifepathModuleValue> res = modules.select(Shadowrun6Core.getItem(LifepathModule.class, "gangmitglied"),
 				new Decision("dd8bb000-fc65-4195-a8cf-1866fa01f2ed","REACTION"),
 				new Decision("5e000fdb-8415-4a0c-9a1d-1e55f633ed34","firearms"),
 				new Decision("72f10b55-0eb5-41b6-874a-00d3b738c905", "stealth")
@@ -91,9 +100,29 @@ public class LifepathGenTest {
 		assertTrue(res.getError(),res.wasSuccessful());
 
 		charGen.finish();
+		assertEquals(expectedKarma, model.getKarmaFree());
+		assertEquals(50000, model.getNuyen());
 		byte[] raw = Shadowrun6Core.encode(model);
 		String xml = new String(raw);
 		System.out.println(xml);
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testLifepathModuleQualityChoicePolarity() {
+		SR6LifePathModuleGenerator modules = charGen.getModuleGenerator();
+		LifepathModule money = Shadowrun6Core.getItem(LifepathModule.class, "an_eine_menge_geld_gekommen");
+		assertNotNull(money);
+
+		OperationResult<LifepathModuleValue> positive = modules.select(money,
+				new Decision("eb8b1c35-686a-4251-a564-2fb29451a3a4", "built_tough")
+				);
+		assertFalse(positive.wasSuccessful());
+
+		OperationResult<LifepathModuleValue> negative = modules.select(money,
+				new Decision("eb8b1c35-686a-4251-a564-2fb29451a3a4", "sinner")
+				);
+		assertTrue(negative.getError(), negative.wasSuccessful());
 	}
 
 	//-------------------------------------------------------------------

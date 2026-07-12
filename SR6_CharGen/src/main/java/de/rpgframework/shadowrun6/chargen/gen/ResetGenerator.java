@@ -13,6 +13,7 @@ import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Lifestyle;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.free.FreeCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.KarmaCharacterGenerator;
@@ -70,19 +71,11 @@ public class ResetGenerator implements ProcessingStep {
 			real = ((GeneratorWrapper)charGen).getWrapped();
 
 		if (real instanceof SR6LifepathCharacterGenerator) {
-			model.setKarmaFree(50);
+			((SR6LifepathCharacterGenerator)real).applyPowerLevelDefaultsIfNeeded();
+			model.setKarmaFree(charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA));
 			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
-			switch (level) {
-			case STREET_LEVEL:
-				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 6));
-				break;
-			case ELITE:
-				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 10));
-				break;
-			default:
-				unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), 8));
-				break;
-			}
+			int maxModules = Math.max(0, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES));
+			unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), maxModules));
 		} else if (real instanceof PointBuyCharacterGenerator) {
 			model.setKarmaFree(50);
 			SR6PointBuySettings settings = model.getCharGenSettings(SR6PointBuySettings.class);

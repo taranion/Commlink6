@@ -5,6 +5,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -38,6 +39,10 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> implements IMetatypeController<SR6MetaType> {
 
 	private MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(SR6LifepathCharacterGenerator.class, Locale.ENGLISH, Locale.ENGLISH);
+
+	private static final Map<String, Integer> LIFEPATH_CORE_METATYPE_KARMA = Map.of(
+			"troll", 10
+			);
 
 	private List<MetaTypeOption> available;
 	private static Random random = new Random();
@@ -79,7 +84,11 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 	 */
 	@Override
 	public int getKarmaCost(SR6MetaType type) {
-		return type.getKarma();
+		if (type==null)
+			return 0;
+		if (type.getKarma()!=0)
+			return type.getKarma();
+		return LIFEPATH_CORE_METATYPE_KARMA.getOrDefault(type.getId(), 0);
 	}
 
 	//-------------------------------------------------------------------
@@ -153,9 +162,10 @@ public class SR6LifePathMetatypeController extends ControllerImpl<SR6MetaType> i
 			// Add modifications from selection
 			MetaType meta = getModel().getMetatype();
 			if (meta != null) {
-				if (meta.getKarma() != 0) {
-					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", meta.getKarma(), meta.getId());
-					model.setKarmaFree(model.getKarmaFree() - meta.getKarma());
+				int karma = (meta instanceof SR6MetaType)?getKarmaCost((SR6MetaType)meta):meta.getKarma();
+				if (karma != 0) {
+					logger.log(Level.INFO, "Pay {0} Karma for metatype '{1}'", karma, meta.getId());
+					model.setKarmaFree(model.getKarmaFree() - karma);
 				}
 				// "Any attributes for which your metatype has an increased maximum (higher than six) start at 2. All other attributes start at 1.""
 				for (Modification tmp : previous) {

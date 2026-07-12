@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -144,13 +145,14 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 	public List<Modification> process(List<Modification> unprocessed) {
 		todos.clear();
 
-		if (parent.getSettings().getBornQuality1()==null) {
+		if (parent.getSettings().getBornQualities().isEmpty()) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_BORN_QUALITY_MISSING));
 		} else {
-			logger.log(Level.INFO, "Born this way Quality 1: {0}", parent.getSettings().getBornQuality1());
-			getModel().addQuality(new QualityValue(parent.getSettings().getBornQuality1(), 1));
+			for (SR6Quality quality : parent.getSettings().getBornQualities()) {
+				logger.log(Level.INFO, "Born this way Quality: {0}", quality);
+				addBornQuality(quality);
+			}
 		}
-		logger.log(Level.INFO, "Born this way Quality 2: {0}", parent.getSettings().getBornQuality2());
 
 		if (parent.getSettings().getNativeLanguage()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_LANGUAGE_NOT_SET));
@@ -163,6 +165,13 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 			unprocessed.add(mod);
 		}
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	private void addBornQuality(Quality quality) {
+		if (!getModel().hasQuality(quality.getId())) {
+			getModel().addQuality(new QualityValue(quality, 1));
+		}
 	}
 
 	@Override
@@ -201,12 +210,18 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 	}
 
 	//-------------------------------------------------------------------
+	public int getMaximumBornQualities() {
+		int maximumQualities = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES);
+		return Math.max(0, maximumQualities - 2);
+	}
+
+	//-------------------------------------------------------------------
 	public OneOrTwoQualityController getQualityController() {
 		return new OneOrTwoQualityController(parent,
-				() -> parent.getSettings().getBornQuality1(),
-				 q -> parent.getSettings().setBornQuality1((SR6Quality) q),
-				() -> parent.getSettings().getBornQuality2(),
-				 q -> parent.getSettings().setBornQuality2((SR6Quality) q)
+				() -> new ArrayList<Quality>(parent.getSettings().getBornQualities()),
+				 q -> parent.getSettings().addBornQuality((SR6Quality) q),
+				 q -> parent.getSettings().removeBornQuality((SR6Quality) q),
+				() -> getMaximumBornQualities()
 				 );
 	}
 

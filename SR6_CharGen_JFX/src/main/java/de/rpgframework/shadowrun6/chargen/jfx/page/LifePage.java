@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import org.prelle.javafx.Mode;
 import org.prelle.javafx.OptionalNodePane;
 import org.prelle.javafx.Page;
+import org.prelle.javafx.Section;
 import org.prelle.javafx.layout.FlexGridPane;
 
 import de.rpgframework.ResourceI18N;
@@ -31,6 +32,8 @@ import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6LifestyleListCell;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.VBox;
 
 /**
  * @author prelle
@@ -47,6 +50,12 @@ public class LifePage extends Page {
 	private SINSection secSINs;
 	private LifestyleSection<SR6Lifestyle> secLifestyles;
 	private ContactSection secContacts;
+	private Section secBackground;
+	private TextArea taBabyBackground;
+	private TextArea taChildhoodBackground;
+	private TextArea taAdultBackground;
+	private TextArea taBackgroundNotes;
+	private boolean updatingBackgroundFields;
 
 	private FlexGridPane flex;
 	private OptionalNodePane layout;
@@ -69,6 +78,7 @@ public class LifePage extends Page {
 		initSINs();
 		initContacts();
 		initLifestyles();
+		initBackgrounds();
 
 		descBox = new GenericDescriptionVBox(Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
@@ -108,10 +118,45 @@ public class LifePage extends Page {
 	}
 
 	//-------------------------------------------------------------------
+	private void initBackgrounds() {
+		taBabyBackground = createBackgroundArea();
+		taChildhoodBackground = createBackgroundArea();
+		taAdultBackground = createBackgroundArea();
+		taBackgroundNotes = createBackgroundArea();
+
+		VBox backgroundContent = new VBox(8,
+				new Label(ResourceI18N.get(RES, "page.life.background.baby")),
+				taBabyBackground,
+				new Label(ResourceI18N.get(RES, "page.life.background.childhood")),
+				taChildhoodBackground,
+				new Label(ResourceI18N.get(RES, "page.life.background.adult")),
+				taAdultBackground,
+				new Label(ResourceI18N.get(RES, "page.life.background.notes")),
+				taBackgroundNotes
+				);
+		secBackground = new Section(ResourceI18N.get(RES, "page.life.section.background"), backgroundContent);
+		secBackground.setMaxWidth(Double.MAX_VALUE);
+		secBackground.setMaxHeight(Double.MAX_VALUE);
+		FlexGridPane.setMinWidth(secBackground, 4);
+		FlexGridPane.setMinHeight(secBackground, 8);
+		FlexGridPane.setMediumWidth(secBackground, 5);
+		FlexGridPane.setMediumHeight(secBackground, 9);
+	}
+
+	//-------------------------------------------------------------------
+	private TextArea createBackgroundArea() {
+		TextArea area = new TextArea();
+		area.setWrapText(true);
+		area.setPrefRowCount(3);
+		area.setMaxWidth(Double.MAX_VALUE);
+		return area;
+	}
+
+	//-------------------------------------------------------------------
 	private void initLayout() {
 		flex = new FlexGridPane();
 		flex.setSpacing(20);
-		flex.getChildren().addAll(secContacts, secSINs, secLifestyles);
+		flex.getChildren().addAll(secContacts, secSINs, secLifestyles, secBackground);
 
 		layout = new OptionalNodePane(flex, new Label(ResourceI18N.get(RES,"select.for.description")));
 		setContent(layout);
@@ -124,6 +169,22 @@ public class LifePage extends Page {
 //		secElectro.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secLifestyles.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
 		secContacts.showHelpForProperty().addListener( (ov,o,n) -> showDescription(n));
+		taBabyBackground.textProperty().addListener((ov,o,n) -> {
+			if (!updatingBackgroundFields && ctrl!=null)
+				ctrl.getModel().setLifepathBabyBackground(n);
+		});
+		taChildhoodBackground.textProperty().addListener((ov,o,n) -> {
+			if (!updatingBackgroundFields && ctrl!=null)
+				ctrl.getModel().setLifepathChildhoodBackground(n);
+		});
+		taAdultBackground.textProperty().addListener((ov,o,n) -> {
+			if (!updatingBackgroundFields && ctrl!=null)
+				ctrl.getModel().setLifepathAdultBackground(n);
+		});
+		taBackgroundNotes.textProperty().addListener((ov,o,n) -> {
+			if (!updatingBackgroundFields && ctrl!=null)
+				ctrl.getModel().setBackgroundNotes(n);
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -195,6 +256,29 @@ public class LifePage extends Page {
 		secContacts.refresh();
 		secSINs.refresh();
 		secLifestyles.refresh();
+		refreshBackgrounds();
+	}
+
+	//-------------------------------------------------------------------
+	private void refreshBackgrounds() {
+		if (ctrl==null)
+			return;
+		updatingBackgroundFields = true;
+		try {
+			setTextIfChanged(taBabyBackground, ctrl.getModel().getLifepathBabyBackground());
+			setTextIfChanged(taChildhoodBackground, ctrl.getModel().getLifepathChildhoodBackground());
+			setTextIfChanged(taAdultBackground, ctrl.getModel().getLifepathAdultBackground());
+			setTextIfChanged(taBackgroundNotes, ctrl.getModel().getBackgroundNotes());
+		} finally {
+			updatingBackgroundFields = false;
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void setTextIfChanged(TextArea area, String value) {
+		String text = value!=null?value:"";
+		if (!text.equals(area.getText()))
+			area.setText(text);
 	}
 
 }

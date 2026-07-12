@@ -3,10 +3,13 @@ package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import de.rpgframework.genericrpg.Possible;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
+import de.rpgframework.genericrpg.ValueType;
 import de.rpgframework.genericrpg.chargen.ComplexDataItemController;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.RecommendationState;
@@ -19,7 +22,9 @@ import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
@@ -63,6 +68,12 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 	}
 
 	//-------------------------------------------------------------------
+	public int getMaximumModules() {
+		int max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES);
+		return Math.max(0, max);
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#getRecommendationState(de.rpgframework.genericrpg.data.DataItem)
 	 */
@@ -92,7 +103,9 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 	 */
 	@Override
 	public List<Choice> getChoicesToDecide(LifepathModule value) {
-		return List.of();
+		if (value==null)
+			return List.of();
+		return value.getChoices();
 	}
 
 	//-------------------------------------------------------------------
@@ -102,8 +115,58 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 	@Override
 	public Possible canBeSelected(LifepathModule value, Decision... decisions) {
 		if (value==null) return Possible.FALSE;
+		int maximumModules = getMaximumModules();
+		if (getSelected().size()>=maximumModules)
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_LIFEPATH_MODULE_LIMIT, maximumModules);
+		long sameModule = getSelected().stream()
+				.filter(val -> val.getKey().equals(value.getId()))
+				.count();
+		if (sameModule>=2)
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_ALREADY_PRESENT, value.getName());
 
-		return Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
+		Possible qualityChoices = validateQualityChoices(value, decisions);
+		if (!qualityChoices.get())
+			return qualityChoices;
+
+		Possible requirements = Shadowrun6Tools.checkDecisionsAndRequirements(getModel(), value, decisions);
+		if (!requirements.get())
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_REQUIREMENTS_NOT_MET);
+		return requirements;
+	}
+
+	//-------------------------------------------------------------------
+	private Possible validateQualityChoices(LifepathModule value, Decision... decisions) {
+		for (Choice choice : value.getChoices()) {
+			if (choice.getChooseFrom()!=ShadowrunReference.QUALITY || choice.getTypeReference()==null)
+				continue;
+			Decision decision = findDecision(choice, decisions);
+			if (decision==null || decision.getValue()==null || decision.getValue().isBlank())
+				continue;
+			SR6Quality quality = Shadowrun6Core.getItem(SR6Quality.class, decision.getValue());
+			if (quality==null)
+				return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_REQUIREMENTS_NOT_MET);
+			if (!matchesQualityChoiceReference(quality, choice.getTypeReference()))
+				return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_REQUIREMENTS_NOT_MET);
+		}
+		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	private Decision findDecision(Choice choice, Decision... decisions) {
+		for (Decision decision : decisions) {
+			if (decision!=null && choice.getUUID().equals(decision.getChoiceUUID()))
+				return decision;
+		}
+		return null;
+	}
+
+	//-------------------------------------------------------------------
+	private boolean matchesQualityChoiceReference(SR6Quality quality, String reference) {
+		if ("POSITIVE".equalsIgnoreCase(reference))
+			return quality.isPositive();
+		if ("NEGATIVE".equalsIgnoreCase(reference))
+			return !quality.isPositive();
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -152,8 +215,14 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 	 */
 	@Override
 	public boolean deselect(LifepathModuleValue value) {
-		// TODO Auto-generated method stub
-		return false;
+		Possible poss = canBeDeselected(value);
+		if (!poss.get()) {
+			logger.log(Level.WARNING, "Trying to deselect({0}) but not possible because {1}", value.getKey(), poss.getMostSevere());
+			return false;
+		}
+		((SR6LifepathCharacterGenerator) parent).getSettings().removeModule(value);
+		parent.runProcessors();
+		return true;
 	}
 
 	//-------------------------------------------------------------------
@@ -172,6 +241,7 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 	@Override
 	public List<Modification> process(List<Modification> previous) {
 		selectionsLeft = 0;
+		todos.clear();
 		List<Modification> unprocessed = new ArrayList<>();
 		try {
 			for (Modification tmp : previous) {
@@ -205,13 +275,29 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 							Decision dec  = modVal.getDecision(choice.getUUID());
 							List<Modification> toAdd = GenericRPGTools.decisionToModifications(mod, choice, dec);
 							logger.log(Level.INFO, "For {0} decision {1} for {2} leads to {3}",modVal.getKey(), dec.getValue(), dec.getChoiceUUID(), toAdd);
-							unprocessed.addAll(toAdd);
+							toAdd.forEach(generated -> unprocessed.add(normalizeModuleModification(generated, module)));
 						} else {
-							unprocessed.add(tmp);
+							unprocessed.add(normalizeModuleModification(tmp, module));
 						}
+					} else {
+						unprocessed.add(normalizeModuleModification(tmp, module));
 					}
 				}
 
+			}
+			int maximumModules = getMaximumModules();
+			if (getSelected().size()<maximumModules) {
+				todos.add(new de.rpgframework.genericrpg.ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_NOT_ENOUGH_LIFEPATH_MODULES, maximumModules - getSelected().size()));
+			} else if (getSelected().size()>maximumModules) {
+				todos.add(new de.rpgframework.genericrpg.ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_TOO_MANY_LIFEPATH_MODULES, getSelected().size() - maximumModules));
+			}
+			Map<String, Long> counts = getSelected().stream()
+					.map(LifepathModuleValue::getKey)
+					.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+			for (Map.Entry<String, Long> entry : counts.entrySet()) {
+				if (entry.getValue()>2) {
+					todos.add(new de.rpgframework.genericrpg.ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_TOO_MANY_LIFEPATH_MODULES, entry.getKey()));
+				}
 			}
 
 		} finally {
@@ -219,6 +305,19 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 		}
 
 		return unprocessed;
+	}
+
+	//-------------------------------------------------------------------
+	private Modification normalizeModuleModification(Modification mod, LifepathModule module) {
+		if (mod instanceof ValueModification && mod.getReferenceType()==ShadowrunReference.SKILL) {
+			ValueModification val = (ValueModification) mod;
+			if (val.getSet()!=ValueType.NATURAL) {
+				ValueModification ret = new ValueModification(ShadowrunReference.SKILL, val.getKey(), val.getValue(), module, ValueType.NATURAL);
+				ret.getDecisions().addAll(val.getDecisions());
+				return ret;
+			}
+		}
+		return mod;
 	}
 
 }

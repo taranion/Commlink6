@@ -8,6 +8,7 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.ResetGenerator;
 
@@ -27,14 +28,16 @@ public class SR6LifePathResetGenerator extends ResetGenerator {
 		unprocessed = super.process(unprocessed);
 
 		Shadowrun6Character model = charGen.getModel();
-		model.setKarmaFree(50);
+		if (charGen instanceof SR6LifepathCharacterGenerator)
+			((SR6LifepathCharacterGenerator)charGen).applyPowerLevelDefaultsIfNeeded();
+		model.setKarmaFree(charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA));
 		model.setKarmaInvested(0);
 		SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 		for (QualityValue val : new ArrayList<QualityValue>( model.getQualities())) {
 			model.removeQuality(val);
 		}
 		for (SR6SkillValue val : new ArrayList<SR6SkillValue>( model.getSkillValues())) {
-			val.clearIncomingModifications();
+			model.removeSkillValue(val);
 		}
 //		settings.characterPoints = 100;
 //		settings.cpBoughtAttrib = 0;

@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
@@ -19,17 +21,21 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 
 	private String nativeLanguage;
 	private String bornQual1, bornQual2;
+	private List<String> bornQualities;
 	private String childhoodArea;
 	private String basicSkills;
 	private String childQual1, childQual2;
 	private String earlySkill;
+	private ShadowrunAttribute earlyAttribute;
 	private String earlyQual1, earlyQual2;
+	private PowerLevel lifePathDefaultsAppliedFor;
 
 	//-------------------------------------------------------------------
 	/**
 	 */
 	public SR6LifePathSettings() {
 		modules = new ArrayList<>();
+		bornQualities = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -81,6 +87,8 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	public void setBornQuality1(SR6Quality value) {
 		if (value==null) this.bornQual1=null;
 		else this.bornQual1 = value.getId();
+		List<String> ids = getBornQualityIds();
+		setBornQualityIdAt(0, bornQual1);
 	}
 
 	//-------------------------------------------------------------------
@@ -93,6 +101,63 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	public void setBornQuality2(SR6Quality value) {
 		if (value==null) this.bornQual2=null;
 		else this.bornQual2 = value.getId();
+		setBornQualityIdAt(1, bornQual2);
+	}
+
+	//-------------------------------------------------------------------
+	public List<SR6Quality> getBornQualities() {
+		List<SR6Quality> ret = new ArrayList<>();
+		for (String id : getBornQualityIds()) {
+			SR6Quality quality = Shadowrun6Core.getItem(SR6Quality.class, id);
+			if (quality!=null) ret.add(quality);
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	public void addBornQuality(SR6Quality value) {
+		if (value==null)
+			return;
+		List<String> ids = getBornQualityIds();
+		if (!ids.contains(value.getId()))
+			ids.add(value.getId());
+		syncLegacyBornQualities();
+	}
+
+	//-------------------------------------------------------------------
+	public void removeBornQuality(SR6Quality value) {
+		if (value==null)
+			return;
+		getBornQualityIds().remove(value.getId());
+		syncLegacyBornQualities();
+	}
+
+	//-------------------------------------------------------------------
+	private List<String> getBornQualityIds() {
+		if (bornQualities==null)
+			bornQualities = new ArrayList<>();
+		if (bornQualities.isEmpty()) {
+			if (bornQual1!=null) bornQualities.add(bornQual1);
+			if (bornQual2!=null && !bornQual2.equals(bornQual1)) bornQualities.add(bornQual2);
+		}
+		return bornQualities;
+	}
+
+	//-------------------------------------------------------------------
+	private void setBornQualityIdAt(int index, String id) {
+		List<String> ids = getBornQualityIds();
+		while (ids.size()<=index)
+			ids.add(null);
+		ids.set(index, id);
+		ids.removeIf(val -> val==null);
+		syncLegacyBornQualities();
+	}
+
+	//-------------------------------------------------------------------
+	private void syncLegacyBornQualities() {
+		List<String> ids = getBornQualityIds();
+		bornQual1 = ids.size()>0?ids.get(0):null;
+		bornQual2 = ids.size()>1?ids.get(1):null;
 	}
 
 	//-------------------------------------------------------------------
@@ -171,5 +236,25 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	//-------------------------------------------------------------------
 	public void setEarlyAdultSkill(SR6Skill skill) {
 		earlySkill=(skill!=null)?skill.getId():null;
+	}
+
+	//-------------------------------------------------------------------
+	public ShadowrunAttribute getEarlyAdultAttribute() {
+		return earlyAttribute;
+	}
+
+	//-------------------------------------------------------------------
+	public void setEarlyAdultAttribute(ShadowrunAttribute attribute) {
+		earlyAttribute = attribute;
+	}
+
+	//-------------------------------------------------------------------
+	public PowerLevel getLifePathDefaultsAppliedFor() {
+		return lifePathDefaultsAppliedFor;
+	}
+
+	//-------------------------------------------------------------------
+	public void setLifePathDefaultsAppliedFor(PowerLevel value) {
+		lifePathDefaultsAppliedFor = value;
 	}
 }

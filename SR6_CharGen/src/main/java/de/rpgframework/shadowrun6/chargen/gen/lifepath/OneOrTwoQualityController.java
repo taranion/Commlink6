@@ -32,6 +32,10 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 	private Supplier<Quality> quality2Supplier;
 	private Consumer<Quality> quality2Consumer;
 	private Predicate<Quality> quality1Predicate;
+	private Supplier<List<Quality>> qualitiesSupplier;
+	private Consumer<Quality> qualityAddConsumer;
+	private Consumer<Quality> qualityRemoveConsumer;
+	private Supplier<Integer> maximumSupplier;
 
 	//-------------------------------------------------------------------
 	public OneOrTwoQualityController(SR6LifepathCharacterGenerator parent,
@@ -42,6 +46,17 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 		this.quality1Consumer = quality1Consumer;
 		this.quality2Supplier = quality2Supplier;
 		this.quality2Consumer = quality2Consumer;
+	}
+
+	//-------------------------------------------------------------------
+	public OneOrTwoQualityController(SR6LifepathCharacterGenerator parent,
+			Supplier<List<Quality>> qualitiesSupplier, Consumer<Quality> qualityAddConsumer,
+			Consumer<Quality> qualityRemoveConsumer, Supplier<Integer> maximumSupplier) {
+		super(parent);
+		this.qualitiesSupplier = qualitiesSupplier;
+		this.qualityAddConsumer = qualityAddConsumer;
+		this.qualityRemoveConsumer = qualityRemoveConsumer;
+		this.maximumSupplier = maximumSupplier;
 	}
 
 	//-------------------------------------------------------------------
@@ -104,6 +119,19 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 	 */
 	@Override
 	public List<Quality> getAvailable() {
+		if (qualitiesSupplier!=null) {
+			List<Quality> selected = getConfiguredQualities();
+			int maximum = getMaximumQualities();
+			if (selected.size()>=maximum)
+				return List.of();
+			if (maximum<=2 && selected.size()==1) {
+				Quality first = selected.get(0);
+				return super.getAvailable().stream()
+						.filter(p -> p.isPositive() == !first.isPositive())
+						.collect(Collectors.toList());
+			}
+			return super.getAvailable();
+		}
 		Quality q1 = quality1Supplier.get();
 		Quality q2 = quality2Supplier.get();
 		if (q1==null && q2==null)
@@ -137,6 +165,10 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 	 */
 	@Override
 	public List<QualityValue> getSelected() {
+		if (qualitiesSupplier!=null) {
+			List<String> selected = getConfiguredQualities().stream().map(Quality::getId).toList();
+			return super.getSelected().stream().filter(q -> selected.contains(q.getKey())).toList();
+		}
 		List<String> selected = new ArrayList<>();
 		if (quality1Supplier.get()!=null) selected.add(quality1Supplier.get().getId());
 		if (quality2Supplier.get()!=null) selected.add(quality2Supplier.get().getId());
@@ -191,6 +223,9 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 	 */
 	@Override
 	public Possible canBeSelected(Quality value, Decision... decisions) {
+		int maximumQualities = getMaximumQualities();
+		if (qualitiesSupplier!=null && getConfiguredQualities().size()>=maximumQualities)
+			return new Possible(ToDoElement.Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6, maximumQualities);
 		return super.canBeSelected(value, decisions);
 	}
 
@@ -212,12 +247,15 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 		ret.setInjectedBy(this);
 		for (Decision dec : decisions) ret.addDecision(dec);
 
-		Quality q1 = quality1Supplier.get();
-		Quality q2 = quality2Supplier.get();
-		if (q1==null) {
-			quality1Consumer.accept(quality);
+		if (qualitiesSupplier!=null) {
+			qualityAddConsumer.accept(quality);
 		} else {
-			quality2Consumer.accept(quality);
+			Quality q1 = quality1Supplier.get();
+			if (q1==null) {
+				quality1Consumer.accept(quality);
+			} else {
+				quality2Consumer.accept(quality);
+			}
 		}
 
 		if (parent.getModel().hasQuality(quality.getId())) {
@@ -241,6 +279,10 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 	 */
 	@Override
 	public Possible canBeDeselected(QualityValue value) {
+		if (qualitiesSupplier!=null) {
+			boolean selected = getConfiguredQualities().stream().anyMatch(quality -> quality.getId().equals(value.getKey()));
+			return selected?Possible.TRUE:Possible.FALSE;
+		}
 		Quality q1 = quality1Supplier.get();
 		Quality q2 = quality2Supplier.get();
 		logger.log(Level.WARNING, "canBeDeselected: {0} while q1={1} and q2={2}\n", value.getKey(), q1, q2);
@@ -258,6 +300,13 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 		if (!poss.get()) {
 			logger.log(Level.WARNING, "Trying to deselect({0}) but not possible because {1}", value.getKey(), poss.getMostSevere());
 			return false;
+		}
+		if (qualitiesSupplier!=null) {
+			value.setDistributed(0);
+			super.deselect(value);
+			qualityRemoveConsumer.accept((Quality)value.getResolved());
+			parent.runProcessors();
+			return true;
 		}
 		Quality q1 = quality1Supplier.get();
 		Quality q2 = quality2Supplier.get();
@@ -278,6 +327,23 @@ public class OneOrTwoQualityController extends CommonQualityGenerator implements
 		}
 
 		return false;
+	}
+
+	//-------------------------------------------------------------------
+	private List<Quality> getConfiguredQualities() {
+		if (qualitiesSupplier==null)
+			return List.of();
+		List<Quality> selected = qualitiesSupplier.get();
+		if (selected==null)
+			return List.of();
+		return selected;
+	}
+
+	//-------------------------------------------------------------------
+	private int getMaximumQualities() {
+		if (maximumSupplier==null)
+			return 2;
+		return Math.max(0, maximumSupplier.get());
 	}
 
 	//-------------------------------------------------------------------

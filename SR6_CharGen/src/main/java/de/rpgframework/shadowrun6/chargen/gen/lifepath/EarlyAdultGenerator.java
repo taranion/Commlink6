@@ -17,11 +17,14 @@ import de.rpgframework.genericrpg.data.IAttribute;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.Quality;
+import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator.SimpleSkillController;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
@@ -57,7 +60,7 @@ public class EarlyAdultGenerator implements PartialController<Quality> {
 
 	//-------------------------------------------------------------------
 	public List<SR6Skill> getAvailableSkills() {
-		return availableSkills;
+		return Shadowrun6Core.getItemList(SR6Skill.class);
 	}
 
 //	//-------------------------------------------------------------------
@@ -152,9 +155,19 @@ public class EarlyAdultGenerator implements PartialController<Quality> {
 		if (parent.getSettings().getEarlyAdultSkill()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_EARLY_SKILL_MISSING));
 		} else {
-			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, parent.getSettings().getEarlyAdultSkill().getId(), 2, EarlyAdultGenerator.class, ValueType.NATURAL);
+			ValueModification mod = new ValueModification(ShadowrunReference.SKILL, parent.getSettings().getEarlyAdultSkill().getId(), 4, EarlyAdultGenerator.class, ValueType.NATURAL);
 			unprocessed.add(mod);
 		}
+		if (parent.getSettings().getEarlyAdultAttribute()==null) {
+			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_EARLY_ATTRIBUTE_MISSING));
+		} else {
+			ValueModification mod = new ValueModification(ShadowrunReference.ATTRIBUTE, parent.getSettings().getEarlyAdultAttribute().name(), 5, EarlyAdultGenerator.class, ValueType.NATURAL);
+			unprocessed.add(mod);
+		}
+
+		int startNuyen = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN);
+		unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.NUYEN.name(), startNuyen));
+		unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.CONTACT_POINTS.name(), 4));
 		return unprocessed;
 	}
 
@@ -230,6 +243,25 @@ public class EarlyAdultGenerator implements PartialController<Quality> {
 				parent.runProcessors();
 			}
 		};
+	}
+
+	//-------------------------------------------------------------------
+	public List<ShadowrunAttribute> getAvailableAttributes() {
+		return List.of(ShadowrunAttribute.primaryValues());
+	}
+
+	//-------------------------------------------------------------------
+	public void selectAttribute(ShadowrunAttribute attribute) {
+		parent.getSettings().setEarlyAdultAttribute(attribute);
+		parent.runProcessors();
+	}
+
+	//-------------------------------------------------------------------
+	public void deselectAttribute(ShadowrunAttribute attribute) {
+		if (parent.getSettings().getEarlyAdultAttribute()==attribute) {
+			parent.getSettings().setEarlyAdultAttribute(null);
+			parent.runProcessors();
+		}
 	}
 }
 

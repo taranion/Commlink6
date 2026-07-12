@@ -66,6 +66,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private SR6WizardPageMagicOrResonance magic;
 	private SR6WizardPageBornThisWay bornThisWay;
 	private SR6WizardPageLPChildhood lpChildhood;
+	private SR6WizardPageLPEarlyAdult lpEarlyAdult;
+	private SR6WizardPageLPAdult lpAdult;
 	private SR6WizardPageQualities qualities;
 	private SR6WizardPageAttributes attrib;
 	private SR6WizardPageSkills skills;
@@ -97,6 +99,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		initInteractivtiy();
 		setShowProgress(false);
 		refresh();
+		setCurrentPage(chargen);
 	}
 
 	//-------------------------------------------------------------------
@@ -115,6 +118,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 			case MAGIC_OR_RESONANCE: ret.add(magic); break;
 			case LP_BORN_THIS_WAY: ret.add(bornThisWay); break;
 			case LP_CHILDHOOD : ret.add(lpChildhood); break;
+			case LP_TEENAGE   : ret.add(lpEarlyAdult); break;
+			case LP_ADULT     : ret.add(lpAdult); break;
 			case QUALITIES    : ret.add(qualities); break;
 			case ATTRIBUTES   : ret.add(   attrib); break;
 			case SKILLS       : ret.add(   skills); break;
@@ -160,6 +165,8 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		animalism   = new SR6WizardPageAnimalism(this, wrapper);
 		bornThisWay = new SR6WizardPageBornThisWay(this, wrapper);
 		lpChildhood = new SR6WizardPageLPChildhood(this, wrapper);
+		lpEarlyAdult = new SR6WizardPageLPEarlyAdult(this, wrapper);
+		lpAdult = new SR6WizardPageLPAdult(this, wrapper);
 		qualities = new SR6WizardPageQualities(this, wrapper);
 		attrib = new SR6WizardPageAttributes(this, wrapper.getWrapped());
 		skills = new SR6WizardPageSkills(this, wrapper.getWrapped());
@@ -178,13 +185,35 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 		getPages().add(chargen);
 		getPages().add(datasets);
 		getPages().addAll(getPageList());
+		updateLifePathPhaseTitles();
 		logger.log(Level.WARNING, "Pages: "+getPages());
+	}
+
+	//-------------------------------------------------------------------
+	private void updateLifePathPhaseTitles() {
+		boolean isLifePath = wrapper.getWrapped()!=null && "lifepath".equals(wrapper.getWrapped().getId());
+		if (race!=null) {
+			race.setTitle(ResourceI18N.get(RES, isLifePath ? "page.lifepath.born.metatype.title" : "page.title"));
+		}
+		if (magic!=null) {
+			magic.setTitle(ResourceI18N.get(RES, isLifePath ? "page.lifepath.born.magic.title" : "page.magic_or_resonance.title"));
+		}
+		if (surge!=null) {
+			surge.setTitle(ResourceI18N.get(RES, isLifePath ? "page.lifepath.born.surge.title" : "page.surge.title"));
+		}
+		if (bornThisWay!=null) {
+			bornThisWay.setTitle(ResourceI18N.get(RES, isLifePath ? "page.lifepath.born.qualities.title" : "page.born_this_way.title"));
+		}
 	}
 
 	//-------------------------------------------------------------------
 	private void initInteractivtiy() {
 		wrapper.addListener(this);
-		canBeFinishedCallback = (wizard) -> wrapper.canBeFinished(); // new Callback<Wizard, Boolean>() {
+		canBeFinishedCallback = (wizard) -> {
+			if ("lifepath".equals(wrapper.getId()))
+				return getCurrentPage()==lpAdult;
+			return wrapper.canBeFinished();
+		}; // new Callback<Wizard, Boolean>() {
 
 		setConfirmCancelCallback(new Callback<Wizard, Boolean>() {
 
@@ -218,6 +247,7 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.INFO, "Controller event: "+type);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
+			updateLifePathPhaseTitles();
 			// Remove all pages as event listeners
 			for (WizardPage page : getPages()) {
 				if (page instanceof ControllerListener) {

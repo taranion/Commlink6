@@ -1,17 +1,24 @@
 package de.rpgframework.shadowrun6.chargen.gen.lifepath;
 
 import java.lang.System.Logger.Level;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import de.rpgframework.MultiLanguageResourceBundle;
 import de.rpgframework.character.CharacterHandle;
 import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.GeneratorId;
 import de.rpgframework.genericrpg.chargen.RuleInterpretation;
 import de.rpgframework.genericrpg.data.AttributeValue;
 import de.rpgframework.genericrpg.data.RuleController;
+import de.rpgframework.genericrpg.items.CarriedItem;
+import de.rpgframework.shadowrun.LicenseValue;
+import de.rpgframework.shadowrun.SIN;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.gen.WizardPageType;
+import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
@@ -20,13 +27,14 @@ import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
-import de.rpgframework.shadowrun6.chargen.gen.RemainingKarmaNuyenController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuySettings;
+import de.rpgframework.shadowrun6.items.ItemTemplate;
+import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
 
 /**
@@ -34,9 +42,6 @@ import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
  */
 @GeneratorId("lifepath")
 public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator implements CharacterGenerator<ShadowrunAttribute, Shadowrun6Character> {
-
-	static MultiLanguageResourceBundle RES = new MultiLanguageResourceBundle(PointBuyCharacterGenerator.class,
-			Locale.ENGLISH, Locale.GERMAN);
 
 	private boolean setupDone;
 
@@ -72,8 +77,6 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		return new WizardPageType[] { WizardPageType.METATYPE, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.LP_BORN_THIS_WAY, WizardPageType.LP_CHILDHOOD, WizardPageType.LP_TEENAGE, WizardPageType.LP_ADULT,
-				WizardPageType.QUALITIES,
-				WizardPageType.ATTRIBUTES,
 //				WizardPageType.SKILLS, WizardPageType.POWERS, WizardPageType.SPELLS,
 //				WizardPageType.RITUALS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
 //				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
@@ -83,7 +86,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 	//-------------------------------------------------------------------
 	public static String getStaticName() {
-		return RES.getString("generator.name");
+		return SR6CharacterGenerator.RES.getString("chargen.SR6LifepathCharacterGenerator");
 	}
 	//-------------------------------------------------------------------
 	/**
@@ -91,7 +94,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	 */
 	@Override
 	public String getName() {
-		return RES.getString("generator.lifepath.name");
+		return SR6CharacterGenerator.RES.getString("chargen.SR6LifepathCharacterGenerator");
 	}
 
 	//-------------------------------------------------------------------
@@ -100,7 +103,72 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	 */
 	@Override
 	public String getDescription() {
-		return RES.getString("generator.lifepath.desc");
+		return SR6CharacterGenerator.RES.getString("chargen.SR6LifepathCharacterGenerator.desc");
+	}
+
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator#canBeFinished()
+	 */
+	@Override
+	public boolean canBeFinished() {
+		SR6LifePathSettings settings = getSettings();
+		if (settings==null)
+			return false;
+		if (settings.getBornQuality1()==null || settings.getNativeLanguage()==null)
+			return false;
+		if (settings.getChildhoodQuality1()==null || settings.getChildhoodArea()==null || settings.getChildhoodSkills().size()!=4)
+			return false;
+		if (settings.getEarlyAdultSkill()==null || settings.getEarlyAdultAttribute()==null)
+			return false;
+		int maximumModules = getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES);
+		if (settings.getModules().size()!=maximumModules)
+			return false;
+
+		Map<String, Long> moduleCounts = settings.getModules().stream()
+				.map(LifepathModuleValue::getKey)
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		return moduleCounts.values().stream().noneMatch(count -> count>2);
+	}
+
+	//-------------------------------------------------------------------
+	public void applyPowerLevelDefaultsIfNeeded() {
+		SR6LifePathSettings settings = getSettings();
+		PowerLevel level = settings.variant;
+		if (level==null) {
+			level = PowerLevel.STANDARD;
+			settings.variant = level;
+		}
+		if (level==settings.getLifePathDefaultsAppliedFor())
+			return;
+		applyPowerLevelDefaults(level);
+		settings.setLifePathDefaultsAppliedFor(level);
+	}
+
+	//-------------------------------------------------------------------
+	public void applyPowerLevelDefaults(PowerLevel level) {
+		if (level==null)
+			level = PowerLevel.STANDARD;
+		switch (level) {
+		case STREET_LEVEL:
+			setLifePathDefaults(25, 6, 4, 10, 5000);
+			break;
+		case ELITE:
+			setLifePathDefaults(85, 10, 8, 30, 100000);
+			break;
+		default:
+			setLifePathDefaults(50, 8, 6, 20, 25000);
+			break;
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void setLifePathDefaults(int adjustmentKarma, int modules, int qualities, int negativeKarmaCap, int startNuyen) {
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA, adjustmentKarma);
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES, modules);
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES, qualities);
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP, negativeKarmaCap);
+		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN, startNuyen);
 	}
 
 	//-------------------------------------------------------------------
@@ -149,10 +217,11 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			processChain.add(bornThisWay);
 			processChain.add(childhood);
 			processChain.add(earlyAdult);
-//			processChain.add(qualities);
 			processChain.add(modules);
+			processChain.add(qualities);
 //			processChain.add(qPaths);
 			processChain.add(attributes);
+			processChain.add(new SR6LifePathSkillGenerator(model));
 			processChain.add(new ApplyModificationsGeneric(model));
 //			processChain.add(skills);
 //			processChain.add(spells);
@@ -161,14 +230,14 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 //			processChain.add(martial);
 //			processChain.add(dataStructures);
 ////			processChain.add(cpToNuyenStep);
-//			processChain.add(equipment);
+			processChain.add(equipment);
 //			processChain.add(foci);
 //			processChain.add(complex);
 //			processChain.add(metaEcho);
 //			processChain.add(sins);
 //			processChain.add(lifestyles);
 			processChain.add(contacts);
-			processChain.add(new RemainingKarmaNuyenController(this));
+			processChain.add(new SR6LifePathRemainingKarmaNuyenController(this));
 
 			setupDone = true;
 		} finally {
@@ -184,8 +253,8 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	 */
 	@Override
 	protected void initializeModel() {
-		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings) ) {
-			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6PointBuySettings)) {
+		if (model.getCharGenSettings(CommonSR6GeneratorSettings.class) == null  || !(model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6LifePathSettings) ) {
+			if (model.getChargenSettingsJSON() != null  && (model.getCharGenSettings(CommonSR6GeneratorSettings.class) instanceof SR6LifePathSettings)) {
 				logger.log(Level.INFO, "Restore generator config from {0}", model.getChargenSettingsJSON());
 				SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
 				model.setCharGenSettings(settings);
@@ -250,6 +319,8 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	}
 
 	public void finish() {
+		runProcessors();
+
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
 			int total = val.getModifiedValue();
@@ -260,9 +331,43 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 		for (SR6SkillValue val : getModel().getSkillValues()) {
 			int total = val.getModifiedValue();
+			if (total<=0)
+				continue;
 			val.clearIncomingModifications();
 			val.setDistributed(total);
 			val.setStart(total);
+		}
+		for (SR6SkillValue val : new ArrayList<>(getModel().getSkillValues())) {
+			if (val.getModifiedValue()<=0)
+				getModel().removeSkillValue(val);
+		}
+
+		getModel().setInCareerMode(true);
+		getModel().setKarmaInvested(0);
+		expandPACKs();
+	}
+
+	//-------------------------------------------------------------------
+	private void expandPACKs() {
+		for (CarriedItem<ItemTemplate> tmp : getModel().getCarriedItems()) {
+			if (getItemType(tmp)==ItemType.PACK) {
+				logger.log(Level.WARNING, "ToDo: handle PACK "+tmp);
+				System.err.println("ToDo: Expand PACK "+tmp);
+
+				for (SIN sin : new ArrayList<>(getModel().getSINs())) {
+					if (sin.getInjectedBy()==tmp.getResolved()) {
+						getModel().removeSIN(sin);
+					}
+				}
+
+				for (LicenseValue lic : new ArrayList<>(getModel().getLicenses())) {
+					if (lic.getInjectedBy()==tmp.getResolved()) {
+						getModel().removeLicense(lic);
+					}
+				}
+				((CommonEquipmentGenerator)getEquipmentController()).expandPACK(tmp);
+				getModel().removeCarriedItem(tmp);
+			}
 		}
 	}
 
@@ -273,6 +378,12 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 	//-------------------------------------------------------------------
 	public SR6LifePathModuleGenerator getModuleGenerator() {
+		return modules;
+	}
+
+	//-------------------------------------------------------------------
+	@Override
+	public SR6LifePathModuleGenerator getLifePathModuleGenerator() {
 		return modules;
 	}
 

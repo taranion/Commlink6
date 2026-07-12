@@ -16,6 +16,8 @@ public interface SR6RejectReasons extends IRejectReasons {
 	public final static String IMPOSS_QUALITY_ALREADY_6 = "impossible.qualityAlready6";
 	public final static String IMPOSS_QUALITY_KARMAGAIN = "impossible.qualityMoreThan20Karma";
 	public final static String IMPOSS_ALREADY_MAX_LIMIT = "impossible.cannotMaxMoreAttributes";
+	public final static String IMPOSS_LIFEPATH_MODULE_LIMIT = "impossible.lifepath.moduleLimit";
+	public final static String IMPOSS_REQUIREMENTS_NOT_MET = "impossible.requirementsNotMet";
 
 	public final static String TODO_ATTRIB_REMAIN_ADJUST = "impossible.remainingAdjustmentPoints";
 	public final static String TODO_ATTRIB_REMAIN_ATTRIB = "impossible.remainingAttributePoints";
@@ -47,6 +49,9 @@ public interface SR6RejectReasons extends IRejectReasons {
 	public static final String TODO_CHILD_QUALITY_MISSING = "todo.lifepath.child.quality.missing";
 	public static final String TODO_CHILDAREA_NOT_SET     = "todo.lifepath.childAreaNotSet";
 	public static final String TODO_EARLY_SKILL_MISSING = "todo.lifepath.early.skill.missing";
+	public static final String TODO_EARLY_ATTRIBUTE_MISSING = "todo.lifepath.early.attribute.missing";
+	public static final String TODO_NOT_ENOUGH_LIFEPATH_MODULES = "todo.lifepath.modules.notEnough";
+	public static final String TODO_TOO_MANY_LIFEPATH_MODULES = "todo.lifepath.modules.tooMany";
 
 	public static final String TODO_SHIFTER_MUST_HAVE_MAGIC = "todo.shifter_must_have_magic";
 	public static final String TODO_SHIFTER_MUST_BE_METAHUMAN = "todo.shifter_must_be_metahuman";

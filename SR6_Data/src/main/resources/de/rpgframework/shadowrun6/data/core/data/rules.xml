@@ -24,7 +24,7 @@
          <set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
 		</rules>
 	</interpretation>
-	<interpretation id="srm" restrict="prio,sumto10,pointbuy">
+	<interpretation id="srm" restrict="prio,sumto10,pointbuy,lifepath">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
          <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="12" />
@@ -38,7 +38,7 @@
 			<set rule="EXPANDED_SPECIALIZATIONS" to="true"/>
 		</rules>
 	</interpretation>
-	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma">
+	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma,lifepath">
 		<rules>
 			<set rule="CHARGEN_ALLOW_INITIATION" to="true"/>
          <set rule="CHARGEN_SUM_TO_TEN_ELITE" to="13" />

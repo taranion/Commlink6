@@ -27,6 +27,7 @@ import de.rpgframework.shadowrun.chargen.gen.QualityGenerator;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
@@ -54,6 +55,20 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 	public int getNumberOfQualities() { return numberOfQualities; }
 
 	//-------------------------------------------------------------------
+	private int getMaximumQualities() {
+		if ("lifepath".equals(parent.getId()))
+			return parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES);
+		return 6;
+	}
+
+	//-------------------------------------------------------------------
+	private int getNegativeQualityKarmaCap() {
+		if ("lifepath".equals(parent.getId()))
+			return parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP);
+		return 20;
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.genericrpg.chargen.NumericalDataItemController#canBeIncreased(de.rpgframework.genericrpg.data.ComplexDataItemValue)
 	 */
@@ -64,9 +79,10 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			return poss;
 
 		// For previously not user-selected qualities, ensure limit is not reached yet
-		if (value.getDistributed()==0 && numberOfQualities>=6) {
+		int maxQualities = getMaximumQualities();
+		if (value.getDistributed()==0 && numberOfQualities>=maxQualities) {
 			// Already 6 qualities
-			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6, maxQualities);
 		}
 
 		return Possible.TRUE;
@@ -132,7 +148,8 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 		if (value.isPositive() && karma>model.getKarmaFree()) {
 			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_NOT_ENOUGH_KARMA, karma);
 		}
-		if (!value.isPositive() && (karmaGain+karma)>20) {
+		int negativeKarmaCap = getNegativeQualityKarmaCap();
+		if (!value.isPositive() && (karmaGain+karma)>negativeKarmaCap) {
 			return new Possible(Severity.WARNING, IRejectReasons.RES, IRejectReasons.IMPOSS_QUALITY_KARMAGAIN, karma);
 		}
 		if (value.getType()==QualityType.METAGENIC && (karmaSURGE+Math.abs(karma))>30) {
@@ -175,13 +192,14 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 		// Is Karma gain >20 and there is no chance to prevent gaining to much Karma
 		int cost = value.getKarmaCost();
-		if (!value.isPositive() && ((karmaGain+cost)>20) && numberOfQualities>4)
+		if (!value.isPositive() && ((karmaGain+cost)>negativeKarmaCap) && numberOfQualities>4)
 			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_KARMAGAIN);
 
 		// No more than 6 user-selected qualities
-		if (numberOfQualities>=6) {
+		int maxQualities = getMaximumQualities();
+		if (numberOfQualities>=maxQualities) {
 			// Already 6 qualities
-			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6);
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_QUALITY_ALREADY_6, maxQualities);
 		}
 
 		return Possible.TRUE;
@@ -328,17 +346,19 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 			}
 
 			// Error conditions
-			if (karmaGain>20) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN));
-				logger.log(Level.WARNING, "Gained more than 20 Karma ({0})", karmaGain);
+			int negativeKarmaCap = getNegativeQualityKarmaCap();
+			int maxQualities = getMaximumQualities();
+			if (karmaGain>negativeKarmaCap) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_KARMAGAIN, negativeKarmaCap));
+				logger.log(Level.WARNING, "Gained more than {0} Karma ({1})", negativeKarmaCap, karmaGain);
 			}
 			if (karmaSURGE>30) {
 				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_KARMASURGE));
 				logger.log(Level.WARNING, "Spent more than 30 Karma ({0}) on SURGE", karmaSURGE);
 			}
-			if (numberOfQualities>6) {
-				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY));
-				logger.log(Level.WARNING, "Added more than 6 qualities ({0})", numberOfQualities);
+			if (numberOfQualities>maxQualities) {
+				todos.add(new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_QUALITY_TOO_MANY, maxQualities));
+				logger.log(Level.WARNING, "Added more than {0} qualities ({1})", maxQualities, numberOfQualities);
 			}
 
 

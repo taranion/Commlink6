@@ -72,6 +72,14 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	private List<QualityValue> shifterAddons;
 	@Element
 	private String shifterAnimal;
+	@Element
+	private String lifepathBabyBackground;
+	@Element
+	private String lifepathChildhoodBackground;
+	@Element
+	private String lifepathAdultBackground;
+	@Element
+	private String backgroundNotes;
 	private transient List<QualityValue> shifterAuto;
 
 	protected transient List<CheckModification> edgeMods;
@@ -580,6 +588,46 @@ public class Shadowrun6Character extends ShadowrunCharacter<SR6Skill, SR6SkillVa
 	//-------------------------------------------------------------------
 	public void setShifterAnimal(String shifterAnimal) {
 		this.shifterAnimal = shifterAnimal;
+	}
+
+	//-------------------------------------------------------------------
+	public String getLifepathBabyBackground() {
+		return lifepathBabyBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public void setLifepathBabyBackground(String lifepathBabyBackground) {
+		this.lifepathBabyBackground = lifepathBabyBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public String getLifepathChildhoodBackground() {
+		return lifepathChildhoodBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public void setLifepathChildhoodBackground(String lifepathChildhoodBackground) {
+		this.lifepathChildhoodBackground = lifepathChildhoodBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public String getLifepathAdultBackground() {
+		return lifepathAdultBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public void setLifepathAdultBackground(String lifepathAdultBackground) {
+		this.lifepathAdultBackground = lifepathAdultBackground;
+	}
+
+	//-------------------------------------------------------------------
+	public String getBackgroundNotes() {
+		return backgroundNotes;
+	}
+
+	//-------------------------------------------------------------------
+	public void setBackgroundNotes(String backgroundNotes) {
+		this.backgroundNotes = backgroundNotes;
 	}
 
 }

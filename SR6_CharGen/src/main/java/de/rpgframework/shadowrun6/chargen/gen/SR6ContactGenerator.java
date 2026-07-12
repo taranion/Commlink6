@@ -11,18 +11,21 @@ import de.rpgframework.genericrpg.ToDoElement;
 import de.rpgframework.genericrpg.ToDoElement.Severity;
 import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.modification.Modification;
+import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.random.VariableHolderNode;
 import de.rpgframework.shadowrun.Contact;
 import de.rpgframework.shadowrun.ContactType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
 import de.rpgframework.shadowrun.generators.ShadowrunNameGenerator;
+import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6ContactController;
+import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 
 /**
  * @author prelle
@@ -36,7 +39,7 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 
 	private ShadowrunNameGenerator nameGen;
 
-	private int pointsLeft;
+	protected int pointsLeft;
 
 	//-------------------------------------------------------------------
 	public SR6ContactGenerator(SR6CharacterController parent) {
@@ -288,14 +291,17 @@ public class SR6ContactGenerator extends ControllerImpl<Contact> implements SR6C
 		try {
 			todos.clear();
 
+			int contactPoints = 0;
 			for (Modification tmp : previous) {
-//				if (tmp.getReferenceType()==ShadowrunReference.CONTACT) {
-//				} else
+				if (tmp instanceof ValueModification && tmp.getReferenceType()==ShadowrunReference.CREATION_POINTS && ((ValueModification)tmp).getResolvedKey()==CreatePoints.CONTACT_POINTS) {
+					contactPoints += ((ValueModification)tmp).getValue();
+				} else {
 					unprocessed.add(tmp);
+				}
 			}
 
 			// Calculate points left
-			pointsLeft = getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 6;
+			pointsLeft = (contactPoints>0)?contactPoints:(getModel().getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue() * 6);
 			logger.log(Level.INFO, "Have {0} points to spend on contacts", pointsLeft);
 
 			// Now pay contacts

@@ -68,7 +68,7 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 	protected SR6CharacterGenerator charGen;
 	protected BornThisWayGenerator bornThisWay;
 
-	private Label lbMetatype, lbMOR;
+	private Label lbMetatype, lbMOR, lbQuality;
 
 	private TextField tfNationality;
 	private TextField tfNativeLanguage;
@@ -112,8 +112,9 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 		selection.setAvailableStyle("-fx-min-width: 20em; -fx-max-width: 25em");
 		selection.setSelectedStyle("-fx-min-width: 20em; -fx-max-width: 30em; -fx-max-height: 10em");
 
-		selection.setAvailablePlaceholder(ResourceI18N.get(RES, "page.born_this_way.placeholder.available"));
-		selection.setSelectedPlaceholder(ResourceI18N.get(RES, "page.born_this_way.placeholder.selected"));
+		int maximumQualities = getMaximumBornQualities();
+		selection.setAvailablePlaceholder(ResourceI18N.format(RES, "page.born_this_way.placeholder.available", maximumQualities));
+		selection.setSelectedPlaceholder(ResourceI18N.format(RES, "page.born_this_way.placeholder.selected", maximumQualities));
 
 		selection.setAvailableCellFactory(lv -> new QualityListCell(selection.getController(), Shadowrun6Tools.requirementResolver(Locale.getDefault())));
 		selection.setSelectedCellFactory(lv -> new QualityValueListCell( ()->charGen, true));
@@ -135,7 +136,7 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 
 		FlowPane flowLang = new FlowPane(5, 5, new Label(ResourceI18N.get(RES, "page.born_this_way.language")), tfNativeLanguage);
 
-		Label lbQuality = new Label(ResourceI18N.get(RES, "page.born_this_way.quality"));
+		lbQuality = new Label();
 
 		Label lbSummarize = new Label(ResourceI18N.get(RES, "page.born_this_way.summarize"));
 		VBox postList = new VBox(5, lbSummarize, taDescription);
@@ -160,7 +161,7 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 			}
 		});
 		taDescription.textProperty().addListener( (ov,o,n) -> {
-			logger.log(Level.WARNING, "ToDo: Store description");
+			charGen.getModel().setLifepathBabyBackground(n);
 		});
 		tfNativeLanguage.textProperty().addListener( (ov,o,n) -> {
 			bornThisWay.selectNativeLanguage(n);
@@ -238,8 +239,13 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 			return;
 
 		backHeader.setValue(charGen.getModel().getKarmaFree());
+		setTextIfChanged(taDescription, charGen.getModel().getLifepathBabyBackground());
 		String mor = (charGen.getModel().getMagicOrResonanceType()!=null)?charGen.getModel().getMagicOrResonanceType().getName():"?";
 		lbMOR.setText(ResourceI18N.format(RES, "page.born_this_way.mor", mor));
+		int maximumQualities = getMaximumBornQualities();
+		lbQuality.setText(ResourceI18N.format(RES, "page.born_this_way.quality", maximumQualities));
+		selection.setAvailablePlaceholder(ResourceI18N.format(RES, "page.born_this_way.placeholder.available", maximumQualities));
+		selection.setSelectedPlaceholder(ResourceI18N.format(RES, "page.born_this_way.placeholder.selected", maximumQualities));
 		if (isLifepath) {
 			SR6LifePathSettings settings = charGen.getModel().getCharGenSettings(SR6LifePathSettings.class);
 			String meta = (charGen.getModel().getMetatype()!=null)?charGen.getModel().getMetatype().getName():"?";
@@ -247,6 +253,21 @@ public class SR6WizardPageBornThisWay extends WizardPage implements ControllerLi
 		}
 
 		selection.refresh();
+	}
+
+	//-------------------------------------------------------------------
+	private int getMaximumBornQualities() {
+		if (bornThisWay!=null)
+			return bornThisWay.getMaximumBornQualities();
+		BornThisWayGenerator controller = charGen.getBornThisWayGenerator();
+		return controller!=null?controller.getMaximumBornQualities():0;
+	}
+
+	//-------------------------------------------------------------------
+	private void setTextIfChanged(TextArea area, String value) {
+		String text = value!=null?value:"";
+		if (!text.equals(area.getText()))
+			area.setText(text);
 	}
 
 	//-------------------------------------------------------------------
