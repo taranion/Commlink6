@@ -19,6 +19,9 @@ import de.rpgframework.genericrpg.data.GenericRPGTools;
 import de.rpgframework.genericrpg.modification.DataItemModification;
 import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
+import de.rpgframework.genericrpg.requirements.AnyRequirement;
+import de.rpgframework.genericrpg.requirements.ExistenceRequirement;
+import de.rpgframework.genericrpg.requirements.Requirement;
 import de.rpgframework.shadowrun6.CreatePoints;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
@@ -206,7 +209,69 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 		if (!((SR6LifepathCharacterGenerator) parent).getSettings().getModules().contains(value)) {
 			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_NOT_PRESENT, value.getNameWithoutRating());
 		}
+		List<LifepathModuleValue> dependents = getModulesDependingOn(value);
+		if (!dependents.isEmpty()) {
+			String names = dependents.stream()
+					.map(module -> module.getResolved().getName(parent.getLocale()))
+					.collect(Collectors.joining(", "));
+			return new Possible(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.IMPOSS_LIFEPATH_MODULE_REQUIRED, names);
+		}
 		return Possible.TRUE;
+	}
+
+	//-------------------------------------------------------------------
+	private List<LifepathModuleValue> getModulesDependingOn(LifepathModuleValue prerequisite) {
+		List<LifepathModuleValue> ret = new ArrayList<>();
+		for (LifepathModuleValue selected : getSelected()) {
+			if (selected==prerequisite)
+				continue;
+			if (wouldLoseRequirement(selected, prerequisite))
+				ret.add(selected);
+		}
+		return ret;
+	}
+
+	//-------------------------------------------------------------------
+	private boolean wouldLoseRequirement(LifepathModuleValue dependent, LifepathModuleValue removed) {
+		LifepathModule module = dependent.getResolved();
+		for (Requirement req : module.getRequirements()) {
+			boolean metBefore = isRequirementMetWithSelection(req, module, dependent.getDecisionArray(), null);
+			boolean metAfter = isRequirementMetWithSelection(req, module, dependent.getDecisionArray(), removed);
+			if (metBefore && !metAfter)
+				return true;
+		}
+		return false;
+	}
+
+	//-------------------------------------------------------------------
+	private boolean isRequirementMetWithSelection(Requirement req, LifepathModule requiredFor, Decision[] decisions, LifepathModuleValue removed) {
+		if (req instanceof ExistenceRequirement) {
+			ExistenceRequirement tmp = (ExistenceRequirement)req;
+			if (tmp.getType()==ShadowrunReference.LIFEMOD) {
+				boolean hasModule = hasSelectedModule(req.getKey(), removed);
+				return tmp.isNegate() ? !hasModule : hasModule;
+			}
+		}
+		if (req instanceof AnyRequirement) {
+			AnyRequirement any = (AnyRequirement)req;
+			for (Requirement option : any.getOptionList()) {
+				if (isRequirementMetWithSelection(option, requiredFor, decisions, removed))
+					return true;
+			}
+			return false;
+		}
+		return Shadowrun6Tools.isRequirementMet(getModel(), requiredFor, req, decisions);
+	}
+
+	//-------------------------------------------------------------------
+	private boolean hasSelectedModule(String key, LifepathModuleValue removed) {
+		for (LifepathModuleValue selected : getSelected()) {
+			if (selected==removed)
+				continue;
+			if (selected.getKey().equals(key))
+				return true;
+		}
+		return false;
 	}
 
 	//-------------------------------------------------------------------

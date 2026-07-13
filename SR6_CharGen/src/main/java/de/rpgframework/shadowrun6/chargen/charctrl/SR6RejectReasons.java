@@ -17,6 +17,7 @@ public interface SR6RejectReasons extends IRejectReasons {
 	public final static String IMPOSS_QUALITY_KARMAGAIN = "impossible.qualityMoreThan20Karma";
 	public final static String IMPOSS_ALREADY_MAX_LIMIT = "impossible.cannotMaxMoreAttributes";
 	public final static String IMPOSS_LIFEPATH_MODULE_LIMIT = "impossible.lifepath.moduleLimit";
+	public final static String IMPOSS_LIFEPATH_MODULE_REQUIRED = "impossible.lifepath.moduleRequired";
 	public final static String IMPOSS_REQUIREMENTS_NOT_MET = "impossible.requirementsNotMet";
 
 	public final static String TODO_ATTRIB_REMAIN_ADJUST = "impossible.remainingAdjustmentPoints";

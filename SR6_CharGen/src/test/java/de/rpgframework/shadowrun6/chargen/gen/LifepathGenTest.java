@@ -126,6 +126,37 @@ public class LifepathGenTest {
 	}
 
 	//-------------------------------------------------------------------
+	@Test
+	public void testCannotDeselectRequiredLifeModule() {
+		SR6LifePathModuleGenerator modules = charGen.getModuleGenerator();
+		LifepathModule studies = Shadowrun6Core.getItem(LifepathModule.class, "studium");
+		LifepathModule doctor = Shadowrun6Core.getItem(LifepathModule.class, "aerztin");
+		assertNotNull(studies);
+		assertNotNull(doctor);
+
+		OperationResult<LifepathModuleValue> studiesResult = modules.select(studies,
+				new Decision("4085c382-f35f-4cf4-a3a0-1f1de3b08e83", "LOGIC"),
+				new Decision("d3782337-10d5-4be6-b7ee-d8f07098537b", "biotech"),
+				new Decision("5e39d6f5-b06f-457c-8017-e2cf6e3e9c5d", "electronics")
+				);
+		assertTrue(studiesResult.getError(), studiesResult.wasSuccessful());
+
+		OperationResult<LifepathModuleValue> doctorResult = modules.select(doctor,
+				new Decision("3a2d5141-0787-4d99-b550-bf5d90a8ec74", "LOGIC"),
+				new Decision("d6a6b973-7455-4d5f-877a-db1db4db542f", "biotech")
+				);
+		assertTrue(doctorResult.getError(), doctorResult.wasSuccessful());
+
+		assertFalse(modules.canBeDeselected(studiesResult.get()).get());
+		assertFalse(modules.deselect(studiesResult.get()));
+		assertTrue(modules.getSelected().contains(studiesResult.get()));
+
+		assertTrue(modules.deselect(doctorResult.get()));
+		assertTrue(modules.canBeDeselected(studiesResult.get()).get());
+		assertTrue(modules.deselect(studiesResult.get()));
+	}
+
+	//-------------------------------------------------------------------
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testGaius() throws CharacterIOException {
