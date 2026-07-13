@@ -27,7 +27,6 @@ import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
-import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.ControllerImpl;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6RejectReasons;
@@ -72,8 +71,7 @@ public class SR6LifePathModuleGenerator extends ControllerImpl<LifepathModule>
 
 	//-------------------------------------------------------------------
 	public int getMaximumModules() {
-		int max = parent.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES);
-		return Math.max(0, max);
+		return ((SR6LifepathCharacterGenerator) parent).getLifePathMaximumModules();
 	}
 
 	//-------------------------------------------------------------------

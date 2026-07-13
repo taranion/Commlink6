@@ -71,10 +71,11 @@ public class ResetGenerator implements ProcessingStep {
 			real = ((GeneratorWrapper)charGen).getWrapped();
 
 		if (real instanceof SR6LifepathCharacterGenerator) {
-			((SR6LifepathCharacterGenerator)real).applyPowerLevelDefaultsIfNeeded();
+			SR6LifepathCharacterGenerator lifepath = (SR6LifepathCharacterGenerator)real;
+			lifepath.applyPowerLevelDefaultsIfNeeded();
 			model.setKarmaFree(charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA));
 			SR6LifePathSettings settings = model.getCharGenSettings(SR6LifePathSettings.class);
-			int maxModules = Math.max(0, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES));
+			int maxModules = lifepath.getLifePathMaximumModules();
 			unprocessed.add(new ValueModification(ShadowrunReference.CREATION_POINTS, CreatePoints.LIFEPATH_MODULES.name(), maxModules));
 		} else if (real instanceof PointBuyCharacterGenerator) {
 			model.setKarmaFree(50);

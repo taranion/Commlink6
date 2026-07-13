@@ -131,7 +131,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			return false;
 		if (settings.getEarlyAdultSkill()==null || settings.getEarlyAdultAttribute()==null)
 			return false;
-		int maximumModules = getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES);
+		int maximumModules = getLifePathMaximumModules();
 		if (settings.getModules().size()>maximumModules)
 			return false;
 
@@ -159,6 +159,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 	public void applyPowerLevelDefaults(PowerLevel level) {
 		if (level==null)
 			level = PowerLevel.STANDARD;
+		getSettings().variant = level;
 		switch (level) {
 		case STREET_LEVEL:
 			setLifePathDefaults(50, 6, 6, 20, 25000);
@@ -174,11 +175,34 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 
 	//-------------------------------------------------------------------
 	private void setLifePathDefaults(int adjustmentKarma, int modules, int qualities, int negativeKarmaCap, int startNuyen) {
-		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA, adjustmentKarma);
-		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES, modules);
-		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES, qualities);
-		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP, negativeKarmaCap);
-		ruleCtrl.setRuleValue(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN, startNuyen);
+		setLifePathDefault(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA, adjustmentKarma);
+		setLifePathDefault(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES, modules);
+		setLifePathDefault(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES, qualities);
+		setLifePathDefault(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP, negativeKarmaCap);
+		setLifePathDefault(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN, startNuyen);
+	}
+
+	//-------------------------------------------------------------------
+	private void setLifePathDefault(de.rpgframework.genericrpg.chargen.Rule rule, int value) {
+		if (ruleCtrl.getRule(rule).isEditable())
+			ruleCtrl.setRuleValue(rule, value);
+	}
+
+	//-------------------------------------------------------------------
+	public int getLifePathMaximumModules() {
+		if (ruleCtrl.getRule(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES).isEditable())
+			return Math.max(0, ruleCtrl.getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES));
+		PowerLevel level = getSettings().variant;
+		if (level==null)
+			level = PowerLevel.STANDARD;
+		switch (level) {
+		case STREET_LEVEL:
+			return 6;
+		case ELITE:
+			return 10;
+		default:
+			return 8;
+		}
 	}
 
 	//-------------------------------------------------------------------

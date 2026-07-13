@@ -170,7 +170,7 @@ public class LifepathGenTest {
 	private void assertLifePathDefaults(PowerLevel level, int expectedModules) {
 		charGen.applyPowerLevelDefaults(level);
 		assertEquals(50, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA));
-		assertEquals(expectedModules, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES));
+		assertEquals(expectedModules, charGen.getLifePathMaximumModules());
 		assertEquals(6, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES));
 		assertEquals(20, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP));
 		assertEquals(25000, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN));
