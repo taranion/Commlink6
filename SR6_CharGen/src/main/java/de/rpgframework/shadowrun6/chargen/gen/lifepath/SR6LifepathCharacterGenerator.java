@@ -25,17 +25,27 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6AnimalismController;
+import de.rpgframework.shadowrun6.chargen.charctrl.CommonQualityPathController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6DrakeController;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6MartialArtsController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonEquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
+import de.rpgframework.shadowrun6.chargen.gen.SR6DataStructureController;
 import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
+import de.rpgframework.shadowrun6.proc.CalculateAttributePools;
+import de.rpgframework.shadowrun6.proc.CalculateSkillPools;
 
 /**
  * @Author prelle
@@ -77,10 +87,10 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		return new WizardPageType[] { WizardPageType.METATYPE, //WizardPageType.DRAKE,
 				WizardPageType.MAGIC_OR_RESONANCE, WizardPageType.SURGE, WizardPageType.INFECTED,
 				WizardPageType.LP_BORN_THIS_WAY, WizardPageType.LP_CHILDHOOD, WizardPageType.LP_TEENAGE, WizardPageType.LP_ADULT,
-//				WizardPageType.SKILLS, WizardPageType.POWERS, WizardPageType.SPELLS,
-//				WizardPageType.RITUALS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
-//				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
-//				WizardPageType.CONTACTS, WizardPageType.NAME,
+				WizardPageType.POWERS, WizardPageType.SPELLS,
+				WizardPageType.RITUALS, WizardPageType.COMPLEX_FORMS, WizardPageType.METAECHO,
+				WizardPageType.GEAR, WizardPageType.SIN_LICENSE, WizardPageType.LIFESTYLE,
+				WizardPageType.CONTACTS, WizardPageType.NAME,
 				};
 	}
 
@@ -122,7 +132,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		if (settings.getEarlyAdultSkill()==null || settings.getEarlyAdultAttribute()==null)
 			return false;
 		int maximumModules = getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES);
-		if (settings.getModules().size()!=maximumModules)
+		if (settings.getModules().size()>maximumModules)
 			return false;
 
 		Map<String, Long> moduleCounts = settings.getModules().stream()
@@ -219,23 +229,24 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			processChain.add(earlyAdult);
 			processChain.add(modules);
 			processChain.add(qualities);
-//			processChain.add(qPaths);
+			processChain.add(qPaths);
 			processChain.add(attributes);
 			processChain.add(new SR6LifePathSkillGenerator(model));
 			processChain.add(new ApplyModificationsGeneric(model));
-//			processChain.add(skills);
-//			processChain.add(spells);
-//			processChain.add(rituals);
-//			processChain.add(adeptPowers);
-//			processChain.add(martial);
-//			processChain.add(dataStructures);
-////			processChain.add(cpToNuyenStep);
+			processChain.add(new CalculateAttributePools(model, locale));
+			processChain.add(new CalculateSkillPools(model, locale));
+			processChain.add(spells);
+			processChain.add(rituals);
+			processChain.add(adeptPowers);
+			processChain.add(martial);
+			processChain.add(animalism);
+			processChain.add(dataStructures);
 			processChain.add(equipment);
-//			processChain.add(foci);
-//			processChain.add(complex);
-//			processChain.add(metaEcho);
-//			processChain.add(sins);
-//			processChain.add(lifestyles);
+			processChain.add(foci);
+			processChain.add(complex);
+			processChain.add(metaEcho);
+			processChain.add(sins);
+			processChain.add(lifestyles);
 			processChain.add(contacts);
 			processChain.add(new SR6LifePathRemainingKarmaNuyenController(this));
 
@@ -284,23 +295,22 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		earlyAdult= new EarlyAdultGenerator(this);
 		modules   = new SR6LifePathModuleGenerator(this);
 		attributes = new SR6LifePathAttributeGenerator(this);
-//		skills = new SR6PointBuySkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
-////		cpToNuyenStep = new RemainingCPAreNuyenStep(this);
 		equipment = new SR6EquipmentGenerator(this);
-////		spells    = new SR6PointBuySpellGenerator(this);
-//		rituals   = new SR6PointBuyRitualGenerator(this);
-//		adeptPowers = new SR6PointBuyAdeptPowerGenerator(this);
-////		complex   = new SR6PointBuyComplexFormGenerator(this);
+		spells    = new SR6LifePathSpellGenerator(this);
+		rituals   = new SR6LifePathRitualGenerator(this);
+		adeptPowers = new SR6AdeptPowerController(this);
+		complex   = new SR6LifePathComplexFormGenerator(this);
 		metaEcho  = new SR6MetamagicOrEchoController(this, true);
-//		sins      = new SR6SINGenerator(this);
-//		lifestyles= new SR6LifestyleGenerator(this);
+		sins      = new SR6SINGenerator(this);
+		lifestyles= new SR6LifestyleGenerator(this);
 		contacts  = new SR6LifePathContactGenerator(this);
-//		foci      = new SR6FocusGenerator(this);
-//		qPaths    = new CommonQualityPathController(this);
-//		martial   = new SR6MartialArtsController(this);
+		foci      = new SR6FocusGenerator(this);
+		qPaths    = new CommonQualityPathController(this);
+		martial   = new SR6MartialArtsController(this);
 		drake     = new SR6DrakeController(this, true);
-//		dataStructures = new SR6DataStructureController(this);
+		animalism = new SR6AnimalismController(this, true);
+		dataStructures = new SR6DataStructureController(this);
 	}
 
 //	//-------------------------------------------------------------------

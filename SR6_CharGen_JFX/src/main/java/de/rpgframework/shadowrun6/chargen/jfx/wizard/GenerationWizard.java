@@ -210,8 +210,11 @@ public class GenerationWizard extends Wizard implements ControllerListener {
 	private void initInteractivtiy() {
 		wrapper.addListener(this);
 		canBeFinishedCallback = (wizard) -> {
-			if ("lifepath".equals(wrapper.getId()))
-				return getCurrentPage()==lpAdult;
+			if ("lifepath".equals(wrapper.getId())) {
+				int adultIndex = getPages().indexOf(lpAdult);
+				int currentIndex = getPages().indexOf(getCurrentPage());
+				return adultIndex>=0 && currentIndex>=adultIndex && wrapper.canBeFinished();
+			}
 			return wrapper.canBeFinished();
 		}; // new Callback<Wizard, Boolean>() {
 
