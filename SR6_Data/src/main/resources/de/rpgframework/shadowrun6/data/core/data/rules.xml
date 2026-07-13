@@ -10,6 +10,11 @@
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="ADD_STRENGTH_TO_MELEE_AR" to="true"/>
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_ADJUSTMENT_KARMA" to="50"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_MODULES" to="8"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_QUALITIES" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP" to="20"/>
+			<set rule="CHARGEN_LIFEPATH_START_NUYEN" to="25000"/>
 		</rules>
 	</interpretation>
 	<interpretation id="core" lang="en">
@@ -22,6 +27,11 @@
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="ADD_STRENGTH_TO_MELEE_AR" to="false"/>
          <set rule="CHARGEN_MAX_AVAILABILITY" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_ADJUSTMENT_KARMA" to="50"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_MODULES" to="8"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_QUALITIES" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP" to="20"/>
+			<set rule="CHARGEN_LIFEPATH_START_NUYEN" to="25000"/>
 		</rules>
 	</interpretation>
 	<interpretation id="srm" restrict="prio,sumto10,pointbuy,lifepath">
@@ -36,6 +46,11 @@
 			<set rule="CHARGEN_MAX_NUYEN_REMAIN" to="5000"/>
 			<set rule="CHARGEN_MAX_AVAILABILITY" to="7"/>
 			<set rule="EXPANDED_SPECIALIZATIONS" to="true"/>
+			<set rule="CHARGEN_LIFEPATH_ADJUSTMENT_KARMA" to="50"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_MODULES" to="8"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_QUALITIES" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP" to="20"/>
+			<set rule="CHARGEN_LIFEPATH_START_NUYEN" to="25000"/>
 		</rules>
 	</interpretation>
 	<interpretation id="core_de" lang="de" restrict="prio,sumto10,pointbuy,karma,lifepath">
@@ -49,6 +64,11 @@
 			<set rule="CARGOFACTOR_IS_WITHOUT_SEATS" to="true"/>
 			<set rule="CHARGEN_ERRATED_POINT_BUY" to="true"/>
 			<set rule="ALLOW_USED_CULTURED_BIOWARE" to="false"/>
+			<set rule="CHARGEN_LIFEPATH_ADJUSTMENT_KARMA" to="50"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_MODULES" to="8"/>
+			<set rule="CHARGEN_LIFEPATH_MAX_QUALITIES" to="6"/>
+			<set rule="CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP" to="20"/>
+			<set rule="CHARGEN_LIFEPATH_START_NUYEN" to="25000"/>
 		</rules>
 	</interpretation>
 	<interpretation id="houserules">

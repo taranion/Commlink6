@@ -161,10 +161,10 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 			level = PowerLevel.STANDARD;
 		switch (level) {
 		case STREET_LEVEL:
-			setLifePathDefaults(25, 6, 4, 10, 5000);
+			setLifePathDefaults(50, 6, 6, 20, 25000);
 			break;
 		case ELITE:
-			setLifePathDefaults(85, 10, 8, 30, 100000);
+			setLifePathDefaults(50, 10, 6, 20, 25000);
 			break;
 		default:
 			setLifePathDefaults(50, 8, 6, 20, 25000);

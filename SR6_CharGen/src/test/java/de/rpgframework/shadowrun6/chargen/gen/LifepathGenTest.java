@@ -16,11 +16,13 @@ import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.LifepathModule;
 import de.rpgframework.shadowrun6.LifepathModuleValue;
+import de.rpgframework.shadowrun6.PowerLevel;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
+import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathModuleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
@@ -154,6 +156,24 @@ public class LifepathGenTest {
 		assertTrue(modules.deselect(doctorResult.get()));
 		assertTrue(modules.canBeDeselected(studiesResult.get()).get());
 		assertTrue(modules.deselect(studiesResult.get()));
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testLifePathPowerLevelOnlyChangesModuleCount() {
+		assertLifePathDefaults(PowerLevel.STREET_LEVEL, 6);
+		assertLifePathDefaults(PowerLevel.STANDARD, 8);
+		assertLifePathDefaults(PowerLevel.ELITE, 10);
+	}
+
+	//-------------------------------------------------------------------
+	private void assertLifePathDefaults(PowerLevel level, int expectedModules) {
+		charGen.applyPowerLevelDefaults(level);
+		assertEquals(50, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_ADJUSTMENT_KARMA));
+		assertEquals(expectedModules, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_MODULES));
+		assertEquals(6, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_MAX_QUALITIES));
+		assertEquals(20, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_NEGATIVE_KARMA_CAP));
+		assertEquals(25000, charGen.getRuleController().getRuleValueAsInteger(Shadowrun6Rules.CHARGEN_LIFEPATH_START_NUYEN));
 	}
 
 	//-------------------------------------------------------------------
