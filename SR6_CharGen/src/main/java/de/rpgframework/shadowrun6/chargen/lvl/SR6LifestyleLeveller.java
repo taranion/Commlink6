@@ -139,16 +139,40 @@ public class SR6LifestyleLeveller extends ControllerImpl<LifestyleQuality> imple
 		}
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#canBeDeselected(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public Possible canBeDeselected(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!model.getLifestyles().contains(value)) {
+			return new Possible(Severity.STOPPER, IRejectReasons.RES , IRejectReasons.IMPOSS_NOT_PRESENT);
+		}
+		return Possible.TRUE;
 	}
 
+	//-------------------------------------------------------------------
+	/**
+	 * @see de.rpgframework.genericrpg.chargen.ComplexDataItemController#deselect(de.rpgframework.genericrpg.data.DataItemValue)
+	 */
 	@Override
 	public boolean deselect(SR6Lifestyle value) {
-		// TODO Auto-generated method stub
-		return false;
+		logger.log(Level.DEBUG, "ENTER: deselect({0})", value);
+		try {
+			Possible possible = canBeDeselected(value);
+			if (possible.getState()!=State.POSSIBLE) {
+				logger.log(Level.ERROR, "Trying to deselect a lifestyle that cannot be deselected: {0}",possible.getI18NKey());
+				return false;
+			}
+
+			model.removeLifestyle(value);
+			logger.log(Level.INFO, "Remove lifestyle '" + value);
+
+			parent.runProcessors();
+			return true;
+		} finally {
+			logger.log(Level.DEBUG, "LEAVE: deselect({0})", value);
+		}
 	}
 
 	//-------------------------------------------------------------------
