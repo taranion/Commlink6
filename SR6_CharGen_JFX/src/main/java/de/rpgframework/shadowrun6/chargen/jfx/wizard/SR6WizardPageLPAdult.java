@@ -51,11 +51,13 @@ import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
@@ -261,8 +263,7 @@ public class SR6WizardPageLPAdult extends WizardPage implements ControllerListen
 
 		//-------------------------------------------------------------------
 		private void initLayout() {
-			setSpacing(6);
-			getChildren().addAll(
+			VBox filterContent = new VBox(6,
 					tfSearch,
 					cbSort,
 					new Separator(),
@@ -274,6 +275,16 @@ public class SR6WizardPageLPAdult extends WizardPage implements ControllerListen
 					cbQuality,
 					cbSkill,
 					cbAttribute);
+			filterContent.setPadding(new Insets(6));
+
+			TitledPane pane = new TitledPane(ResourceI18N.get(RES, "page.adult.filter.title"), filterContent);
+			pane.setExpanded(false);
+
+			Accordion accordion = new Accordion(pane);
+			accordion.setExpandedPane(null);
+			VBox.setMargin(accordion, new Insets(0, 0, 8, 0));
+
+			getChildren().add(accordion);
 		}
 
 		//-------------------------------------------------------------------
