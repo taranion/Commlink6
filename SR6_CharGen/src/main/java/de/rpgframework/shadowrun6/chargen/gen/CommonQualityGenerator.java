@@ -128,7 +128,7 @@ public class CommonQualityGenerator extends QualityGenerator<Shadowrun6Character
 
 
 		int karma = value.getKarmaCost();
-		List<Choice> requiredChoices = value.getChoices();
+		List<Choice> requiredChoices = new ArrayList<>(value.getChoices());
 		for (Decision dec : decisions) {
 			logger.log(Level.INFO, "Decision "+dec);
 			if (dec==null) continue;

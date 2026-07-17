@@ -11,12 +11,12 @@ import de.rpgframework.ResourceI18N;
 import de.rpgframework.classification.Gender;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.chargen.charctrl.IMetatypeController;
 import de.rpgframework.shadowrun6.SR6MetaType;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
-import de.rpgframework.shadowrun6.chargen.gen.CommonMetatypeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -118,8 +118,9 @@ public class BasicDataSection extends Section {
 			}
 		});
 		cbMetatype.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> {
-			if (control instanceof SR6CharacterGenerator) {
-				 ((CommonMetatypeGenerator) ((SR6CharacterGenerator)control).getMetatypeController()).select(n);
+			if (control instanceof SR6CharacterGenerator && n!=null && n!=control.getModel().getMetatype()) {
+				IMetatypeController<SR6MetaType> metatypeController = ((SR6CharacterGenerator)control).getMetatypeController();
+				metatypeController.select(n);
 			}
 		});
 	}

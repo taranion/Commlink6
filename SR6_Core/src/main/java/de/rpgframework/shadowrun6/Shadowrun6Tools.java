@@ -337,6 +337,13 @@ public class Shadowrun6Tools {
 	}
 
 	//-------------------------------------------------------------------
+	private static String getUnresolvedModificationName(String key, Modification mod) {
+		if (key!=null && !key.isBlank())
+			return key;
+		return String.valueOf(mod);
+	}
+
+	//-------------------------------------------------------------------
 	private static String getValueString(ValueModification valMod, Locale loc) {
 		String level = "";
 		if ("$LEVEL".equals(valMod.getRawValue())) {
@@ -525,11 +532,17 @@ public class Shadowrun6Tools {
 						return skillName+" "+valMod.getValue();
 					}
 				case GEAR:
-					return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+					if (valMod.getResolvedKey() instanceof ItemTemplate)
+						return valMod.getValue()+"x "+((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+					logger.log(Level.ERROR, "No resolution for key ''{0}'' in modification {1}", valMod.getKey(), mod);
+					return valMod.getValue()+"x "+getUnresolvedModificationName(valMod.getKey(), mod);
 				case LICENSE:
 					return valMod.getValue()+"x "+RES.getString("modification.license", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				case QUALITY:
-					return valMod.getValue()+"x "+((Quality)valMod.getResolvedKey()).getName(loc);
+					if (valMod.getResolvedKey() instanceof Quality)
+						return valMod.getValue()+"x "+((Quality)valMod.getResolvedKey()).getName(loc);
+					logger.log(Level.ERROR, "No resolution for key ''{0}'' in modification {1}", valMod.getKey(), mod);
+					return valMod.getValue()+"x "+getUnresolvedModificationName(valMod.getKey(), mod);
 				case SIN:
 					return valMod.getValue()+"x "+RES.getString("modification.sin", loc)+" "+RES.getString("modification.rating", loc)+" "+((FakeRating)valMod.getResolvedKey()).getValue()+"";
 				default:
@@ -593,19 +606,31 @@ public class Shadowrun6Tools {
 				}
 				switch (type) {
 				case CRITTER_POWER:
-					return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
+					if (valMod.getResolvedKey() instanceof CritterPower)
+						return RES.format("modification.critterpower", loc, ((CritterPower)valMod.getResolvedKey()).getName(loc));
+					return RES.format("modification.critterpower", loc, getUnresolvedModificationName(valMod.getKey(), mod));
 				case QUALITY:
-					return RES.format("modification.quality", loc, ((Quality)valMod.getResolvedKey()).getName(loc));
+					if (valMod.getResolvedKey() instanceof Quality)
+						return RES.format("modification.quality", loc, ((Quality)valMod.getResolvedKey()).getName(loc));
+					return RES.format("modification.quality", loc, getUnresolvedModificationName(valMod.getKey(), mod));
 				case SKILL:
-					return RES.format("modification.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+					if (valMod.getResolvedKey() instanceof SR6Skill)
+						return RES.format("modification.skill", loc, ((SR6Skill)valMod.getResolvedKey()).getName(loc));
+					return RES.format("modification.skill", loc, getUnresolvedModificationName(valMod.getKey(), mod));
 				case GEAR:
-					return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+					if (valMod.getResolvedKey() instanceof ItemTemplate)
+						return ((ItemTemplate)valMod.getResolvedKey()).getName(loc);
+					return getUnresolvedModificationName(valMod.getKey(), mod);
 				case GEARMOD:
-					return ((SR6ItemEnhancement)valMod.getResolvedKey()).getName(loc);
+					if (valMod.getResolvedKey() instanceof SR6ItemEnhancement)
+						return ((SR6ItemEnhancement)valMod.getResolvedKey()).getName(loc);
+					return getUnresolvedModificationName(valMod.getKey(), mod);
 				case HOOK:
 					return null;
 				case MAGIC_RESO:
-					return RES.format("modification.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					if (valMod.getResolvedKey() instanceof MagicOrResonanceType)
+						return RES.format("modification.magicreso", loc, ((MagicOrResonanceType)valMod.getResolvedKey()).getName(loc));
+					return RES.format("modification.magicreso", loc, getUnresolvedModificationName(valMod.getKey(), mod));
 				default:
 					logger.log(Level.WARNING, "Don't know how to display "+mod);
 					return null;
@@ -616,7 +641,11 @@ public class Shadowrun6Tools {
 			if (mod instanceof ModificationChoice) {
 				ModificationChoice chMod = (ModificationChoice)mod;
 				List<String> or = new ArrayList<>();
-				chMod.getModificiations().forEach(m -> or.add(getModificationString(m, loc)));
+				chMod.getModificiations().forEach(m -> {
+					String text = getModificationString(m, loc);
+					if (text!=null && !text.isBlank())
+						or.add(text);
+				});
 				return String.join(" "+RES.getString("label.or")+" ", or);
 			}
 			if (mod instanceof RelevanceModification) {

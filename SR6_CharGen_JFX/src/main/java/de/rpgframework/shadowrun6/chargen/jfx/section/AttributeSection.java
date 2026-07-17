@@ -19,6 +19,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.gen.free.SR6FreeAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaAttributeGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
@@ -92,6 +93,8 @@ public class AttributeSection extends Section {
 			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6FreeAttributeGenerator) {
 			table = new KarmaAttributeTable<>(ctrl);
+		} else if (attrib instanceof SR6LifePathAttributeGenerator) {
+			table = new KarmaAttributeTable<>(ctrl);
 		} else if (attrib instanceof SR6AttributeLeveller) {
 			table = new LevellingAttributeTable<>(ctrl);
 		} else {
@@ -100,7 +103,7 @@ public class AttributeSection extends Section {
 		}
 
 		MagicOrResonanceType mor = model.getMagicOrResonanceType();
-		if (mor != null) {
+		if (table!=null && mor != null) {
 			table.setShowMagic(mor.usesMagic());
 			table.setShowResonance(mor.usesResonance());
 		}
@@ -110,17 +113,17 @@ public class AttributeSection extends Section {
 
 	//-------------------------------------------------------------------
 	public void refresh() {
-		logger.log(Level.DEBUG, "refresh: {0}",table.getSkin());
-		if (control!=null) {
-			Shadowrun6Character model = control.getModel();
-			MagicOrResonanceType mor = model.getMagicOrResonanceType();
-			if (mor != null) {
-				table.setShowMagic(mor.usesMagic());
-				table.setShowResonance(mor.usesResonance());
-			}
+		logger.log(Level.DEBUG, "refresh: {0}",table!=null?table.getSkin():null);
+		if (table==null || control==null)
+			return;
+		Shadowrun6Character model = control.getModel();
+		MagicOrResonanceType mor = model.getMagicOrResonanceType();
+		if (mor != null) {
+			table.setShowMagic(mor.usesMagic());
+			table.setShowResonance(mor.usesResonance());
 		}
 
-		if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
+		if (model.getMetatype()!=null && model.getMetatype().isAI()) {
 			if (table.getNameMapper()!=nameMapperAI)
 				table.setNameMapper(nameMapperAI);
 		} else {

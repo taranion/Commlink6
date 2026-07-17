@@ -22,8 +22,8 @@ import de.rpgframework.genericrpg.modification.Modification;
 import de.rpgframework.genericrpg.modification.ValueModification;
 import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.chargen.charctrl.IAttributeController;
 import de.rpgframework.shadowrun.chargen.charctrl.IRejectReasons;
+import de.rpgframework.shadowrun.chargen.gen.KarmaAttributeGenerator;
 import de.rpgframework.shadowrun.chargen.gen.PerAttributePoints;
 import de.rpgframework.shadowrun.chargen.gen.PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.CreatePoints;
@@ -39,7 +39,7 @@ import de.rpgframework.shadowrun6.modifications.ShadowrunReference;
  * @author prelle
  *
  */
-public class SR6LifePathAttributeGenerator extends CommonAttributeGenerator implements IAttributeController {
+public class SR6LifePathAttributeGenerator extends CommonAttributeGenerator implements KarmaAttributeGenerator {
 
 	private final static Logger logger = System.getLogger(SR6LifePathAttributeGenerator.class.getPackageName()+".attrib");
 
