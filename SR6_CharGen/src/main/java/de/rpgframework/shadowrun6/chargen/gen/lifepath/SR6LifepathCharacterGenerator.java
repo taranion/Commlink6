@@ -41,6 +41,7 @@ import de.rpgframework.shadowrun6.chargen.gen.SR6EquipmentGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6FocusGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6LifestyleGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.SR6SINGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.free.SR6FreeSkillGenerator;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.proc.ApplyModificationsGeneric;
@@ -319,6 +320,7 @@ public class SR6LifepathCharacterGenerator extends CommonSR6CharacterGenerator i
 		earlyAdult= new EarlyAdultGenerator(this);
 		modules   = new SR6LifePathModuleGenerator(this);
 		attributes = new SR6LifePathAttributeGenerator(this);
+		skills = new SR6FreeSkillGenerator(this);
 		qualities = new CommonQualityGenerator(this);
 		equipment = new SR6EquipmentGenerator(this);
 		spells    = new SR6LifePathSpellGenerator(this);

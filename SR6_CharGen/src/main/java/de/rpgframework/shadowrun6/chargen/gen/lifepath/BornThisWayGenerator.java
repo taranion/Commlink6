@@ -153,6 +153,10 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 				addBornQuality(quality);
 			}
 		}
+		for (QualityValue quality : parent.getSettings().getSurgeQualities()) {
+			addSurgeQuality(quality);
+		}
+		applySurgeKarma();
 
 		if (parent.getSettings().getNativeLanguage()==null) {
 			todos.add( new ToDoElement(Severity.STOPPER, SR6RejectReasons.RES, SR6RejectReasons.TODO_LANGUAGE_NOT_SET));
@@ -171,6 +175,29 @@ public class BornThisWayGenerator implements PartialController<Quality> {
 	private void addBornQuality(Quality quality) {
 		if (!getModel().hasQuality(quality.getId())) {
 			getModel().addQuality(new QualityValue(quality, 1));
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void addSurgeQuality(QualityValue value) {
+		if (value==null || value.getResolved()==null)
+			return;
+		if (!getModel().hasQuality(value.getKey())) {
+			QualityValue copy = new QualityValue(value.getResolved(), value.getDistributed());
+			copy.setInjectedBy(this);
+			value.getDecisions().forEach(copy::addDecision);
+			getModel().addQuality(copy);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	private void applySurgeKarma() {
+		int surgeKarma = parent.getSettings().getSurgeQualities().stream()
+				.mapToInt(SR6LifePathSurgeQualityController::getSurgeKarmaCost)
+				.sum();
+		if (surgeKarma!=0) {
+			logger.log(Level.INFO, "Apply Life Path SURGE Karma {0}", surgeKarma);
+			getModel().setKarmaFree(getModel().getKarmaFree() - surgeKarma);
 		}
 	}
 

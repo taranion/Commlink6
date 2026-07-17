@@ -9,6 +9,7 @@ import de.rpgframework.shadowrun6.SR6Quality;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
+import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun6.chargen.gen.CommonSR6GeneratorSettings;
 
 /**
@@ -22,6 +23,7 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	private String nativeLanguage;
 	private String bornQual1, bornQual2;
 	private List<String> bornQualities;
+	private List<QualityValue> surgeQualities;
 	private String childhoodArea;
 	private String basicSkills;
 	private String childQual1, childQual2;
@@ -36,6 +38,7 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 	public SR6LifePathSettings() {
 		modules = new ArrayList<>();
 		bornQualities = new ArrayList<>();
+		surgeQualities = new ArrayList<>();
 	}
 
 	//-------------------------------------------------------------------
@@ -158,6 +161,28 @@ public class SR6LifePathSettings extends CommonSR6GeneratorSettings {
 		List<String> ids = getBornQualityIds();
 		bornQual1 = ids.size()>0?ids.get(0):null;
 		bornQual2 = ids.size()>1?ids.get(1):null;
+	}
+
+	//-------------------------------------------------------------------
+	public List<QualityValue> getSurgeQualities() {
+		if (surgeQualities==null)
+			surgeQualities = new ArrayList<>();
+		return surgeQualities;
+	}
+
+	//-------------------------------------------------------------------
+	public void addSurgeQuality(QualityValue value) {
+		if (value==null || value.getKey()==null)
+			return;
+		getSurgeQualities().removeIf(existing -> value.getKey().equals(existing.getKey()));
+		getSurgeQualities().add(value);
+	}
+
+	//-------------------------------------------------------------------
+	public void removeSurgeQuality(QualityValue value) {
+		if (value==null)
+			return;
+		getSurgeQualities().removeIf(existing -> value.getKey().equals(existing.getKey()));
 	}
 
 	//-------------------------------------------------------------------

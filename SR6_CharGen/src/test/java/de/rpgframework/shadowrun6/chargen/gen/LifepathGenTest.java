@@ -24,6 +24,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Rules;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathModuleGenerator;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSurgeQualityController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import de.rpgframework.shadowrun6.data.Shadowrun6DataPlugin;
 
@@ -156,6 +157,60 @@ public class LifepathGenTest {
 		assertTrue(modules.deselect(doctorResult.get()));
 		assertTrue(modules.canBeDeselected(studiesResult.get()).get());
 		assertTrue(modules.deselect(studiesResult.get()));
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testSurgeQualitySurvivesLifePathReset() {
+		charGen.runProcessors();
+		charGen.getBornThisWayGenerator().getQualityController().select(Shadowrun6Core.getItem(SR6Quality.class, "sinner"));
+		charGen.getBornThisWayGenerator().selectNativeLanguage("German");
+		int baseKarma = model.getKarmaFree();
+
+		SR6LifePathSurgeQualityController surge = new SR6LifePathSurgeQualityController(charGen);
+		SR6Quality quills = Shadowrun6Core.getItem(SR6Quality.class, "quills");
+		assertNotNull(quills);
+		SR6Quality asymmetry = Shadowrun6Core.getItem(SR6Quality.class, "asymmetric_deformity");
+		assertNotNull(asymmetry);
+
+		OperationResult<?> result = surge.select(quills);
+		assertTrue(result.getError(), result.wasSuccessful());
+		assertTrue(model.hasQuality("quills"));
+		assertEquals(1, surge.getSelected().size());
+		assertEquals(Math.abs(quills.getKarmaCost()), surge.getKarmaForSURGE());
+		assertEquals(baseKarma - quills.getKarmaCost(), model.getKarmaFree());
+
+		result = surge.select(asymmetry,
+				new Decision(asymmetry.getChoices().get(0).getUUID(), "picasso"));
+		assertTrue(result.getError(), result.wasSuccessful());
+		assertTrue(model.hasQuality("asymmetric_deformity"));
+		assertEquals(quills.getKarmaCost() - asymmetry.getKarmaCost(), surge.getKarmaForSURGE());
+		assertEquals(baseKarma - quills.getKarmaCost() + asymmetry.getKarmaCost(), model.getKarmaFree());
+
+		charGen.runProcessors();
+		assertTrue(model.hasQuality("quills"));
+		assertTrue(model.hasQuality("asymmetric_deformity"));
+		assertEquals(2, surge.getSelected().size());
+		assertEquals(quills.getKarmaCost() - asymmetry.getKarmaCost(), surge.getKarmaForSURGE());
+		assertEquals(baseKarma - quills.getKarmaCost() + asymmetry.getKarmaCost(), model.getKarmaFree());
+	}
+
+	//-------------------------------------------------------------------
+	@Test
+	public void testNegativeSurgeQualityGrantsGlobalKarma() {
+		charGen.runProcessors();
+		int baseKarma = model.getKarmaFree();
+
+		SR6LifePathSurgeQualityController surge = new SR6LifePathSurgeQualityController(charGen);
+		SR6Quality asymmetry = Shadowrun6Core.getItem(SR6Quality.class, "asymmetric_deformity");
+		assertNotNull(asymmetry);
+
+		OperationResult<?> result = surge.select(asymmetry,
+				new Decision(asymmetry.getChoices().get(0).getUUID(), "picasso"));
+		assertTrue(result.getError(), result.wasSuccessful());
+		assertTrue(model.hasQuality("asymmetric_deformity"));
+		assertEquals(-asymmetry.getKarmaCost(), surge.getKarmaForSURGE());
+		assertEquals(baseKarma + asymmetry.getKarmaCost(), model.getKarmaFree());
 	}
 
 	//-------------------------------------------------------------------

@@ -44,6 +44,7 @@ import de.rpgframework.shadowrun.BodyType;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.Quality.QualityType;
 import de.rpgframework.shadowrun.QualityValue;
+import de.rpgframework.shadowrun.chargen.charctrl.IQualityController;
 import de.rpgframework.shadowrun.chargen.jfx.CommonShadowrunJFXResourceHook;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityListCell;
 import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
@@ -52,10 +53,13 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.CommonQualityGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSurgeQualityController;
+import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifepathCharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -71,6 +75,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	private final static Logger logger = System.getLogger(SR6WizardPageChangeling.class.getPackageName());
 
 	private final static ResourceBundle RES = ResourceBundle.getBundle(SR6WizardPageQualities.class.getPackageName()+".SR6WizardPages");
+	private final static double SURGE_QUALITY_SELECTOR_WIDTH = 520;
 
 	private GeneratorWrapper charGen;
 
@@ -207,7 +212,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		lbNetKarma = new Label("?");
 		lbNetKarma.getStyleClass().add(JavaFXConstants.STYLE_HEADING5);
 
-		selection = new ComplexDataItemControllerNode<>(charGen.getQualityController());
+		selection = new ComplexDataItemControllerNode<>(getSurgeQualityController());
 		QualityFilterNode filter = new QualityFilterNode(RES, selection, QualityType.METAGENIC);
 		filter.setShowSURGE(true);
 		selection.setFilterNode(filter);
@@ -222,10 +227,21 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 		selection.setShowHeadings(false);
 		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
 		selection.setSkin(new ComplexDataItemControllerOneColumnSkin(selection));
+		selection.setMinWidth(0);
+		selection.setPrefWidth(SURGE_QUALITY_SELECTOR_WIDTH);
+		selection.setMaxWidth(SURGE_QUALITY_SELECTOR_WIDTH);
 
 //		bxDescription = new GenericDescriptionVBox(
 //				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 //				Shadowrun6Tools.modificationResolver(Locale.getDefault()));
+	}
+
+	//-------------------------------------------------------------------
+	private IQualityController getSurgeQualityController() {
+		if (charGen.getWrapped() instanceof SR6LifepathCharacterGenerator) {
+			return new SR6LifePathSurgeQualityController((SR6LifepathCharacterGenerator) charGen.getWrapped());
+		}
+		return charGen.getQualityController();
 	}
 
 	private void initContentPane() {
@@ -313,7 +329,13 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			userSelects(n);
 			refresh();
 		});
+		selection.getSelected().addListener((ListChangeListener<QualityValue>) change -> refreshSurgeKarmaLabel());
 
+	}
+
+	//-------------------------------------------------------------------
+	private void refreshSurgeKarmaLabel() {
+		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)selection.getController()).getKarmaForSURGE()));
 	}
 
 	//-------------------------------------------------------------------
@@ -326,7 +348,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 			Shadowrun6Character model = charGen.getModel();
 			backHeader.setValue(model.getKarmaFree());
 
-		lbNetKarma.setText(String.valueOf( ((CommonQualityGenerator)charGen.getQualityController()).getKarmaForSURGE()));
+		refreshSurgeKarmaLabel();
 		BodyType type = charGen.getModel().getBodytype();
 		if (type!=null) {
 			// Enable or disable page
@@ -380,7 +402,7 @@ public class SR6WizardPageChangeling extends WizardPage implements ControllerLis
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		logger.log(Level.DEBUG, "RCV {0}",type);
 		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
-			selection.setController(charGen.getQualityController());
+			selection.setController(getSurgeQualityController());
 		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
 			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
