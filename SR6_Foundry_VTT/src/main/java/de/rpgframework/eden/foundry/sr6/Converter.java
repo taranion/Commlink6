@@ -143,8 +143,13 @@ public class Converter {
 		if (tmp.getAttribute(SR6ItemAttribute.AVAILABILITY)!=null)
 			data.availDef   = tmp.getAttribute(SR6ItemAttribute.AVAILABILITY).getRawValue();
 		if (tmp.getAttribute(SR6ItemAttribute.PRICE)!=null) {
-			if (tmp.getAttribute(SR6ItemAttribute.PRICE).isInteger())
-				data.price      = tmp.getAttribute(SR6ItemAttribute.PRICE).getValue();
+			if (tmp.getAttribute(SR6ItemAttribute.PRICE).isInteger()) {
+				try {
+					data.price = tmp.getAttribute(SR6ItemAttribute.PRICE).getValue();
+				} catch (Exception e) {
+					logger.log(Level.ERROR, "Failed to load data for {0}: {1}", tmp.getId(), e);
+				}
+			}
 		}
 		if (tmp.getAttribute(SR6ItemAttribute.SKILL)!=null)
 			data.skill      = tmp.getAttribute(SR6ItemAttribute.SKILL).getRawValue();
