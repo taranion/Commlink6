@@ -610,6 +610,7 @@ public class FoundryExportService {
 				spell.damage    = item.getModifyable().getDamage().name().toLowerCase();
 			spell.isOpposed = item.getModifyable().isOpposed();
 			spell.withEssence = item.getModifyable().isEssence();
+			spell.wild      = item.getModifyable().isWild();
 			for (SpellFeatureReference ref : item.getModifyable().getFeatures()) {
 				switch (ref.getFeature().getId()) {
 				case "sense_multi": spell.multiSense=true; break;

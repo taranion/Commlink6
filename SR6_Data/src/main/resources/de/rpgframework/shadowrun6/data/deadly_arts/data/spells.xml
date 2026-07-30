@@ -4,8 +4,8 @@
    <spell id="aerial_flare" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="LIMITED" drain="8" />
    <spell id="astral_flare" cat="DETECTION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="INSTANTANEOUS" drain="5" />
    <spell id="bridge_layer" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="6" />
-   <spell id="dead_weight" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="4" />
-   <spell id="designate_target" cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="3" />
+   <spell id="dead_weight" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="4" opposed="true" />
+   <spell id="designate_target" cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="3" opposed="true" />
    <spell id="dirt_wave" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="PHYSICAL">
       <spellfeature ref="indirect"/>
       <spellfeature ref="area"/>

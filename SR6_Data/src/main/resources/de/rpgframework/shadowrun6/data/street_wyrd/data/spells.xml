@@ -1,61 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spells>
     <!-- Combat -->
-   <spell id="death_touch" cat="COMBAT" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL">
+   <spell id="death_touch" cat="COMBAT" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL" opposed="true">
       <spellfeature ref="direct"/>
    </spell>
-   <spell id="disrupt" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="SPECIAL">
+   <spell id="disrupt" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="SPECIAL" multi="yes">
       <spellfeature ref="focus"/>
    </spell>
-   <spell id="ectomagic_pulse" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="SPECIAL">
+   <spell id="ectomagic_pulse" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="SPECIAL" multi="yes">
       <spellfeature ref="focus"/>
 	  <spellfeature ref="area"/>
    </spell>
-   <spell id="knockout" cat="COMBAT" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="2" dmg="STUN">
+   <spell id="knockout" cat="COMBAT" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="2" dmg="STUN" opposed="true">
       <spellfeature ref="direct"/>
    </spell>
-   <spell id="hellblast" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="8" dmg="PHYSICAL_SPECIAL">
+   <spell id="hellblast" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="8" dmg="PHYSICAL_SPECIAL" opposed="true">
       <spellfeature ref="indirect"/>
 	  <spellfeature ref="area"/>
    </spell>
-   <spell id="napalm" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="PHYSICAL_SPECIAL">
+   <spell id="napalm" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="PHYSICAL_SPECIAL" opposed="true">
       <spellfeature ref="indirect"/>
    </spell>
-   <spell id="thunderstruck" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="STUN_SPECIAL">
+   <spell id="thunderstruck" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="STUN_SPECIAL" opposed="true">
       <spellfeature ref="indirect"/>
    </spell>
-   <spell id="corrode" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="SPECIAL" multi="yes">
-      <spellfeature ref="indirect"/>
-      <choices>
-      	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
-      </choices>
-   </spell>
-   <spell id="melt" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="3" dmg="SPECIAL" multi="yes">
+   <spell id="corrode" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="SPECIAL" multi="yes" opposed="true">
       <spellfeature ref="indirect"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
       </choices>
    </spell>
-   <spell id="sludge" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="5" dmg="SPECIAL" multi="yes">
+   <spell id="melt" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="3" dmg="SPECIAL" multi="yes" opposed="true">
+      <spellfeature ref="indirect"/>
+      <choices>
+      	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
+      </choices>
+   </spell>
+   <spell id="sludge" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="5" dmg="SPECIAL" multi="yes" opposed="true">
       <spellfeature ref="indirect"/>
 	  <spellfeature ref="area"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
       </choices>
    </spell>
-   <spell id="ram" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="PHYSICAL_SPECIAL" multi="yes">
+   <spell id="ram" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="PHYSICAL_SPECIAL" multi="yes" opposed="true">
       <spellfeature ref="direct"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
       </choices>
    </spell>
-   <spell id="wreck" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" dmg="PHYSICAL_SPECIAL" multi="yes">
+   <spell id="wreck" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" dmg="PHYSICAL_SPECIAL" multi="yes" opposed="true">
       <spellfeature ref="direct"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
       </choices>
    </spell>
-   <spell id="demolish" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="PHYSICAL_SPECIAL" multi="yes">
+   <spell id="demolish" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="INSTANTANEOUS" drain="6" dmg="PHYSICAL_SPECIAL" multi="yes" opposed="true">
       <spellfeature ref="direct"/>
 	  <spellfeature ref="area"/>
       <choices>
@@ -69,16 +69,16 @@
       <spellfeature ref="indirect"/>
       <spellfeature ref="area"/>
    </spell>
-   <spell id="punch" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="STUN">
+   <spell id="punch" cat="COMBAT" range="TOUCH" type="PHYSICAL" dur="INSTANTANEOUS" drain="2" dmg="STUN" opposed="true">
       <spellfeature ref="indirect"/>
    </spell>
-   <spell id="slay" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL" multi="yes" wild="true">
+   <spell id="slay" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL" multi="yes" wild="true" opposed="true">
       <spellfeature ref="direct"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
       </choices>
    </spell>
-   <spell id="bane" cat="COMBAT" range="LINE_OF_SIGHT" type="MANA" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL" multi="yes" wild="true">
+   <spell id="bane" cat="COMBAT" range="LINE_OF_SIGHT" type="MANA" dur="INSTANTANEOUS" drain="3" dmg="PHYSICAL" multi="yes" wild="true" opposed="true">
       <spellfeature ref="direct"/>
       <choices>
       	<choice type="TEXT" uuid="9405850e-84a0-4cca-82f9-5dbea975a112"/>
@@ -105,32 +105,32 @@
 
    <!-- Detection -->
 	<spell id="astral_window"	cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" />
-	<spell id="borrow_sense"	cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
-	<spell id="passenger"		cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" />
-	<spell id="animal_sense"	cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
+	<spell id="borrow_sense"	cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
+	<spell id="passenger"		cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" opposed="true" />
+	<spell id="animal_sense"	cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
 	<spell id="eyes_of_the_pack"	cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
 	<spell id="scrutinize"		cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
 	<spell id="catalog"			cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" />
-	<spell id="mana_window"		cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" />
-	<spell id="translate"		cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
+	<spell id="mana_window"		cat="DETECTION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" opposed="true" />
+	<spell id="translate"		cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
 
    <!-- Illusion -->
 	<spell id="babble"			cat="ILLUSION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
 	<spell id="thieves_cant"	cat="ILLUSION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" />
-	<spell id="chaff"			cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="5" >
+	<spell id="chaff"			cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="5" opposed="true" >
 		<spellfeature ref="area"/>
    </spell>
-	<spell id="double_image"	cat="ILLUSION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" >
+	<spell id="double_image"	cat="ILLUSION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 	</spell>
-	<spell id="dreams"			cat="ILLUSION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" >
+	<spell id="dreams"			cat="ILLUSION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 	</spell>
-	<spell id="foreboding"		cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="4" >
+	<spell id="foreboding"		cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="4" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 		<spellfeature ref="area"/>
 	</spell>
-	<spell id="disquiet"		cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="3" >
+	<spell id="disquiet"		cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="3" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 		<spellfeature ref="area"/>
 	</spell>
@@ -138,13 +138,13 @@
 	<spell id="manascape"		cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="4" >
 		<spellfeature ref="area"/>
    </spell>
-	<spell id="hot_potato"		cat="ILLUSION" range="LINE_OF_SIGHT" type="MANA" dur="INSTANTANEOUS" drain="3" >
+	<spell id="hot_potato"		cat="ILLUSION" range="LINE_OF_SIGHT" type="MANA" dur="INSTANTANEOUS" drain="3" opposed="true" >
 		<spellfeature ref="sense_single"/>
 	</spell>
-	<spell id="vehicle_mask"	cat="ILLUSION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" >
+	<spell id="vehicle_mask"	cat="ILLUSION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 	</spell>
-	<spell id="phantomscape"	cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" >
+	<spell id="phantomscape"	cat="ILLUSION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" opposed="true" >
 		<spellfeature ref="sense_multi"/>
 		<spellfeature ref="area"/>
 	</spell>
@@ -152,50 +152,50 @@
    <!-- Manipulation -->
 	<spell id="vine"			cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="PERMANENT" drain="4" />
 	<spell id="rosebush"		cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="PERMANENT" drain="5" />
-	<spell id="fashion"			cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="4" />
+	<spell id="fashion"			cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="4" opposed="true" />
 	<spell id="catfall"			cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="3" />
 	<spell id="gecko_crawl"		cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" />
-	<spell id="glue"			cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="-2" />
+	<spell id="glue"			cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="-2" opposed="true" />
 	<spell id="ice_sheet"		cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="5" />
-	<spell id="looking_glass"	cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="-2" />
+	<spell id="looking_glass"	cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="-2" opposed="true" />
 	<spell id="magic_fingers"	cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="4" />
-	<spell id="disregard"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" >
+	<spell id="disregard"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" opposed="true" >
 		<spellfeature ref="area"/>
 	</spell>
 	<spell id="makeover"		cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="4" />
-	<spell id="mob_mood"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" >
+	<spell id="mob_mood"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" opposed="true" >
 		<spellfeature ref="area"/>
 	</spell>
-	<spell id="mob_mind"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" >
+	<spell id="mob_mind"		cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" opposed="true" >
 		<spellfeature ref="area"/>
 	</spell>
-	<spell id="lokis_musical"	cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" >
+	<spell id="lokis_musical"	cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" opposed="true" >
 		<spellfeature ref="area"/>
 	</spell>
 	<spell id="stone_fist"		cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="5" />
 
    <!-- Blood -->
-   <spell id="boil_blood" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="PHYSICAL_SPECIAL" >
+   <spell id="boil_blood" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="7" dmg="PHYSICAL_SPECIAL" opposed="true" >
       <spellfeature ref="indirect"/>
       <spellfeature ref="blood"/>
 <!--	<requires>
 			<metaechoreq ref="sacrifice"/>
 		</requires>  -->
    </spell>
-   <spell id="chilled_claret" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" dmg="STUN_SPECIAL" >
+   <spell id="chilled_claret" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" dmg="STUN_SPECIAL" opposed="true" >
       <spellfeature ref="direct"/>
       <spellfeature ref="blood"/>
 <!--	<requires>
 			<metaechoreq ref="sacrifice"/>
 		</requires>  -->
    </spell>
-   <spell id="clot"		cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="4" >
+   <spell id="clot"		cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="4" essence="true" >
       <spellfeature ref="blood"/>
 <!--	<requires>
 			<metaechoreq ref="sacrifice"/>
 		</requires>  -->
    </spell>
-   <spell id="anticoagulant"	cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="4" >
+   <spell id="anticoagulant"	cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="LIMITED" drain="4" opposed="true" >
       <spellfeature ref="blood"/>
       <spellfeature ref="negative"/>
 <!--	<requires>
@@ -208,7 +208,7 @@
 			<metaechoreq ref="sacrifice"/>
 		</requires>  -->
    </spell>
-   <spell id="viscera_web"	cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="6" >
+   <spell id="viscera_web"	cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="6" opposed="true" >
       <spellfeature ref="blood"/>
 <!--	<requires>
 			<metaechoreq ref="sacrifice"/>

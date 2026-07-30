@@ -155,10 +155,6 @@
 			<groupId>de.rpgframework</groupId>
 			<artifactId>rpgframework-rules</artifactId>
 		</dependency>
-      <dependency>
-         <groupId>de.rpgframework</groupId>
-         <artifactId>rpgframework-rules</artifactId>
-      </dependency>
 		<dependency>
 			<groupId>de.rpgframework</groupId>
 			<artifactId>shadowrun6-core</artifactId>

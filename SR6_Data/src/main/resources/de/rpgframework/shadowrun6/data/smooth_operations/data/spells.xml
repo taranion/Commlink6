@@ -2,22 +2,22 @@
 <spells>
 
    <!-- Health -->
-   <spell id="antipathy"		cat="HEALTH"       range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
-   <spell id="arousal"	   	cat="HEALTH"       range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
-   <spell id="blackout"			cat="MANIPULATION" range="TOUCH" type="MANA" dur="LIMITED"   drain="5" />
+   <spell id="antipathy"		cat="HEALTH"       range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" essence="true" />
+   <spell id="arousal"	   	cat="HEALTH"       range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" essence="true" />
+   <spell id="blackout"			cat="MANIPULATION" range="TOUCH" type="MANA" dur="LIMITED"   drain="5" opposed="true" />
    <spell id="charm"				cat="ILLUSION"     range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" />
-   <spell id="clear_thoughts" cat="ILLUSION"     range="TOUCH" type="MANA" dur="PERMANENT" drain="3" />
-   <spell id="cold_shower"    cat="ILLUSION"     range="TOUCH" type="MANA" dur="PERMANENT" drain="3" />
-   <spell id="compel_truth"   cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="4" />
-   <spell id="desire"	   	cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" />
-   <spell id="evil_eye" 		cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" />
-   <spell id="paranoia"       cat="ILLUSION"     range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" />
-   <spell id="mental_fortitude" cat="HEALTH"     range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
-   <spell id="nudge"     		cat="MANIPULATION" range="TOUCH" type="MANA" dur="LIMITED" drain="5" />
-   <spell id="sideshow"       cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" />
-   <spell id="three_ring_circus" cat="ILLUSION"     range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" />
-   <spell id="thought_recognition"      cat="DETECTION"  range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" />
-   <spell id="area_thought_recognition" cat="DETECTION"  range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" />
+   <spell id="clear_thoughts" cat="ILLUSION"     range="TOUCH" type="MANA" dur="PERMANENT" drain="3" essence="true" />
+   <spell id="cold_shower"    cat="ILLUSION"     range="TOUCH" type="MANA" dur="PERMANENT" drain="3" essence="true" />
+   <spell id="compel_truth"   cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="4" opposed="true" />
+   <spell id="desire"	   	cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
+   <spell id="evil_eye" 		cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
+   <spell id="paranoia"       cat="ILLUSION"     range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" opposed="true" />
+   <spell id="mental_fortitude" cat="HEALTH"     range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" essence="true" />
+   <spell id="nudge"     		cat="MANIPULATION" range="TOUCH" type="MANA" dur="LIMITED" drain="5" opposed="true" />
+   <spell id="sideshow"       cat="ILLUSION"     range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="3" opposed="true" />
+   <spell id="three_ring_circus" cat="ILLUSION"     range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="5" opposed="true" />
+   <spell id="thought_recognition"      cat="DETECTION"  range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" opposed="true" />
+   <spell id="area_thought_recognition" cat="DETECTION"  range="LINE_OF_SIGHT_AREA" type="MANA" dur="SUSTAINED" drain="6" opposed="true" />
    <spell id="wingman"        cat="DETECTION"     range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
 
 </spells>
