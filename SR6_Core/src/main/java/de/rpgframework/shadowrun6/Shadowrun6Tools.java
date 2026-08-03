@@ -2280,7 +2280,9 @@ public class Shadowrun6Tools {
 				item.setAttribute(SR6ItemAttribute.FIREWALL, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
 			}
 
-			if (ret==null || ret.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()<item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue())
+			if (ret==null 
+					|| !ret.hasAttribute(SR6ItemAttribute.DEVICE_RATING)  // No device rating assumes technomancer ability
+					|| ret.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue()<item.getAsValue(SR6ItemAttribute.DEVICE_RATING).getModifiedValue())
 				ret = item;
 		}
 		
