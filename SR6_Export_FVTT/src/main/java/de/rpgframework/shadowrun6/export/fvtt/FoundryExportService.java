@@ -598,32 +598,7 @@ public class FoundryExportService {
 	//-------------------------------------------------------------------
 	private void addSpells(ActorData<Shadowrun6FoundryCharacter> actor, Shadowrun6Character character) {
 		for (SpellValue<SR6Spell> item : character.getSpells()) {
-			FVTTSpell spell = new FVTTSpell();
-
-			spell.genesisID = item.getModifyable().getId();
-			spell.category  = item.getModifyable().getCategory().name().toLowerCase();
-			spell.duration  = item.getModifyable().getDuration().name().toLowerCase();
-			spell.drain     = item.getModifyable().getDrain();
-			spell.range     = item.getModifyable().getRange().name().toLowerCase();
-			spell.type      = item.getModifyable().getType().name().toLowerCase();
-			if (item.getModifyable().getDamage()!=null)
-				spell.damage    = item.getModifyable().getDamage().name().toLowerCase();
-			spell.isOpposed = item.getModifyable().isOpposed();
-			spell.withEssence = item.getModifyable().isEssence();
-			spell.wild      = item.getModifyable().isWild();
-			for (SpellFeatureReference ref : item.getModifyable().getFeatures()) {
-				switch (ref.getFeature().getId()) {
-				case "sense_multi": spell.multiSense=true; break;
-				}
-			}
-			
-			for (PageReference pr : item.getModifyable().getPageReferences()) {
-				spell.product = pr.getProduct().getID().toLowerCase();
-				spell.page    = pr.getPage();
-			}
-
-			ItemData<FVTTSpell> foundry = new ItemData<FVTTSpell>(item.getNameWithoutRating(), "spell", spell);
-			actor.addItem(foundry);
+			actor.addItem(FoundryDataConverter.convertSpell(item, Locale.getDefault()));
 		}
 	}
 

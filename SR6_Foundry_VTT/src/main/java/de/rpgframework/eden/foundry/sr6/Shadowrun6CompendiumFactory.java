@@ -50,6 +50,7 @@ import de.rpgframework.shadowrun6.foundry.FVTTSpell;
 import de.rpgframework.shadowrun6.foundry.GeneralActor;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
+import de.rpgframework.shadowrun6.export.fvtt.FoundryDataConverter;
 
 /**
  * @author prelle
@@ -299,7 +300,7 @@ public class Shadowrun6CompendiumFactory {
 				module.addTranslation(loc.getLanguage(), "spell."+spell.getId()+".src", createSourceText(spell, loc));
 			}
 
-			ItemData<FVTTSpell> entry = Converter.convertSpell((SR6Spell) spell, locales[0]);
+			ItemData<FVTTSpell> entry = FoundryDataConverter.convertSpell((SR6Spell) spell, locales[0]);
 			entry._id  = createRandomID();
 			buf.append(gson.toJson(entry));
 			buf.append('\n');

@@ -21,14 +21,11 @@ import de.rpgframework.shadowrun.CritterPowerValue;
 import de.rpgframework.shadowrun.Quality;
 import de.rpgframework.shadowrun.QualityValue;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
-import de.rpgframework.shadowrun.SpellFeatureReference;
-import de.rpgframework.shadowrun.SpellValue;
 import de.rpgframework.shadowrun.items.Availability;
 import de.rpgframework.shadowrun.items.FireMode;
 import de.rpgframework.shadowrun6.SR6NPC;
 import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
-import de.rpgframework.shadowrun6.SR6Spell;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.foundry.ActionSkills.ActionSkillValue;
 import de.rpgframework.shadowrun6.foundry.FVTTAdeptPower;
@@ -38,7 +35,6 @@ import de.rpgframework.shadowrun6.foundry.FVTTCritterPower;
 import de.rpgframework.shadowrun6.foundry.FVTTGear;
 import de.rpgframework.shadowrun6.foundry.FVTTNPCActor;
 import de.rpgframework.shadowrun6.foundry.FVTTQuality;
-import de.rpgframework.shadowrun6.foundry.FVTTSpell;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicle;
 import de.rpgframework.shadowrun6.foundry.FVTTVehicleActor;
 import de.rpgframework.shadowrun6.foundry.FVTTWeapon;
@@ -52,6 +48,7 @@ import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.OnRoadOffRoadValue;
 import de.rpgframework.shadowrun6.items.SR6GearTool;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
+import de.rpgframework.shadowrun6.export.fvtt.FoundryDataConverter;
 
 /**
  * @author prelle
@@ -286,36 +283,6 @@ public class Converter {
 	}
 
 	//-------------------------------------------------------------------
-	public static ItemData<FVTTSpell> convertSpell(SR6Spell item, Locale loc) {
-		FVTTSpell spell = new FVTTSpell();
-
-		spell.genesisID = item.getId();
-		spell.category  = item.getCategory().name().toLowerCase();
-		spell.duration  = item.getDuration().name().toLowerCase();
-		spell.drain     = item.getDrain();
-		spell.range     = item.getRange().name().toLowerCase();
-		spell.type      = item.getType().name().toLowerCase();
-		if (item.getDamage()!=null)
-			spell.damage    = item.getDamage().name().toLowerCase();
-		spell.isOpposed = item.isOpposed();
-		spell.withEssence = item.isEssence();
-		spell.wild      = item.isWild();
-		for (SpellFeatureReference ref : item.getFeatures()) {
-			switch (ref.getFeature().getId()) {
-			case "sense_multi": spell.multiSense=true; break;
-			}
-		}
-
-		ItemData<FVTTSpell> foundry = new ItemData<FVTTSpell>(item.getName(loc), "spell", spell);
-		return foundry;
-	}
-
-	//-------------------------------------------------------------------
-	public static ItemData<FVTTSpell> convertSpell(SpellValue<SR6Spell> item, Locale loc) {
-		return convertSpell(item.getModifyable(), loc);
-	}
-
-	//-------------------------------------------------------------------
 	public static ItemData<FVTTComplexForm> convertComplexForm(ComplexForm item, Locale loc) {
 		FVTTComplexForm spell = new FVTTComplexForm();
 
@@ -499,7 +466,7 @@ public class Converter {
 
 		data.getQualities().forEach(tmp -> foundry.addItem(convertQuality(tmp,loc)));
 		data.getCritterPowers().forEach(tmp -> foundry.addItem(convert(tmp,loc)));
-		data.getSpells().forEach(tmp -> foundry.addItem(convertSpell(tmp,loc)));
+		data.getSpells().forEach(tmp -> foundry.addItem(FoundryDataConverter.convertSpell(tmp,loc)));
 		data.getGear().forEach(tmp -> {
 			SR6GearTool.recalculate("", data, tmp);
 			ItemData<FVTTGear> converted = convertGear(tmp, loc);

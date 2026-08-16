@@ -51,6 +51,11 @@
 			<artifactId>foundryvtt-documents</artifactId>
 			<version>13.1</version>
 		</dependency>
+		<dependency>
+			<groupId>de.rpgframework</groupId>
+			<artifactId>shadowrun6-export-fvtt</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
