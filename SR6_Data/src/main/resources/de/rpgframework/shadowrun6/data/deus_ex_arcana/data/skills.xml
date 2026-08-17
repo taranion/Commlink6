@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<skills>
+
+    <skill id="pattern_craft"  attr="MAGIC" type="MAGIC" untr="n" restrict="y">
+        <skillspec id="readings"/>
+        <skillspec id="pattern_itemcraft"/>
+    </skill>
+
+</skills>

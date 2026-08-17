@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<powers>
+	<power id="aid_sorcery"  cost="0.5" hasLevel="true" act="MAJOR_ACTION"/>
+   <power id="air_dance"    cost="1.5" act="PASSIVE" />
+   <power id="analytics"    cost="0.5" act="PASSIVE" >
+   	<modifications>
+     		<checkmod type="ATTRIBUTE" ref="LOGIC" value="1" what="EDGE_ONLY_TEST"  apply="CHARACTER"/>
+     </modifications>
+   </power>
+   <power id="animal_empathy" cost="0.5" hasLevel="true" max="2" act="PASSIVE"/>
+   <power id="attribute_boost_mental" cost="0.25" hasLevel="true" act="MAJOR_ACTION">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc087f" options="CHARISMA,LOGIC,INTUITION,WILLPOWER"/>
+   	</choices>
+   </power>
+   <power id="berserk"        cost="1" hasLevel="true" act="MINOR_ACTION" />
+   <power id="blind_fighting" cost="0.5" act="PASSIVE" >
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+     </modifications>
+   </power>
+   <power id="cloak"          cost="0.25" hasLevel="true" act="PASSIVE" />
+   <power id="commanding_voice" cost="1.5" hasLevel="true" act="PASSIVE">
+      <modifications>
+         <relevancemod topic="SOCIAL"/>
+     		<checkmod type="SKILL" ref="influence" value="$LEVEL" what="DICE" cond="y"  apply="CHARACTER"/>
+      </modifications>
+   </power>
+   <power id="cool_resolve"  cost="0.25" hasLevel="true" act="PASSIVE">
+     <modifications>
+        <relevancemod topic="SOCIAL"/>
+     </modifications>
+   </power>
+   <power id="cosmetic_control" cost="1" hasLevel="true" max="2" act="MAJOR_ACTION">
+     <modifications>
+     		<checkmod type="SKILL" ref="con" value="$LEVEL" what="EDGE_COST_MALUS" apply="CHARACTER"/>
+     		<checkmod type="SKILL" ref="influence" value="$LEVEL" what="EDGE_COST_MALUS" cond="y"  apply="CHARACTER"/>
+     </modifications>
+   </power>
+   <power id="countermagic" cost="0.5" hasLevel="true" act="MINOR_ACTION">S
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="DEFENSE_POOL_COMBAT_DIRECT" value="1"/>
+        <relevancemod topic="MAGICAL"/>
+     </modifications>
+   </power>
+   <power id="counterstrike" cost="0.5" hasLevel="true" act="MINOR_ACTION">
+   </power>
+   <power id="dash" cost="0.25" hasLevel="true" act="MINOR_ACTION">
+     <modifications>
+        <relevancemod topic="MUNDANE"/>
+     </modifications>
+   </power>
+   <power id="distance_grasp"  cost="0.5" hasLevel="true" act="MINOR_ACTION" />
+   <power id="distance_strike" cost="2" act="PASSIVE" />
+   <power id="elemental_missile" cost="0.5" act="MINOR_ACTION" multi="y">
+   	<choices>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
+   		<choice type="TEXT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0881"/>
+   	</choices>
+   </power>
+   <power id="elemental_strike" cost="0.5" act="MINOR_ACTION" multi="y">
+     	<requires>
+     		<datareq type="ADEPT_POWER" ref="killing_hands"/>
+     </requires>
+   	<choices>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
+   	</choices>
+   </power>
+   <power id="elemental_weapon" cost="0.5" act="MINOR_ACTION" multi="y">
+   	<choices>
+   		<choice type="ELEMENT" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0880" options="FIRE,WATER,AIR,EARTH"/>
+   	</choices>
+   </power>
+   <power id="empathic_healing" cost="0.75" act="MAJOR_ACTION"/>
+   <power id="empathic_sense" cost="0.5" act="MINOR_ACTION">
+     <modifications>
+     		<checkmod type="SKILL" ref="influence" value="1" what="EDGE_ONLY_TEST" cond="y"  apply="CHARACTER"/>
+     		<checkmod type="SKILL" ref="con" value="1" what="EDGE_ONLY_TEST" cond="y"  apply="CHARACTER"/>
+     </modifications>
+   </power>
+   <power id="enthralling_performance" cost="0.5" act="MINOR_ACTION" multi="y">
+   	<choices>
+   		<choice type="SKILLSPECIALIZATION" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc0881" options="con/performance,influence/leadership,athletics/gymnastics,close_combat/unarmed,stealth/palming"/>
+   	</choices>
+   </power>
+   <power id="freefall"        cost="0.25" hasLevel="true" max="3" act="PASSIVE" />
+   <power id="great_leap"      cost="0.25" hasLevel="true" act="MINOR_ACTION" />
+   <power id="improved_mental_attribute" cost="1" hasLevel="true" act="PASSIVE">
+   	<choices>
+   		<choice type="ATTRIBUTE" uuid="4fbc6994-a69c-4708-9d08-12ff9ffc087e" options="CHARISMA,LOGIC,INTUITION,WILLPOWER"/>
+   	</choices>
+     <modifications>
+        <valmod type="ATTRIBUTE" ref="CHOICE" choice="4fbc6994-a69c-4708-9d08-12ff9ffc087e" value="1"/>
+     </modifications>
+   </power>
+   <power id="iron_will"        cost="0.25" hasLevel="true" act="PASSIVE" />
+   <power id="kinesics_mastery" cost="0.25" hasLevel="true" act="PASSIVE">
+      <requires>
+      	<datareq type="ADEPT_POWER" ref="kinesics"/>
+      </requires>
+   </power>
+   <power id="linguistics"      cost="0.25" act="PASSIVE" />
+   <power id="living_focus"     cost="1" hasLevel="true" act="PASSIVE" />
+   <power id="maneuver"         cost="0.5" act="MAJOR_ACTION">
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+     </modifications>
+   </power>
+   <power id="missile_mastery"  cost="1" act="PASSIVE">
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+        <!-- itemmod item="improvised_throwing_weapon" /-->
+        <!-- the adept can attack for DV 1P
+or 1S, with an Attack Rating equal to the adept’s
+Athletics + Strength at Close and Near range,
+half that (rounded up) at Medium range, up to
+a maximum 100 meters. -->
+     </modifications>
+   </power>
+   <power id="missile_parry"    cost="0.5" act="PASSIVE">
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+     </modifications>
+   </power>
+   <power id="momentum"         cost="0.25" hasLevel="true" act="PASSIVE" />
+   <power id="nerve_strke"      cost="1" act="PASSIVE">
+     <modifications>
+        <relevancemod topic="COMBAT"/>
+     </modifications>
+   </power>
+   <power id="nimble_fingers" cost="0.25" hasLevel="true" act="PASSIVE">
+     <modifications>
+     		<checkmod type="SKILLSPECIALIZATION" ref="stealth/palming" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="1" what="EDGE_COST_MALUS" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="stealth/palming" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="engineering/lockpicking" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
+     		<checkmod type="SKILLSPECIALIZATION" ref="con/performance" value="$LEVEL-1" what="DICE" apply="CHARACTER" cond="y"/>
+     </modifications>
+   </power>
+   <power id="pain_relief"     cost="1" act="MAJOR_ACTION" />
+   <power id="penetrating_strike" cost="0.25" hasLevel="true" act="PASSIVE">
+     <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$LEVEL" options="CLOSE_COMBAT" />
+     </modifications>
+   </power>
+   <power id="power_throw" cost="0.5" hasLevel="true" act="PASSIVE">
+     <modifications>
+        <valmod type="ITEM_ATTRIBUTE" ref="ATTACK_RATING" value="$LEVEL*2" options="THROWING" cond="y"/>
+        <valmod type="ITEM_ATTRIBUTE" ref="DAMAGE" value="$LEVEL" options="THROWING" cond="y"/>
+     </modifications>
+   </power>
+   <power id="quick_draw"   cost="0.25" act="PASSIVE" />
+   <power id="quick_strike" cost="3" act="PASSIVE" />
+   <power id="side_step"    cost="0.25" hasLevel="true" act="PASSIVE" />
+   <power id="spell_shroud" cost="0.25" hasLevel="true" act="PASSIVE" />
+   <power id="sustenance"   cost="0.25" act="PASSIVE">
+     <modifications>
+     	<!-- ToDo: Lifestyle cost -250 -->
+     </modifications>
+   </power>
+   <power id="three_dimensional_memory" cost="0.5" act="MAJOR_ACTION" />
+
+</powers>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<traditions>
+   <tradition id="unawaken_umt_log" drain1="WILLPOWER" drain2="LOGIC" />
+   <tradition id="unawaken_umt_cha" drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="unawaken_shamanic" drain1="WILLPOWER" drain2="CHARISMA" />
+   <tradition id="unawaken_hermetic" drain1="WILLPOWER" drain2="LOGIC" />
+</traditions>

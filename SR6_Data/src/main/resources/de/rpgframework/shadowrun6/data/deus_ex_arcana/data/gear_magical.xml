@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<items>
+
+   <item id="magical_lodge_materials" avail="1" price="500" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y">
+   	<choices>
+   		<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+   	</choices>
+   	<attrdef id="AVAILABILITY" value="$RATING"/>
+   	<attrdef id="PRICE" value="500*$RATING"/>
+   </item>
+
+   <item id="reagents_per_dram" avail="2" price="50" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y"/>
+
+	<item id="formula_spell" type="MAGICAL" subtype="MAGICAL_SUPPLIES" reqVariant="y" count="y">
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+		<variant id="combat">
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="2000"/>
+		</variant>
+		<variant id="detection">
+			<attrdef id="AVAILABILITY" value="2L"/>
+			<attrdef id="PRICE" value="500"/>
+		</variant>
+		<variant id="health">
+			<attrdef id="AVAILABILITY" value="2L"/>
+			<attrdef id="PRICE" value="500"/>
+		</variant>
+		<variant id="illusion">
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="1000"/>
+		</variant>
+		<variant id="manipulation">
+			<attrdef id="AVAILABILITY" value="3L"/>
+			<attrdef id="PRICE" value="1500"/>
+		</variant>
+	</item>
+
+	<item id="formula_ritual" avail="3L" price="1000" type="MAGICAL" subtype="MAGICAL_SUPPLIES" count="y">
+		<choices>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+	</item>
+
+	<item id="formula_focus" type="MAGICAL" subtype="MAGICAL_SUPPLIES" reqVariant="y" count="y">
+		<choices>
+			<choice uuid="c2d17c87-1cfe-4355-9877-a20fe09c170d" type="ITEM_ATTRIBUTE" ref="RATING" options="1,2,3,4,5,6,7,8,9"/>
+			<choice uuid="47d1e468-6df7-43ce-9651-44485cc78bb8" type="TEXT" />
+		</choices>
+		<variant id="enchanting">
+			<attrdef id="AVAILABILITY" value="$RATING L"/>
+			<attrdef id="PRICE" value="1250*$RATING"/>
+		</variant>
+		<variant id="metamagic">
+			<attrdef id="AVAILABILITY" value="$RATING L"/>
+			<attrdef id="PRICE" value="2250*$RATING"/>
+		</variant>
+		<variant id="power">
+			<attrdef id="AVAILABILITY" value="$RATING+3 L"/>
+			<attrdef id="PRICE" value="4500*$RATING"/>
+		</variant>
+		<variant id="qi">
+			<attrdef id="AVAILABILITY" value="$RATING L"/>
+			<attrdef id="PRICE" value="750*$RATING"/>
+		</variant>
+		<variant id="spell">
+			<attrdef id="AVAILABILITY" value="$RATING L"/>
+			<attrdef id="PRICE" value="1000*$RATING"/>
+		</variant>
+		<variant id="spirit">
+			<attrdef id="AVAILABILITY" value="$RATING L"/>
+			<attrdef id="PRICE" value="1000*$RATING"/>
+		</variant>
+		<variant id="weapon">
+			<attrdef id="AVAILABILITY" value="$RATING+3 L"/>
+			<attrdef id="PRICE" value="1750*$RATING"/>
+		</variant>
+	</item>
+
+</items>
