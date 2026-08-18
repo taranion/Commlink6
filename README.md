@@ -4,7 +4,7 @@ It is written in Java and uses JavaFX as a GUI framework.
 
 ## Dependencies
 * **RPGFramework** - Core classes shared with other TTRPGs
-* **Shadowrun-Common* - Classes shared with other rule editions of Shadowrun.
+* **Shadowrun-Common** - Classes shared with other rule editions of Shadowrun.
 * **javafx-extensions** - Additional JavaFX GUI components and helpers, e.g. for reactive layout.
 * **eden-client** - A library for character storage (and originally synchronization with a server).
 * **simple-persist** - XML persistence framework.
@@ -12,4 +12,4 @@ It is written in Java and uses JavaFX as a GUI framework.
 
 ## Directory structure
 
-* `SR6Core`: 
+* `SR6_Core`:  
