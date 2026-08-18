@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qpaths>
+	<qpath id="boundaries_of_honor">
+		<step id="broken_code" level="0">
+			<requires>
+				<datareq type="QUALITY" ref="honorbound" apply="CHARACTER"/>
+			</requires>
+			<nextSteps>
+				<next>no_code</next>
+				<next>rebound</next>
+				<next>penitent</next>
+			</nextSteps>
+			<modifications>
+				<itemmod type="QUALITY" ref="broken_code"/>
+				<itemmod type="QUALITY" ref="honorbound" remove="true"/>
+			</modifications>
+		</step>
+		<step id="no_code" level="1">
+			<modifications>
+				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
+				<itemmod type="QUALITY" ref="no_code"/>
+			</modifications>
+		</step>
+		<step id="rebound" level="1">
+			<modifications>
+				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
+				<itemmod type="QUALITY" ref="rebound"/>
+			</modifications>
+		</step>
+		<step id="penitent" level="1">
+			<modifications>
+				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
+				<itemmod type="QUALITY" ref="honorbound"/>
+				<valmod type="SKILL" ref="knowledge" value="1"/>
+			</modifications>
+		</step>
+	</qpath>
+	
+	<qpath id="once_bitten">
+		<step id="immediate_aftermath" level="0">
+			<choices>
+				<choice uuid="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8" type="QUALITY" ref="CHOICE" options="phobia,bad_memories"/>
+			</choices>
+			<modifications>
+				<itemmod type="QUALITY" ref="CHOICE" choice="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8"/>
+			</modifications>
+			<nextSteps>
+				<next>double_sure</next>
+				<next>addiction</next>
+				<next>reconditioning</next>
+			</nextSteps>
+		</step>
+		<step id="double_sure" level="1">
+			<nextSteps>
+				<next>addiction</next>
+				<next>reconditioning</next>
+			</nextSteps>
+		</step>
+		<step id="addiction" level="2">
+			<modifications>
+				<valmod type="QUALITY" ref="addiction" value="1"/>
+			</modifications>
+		</step>
+		<step id="reconditioning" level="2">
+			<requires>
+				<valuereq type="GEAR" ref="docwagon_contract" variant="gold" value="2" apply="CHARACTER"/>
+			</requires>
+			<modifications>
+				<itemmod type="QUALITY" ref="phobia" remove="true"/>
+			</modifications>
+		</step>	
+	</qpath>
+	
+	<qpath id="eye_for_an_eye">
+		<step id="violence_prone" level="0">
+			<nextSteps>
+				<next>heedless</next>
+				<next>coping</next>
+			</nextSteps>
+		</step>
+		<step id="heedless" level="1">
+			<nextSteps>
+				<next>conscientious_fighter</next>
+			</nextSteps>
+		</step>
+		<step id="coping" level="1">
+			<nextSteps>
+				<next>conscientious_fighter</next>
+			</nextSteps>
+		</step>
+		<step id="conscientious_fighter" level="2">
+		</step>	
+	</qpath>
+</qpaths>

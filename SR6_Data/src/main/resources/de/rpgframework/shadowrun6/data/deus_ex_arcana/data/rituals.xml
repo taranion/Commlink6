@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rituals>
+
+   <ritual id="exorcism_rites" thr="5">
+      <ritualfeature ref="spotter"/>
+   </ritual>
+   <ritual id="hoist" thr="6">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="homunculus_awaken" thr="5">
+      <ritualfeature ref="minion"/>
+   </ritual>
+   <ritual id="lost_and_found" thr="3">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="material_link"/>
+   </ritual>
+   <ritual id="manifest_desire" thr="7">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="material_link"/>
+   </ritual>
+   <ritual id="real_of_healing" thr="7">
+      <ritualfeature ref="anchored"/>
+   </ritual>
+   <ritual id="sacrament_of_change" thr="6">
+      <ritualfeature ref="material_link"/>
+   </ritual>
+   <ritual id="sealing" thr="4">
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="stories_of_ancestors" thr="5">
+      <ritualfeature ref="spell"/>
+   </ritual>
+   <ritual id="telling_of_tales" thr="5">
+      <ritualfeature ref="spell"/>
+   </ritual>
+
+</rituals>

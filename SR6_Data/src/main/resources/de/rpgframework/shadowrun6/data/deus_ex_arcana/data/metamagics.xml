@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metaechoes>
+
+	<metaecho id="filtering" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+		<requires>
+			<datareq type="METAECHO" ref="cleansing"/>
+		</requires>
+	</metaecho>
+
+	<metaecho id="accumulator" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+		<requires>
+			<datareq type="METAECHO" ref="absorption"/>
+		</requires>
+	</metaecho>
+
+	<metaecho id="blood_accumulator" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+		<requires>
+			<datareq type="METAECHO" ref="sacrifice"/>
+		</requires>
+	</metaecho>
+
+	<metaecho id="anchoring" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+
+	<metaecho id="fixation" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+
+</metaechoes>

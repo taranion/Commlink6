@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<actions>
+  <action type="BOOST" cat="ANY"    cost="1" id="reroll_one"    time="POST" /> 
+  <action type="BOOST" cat="COMBAT" cost="1" id="plus_3_ini"    time="ANYTIME" /> 
+  <action type="BOOST" cat="ANY"    cost="2" id="plus_1_roll"   time="POST" /> 
+  <action type="BOOST" cat="ANY"    cost="2" id="give_ally_1_edge" time="ANYTIME" /> 
+  <action type="BOOST" cat="ANY"    cost="2" id="negate_1_edge" time="PRE" /> 
+  <action type="BOOST" cat="ANY"    cost="3" id="buy_auto_hit"  time="ANYTIME" /> 
+  <action type="BOOST" cat="COMBAT" cost="3" id="heal_1_stun"   time="ANYTIME" /> 
+  <action type="BOOST" cat="ANY"    cost="4" id="add_edge_pool" time="PRE" /> 
+  <action type="BOOST" cat="COMBAT" cost="4" id="heal_1_physic" time="ANYTIME" /> 
+  <action type="BOOST" cat="ANY"    cost="4" id="reroll_failed" time="POST" /> 
+  <action type="BOOST" cat="ANY"    cost="5" id="count_2_glitch" time="PRE" /> 
+  <action type="BOOST" cat="ANY"    cost="5" id="create_special" time="ANYTIME" /> 
+
+
+  <action type="EDGE" cat="COMBAT" cost="4" apply="RANGED" id="anticipation" /> 
+  <action type="EDGE" cat="SOCIAL"  cost="4" apply="SKILL"  id="big_speech" skill="influence"/> 
+  <action type="EDGE" cat="SOCIAL"  cost="2" apply="SKILL"  id="bring_the_drama" skill="con"/> 
+  <action type="EDGE" cat="COMBAT" cost="5" apply="ATTACK" id="called_shot_disarm" /> 
+  <action type="EDGE" cat="COMBAT" cost="5" apply="ATTACK" id="called_shot_vitals" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="RANGED" id="fire_from_cover" /> 
+  <action type="EDGE" cat="COMBAT" cost="2" apply="RANGED" id="knockout_blow" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="shank" /> 
+  <action type="EDGE" cat="OTHER"  cost="1" apply="SKILL"  id="sudden_insight" /> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="ACTION" id="tactical_roll_htd" action="hit_the_dirt"/> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="tumble"/> 
+  <action type="EDGE" cat="COMBAT" cost="1" apply="MELEE"  id="wrest"/> 
+
+  <action type="EDGE" cat="MATRIX" cost="1" apply="MATRIX" id="emergency_boost" illegal="true" /> 
+  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="hog" illegal="true" /> 
+  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="signal_scream" illegal="true" /> 
+  <action type="EDGE" cat="MATRIX" cost="2" apply="MATRIX" id="technobabble"  illegal="true" /> 
+  <action type="EDGE" cat="MATRIX" cost="3" apply="MATRIX" id="under_the_radar" illegal="true" /> 
+</actions>

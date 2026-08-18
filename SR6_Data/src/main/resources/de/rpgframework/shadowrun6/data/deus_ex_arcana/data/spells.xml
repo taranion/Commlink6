@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spells>
+
+    <!-- Combat -->
+   <spell id="five_element_blast" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="9" dmg="PHYSICAL_SPECIAL">
+      <spellfeature ref="indirect"/>
+   </spell>
+   <spell id="ku" cat="COMBAT" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="5">
+      <spellfeature ref="direct"/>
+   </spell>
+   <spell id="malos_aires" cat="COMBAT" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="9" dmg="PHYSICAL_SPECIAL">
+      <spellfeature ref="indirect"/>
+      <spellfeature ref="area"/>
+   </spell>
+   
+   <!-- Detection -->
+   <spell id="detect_enemies_extended" cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
+   <spell id="detect_enemies_tactical" cat="DETECTION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" />
+   <spell id="spatial_sense" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="spatial_sense_extended" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="5" />
+   <spell id="spatial_sense_tactical" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="6" />
+
+   <spell id="find_scanners" cat="DETECTION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="3" />
+   <spell id="mind_jammer_touch" cat="DETECTION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="mind_jammer_los" cat="DETECTION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" />
+   <spell id="messenger" cat="DETECTION" range="TOUCH" type="MANA" dur="INSTANTANEOUS" drain="4" />
+   
+   <!-- Health -->
+   <spell id="fehu" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="5" />
+   <spell id="natures_bounty" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="4" />
+   <spell id="purify_the_blood" cat="HEALTH" range="TOUCH" type="PHYSICAL" dur="PERMANENT" drain="5" />
+   <spell id="romance" cat="HEALTH" range="TOUCH" type="MANA" dur="SUSTAINED" drain="3" />
+
+   <!-- Illusion -->
+   <spell id="force_multiplier" cat="ILLUSION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="5" >
+      <spellfeature ref="sense_multi"/>
+   </spell>
+   <spell id="sensory_projection" cat="ILLUSION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="5" >
+      <spellfeature ref="sense_multi"/>
+   </spell>
+   <spell id="shift" cat="ILLUSION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="5" >
+      <spellfeature ref="sense_multi"/>
+   </spell>
+
+   <!-- Manipulation -->
+   <spell id="ansuz" cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="INSTANTANEOUS" drain="4" />
+   <spell id="binding_of_peace" cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" />
+   <spell id="bless_weapon" cat="MANIPULATION" range="TOUCH" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="cleansing" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="MANA" dur="LIMITED" drain="5" />
+   <spell id="druids_mist" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="friend_or_foe" cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="LIMITED" drain="6" />
+   <spell id="halt" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="4" />
+   <!-- light spell same as in CRB 140 -->
+   <spell id="rain_maker" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="LIMITED" drain="5" />
+   <spell id="shape_change" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="5" />
+   <spell id="shape_earth" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="sound_barrier_ii" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="4" />
+   <spell id="spirit_hold" cat="MANIPULATION" range="LINE_OF_SIGHT" type="MANA" dur="SUSTAINED" drain="4" />
+   <spell id="stall_out" cat="MANIPULATION" range="LINE_OF_SIGHT" type="PHYSICAL" dur="INSTANTANEOUS" drain="5" />
+   <spell id="turn_to_mud" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="5" />
+   <spell id="vacuum" cat="MANIPULATION" range="LINE_OF_SIGHT_AREA" type="PHYSICAL" dur="SUSTAINED" drain="6" />
+   <spell id="ward_evil" cat="MANIPULATION" range="TOUCH" type="MANA" dur="SUSTAINED" drain="4" />
+
+</spells>

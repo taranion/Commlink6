@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<qualities>
+
+   <quality id="brumeur_mudane" karma="12" pos="true" type="NORMAL">
+     <requires>
+       <datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
+     </requires>
+   </quality>
+   <quality id="brumeur_awaken" karma="6" pos="true" type="NORMAL">
+     <requires>
+   		<selreq>
+   			<datareq type="MAGIC_RESO" ref="magician" apply="CHARACTER" />
+   			<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
+   		</selreq>
+     </requires>
+   </quality>
+
+</qualities>

@@ -4,14 +4,14 @@
       <flags><flag>AUGMENTATION</flag></flags>
       <variant id="blade">
       	<usage mode="IMPLANTED" value="0.15"/>
-      	<attrdef id="PRICE" value="5000"/>
+      	<attrdef id="PRICE" value="7500"/>
      		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="3P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>
       </variant>
       <variant id="claws">
       	<usage mode="IMPLANTED" value="0.1"/>
-      	<attrdef id="PRICE" value="7500"/>
+      	<attrdef id="PRICE" value="5000"/>
      		<alternate mode="WEAPON" type="WEAPON_CLOSE_COMBAT" subtype="UNARMED" id="weapon">
      			<weapon  dmg="2P" attack="7,,,," skill="close_combat" spec="close_combat/unarmed"/>
      		</alternate>

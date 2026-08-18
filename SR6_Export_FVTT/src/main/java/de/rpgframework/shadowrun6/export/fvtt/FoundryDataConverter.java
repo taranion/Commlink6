@@ -29,9 +29,12 @@ public class FoundryDataConverter {
 			spell.damage    = item.getDamage().name().toLowerCase();
 		spell.isOpposed   = item.isOpposed();
 		spell.withEssence = item.isEssence();
-		spell.wild        = item.isWild();
+		spell.wildDie     = item.isWild();
 		for (SpellFeatureReference ref : item.getFeatures()) {
 			switch (ref.getFeature().getId()) {
+			case "indirect": spell.combatSpellType="spells_indirect"; break;
+			case "direct": spell.combatSpellType="spells_direct"; break;
+			case "sense_single": spell.multiSense=false; break;
 			case "sense_multi": spell.multiSense=true; break;
 			}
 		}

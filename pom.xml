@@ -22,10 +22,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<log4j.version>2.25.4</log4j.version>
+		<log4j.version>2.26.1</log4j.version>
 		<maven.compiler.release>17</maven.compiler.release>
 		<revision>0.0.3-SNAPSHOT</revision>
-		<rpgfw.version>5.5.0</rpgfw.version>
+		<rpgfw.version>5.6.0</rpgfw.version>
 		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
@@ -34,7 +34,6 @@
 		<module>SR6_Data</module>
 		<module>SR6_CharGen</module>
 		<module>SR6_CharGen_JFX</module>
-		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
 		<module>SR6_Export_FVTT</module>
 		<module>Commlink6</module>
@@ -163,7 +162,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.14.0</version>
+				<version>3.15.0</version>
 			</plugin>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
