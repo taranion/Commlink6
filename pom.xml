@@ -34,7 +34,6 @@
 		<module>SR6_Data</module>
 		<module>SR6_CharGen</module>
 		<module>SR6_CharGen_JFX</module>
-		<module>SR6_Foundry_VTT</module>
 		<module>SR6_Export_JSON</module>
 		<module>SR6_Export_FVTT</module>
 		<module>Commlink6</module>
