@@ -2273,11 +2273,22 @@ public class Shadowrun6Tools {
 				continue;
 			// If the RCC is the "Living Command Console", derive matrix attributes from character
 			if ("living_console".equals(item.getKey())) {
-				// Device rating equals to resonance attribute
+				// Device rating = RES, data processing = LOG and firewall = WIL defined by living persona; noise reduction = device rating as normal RCC
 				int rating = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
 				item.setAttribute(SR6ItemAttribute.DEVICE_RATING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEVICE_RATING, rating));
 				item.setAttribute(SR6ItemAttribute.DATA_PROCESSING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING, model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()));
 				item.setAttribute(SR6ItemAttribute.FIREWALL, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
+				item.setAttribute(SR6ItemAttribute.NOISE_REDUCTION, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.NOISE_REDUCTION, rating));
+			}
+			// If the RCC is the "Stream: Machinists", derive matrix attributes from character
+			if ("machinist_console".equals(item.getKey())) {
+				// Device rating = RES, data processing = LOG and firewall = WIL defined by living persona; noise reduction = WIL, sharing rating = CHA
+				int rating = model.getAttribute(ShadowrunAttribute.RESONANCE).getModifiedValue();
+				item.setAttribute(SR6ItemAttribute.DEVICE_RATING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DEVICE_RATING, rating));
+				item.setAttribute(SR6ItemAttribute.DATA_PROCESSING, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.DATA_PROCESSING, model.getAttribute(ShadowrunAttribute.LOGIC).getModifiedValue()));
+				item.setAttribute(SR6ItemAttribute.FIREWALL, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.FIREWALL, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
+				item.setAttribute(SR6ItemAttribute.NOISE_REDUCTION, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.NOISE_REDUCTION, model.getAttribute(ShadowrunAttribute.WILLPOWER).getModifiedValue()));
+				item.setAttribute(SR6ItemAttribute.CONCURRENT_PROGRAMS, new ItemAttributeNumericalValue<SR6ItemAttribute>(SR6ItemAttribute.CONCURRENT_PROGRAMS, model.getAttribute(ShadowrunAttribute.CHARISMA).getModifiedValue()));
 			}
 
 			if (ret==null 
