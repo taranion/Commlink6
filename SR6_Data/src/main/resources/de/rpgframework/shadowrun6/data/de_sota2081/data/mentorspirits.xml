@@ -47,14 +47,7 @@
 		<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-      	<selmod uuid="5dccba9a-8330-4dad-82c4-ee47f27b5b03">
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="electronics"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="cracking"/>
-				</valmod>
-	  	</selmod>
+		<valmod type="ADEPT_POWER" ref="improved_ability" choice="05054102-0183-482a-9e2b-84bc8d5f153f" options="cracking,electronics" value="1" />
     </adept>
   </mentorspirit>
 
@@ -66,8 +59,8 @@
 		<checkmod type="SPELL" ref="ILLUSION" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="improved_sense" value="1" />
-		<valmod type="ADEPT_POWER" ref="improved_sense" value="1" />
+		<itemmod type="ADEPT_POWER" ref="improved_sense" />
+		<itemmod type="ADEPT_POWER" ref="improved_sense" />
     </adept>
   </mentorspirit>
 
@@ -85,14 +78,7 @@
 		<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<selmod uuid="ad49f6be-05b2-4069-8bfd-8980272aefda">
-			<valmod type="ADEPT_POWER" ref="improved_physical_attribute" value="1" >
-				<decision choice="7282ba2c-fe33-4220-8fce-2ed77e0a3068" value="BODY"/>
-			</valmod>
-			<valmod type="ADEPT_POWER" ref="improved_physical_attribute" value="1" >
-				<decision choice="7282ba2c-fe33-4220-8fce-2ed77e0a3068" value="STRENGTH"/>
-			</valmod>
-		</selmod>
+		<valmod type="ADEPT_POWER" ref="improved_physical_attribute" choice="05054102-0183-482a-9e2b-84bc8d5f153f" options="BODY,STRENGTH" value="1" />
     </adept>
   </mentorspirit>
 
@@ -126,56 +112,7 @@
 		<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-      <selmod uuid="c6541756-3f57-430b-ab27-bb961c8dcde5">
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="astral"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="athletics"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="biotech"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="con"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="conjuring"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="cracking"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="electronics"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="enchanting"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="engineering"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="influence"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="outdoors"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="perception"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="piloting"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="sorcery"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="stealth"/>
-				</valmod>
-    			<valmod type="ADEPT_POWER" ref="improved_ability" value="1" >
-					<decision choice="05054102-0183-482a-9e2b-84bc8d5f153f" value="tasking"/>
-				</valmod>
-      </selmod>
+		<valmod type="ADEPT_POWER" ref="improved_ability" choice="05054102-0183-482a-9e2b-84bc8d5f153f" options="astral,athletics,biotech,con,conjuring,cracking,electronics,enchanting,engineering,influence,outdoors,perception,piloting,sorcery,stealth,tasking" value="1" />
     </adept>
   </mentorspirit>
 
@@ -190,7 +127,7 @@
 		<checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
     </magician>
     <adept>
-		<valmod type="ADEPT_POWER" ref="enhanced_perception" value="1" />
+		<itemmod type="ADEPT_POWER" ref="enhanced_perception" />
     </adept>
   </mentorspirit>
 

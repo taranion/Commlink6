@@ -47,7 +47,7 @@
 			<checkmod type="SPELL" ref="MANIPULATION" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="vocal_control" value="1" />
+			<itemmod type="ADEPT_POWER" ref="vocal_control"/>
 		</adept>
 	</mentorspirit>
 
@@ -63,7 +63,8 @@
 			<checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="improved_sense" value="2" />
+			<itemmod type="ADEPT_POWER" ref="improved_sense"/>
+			<itemmod type="ADEPT_POWER" ref="improved_sense"/>
 		</adept>
 	</mentorspirit>
 
@@ -79,7 +80,7 @@
 			<checkmod type="SPELL" ref="COMBAT" value="-1" what="EDGE_BOOST" />
 		</magician>
 		<adept>
-			<valmod type="ADEPT_POWER" ref="danger_sense" value="1" />
+			<itemmod type="ADEPT_POWER" ref="danger_sense" />
 		</adept>
 	</mentorspirit>
 
