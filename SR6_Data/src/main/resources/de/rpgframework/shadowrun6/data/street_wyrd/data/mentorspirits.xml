@@ -123,12 +123,12 @@
 		<similar>kobold</similar>
 		<similar>sirene</similar>
 		</similarNames>
-    	<modifications>
-    		<selmod uuid="abe1ba17-cd19-4d8d-9443-bef9f897d566">
-    			<checkmod type="SKILL" ref="engineering" value="-1" what="EDGE_BOOST" />
-    			<checkmod type="SKILL" ref="piloting" value="-1" what="EDGE_BOOST" />
-    		</selmod>
-    	</modifications>
+		<choices>
+			<choice type="SKILL" uuid="ee7bc846-f246-47bf-931c-786d5b0ee15b" options="engineering,piloting"/>
+		</choices>
+		<modifications>
+			<checkmod type="SKILL" ref="CHOICE" choice="ee7bc846-f246-47bf-931c-786d5b0ee15b" value="-1" what="EDGE_BOOST" />
+		</modifications>
     	<magician>
 			<checkmod type="SKILL" ref="conjuring" value="-1" what="EDGE_BOOST" />
      	</magician>

@@ -114,12 +114,10 @@
 		<checkmod type="SPELL" ref="DETECTION" value="-1" what="EDGE_BOOST" />
     </magician>
 	<adept>
+		<itemmod type="ADEPT_POWER" ref="sustenance" />
 		<selmod>
 			<itemmod type="ADEPT_POWER" ref="enhanced_perception" />
-			<allmod>
-				<itemmod type="ADEPT_POWER" ref="sustenance" />
-				<itemmod type="ADEPT_POWER" ref="improved_sense" />
-			</allmod>
+			<itemmod type="ADEPT_POWER" ref="improved_sense" />
 		</selmod>
 	</adept>
 
