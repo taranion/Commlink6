@@ -528,6 +528,7 @@
    			<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
    			<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
    			<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
+			<datareq type="MAGIC_RESO" ref="minor_awakened" apply="CHARACTER"/>
    		</selreq>
    	</requires>
    </quality>

@@ -1,94 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qpaths>
-	<qpath id="boundaries_of_honor">
-		<step id="broken_code" level="0">
+	<qpath id="path_of_mentor_spirit">
+		<step id="first_interaction" level="0">
 			<requires>
-				<datareq type="QUALITY" ref="honorbound" apply="CHARACTER"/>
+				<datareq type="QUALITY" ref="mentor_spirit" negate="true" />/>
 			</requires>
 			<nextSteps>
-				<next>no_code</next>
-				<next>rebound</next>
-				<next>penitent</next>
+				<next>accept</next>
+				<next>reject</next>
 			</nextSteps>
 			<modifications>
-				<itemmod type="QUALITY" ref="broken_code"/>
-				<itemmod type="QUALITY" ref="honorbound" remove="true"/>
+				<itemmod type="QUALITY" ref="first_interaction"/>
 			</modifications>
 		</step>
-		<step id="no_code" level="1">
+		<step id="accept" level="1">
 			<modifications>
-				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
-				<itemmod type="QUALITY" ref="no_code"/>
+				<itemmod type="QUALITY" ref="mentor_spirit"/>
+				<itemmod type="QUALITY" ref="first_interaction" remove="true"/>
 			</modifications>
 		</step>
-		<step id="rebound" level="1">
+		<step id="reject" level="1">
 			<modifications>
-				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
-				<itemmod type="QUALITY" ref="rebound"/>
+				<itemmod type="QUALITY" ref="first_interaction" remove="true"/>
 			</modifications>
+			<nextSteps>
+				<next>first_interaction</next>
+			</nextSteps>
 		</step>
-		<step id="penitent" level="1">
+	</qpath>
+	
+	<qpath id="path_of_familiar">
+		<step id="pet_store" level="0">
 			<modifications>
-				<itemmod type="QUALITY" ref="broken_code" remove="true"/>
-				<itemmod type="QUALITY" ref="honorbound"/>
-				<valmod type="SKILL" ref="knowledge" value="1"/>
+				<itemmod type="QUALITY" ref="pet_store"/>
+			</modifications>
+			<nextSteps>
+				<next>new_buddy</next>
+			</nextSteps>
+		</step>
+		<step id="new_buddy" level="1">
+			<modifications>
+				<itemmod type="QUALITY" ref="pet_store" remove="true"/>
+				<itemmod type="QUALITY" ref="new_budyy"/>
+			</modifications>
+			<nextSteps>
+				<next>bound_soul</next>
+			</nextSteps>
+		</step>
+		<step id="bound_soul" level="2">
+			<requires>
+				<selreq>
+					<datareq type="MAGIC_RESO" ref="magician" apply="CHARACTER" />
+					<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
+					<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
+					<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
+					<datareq type="MAGIC_RESO" ref="minor_awakened" apply="CHARACTER"/>
+				</selreq>
+			</requires>
+			<modifications>
+				<itemmod type="QUALITY" ref="new_budyy" remove="true"/>
+				<itemmod type="QUALITY" ref="bound_soul"/>
 			</modifications>
 		</step>
 	</qpath>
 	
-	<qpath id="once_bitten">
-		<step id="immediate_aftermath" level="0">
-			<choices>
-				<choice uuid="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8" type="QUALITY" ref="CHOICE" options="phobia,bad_memories"/>
-			</choices>
-			<modifications>
-				<itemmod type="QUALITY" ref="CHOICE" choice="bfbfc52f-a174-4fa5-bc14-994b9f11ffc8"/>
-			</modifications>
-			<nextSteps>
-				<next>double_sure</next>
-				<next>addiction</next>
-				<next>reconditioning</next>
-			</nextSteps>
-		</step>
-		<step id="double_sure" level="1">
-			<nextSteps>
-				<next>addiction</next>
-				<next>reconditioning</next>
-			</nextSteps>
-		</step>
-		<step id="addiction" level="2">
-			<modifications>
-				<valmod type="QUALITY" ref="addiction" value="1"/>
-			</modifications>
-		</step>
-		<step id="reconditioning" level="2">
-			<requires>
-				<valuereq type="GEAR" ref="docwagon_contract" variant="gold" value="2" apply="CHARACTER"/>
-			</requires>
-			<modifications>
-				<itemmod type="QUALITY" ref="phobia" remove="true"/>
-			</modifications>
-		</step>	
-	</qpath>
-	
-	<qpath id="eye_for_an_eye">
-		<step id="violence_prone" level="0">
-			<nextSteps>
-				<next>heedless</next>
-				<next>coping</next>
-			</nextSteps>
-		</step>
-		<step id="heedless" level="1">
-			<nextSteps>
-				<next>conscientious_fighter</next>
-			</nextSteps>
-		</step>
-		<step id="coping" level="1">
-			<nextSteps>
-				<next>conscientious_fighter</next>
-			</nextSteps>
-		</step>
-		<step id="conscientious_fighter" level="2">
-		</step>	
-	</qpath>
 </qpaths>

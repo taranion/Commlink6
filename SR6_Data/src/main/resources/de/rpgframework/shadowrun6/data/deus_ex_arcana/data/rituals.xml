@@ -19,19 +19,34 @@
       <ritualfeature ref="anchored"/>
       <ritualfeature ref="material_link"/>
    </ritual>
-   <ritual id="real_of_healing" thr="7">
+   <ritual id="realm_of_healing" thr="7">
       <ritualfeature ref="anchored"/>
    </ritual>
-   <ritual id="sacrament_of_change" thr="6">
+   <ritual id="sacrament_of_changed" thr="6">
       <ritualfeature ref="material_link"/>
    </ritual>
-   <ritual id="sealing" thr="4">
+   <ritual id="sealing_ritual" thr="4">
       <ritualfeature ref="spell"/>
    </ritual>
    <ritual id="stories_of_ancestors" thr="5">
       <ritualfeature ref="spell"/>
    </ritual>
    <ritual id="telling_of_tales" thr="5">
+      <ritualfeature ref="spell"/>
+   </ritual>
+
+<!-- toxic -->
+
+   <ritual id="circle_of_corruption" thr="7">
+      <ritualfeature ref="anchored"/>
+      <ritualfeature ref="spell"/>
+     <requires>
+		<datareq type="METAECHO" ref="taint" apply="CHARACTER" />
+     </requires>
+   </ritual>
+
+   <ritual id="urban_renewal" thr="6">
+      <ritualfeature ref="anchored"/>
       <ritualfeature ref="spell"/>
    </ritual>
 

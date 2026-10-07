@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<metatypes>
+	<!-- Dwarf variants -->
+	
+	<metatype id="vazimbia" variantof="dwarf" size="120" weight="54" karma="0">
+		<modifications>
+           <valmod ref="REACTION"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="STRENGTH"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="WILLPOWER" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="LOGIC"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="CHARISMA" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="EDGE"  type="ATTRIBUTE" value="5" set="MAX" when="CREATION"/>
+           <valmod ref="MAGIC" type="ATTRIBUTE" value="8" set="MAX" when="CREATION"/>
+           <valmod ref="RESONANCE" type="ATTRIBUTE" value="0" set="MAX" when="CREATION"/>
+           <itemmod type="QUALITY" ref="low-light_vision"/>
+           <valmod  type="PRICEMOD" ref="ARMOR"   value="0.1" id="2f74161e-e340-42e0-b82e-02e8afe7af62"/>
+		</modifications>
+	</metatype>
+
+</metatypes>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<magicresons>
+
+	<magicreson id="minor_awakened" magic="true" spells="false" powers="false" cost="0"> <!-- priority mudane with quality astral_spark, astral_sensitive or astral_explorer -->
+		<modifications>
+			<valmod type="ATTRIBUTE" ref="MAGIC" value="0" apply="CHARACTER"/>
+		</modifications>
+	</magicreson>
+
+</magicresons>

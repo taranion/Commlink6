@@ -197,6 +197,7 @@ public class Shadowrun6DataPlugin  {
 			initDealersOfDeath();
 			initShadowCast();
 			initDeadlyArts();
+			initDeusExArcana();
 		} catch (DataErrorException e) {
 			logger.log(Level.ERROR, "Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
 			System.err.println("Failed loading data. In dataset "+e.getDataset().getID()+"\n"+e.getMessage());
@@ -1232,6 +1233,42 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" armor");
 		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deadly_arts/data/gear_biotech.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" biotech");
+	}
+
+	//-------------------------------------------------------------------
+	private void initDeusExArcana() throws IOException {
+		logger.log(Level.INFO, "START -------------------------------Deus Ex Arcana---------------------------------------");
+		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
+		List<? extends DataItem> list = null;
+		DataSet set = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "DEUS_EX_ARCANA", "deus_ex_arcana.i18n", Locale.ENGLISH, Locale.GERMAN);
+		set.setType(DataSetType.OPT_RULES);
+		set.setReleased(202512);
+		list = Shadowrun6Core.loadDataItems(TraditionList.class, Tradition.class, set, clazz,"deus_ex_arcana/data/traditions.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" magic traditions");
+		list = Shadowrun6Core.loadDataItems(SR6SpellList.class, SR6Spell.class, set, clazz, "deus_ex_arcana/data/spells.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" spells");
+		list = Shadowrun6Core.loadDataItems(RitualList.class, Ritual.class, set, clazz, "deus_ex_arcana/data/rituals.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" rituals");
+		list = Shadowrun6Core.loadDataItems(MetamagicOrEchoList.class, MetamagicOrEcho.class, set, clazz,"deus_ex_arcana/data/metamagics.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" metamagics");
+		list = Shadowrun6Core.loadDataItems(SkillList.class, SR6Skill.class, set, clazz,"deus_ex_arcana/data/skills.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" skills");
+		list = Shadowrun6Core.loadDataItems(MagicOrResonanceTypeList.class, MagicOrResonanceType.class, set, clazz,"deus_ex_arcana/data/magicOrResonance.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" magic or resonance entries");
+		list = Shadowrun6Core.loadDataItems(QualityList.class, SR6Quality.class, set, clazz,"deus_ex_arcana/data/qualities.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" qualities");
+		list = Shadowrun6Core.loadDataItems(QualityPathList.class, QualityPath.class, set, clazz,"deus_ex_arcana/data/quality_paths.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" quality paths");
+		list = Shadowrun6Core.loadDataItems(MentorSpiritList.class, MentorSpirit.class, set, clazz,"deus_ex_arcana/data/mentorspirits.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" mentor spirit");
+		list = Shadowrun6Core.loadDataItems(ActionList.class, Shadowrun6Action.class, set, clazz, "deus_ex_arcana/data/actions_edge.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" edge actions");
+		list = Shadowrun6Core.loadDataItems(AdeptPowerList.class, AdeptPower.class, set, clazz, "deus_ex_arcana/data/adeptpowers.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" adept powers");
+		list = Shadowrun6Core.loadDataItems(MetaTypeList.class, SR6MetaType.class, set, clazz, "deus_ex_arcana/data/metatypes.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" metatypes");
+		list = Shadowrun6Core.loadDataItems(ItemTemplateList.class, ItemTemplate.class, set, clazz,"deus_ex_arcana/data/gear_magical.xml");
+		logger.log(Level.DEBUG, "Loaded "+list.size()+" magical gear");
 	}
 
 }

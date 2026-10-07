@@ -41,6 +41,9 @@
 			<valmod type="METATYPE" ref="dokkaebi_major"  value="13"/>
 			<valmod type="METATYPE" ref="dokkaebi_minor"  value="13"/>
 
+			<!-- Deus Ex Arcana -->
+			<valmod type="METATYPE" ref="vazimbia"  value="13"/>
+
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaB" prio="B" type="METATYPE" adj="11">
@@ -95,6 +98,9 @@
 			<!-- Seoul Survivor -->
 			<valmod type="METATYPE" ref="dokkaebi_major"  value="11"/>
 			<valmod type="METATYPE" ref="dokkaebi_minor"  value="11"/>
+
+			<!-- Deus Ex Arcana -->
+			<valmod type="METATYPE" ref="vazimbia"  value="11"/>
 
 		</modifications>
 	</priotableentry>
@@ -154,6 +160,9 @@
 			<valmod type="METATYPE" ref="dokkaebi_major"  value="9"/>
 			<valmod type="METATYPE" ref="dokkaebi_minor"  value="9"/>
 
+			<!-- Deus Ex Arcana -->
+			<valmod type="METATYPE" ref="vazimbia"  value="9"/>
+
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaD" prio="D" type="METATYPE" adj="4">
@@ -212,6 +221,9 @@
 			<valmod type="METATYPE" ref="dokkaebi_major"  value="4"/>
 			<valmod type="METATYPE" ref="dokkaebi_minor"  value="4"/>
 
+			<!-- Deus Ex Arcana -->
+			<valmod type="METATYPE" ref="vazimbia"  value="4"/>
+
 		</modifications>
 	</priotableentry>
 	<priotableentry id="metaE" prio="E" type="METATYPE" adj="1">
@@ -251,6 +263,9 @@
 			<valmod type="METATYPE" ref="agent-ai"   value="1"/>
 			<valmod type="METATYPE" ref="deep_foundation_ai" value="1"/>
 			<valmod type="METATYPE" ref="realms_ai"  value="1"/>
+
+			<!-- Deus Ex Arcana -->
+			<valmod type="METATYPE" ref="vazimbia"  value="1"/>
 
 		</modifications>
 	</priotableentry>

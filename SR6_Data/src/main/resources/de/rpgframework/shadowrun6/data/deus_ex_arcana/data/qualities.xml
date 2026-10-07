@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <qualities>
 
+<!-- Burmeur -->
+
    <quality id="brumeur_mudane" karma="12" pos="true" type="NORMAL">
      <requires>
        <datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
      </requires>
    </quality>
+
    <quality id="brumeur_awaken" karma="6" pos="true" type="NORMAL">
      <requires>
    		<selreq>
@@ -13,8 +16,89 @@
    			<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
    			<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
    			<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
+			<datareq type="MAGIC_RESO" ref="minor_awakened" apply="CHARACTER"/>
    		</selreq>
      </requires>
    </quality>
 
+<!-- Metagenetic -->
+
+   <quality id="amatotoxification" karma="4" pos="true" type="METAGENIC" cat="COMPLEX_TRAITS"/>
+   <quality id="antibiotic_secretions" karma="6" pos="true" type="METAGENIC" cat="BENEFICIAL_SECRETIONS"/>
+   <quality id="bamboo_bones" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"/>
+   <quality id="burdock" karma="8" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION"/>
+   <quality id="chelating_acids" karma="5" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION"/>
+   <quality id="gelatinous_body" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"/>
+   <quality id="mycorrhiza" karma="8" pos="true" type="METAGENIC" cat="METAGENIC_SENSES"/>
+   <quality id="stone_bones" karma="12" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"/>
+   <quality id="suckers" karma="6" pos="true" type="METAGENIC" cat="DERMAL_ALTERATION"/>
+   <quality id="thorn_claws" karma="10" pos="true" type="METAGENIC" cat="METAGENIC_MORPHISMS"/>
+
+   <quality id="alliinase" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES"/>
+   <quality id="astral_mitosis" karma="8" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES"/>   
+   <quality id="dense_bone_structure" karma="4" pos="false" type="METAGENIC" cat="METAGENIC_ANOMALIES"/>   
+   <quality id="fermenter" karma="5" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS"/>   
+   <quality id="saprotrophic_diet" karma="3" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS"/>   
+   <quality id="stapeliaroma" karma="4" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS"/>   
+   <quality id="spore_aura" karma="6" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS"/>   
+   <quality id="ultrasonic_distress" karma="4" pos="false" type="METAGENIC" cat="METAGENIC_DEFECTS"/>   
+   
+<!-- Sparks -->
+
+   <quality id="astral_sensitive" karma="8" pos="true" type="NORMAL">
+		<requires>
+			<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<itemmod type="MAGIC_RESO" ref="minor_awakened" />
+			<valmod type="ATTRIBUTE" ref="MAGIC" value="0" apply="CHARACTER"/>
+			<allowmod type="SKILL" ref="astral" />
+		</modifications>
+   </quality>
+
+   <quality id="astral_explorer" karma="12" pos="true" type="NORMAL">
+		<requires>
+			<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<itemmod type="MAGIC_RESO" ref="minor_awakened" />
+			<valmod type="ATTRIBUTE" ref="MAGIC" value="0" apply="CHARACTER"/>
+			<allowmod type="SKILL" ref="astral" />
+		</modifications>
+   </quality>
+
+   <quality id="astral_spark" karma="4" pos="true" type="NORMAL">
+		<requires>
+			<datareq type="MAGIC_RESO" ref="mundane" apply="CHARACTER"/>
+		</requires>
+		<modifications>
+			<itemmod type="MAGIC_RESO" ref="minor_awakened" />
+			<valmod type="ATTRIBUTE" ref="MAGIC" value="0" apply="CHARACTER"/>
+		</modifications>
+   </quality>
+
+<!-- Quality Paths -->
+
+   <quality id="first_interaction" karma="5" pos="true" type="QUALITY_PATH" />
+   <quality id="pet_store" karma="5" pos="true" type="QUALITY_PATH" />
+   <quality id="new_budyy" karma="5" pos="true" type="QUALITY_PATH" />
+   <quality id="bound_soul" karma="5" pos="true" type="QUALITY_PATH" />
+
+<!-- Gifts and Curses -->
+
+   <quality id="familiar" karma="15" pos="true" type="NORMAL">
+     <requires>
+   		<selreq>
+   			<datareq type="MAGIC_RESO" ref="magician" apply="CHARACTER" />
+   			<datareq type="MAGIC_RESO" ref="adept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="mysticadept" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="aspectedmagician" apply="CHARACTER"/>
+   			<datareq type="MAGIC_RESO" ref="minor_awakened" apply="CHARACTER"/>
+   		</selreq>
+     </requires>
+   </quality>
+   <quality id="hardened_will" karma="6" pos="true" type="NORMAL" max="3" />
+   <quality id="magical_family" karma="3" pos="false" type="NORMAL" />
+   <quality id="privileged_family" karma="7" pos="true" type="NORMAL" />
+   
 </qualities>

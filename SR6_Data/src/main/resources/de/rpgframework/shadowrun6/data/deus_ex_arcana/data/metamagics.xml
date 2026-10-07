@@ -34,7 +34,21 @@
 		</modifications>
 	</metaecho>
 
-	<metaecho id="fixation" type="METAMAGIC">
+	<metaecho id="spell_fixation" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+
+<!-- toxic -->
+
+	<metaecho id="corruption" type="METAMAGIC">
+		<modifications>
+			<relevancemod topic="MAGICAL" />
+		</modifications>
+	</metaecho>
+
+	<metaecho id="taint" type="METAMAGIC">
 		<modifications>
 			<relevancemod topic="MAGICAL" />
 		</modifications>
