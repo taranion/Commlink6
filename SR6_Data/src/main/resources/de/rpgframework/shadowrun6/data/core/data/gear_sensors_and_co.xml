@@ -17,6 +17,9 @@
 		</choices>
    </item>
 
+   <item avail="1" price="0" id="standard_good" type="TOOLS" subtype="TOOLS"/>
+   <item avail="1" price="0" id="standard_good_countable" type="TOOLS" subtype="TOOLS" count="y"/>
+
    <item avail="1" price="50" id="binoculars" type="ELECTRONICS" subtype="IMAGING" reqVariant="y">
    	<variant id="electronic">
 			<choices>

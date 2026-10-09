@@ -23,7 +23,8 @@
    	<modifications>
 			<!-- ToDo: all compile and decompile fade -2 -->
 			<!-- ToDo: 1 additional sprite service -->
-			<itemmod type="METAECHO" apply="CHARACTER" ref="hybrid_sprites"/>
+			<!-- ToDo: allow use of Metaecho 'hybrid_sprites'. Note: When trying to add the echo using...
+			<itemmod type="METAECHO" apply="CHARACTER" ref="hybrid_sprites"/> ... this causes the stream to cost 31 karma (20 + 11 for a submersion) as adding the echo has commlink believe that a submersion must have happened. -->
      		<allowmod type="COMPLEX_FORM" ref="control_virtual_life"/>
      </modifications>
    </quality>
