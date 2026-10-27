@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<lifemods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lifemods>
   <lifemod id="adeptenausbildung_(nur_adepten)" type="ADULT">
     <requires>
       <selreq>
@@ -20,7 +20,7 @@
       <valmod type="SKILL" ref="CHOICE" choice="1e84db39-8635-48fc-9571-e5e056c05419" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
-      <selmod>
+      <selmod uuid="01a17e88-83d6-7223-aa40-4448b342f705">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -51,7 +51,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e89-2e9c-728b-9d0c-1438d69c3096">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Politik von [Land]" />
@@ -79,7 +79,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MEDIA" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e89-75c3-70e2-9545-93f4b440ab58">
         <valmod type="SKILL" ref="language" value="1" />
       </selmod>
     </modifications>
@@ -89,14 +89,14 @@
       <valuereq type="ATTRIBUTE" ref="MAGIC" value="1" />
     </requires>
     <choices>
-      <choice uuid="b14efba8-4771-4314-a343-06131c6a97db" type="ATTRIBUTE" options="EDGE,MAGIC,WILLPOWER,DRAIN" />
+      <choice uuid="b14efba8-4771-4314-a343-06131c6a97db" type="ATTRIBUTE" options="EDGE,MAGIC,WILLPOWER" />
       <choice uuid="c9af0734-a228-4ed5-a48e-ecb13357fb4a" type="SKILL" options="astral,enchanting" />
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="b14efba8-4771-4314-a343-06131c6a97db" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="c9af0734-a228-4ed5-a48e-ecb13357fb4a" value="2" />
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
-      <selmod>
+      <selmod uuid="01a17e89-b671-7166-863b-e9156b041278">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -118,7 +118,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="1976914d-adf5-431d-baae-d0088bb496fe" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="1963d15f-9e7b-40e8-a6c5-2691c9a18d65" value="1" />
-      <selmod>
+      <selmod uuid="01a17e89-e709-717f-8a10-4509c13f4cdc">
         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
@@ -147,7 +147,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="c50461e6-fa8e-4b4b-82da-e0e0c1087097" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="83ddc9a3-3c99-41ac-9b91-2a3fa778e70a" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8a-0fa1-71a4-9ce3-d90c95cbb93c">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
@@ -155,7 +155,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8a-3247-7246-8226-f491aaa51827">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -183,7 +183,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8a-546b-732e-8bf5-e050ccc8906d">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Experte für [Industrie]" />
@@ -214,7 +214,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8a-7745-73c9-8f28-4cd358504042">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -243,7 +243,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
-      <selmod>
+      <selmod uuid="01a17e8a-99dc-7228-aeb0-a65eb562619e">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Biotechnologie" />
@@ -268,18 +268,18 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="493ba2f0-fbc5-437e-991c-094281278bcb" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="1f05d313-86a7-4a9d-9e25-fe378f90bad5" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8a-ba12-724d-a501-30d54b1b3b32">
         <valmod type="SKILL" ref="astral" value="1" />
         <valmod type="ATTRIBUTE" ref="LOGIC" value="1" />
         <valmod type="ATTRIBUTE" ref="MAGIC" value="1" />
       </selmod>
-      <selmod>
+      <selmod uuid="01a17e8a-d365-710d-b536-2e72767b3a7a">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="SKILL" ref="sorcery" value="1" />
         <valmod type="SKILL" ref="enchanting" value="1" />
       </selmod>
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="0" />
-      <selmod>
+      <selmod uuid="01a17e8a-fc6d-714e-9273-3b4e9d7a251a">
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
         </itemmod>
@@ -307,7 +307,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MEDIA" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
-      <selmod>
+      <selmod uuid="01a17e8b-21ab-708e-bba9-0586cc9b0c89">
         <valmod type="SKILL" ref="language" value="2" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Combatbiking" />
@@ -341,7 +341,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8b-4e21-71a9-811f-12029126727a">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -360,7 +360,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="2a0b802a-c3e8-412b-a4a9-da7eff9b4bfb" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="0ef5c2d4-c815-47ba-9c3c-d06beb144535" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8b-7018-7180-b638-05bd2f80ff3a">
         <valmod type="SKILL" ref="astral" value="1" />
         <valmod type="SKILL" ref="cracking" value="1" />
         <valmod type="SKILL" ref="conjuring" value="1" />
@@ -399,7 +399,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8b-b0b6-70a3-a97b-a117819f82e2">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -444,7 +444,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
-      <selmod>
+      <selmod uuid="01a17e8b-d38a-7297-b20d-69aee27cdda3">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -466,7 +466,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="35c2cbc5-0445-4c7d-9ef5-e2d670edef51" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8b-ee73-72fc-a0c8-564176a81c35">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="ATTRIBUTE" ref="RESONANCE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -477,7 +477,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8c-0e31-70c8-8d2a-edd74d6aba56">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Berüchtigte Hacker" />
@@ -506,7 +506,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8c-3189-73c5-8396-76e4f9446b35">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Datahavens" />
@@ -533,7 +533,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8c-4ced-70e5-b8a2-650989aeeb61">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Drohnenmodelle" />
@@ -560,7 +560,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MEDIA" />
-      <selmod>
+      <selmod uuid="01a17e8c-6aea-732b-92a3-caaed28876ca">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Experte für [Unterhaltungsform oder Musikgenre]" />
@@ -587,7 +587,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8c-8524-7055-8343-791f50e7d6bb">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Gang in [Gebiet]" />
@@ -612,7 +612,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7443049d-e51e-4847-9241-8c038bfe9db2" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="2b1e96b6-fab9-4c18-844d-6c3bb0ed6cd2" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8c-a228-72a7-910e-2aba0bffa149">
         <valmod type="SKILL" ref="electronics" value="1" />
         <valmod type="SKILL" ref="perception" value="1" />
         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
@@ -624,7 +624,7 @@
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8c-be8f-728d-b0b6-4eba73d29380">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Experte in [Forschungsgebiet]" />
@@ -651,7 +651,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8c-db6c-7082-a100-bf8121e41020">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Ortskenntnis [Gebiet]" />
@@ -679,7 +679,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8c-f4f5-7019-8030-d81ad0d4c04c">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Gang in [Gebiet]" />
@@ -701,11 +701,11 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="46cae1d7-7761-4774-b08b-67a2b9ed45af" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="fc0e6b5f-3e51-4cea-90bd-c43bc7d3f54d" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8d-12d5-72e4-abd7-7e262dbf9b74">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
-      <selmod>
+      <selmod uuid="01a17e8d-3224-707c-868b-9c53d509e035">
         <valmod type="SKILL" ref="astral" value="1" />
         <valmod type="SKILL" ref="cracking" value="1" />
         <valmod type="SKILL" ref="conjuring" value="1" />
@@ -749,7 +749,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="7607c989-292a-46ea-9307-41c116d1f683" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8d-517f-7242-8407-e22777da7d1c">
         <valmod type="SKILL" ref="cracking" value="2" />
         <valmod type="SKILL" ref="electronics" value="2" />
         <valmod type="ATTRIBUTE" ref="EDGE" value="2" />
@@ -759,7 +759,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
-      <selmod>
+      <selmod uuid="01a17e8d-6de8-73a4-9a6f-84c1d67c88e6">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Hackergruppen" />
@@ -777,7 +777,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="dda9cd26-a1a1-4c1f-b486-a524a13c86cc" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8d-852d-71d7-a78e-8759e26a8f54">
         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="SKILL" ref="perception" value="1" />
@@ -786,7 +786,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8d-9c9f-71d3-942a-7f1d0e91c5a5">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -817,7 +817,7 @@
       <valmod type="SKILL" ref="CHOICE" choice="32f219d9-7495-43f2-ba43-7f6314255485" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
-      <selmod>
+      <selmod uuid="01a17e8d-bad8-708e-9b46-7fe2958e07bc">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -849,7 +849,7 @@
       <valmod type="SKILL" ref="CHOICE" choice="3c439398-10fa-4a1b-b4f2-d5589922895f" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8d-d44c-71ee-9694-8239592437da">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Luft und Raumfahrtunternehmen" />
@@ -874,7 +874,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="334c1f38-e5dd-42e5-9cd0-6756f1c80939" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="30dccd41-560d-445a-8cae-62d19bb5fd11" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8d-eb27-7329-bf27-2eee79618cb8">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="ATTRIBUTE" ref="RESONANCE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -884,7 +884,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
-      <selmod>
+      <selmod uuid="01a17e8e-05cf-72f7-b426-767a9084b2ad">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Sicherheitssysteme" />
@@ -912,7 +912,7 @@
       <valmod type="SKILL" ref="CHOICE" choice="642a61c9-b847-43c2-af97-19f76b81f709" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8e-2925-719b-8fff-5189ebc57936">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Critter" />
@@ -955,7 +955,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="9b36ac4c-f630-47b6-a480-e9a139c501c5" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8e-4ab1-706e-aea9-0489bc936fc6">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="ATTRIBUTE" ref="MAGIC" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -981,7 +981,7 @@
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8e-4ab1-706e-aea9-0489bc936fc6">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Moderne Küche" />
@@ -998,7 +998,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="a4b53a6d-db5f-4e0d-abfd-ced1c2da6e57" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8e-890e-71d4-b4d3-1cc0ccbaf3c8">
         <valmod type="SKILL" ref="stealth" value="1" />
         <valmod type="SKILL" ref="outdoors" value="1" />
         <valmod type="SKILL" ref="close_combat" value="1" />
@@ -1008,7 +1008,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8e-9d7e-7059-afc1-a0ff4d9a485b">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Gang in [Gebiet]" />
@@ -1036,7 +1036,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8e-b25d-71b0-93eb-766c9e4b1b33">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Biotechnologie" />
@@ -1067,7 +1067,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8e-c8aa-7003-9b4a-2a6c2cc333c4">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Forensik" />
@@ -1098,7 +1098,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MEDIA" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8e-dc8f-73ae-b63c-f95379261f7a">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -1124,7 +1124,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8e-f159-703c-a91f-251c4031d787">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.SchmuggelRouten" />
@@ -1152,7 +1152,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8f-03f3-72a7-a8de-b31f95f930b6">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Critter" />
@@ -1196,7 +1196,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="50000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
-      <selmod>
+      <selmod uuid="01a17e8f-1dd5-7259-b23a-f41754035f4d">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -1219,7 +1219,7 @@
       <choice uuid="6d5110eb-d30a-4358-9220-0eaf0add298d" type="SKILL" options="astral,conjuring,sorcery,enchanting" />
     </choices>
     <modifications>
-      <selmod>
+      <selmod uuid="01a17e8f-3157-719f-abd5-1c9c4eacdfaa">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="ATTRIBUTE" ref="MAGIC" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -1229,7 +1229,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
-      <selmod>
+      <selmod uuid="01a17e8f-42f8-72b2-8c9c-b57689014e08">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Geisterarten" />
@@ -1254,7 +1254,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="14b0f4c6-3ec3-419d-af98-c87f9700e40c" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="e559e85e-b22b-4235-9caf-7f312b046205" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8f-5f6e-71da-935c-3a76051ca183">
         <valmod type="SKILL" ref="cracking" value="1" />
         <valmod type="SKILL" ref="electronics" value="1" />
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
@@ -1263,7 +1263,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
-      <selmod>
+      <selmod uuid="01a17e8f-7266-71fb-8da3-6548afb93c3c">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Matrixhost-Design" />
@@ -1285,7 +1285,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="d49bb6d6-741c-4795-9f97-6ed101294b8d" value="1" />
-      <selmod>
+      <selmod uuid="01a17e8f-91d9-728b-80a7-4d9c76bcc3f9">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="ATTRIBUTE" ref="RESONANCE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -1296,7 +1296,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e8f-a5a8-7084-a272-77595636201a">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -1325,7 +1325,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e8f-b749-719e-ac61-362744322a2a">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -1357,7 +1357,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8f-cc5d-7370-a58a-fc19cfb8c6da">
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Sicherheitsdienstleister" />
         </itemmod>
@@ -1379,7 +1379,7 @@
       <choice uuid="a7e3ffea-aca4-4533-9403-0ee0d6c59611" type="SKILL" options="exotic_weapons,firearms,close_combat" />
     </choices>
     <modifications>
-      <selmod>
+      <selmod uuid="01a17e8f-e10f-7071-8ca7-2d965b6f23b9">
         <valmod type="SKILL" ref="athletics" value="1" />
         <valmod type="ATTRIBUTE" ref="BODY" value="1" />
         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
@@ -1391,7 +1391,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e8f-f35b-70b1-9847-d58557aff5ef">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Experte für Militär" />
@@ -1419,7 +1419,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e90-085c-7148-bd1e-0c577bd8d435">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Geschichte der Sechsten Welt" />
@@ -1448,7 +1448,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e90-1b66-708c-9ce8-1035921bf2dc">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aktuelles Tagesgeschehen" />
@@ -1467,21 +1467,21 @@
       <choice uuid="cc4f70e2-6c1e-418c-8282-5711aa73d853" type="SKILL" options="athletics,stealth,con,perception" />
     </choices>
     <modifications>
-      <selmod>
+      <selmod uuid="01a17e90-3a96-70c3-ab6d-a35b06c9513f">
         <valmod type="ATTRIBUTE" ref="BODY" value="1" />
         <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" />
         <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
         <valmod type="SKILL" ref="close_combat" value="1" />
       </selmod>
       <valmod type="SKILL" ref="CHOICE" choice="cc4f70e2-6c1e-418c-8282-5711aa73d853" value="1" />
-      <selmod>
+      <selmod uuid="01a17e90-4d29-7040-8af4-aeac01b24c61">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e90-5e9e-7316-bb02-0ca2600a4fbe">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Gang in [Gebiet]" />
@@ -1503,7 +1503,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="d394607a-61a3-4923-8771-61c1bdd7b3d3" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="0d802681-a524-4a45-b7ed-62a9cd6e8ebc" value="1" />
-      <selmod>
+      <selmod uuid="01a17e90-7413-73e5-97f8-6efe8a1e8021">
         <valmod type="ATTRIBUTE" ref="LOGIC" value="1" />
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="SKILL" ref="perception" value="1" />
@@ -1531,7 +1531,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MEDIA" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e90-87f5-7129-94d5-eb1f9c70dbe8">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Konzernpersönlichkeiten" />
@@ -1561,7 +1561,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
-      <selmod>
+      <selmod uuid="01a17e90-9e68-713a-abf5-087bce0915d0">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Beliebiges akademisches Wissen" />
@@ -1592,14 +1592,14 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="495f3801-7ec9-4e9b-bcdb-4720f69bd111" value="1" />
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="70f524d4-d455-4a22-b93d-46a023c1df1f" value="1" />
-      <selmod>
+      <selmod uuid="01a17e90-b487-722f-9343-ab89cbc91d4d">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
       <valmod type="SKILL" ref="CHOICE" choice="a07f8be8-9219-47c1-ac69-e887f4240af8" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e90-c257-72d5-b668-babac78cacf8">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Geschichte von [Gebiet]" />
@@ -1619,7 +1619,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="0ecc9e9a-730a-4683-b360-c0368bbec67d" value="1" />
-      <selmod>
+      <selmod uuid="01a17e90-dd97-72fd-8fb0-7d57e1720fb3">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="SKILL" ref="engineering" value="1" />
         <valmod type="SKILL" ref="piloting" value="1" />
@@ -1627,7 +1627,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e90-f2f1-7205-8ac1-7e8ea77054ee">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Drohnen und Fahrzeugmodelle" />
@@ -1653,7 +1653,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
-      <selmod>
+      <selmod uuid="01a17e91-0e97-711f-9523-0228e5440b95">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -1675,7 +1675,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="cfca6adb-3643-43df-95a7-0db20f035d60" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="87a920f9-8c61-46f8-b1b7-73c7db9c069f" value="1" />
-      <selmod>
+      <selmod uuid="01a17e91-2b23-72ea-b4f9-d7d8b4aee487">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
       </selmod>
@@ -1707,7 +1707,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e91-4036-717b-b7cb-f5f6dc623c68">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Schmuggelrouten" />
@@ -1729,7 +1729,7 @@
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="67417458-5e91-4712-9c6e-2af081baaca9" value="1" />
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="5aa5c80f-6549-4aae-baea-a5d5f66f0b97" value="1" />
-      <selmod>
+      <selmod uuid="01a17e91-4ff6-71c1-903b-53e6cbbafdb1">
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="SKILL" ref="influence" value="1" />
         <valmod type="SKILL" ref="stealth" value="1" />
@@ -1739,7 +1739,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e91-629a-7071-912d-f89665d1c20e">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Reputationen von Shadowrunnern" />
@@ -1767,7 +1767,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e91-7772-7308-a0a9-5e5324813627">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Ortskenntnis [Gebiet]" />
@@ -1797,7 +1797,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e91-89a9-735c-bec7-6f37c189eecc">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.?" />
@@ -1816,17 +1816,17 @@
       <choice uuid="2b59692d-f458-4f0d-904f-d0bb62bc8872" type="SKILL" options="stealth,con,perception" />
     </choices>
     <modifications>
-      <selmod>
+      <selmod uuid="01a17e91-bac3-7016-b526-4861d1073a8b">
         <valmod type="ATTRIBUTE" ref="AGILITY" value="1" />
         <valmod type="ATTRIBUTE" ref="CHARISMA" value="1" />
         <valmod type="SKILL" ref="perception" value="1" />
       </selmod>
-      <selmod>
+      <selmod uuid="01a17e91-d384-700d-a743-d6cfc5d7163d">
         <valmod type="ATTRIBUTE" ref="REACTION" value="1" />
         <valmod type="ATTRIBUTE" ref="INTUITION" value="1" />
       </selmod>
       <valmod type="SKILL" ref="CHOICE" choice="2b59692d-f458-4f0d-904f-d0bb62bc8872" value="1" />
-      <selmod>
+      <selmod uuid="01a17e91-eb1e-720a-956d-b12bb522216c">
         <valmod type="SKILL" ref="athletics" value="1" />
         <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
         <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
@@ -1835,7 +1835,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e91-fb3e-7273-8dbd-720fd0ee310c">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Sicherheitssysteme" />
@@ -1861,7 +1861,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e92-1c24-729a-b0d9-73fe0d654851">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Aufbau von Bomben" />
@@ -1889,7 +1889,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e92-51ad-738a-b4bb-7d2c1af07bdf">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -1920,7 +1920,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e92-6ee3-7176-a4ad-772afcef4283">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Polizeiprozeduren" />
@@ -1944,7 +1944,7 @@
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="4085c382-f35f-4cf4-a3a0-1f1de3b08e83" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="d3782337-10d5-4be6-b7ee-d8f07098537b" value="2" />
       <valmod type="SKILL" ref="CHOICE" choice="5e39d6f5-b06f-457c-8017-e2cf6e3e9c5d" value="1" />
-      <selmod>
+      <selmod uuid="01a17e92-8509-7307-94e6-5a6f0d90a138">
         <valmod type="SKILL" ref="language" value="2" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Beliebiges akademisches Wissen" />
@@ -1966,7 +1966,7 @@
       <valmod type="SKILL" ref="CHOICE" choice="b6aa0e42-4235-40ee-ae85-55281bff7d3f" value="1" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MAGIC" />
-      <selmod>
+      <selmod uuid="01a17e92-a96f-7087-8433-28feefd1459c">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -1994,7 +1994,7 @@
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
       <allowmod type="CONTACT_TYPES" ref="ENGINEERING" />
-      <selmod>
+      <selmod uuid="01a17e92-bfb8-70c3-bd8c-05612b4319b5">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Drohnen und Fahrzeugmodelle" />
@@ -2026,7 +2026,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="MATRIX" />
       <allowmod type="CONTACT_TYPES" ref="STREET" />
-      <selmod>
+      <selmod uuid="01a17e92-d5df-700c-89df-6985b0f7a9f2">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.?" />
@@ -2049,7 +2049,7 @@
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="73b8e325-dc98-419a-b738-fb7087f3791c" value="1" />
       <valmod type="SKILL" ref="CHOICE" choice="6932afed-9e78-4cae-99ec-06d948303992" value="1" />
       <valmod type="CREATION_POINTS" ref="NUYEN" value="50000" />
-      <selmod>
+      <selmod uuid="01a17e92-ef80-702e-a9a8-f373fb7d2863">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Politik von [Land]" />
@@ -2080,7 +2080,7 @@
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="ACADEMIC" />
       <allowmod type="CONTACT_TYPES" ref="MEDICAL" />
-      <selmod>
+      <selmod uuid="01a17e93-04ce-7175-8dd1-06ca473ae26e">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Biotechnologie" />
@@ -2109,7 +2109,7 @@
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
       <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
       <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
-      <selmod>
+      <selmod uuid="01a17e93-1963-7236-914e-a204af52d299">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Combatbiking" />
@@ -2132,7 +2132,7 @@
     </choices>
     <modifications>
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="faefc259-4275-413b-a56d-5337fe6020ff" value="1" />
-      <selmod>
+      <selmod uuid="01a17e93-3bce-7012-8d7d-01a20eeb7cab">
         <valmod type="SKILL" ref="influence" value="1" />
         <valmod type="SKILL" ref="con" value="1" />
         <valmod type="ATTRIBUTE" ref="LOGIC" value="1" />
@@ -2154,7 +2154,7 @@
       <valmod type="CREATION_POINTS" ref="NUYEN" value="50000" />
       <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
       <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
-      <selmod>
+      <selmod uuid="01a17e93-5097-72e7-ad07-594290951c05">
         <valmod type="SKILL" ref="language" value="1" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Konzernpersönlichkeiten" />
@@ -2212,7 +2212,7 @@
     </choices>
     <modifications>
       <valmod type="SKILL" ref="CHOICE" choice="4f1bb50e-3ca4-41ee-9074-637070464851" value="1" />
-      <selmod>
+      <selmod uuid="01a17e93-68b4-73a3-b749-d9f1241bdd16">
         <valmod type="SKILL" ref="language" value="2" />
       </selmod>
     </modifications>
@@ -2225,7 +2225,7 @@
     <modifications>
       <valmod type="SKILL" ref="CHOICE" choice="40334f70-cd48-4739-bb51-9cb36e8f6462" value="1" />
       <valmod type="ATTRIBUTE" ref="CHOICE" choice="65fa76b5-8603-428b-8645-28ac69b24949" value="1" />
-      <selmod>
+      <selmod uuid="01a17e93-7e66-705b-ad53-ccbc51c29700">
         <valmod type="SKILL" ref="language" value="2" />
         <itemmod type="SKILL" ref="knowledge">
           <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.Arkana" />
@@ -2299,6 +2299,3 @@
     </modifications>
   </lifemod>
 </lifemods>
-
-
-
