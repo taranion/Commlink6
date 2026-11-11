@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lifemods>
+
+<!-- adult modules -->
+
+  <lifemod id="live_caged" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c6ec-82e9-7235-b271-e85f61e78e23" type="ATTRIBUTE" options="BODY,STRENGTH,WILLPOWER" />
+      <choice uuid="01a1c6ec-b740-715a-a678-63972f5a75f6" type="ATTRIBUTE" options="INTUITION,AGILITY,REACTION" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c6ec-82e9-7235-b271-e85f61e78e23" value="1" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c6ec-b740-715a-a678-63972f5a75f6" value="1" />
+      <selmod uuid="01a1c6ec-de97-708c-83ed-5b6738d7fca1">
+        <valmod type="SKILL" ref="con" value="1" />
+        <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
+        <valmod type="ATTRIBUTE" ref="MAGIC" value="1" />
+      </selmod>
+      <selmod uuid="01a1c6ec-fa40-7228-9a3c-53ac7514080e">
+        <valmod type="ATTRIBUTE" ref="CHARISMA" value="1" />
+        <valmod type="SKILL" ref="close_combat" value="1" />
+        <valmod type="SKILL" ref="perception" value="1" />
+      </selmod>
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="STREET" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+	  <selmod uuid="01a1c6ed-2095-72da-84ae-570705d12855">
+        <valmod type="SKILL" ref="language" value="1" />
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.smuggling" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.mining" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.agriculture" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+
+  <lifemod id="live_free" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c6ef-f9a7-716a-b065-75196133b1d4" type="ATTRIBUTE" options="EDGE,MAGIC" />
+      <choice uuid="01a1c6f0-2c6a-7005-b2e6-9f646d8ec6df" type="ATTRIBUTE" options="CHARISMA,INTUITION,WILLPOWER" />
+      <choice uuid="01a1c6f0-561d-72f0-9fe7-7c1813e80b9c" type="SKILL" options="astral,cracking,conjuring,exotic_weapons,sorcery,tasking,enchanting,biotech,engineering,athletics,firearms,piloting,outdoors,influence,stealth,con,perception,close_combat,electronics" />
+    </choices>
+    <modifications>
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c6ef-f9a7-716a-b065-75196133b1d4" value="1" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c6f0-2c6a-7005-b2e6-9f646d8ec6df" value="1" />
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c6f0-561d-72f0-9fe7-7c1813e80b9c" value="1" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4" />
+      <allowmod type="CONTACT_TYPES" ref="STREET" />
+      <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
+      <allowmod type="CONTACT_TYPES" ref="MAGIC" />
+    </modifications>
+  </lifemod>
+
+  <lifemod id="live_wild" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c70b-77b0-739a-84d1-608b1c273e96" type="SKILL" options="outdoors,close_combat,perception" />
+      <choice uuid="01a1c70b-bf29-72a3-95c6-38ff691d7750" type="ATTRIBUTE" options="BODY,WILLPOWER,AGILITY" />
+    </choices>
+    <modifications>
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c70b-77b0-739a-84d1-608b1c273e96" value="1" />
+      <selmod uuid="01a1c70b-e8df-707b-a1c7-e1eebda6e2c4">
+        <valmod type="SKILL" ref="influence" value="1" />
+        <valmod type="SKILL" ref="athletics" value="1" />
+        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" />
+      </selmod>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c70b-bf29-72a3-95c6-38ff691d7750" value="1" />
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
+      <allowmod type="CONTACT_TYPES" ref="MAGIC" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+	  <selmod uuid="01a1c70c-07bf-7202-8c6b-bbf892268e85">
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.biology" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.zoology" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.parazoology" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.meteorology" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.area_knowledge" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+
+  <lifemod id="pack_leader" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <modifications>
+      <selmod uuid="01a1c70e-e9cb-72cc-8f47-b88a89e7b12a">
+        <valmod type="SKILL" ref="influence" value="1" />
+        <valmod type="ATTRIBUTE" ref="CHARISMA" value="1" />
+        <valmod type="ATTRIBUTE" ref="INTUITION" value="1" />
+      </selmod>
+      <selmod uuid="01a1c70f-075a-7020-a07f-320ffed3943c">
+        <valmod type="SKILL" ref="close_combat" value="1" />
+        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" />
+        <valmod type="ATTRIBUTE" ref="WILLPOWER" value="1" />
+      </selmod>
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="50000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4" />
+      <allowmod type="CONTACT_TYPES" ref="GOVERNMENT" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+      <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
+    </modifications>
+  </lifemod>
+
+  <lifemod id="urbane_shifter" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c716-d020-73ef-ae89-1b98963b6f89" type="ATTRIBUTE" options="CHARISMA,INTUITION,EDGE" />
+      <choice uuid="01a1c716-fbcc-739a-a566-812927819b35" type="SKILL" options="electronics,influence,piloting" />
+      <choice uuid="01a1c717-2e78-7290-80fe-0871e73c313d" type="SKILL" options="con,cracking,engineering" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c716-d020-73ef-ae89-1b98963b6f89" value="1" />
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c716-fbcc-739a-a566-812927819b35" value="1" />
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c717-2e78-7290-80fe-0871e73c313d" value="1" />
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="STREET" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+      <allowmod type="CONTACT_TYPES" ref="CORPORATE" />
+    </modifications>
+  </lifemod>
+
+  <lifemod id="wild_hunter" type="ADULT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c71f-fa2f-73c5-a959-0ab05ce17b2c" type="SKILL" options="close_combat,outdoors,perception" />
+      <choice uuid="01a1c720-3a3e-735b-9e38-2eea84e233f7" type="SKILL" options="close_combat,outdoors,perception" />
+      <choice uuid="01a1c720-625e-719a-8d4a-43bb95e0ae05" type="ATTRIBUTE" options="STRENGTH,BODY,AGILITY" />
+    </choices>
+    <modifications>
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c71f-fa2f-73c5-a959-0ab05ce17b2c" value="1" />
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c720-3a3e-735b-9e38-2eea84e233f7" value="1" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c720-625e-719a-8d4a-43bb95e0ae05" value="1" />
+      <valmod type="CREATION_POINTS" ref="NUYEN" value="25000" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="MAGIC" />
+      <allowmod type="CONTACT_TYPES" ref="CRIMINAL" />
+	  <selmod uuid="01a1c720-d1ee-726b-8f80-596bfafed962">
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.parazoology" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.talismongering" />
+        </itemmod>
+        <itemmod type="SKILL" ref="knowledge">
+          <decision choice="89ebc659-ba06-4732-b347-6b832842a55b" value="i18n.smuggling" />
+        </itemmod>
+      </selmod>
+    </modifications>
+  </lifemod>
+
+<!-- event modules -->  
+
+  <lifemod id="captured" type="EVENT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c725-6e4b-7166-b8ec-f3732f7502be" type="ATTRIBUTE" options="AGILITY,BODY,REACTION,STRENGTH" />
+      <choice uuid="01a1c725-b013-705e-a0a9-5bf8ad8cb48d" type="ATTRIBUTE" options="CHARISMA,INTUITION,LOGIC,WILLPOWER" />
+      <choice uuid="01a1c725-d971-7251-8fd2-ddab981daa15" type="ATTRIBUTE" options="EDGE,MAGIC" />
+      <choice uuid="01a1c726-0e4d-7394-a026-fdc505fd2cd5" type="SKILL" options="stealth,engineering,con" />
+    </choices>
+    <modifications>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c725-6e4b-7166-b8ec-f3732f7502be" value="1" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c725-b013-705e-a0a9-5bf8ad8cb48d" value="1" />
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c725-d971-7251-8fd2-ddab981daa15" value="1" />
+      <valmod type="SKILL" ref="CHOICE" choice="01a1c726-0e4d-7394-a026-fdc505fd2cd5" value="1" />
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="2" />
+      <allowmod type="CONTACT_TYPES" ref="EXISTING" />
+      <itemmod type="SKILL" ref="knowledge"/>
+    </modifications>
+  </lifemod>
+
+  <lifemod id="escaped" type="EVENT">
+    <requires>
+        <datareq type="QUALITY" ref="shifter" />
+    </requires>
+    <choices>
+      <choice uuid="01a1c734-ad6d-7094-95fa-84ae7ce884c6" type="ATTRIBUTE" options="AGILITY,CHARISMA,MAGIC" />
+      <choice uuid="01a1c735-1373-70f6-ac5d-8edac5629fca" type="QUALITY" ref="NEGATIVE,POSITIVE" />
+    </choices>
+    <modifications>
+      <selmod uuid="01a1c735-4577-730e-9d83-1a25cf81e4cd">
+        <valmod type="SKILL" ref="close_combat" value="1" />
+        <valmod type="SKILL" ref="con" value="1" />
+        <valmod type="ATTRIBUTE" ref="EDGE" value="1" />
+      </selmod>
+      <valmod type="ATTRIBUTE" ref="CHOICE" choice="01a1c734-ad6d-7094-95fa-84ae7ce884c6" value="1" />
+      <selmod uuid="01a1c735-63b2-72ed-8823-f2de64adbd65">
+        <valmod type="SKILL" ref="stealth" value="1" />
+        <valmod type="SKILL" ref="athletics" value="1" />
+        <valmod type="ATTRIBUTE" ref="BODY" value="1" />
+      </selmod>
+      <selmod uuid="01a1c735-8f20-71b6-9668-cf25edf2a8c7">
+        <valmod type="ATTRIBUTE" ref="STRENGTH" value="1" />
+        <valmod type="SKILL" ref="engineering" value="1" />
+        <valmod type="ATTRIBUTE" ref="INTUITION" value="1" />
+      </selmod>
+      <valmod type="CREATION_POINTS" ref="CONTACT_POINTS" value="4" />
+      <allowmod type="CONTACT_TYPES" ref="EXISTING" />
+	  <itemmod type="QUALITY" ref="CHOICE" choice="01a1c735-1373-70f6-ac5d-8edac5629fca" />
+    </modifications>
+  </lifemod>
+
+</lifemods>

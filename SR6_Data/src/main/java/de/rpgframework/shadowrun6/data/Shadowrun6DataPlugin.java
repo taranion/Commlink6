@@ -1094,6 +1094,8 @@ public class Shadowrun6DataPlugin  {
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" drones");
 		list = Shadowrun6Core.loadDataItems(AmmunitionTypeList.class, AmmunitionType.class, set, clazz,"bestial_nature/data/ammunition_types.xml");
 		logger.log(Level.DEBUG, "Loaded "+list.size()+" ammunition types");
+		list = Shadowrun6Core.loadDataItems(LifepathModuleList.class, LifepathModule.class, set, clazz,"bestial_nature/data/lifemods.xml");
+		logger.log(Level.WARNING, "Loaded "+list.size()+" lifepath modules");
 	}
 
 	//-------------------------------------------------------------------
