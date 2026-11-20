@@ -168,10 +168,9 @@ public class ItemTemplate extends PieceOfGear<SR6VariantMode,SR6UsageMode,SR6Pie
 		setAttribute(SR6ItemAttribute.PRICE, super.price);
 		setAttribute(SR6ItemAttribute.ITEMTYPE, type);
 		setAttribute(SR6ItemAttribute.ITEMSUBTYPE, subtype);
-		super.validate();
-
 		if (availability!=null)
 			setAttribute(SR6ItemAttribute.AVAILABILITY, availability);
+		super.validate();
 
 		/* If there is no USAGE assume a CARRIED mode and no slot */
 		if (usages.isEmpty()) {
