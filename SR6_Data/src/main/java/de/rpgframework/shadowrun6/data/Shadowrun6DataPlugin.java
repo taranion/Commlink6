@@ -284,7 +284,7 @@ public class Shadowrun6DataPlugin  {
 		Class<Shadowrun6DataPlugin> clazz = Shadowrun6DataPlugin.class;
 		List<? extends DataItem> list = null;
 		logger.log(Level.INFO, "START -------------------------------Core-----------------------------------------------");
-		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
+		DataSet core = new DataSet(this, RoleplayingSystem.SHADOWRUN6, "CORE", "core.i18n", Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"), Locale.forLanguageTag("ru"));
 		core.setType(DataSetType.RULES);
 		core.setReleased(201908);
 		ItemUtil.SOFTWARE_LIBRARY_ITEM.assignToDataSet(core);
