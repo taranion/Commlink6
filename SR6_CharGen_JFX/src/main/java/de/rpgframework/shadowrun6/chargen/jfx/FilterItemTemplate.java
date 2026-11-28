@@ -13,15 +13,14 @@ import java.util.stream.Collectors;
 
 import de.rpgframework.ResourceI18N;
 import de.rpgframework.genericrpg.items.CarryMode;
-import de.rpgframework.jfx.AFilterInjector;
 import de.rpgframework.jfx.IRefreshableList;
+import de.rpgframework.jfx.NameFilter;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import de.rpgframework.shadowrun6.items.SR6PieceOfGearVariant;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 
@@ -29,7 +28,7 @@ import javafx.util.StringConverter;
  * @author prelle
  *
  */
-public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
+public class FilterItemTemplate extends NameFilter<ItemTemplate> {
 
 	private final static Logger logger = System.getLogger(FilterItemTemplate.class.getPackageName());
 
@@ -42,12 +41,12 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 
 	private ChoiceBox<ItemType> cbType;
 	private ChoiceBox<ItemSubType> cbSubtype;
-	private TextField tfSearch;
 
 	private ItemType lastType;
 
 	//-------------------------------------------------------------------
 	public FilterItemTemplate(CarryMode carry, ItemType...allowed) {
+		super(ResourceI18N.get(SR6CharacterViewLayout.UI, "filter.search.prompt"));
 		this.carry   = carry;
 		this.allowed = List.of(allowed);
 		logger.log(Level.INFO, "FilterItemTemplate for "+carry);
@@ -210,10 +209,8 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 		});
 		filterPane.getChildren().add(cbSubtype);
 
-		// Finally a keyword search
-		tfSearch = new TextField();
-		tfSearch.textProperty().addListener( (ov,o,n)-> page.refreshList());
-		filterPane.getChildren().add(tfSearch);
+		// Keyword search via NameFilter
+		super.addFilter(page, filterPane);
 	}
 
 	//-------------------------------------------------------------------
@@ -242,11 +239,12 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 				cbSubtype.getItems().setAll(appear);
 			}
 		} else {
-			if (allowed!=null && allowed.size()>0) {
+			if (allowed != null && !allowed.isEmpty()) {
 				input = input.stream()
 					.filter(data -> {
 						CarryMode realCarry = getRealCarry(data);
-						return data.getItemType(realCarry)!=null && List.of(allowed).contains(data.getItemType(realCarry));})
+						return data.getItemType(realCarry) != null && allowed.contains(data.getItemType(realCarry));
+					})
 					.collect(Collectors.toList());
 			}
 			logger.log(Level.INFO, "After filter cbType={0} remain {1} items", cbType, input.size());
@@ -269,14 +267,8 @@ public class FilterItemTemplate extends AFilterInjector<ItemTemplate> {
 					.collect(Collectors.toList());
 			logger.log(Level.INFO, "After filter cbSubType={0} remain {1} items", cbSubtype.getValue(), input.size());
 		}
-		// Match keyword
-		if (tfSearch.getText()!=null && !tfSearch.getText().isBlank()) {
-			String key = tfSearch.getText().toLowerCase().trim();
-			input = input.stream()
-					.filter(item -> item.getName().toLowerCase().contains(key))
-					.collect(Collectors.toList());
-			logger.log(Level.INFO, "After filter text={0} remain {1} items", key, input.size());
-		}
+		// Match keyword via NameFilter
+		input = super.applyFilter(input);
 
 		logger.log(Level.INFO, "applyFilter() returns with {0} items, {1} types and {2} subtypes", input.size(), cbType.getItems().size(), cbSubtype.getItems().size());
 		return input;

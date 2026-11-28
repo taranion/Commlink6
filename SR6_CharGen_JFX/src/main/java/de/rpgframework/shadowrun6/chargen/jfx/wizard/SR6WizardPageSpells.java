@@ -19,7 +19,7 @@ import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaSpellGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PrioritySpellGenerator;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -74,7 +74,7 @@ public class SR6WizardPageSpells extends WizardPageSpells<SR6Spell> {
 	public void handleControllerEvent(ControllerEvent type, Object... param) {
 		super.handleControllerEvent(type, param);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
-			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+			selection.setOptionCallback(SR6JFXTools.decisionCallback(selection.getController()));
 		}
 	}
 

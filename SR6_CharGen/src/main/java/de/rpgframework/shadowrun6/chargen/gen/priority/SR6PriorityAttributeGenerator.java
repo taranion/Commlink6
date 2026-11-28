@@ -560,13 +560,15 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
 			AttributeValue<ShadowrunAttribute> val = parent.getModel().getAttribute(key);
-			switch (key) {
-			case MAGIC:
-			case RESONANCE:
-				val.setDistributed(per.getSumWithoutBase());
-				break;
-			default:
-				val.setDistributed(per.getSum());
+			if (val!=null && per!=null) {
+				switch (key) {
+				case MAGIC:
+				case RESONANCE:
+					val.setDistributed(per.getSumWithoutBase());
+					break;
+				default:
+					val.setDistributed(per.getSum());
+				}
 			}
 		}
 	}
@@ -605,9 +607,13 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 	private void validateAdjustmentpoints() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PrioritySettings.class).perAttrib.get(key);
-			if (per.points1>0 && !allowedAdjust.contains(key)) {
-				logger.log(Level.ERROR, "Attribute {0} has spent adjustment points, though it is not allowed - remove them", key);
-				per.points1=0;
+			if (per==null)
+				logger.log(Level.ERROR, "No 'PerAttributePoints' for {0}",key);
+			else {
+				if (per.points1>0 && !allowedAdjust.contains(key)) {
+					logger.log(Level.ERROR, "Attribute {0} has spent adjustment points, though it is not allowed - remove them", key);
+					per.points1=0;
+				}
 			}
 		}
 	}
@@ -636,10 +642,12 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 	private void ensureMaximumSet() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
-			if (val.getMaximum()==0) {
-				val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+			if (val != null) {
+				if (val.getMaximum()==0) {
+					val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+				}
+				logger.log(Level.TRACE, "Maximum of {0} is {1}", key, val.getMaximum());
 			}
-			logger.log(Level.TRACE, "Maximum of {0} is {1}", key, val.getMaximum());
 		}
 	}
 
@@ -729,7 +737,9 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 				public int compare(ShadowrunAttribute o1, ShadowrunAttribute o2) {
 					if (allowedAdjust.contains(o1) && !allowedAdjust.contains(o2)) return -1;
 					if (!allowedAdjust.contains(o1) && allowedAdjust.contains(o2)) return +1;
-					return -Integer.compare(getModel().getAttribute(o1).getModifiedValue(), getModel().getAttribute(o2).getModifiedValue());
+					int val1 = getModel().getAttribute(o1) != null ? getModel().getAttribute(o1).getModifiedValue() : 0;
+					int val2 = getModel().getAttribute(o2) != null ? getModel().getAttribute(o2).getModifiedValue() : 0;
+					return -Integer.compare(val1, val2);
 				}
 			});
 			logger.log(Level.DEBUG, "Order: "+order);
@@ -737,6 +747,7 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 			// Pay
 			for (ShadowrunAttribute key : order) {
 				PerAttributePoints per = prioSettings.perAttrib.get(key);
+				if (per == null) continue;
 				// Pay adjustment points first
 				int required = per.points1;
 				if (required>0 &&adjustmentPoints>0) {
@@ -781,8 +792,10 @@ public class SR6PriorityAttributeGenerator extends CommonAttributeGenerator impl
 				}
 
 				AttributeValue<ShadowrunAttribute> aVal = getModel().getAttribute(key);
-				logger.log(Level.DEBUG, "Current {4} aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum(), key);
-				aVal.setDistributed(per.getSumWithoutBase());
+				if (aVal != null) {
+					logger.log(Level.DEBUG, "Current {4} aVal={0}/{1}  sumWithout={2}  sum={3}", aVal.getModifiedValue(), aVal.getModifier(), per.getSumWithoutBase(), per.getSum(), key);
+					aVal.setDistributed(per.getSumWithoutBase());
+				}
 			}
 			logger.log(Level.DEBUG, "Finish with {0} adjust and {1} attrib points and {2} Karma", adjustmentPoints, attributePoints, getModel().getKarmaFree());
 

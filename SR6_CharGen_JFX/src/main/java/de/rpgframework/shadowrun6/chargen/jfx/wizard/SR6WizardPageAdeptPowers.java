@@ -27,7 +27,7 @@ import de.rpgframework.shadowrun6.chargen.gen.pointbuy.PointBuyCharacterGenerato
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAdeptPowerGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAdeptPowerGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.AdeptPowerFilterNode;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -53,7 +53,7 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 	protected void initComponents(Function<Requirement, String> req) {
 		super.initComponents(req);
 		selection.setFilterNode(new AdeptPowerFilterNode(RES, selection));
-		selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getAdeptPowerController()));
+		selection.setOptionCallback(SR6JFXTools.decisionCallback(charGen.getAdeptPowerController()));
 //		selection.setSelectedFilter(qv -> qv.getModifyable().getType()==QualityType.NORMAL);
 
 		bxDescription = new GenericDescriptionVBox(
@@ -90,7 +90,7 @@ public class SR6WizardPageAdeptPowers extends WizardPageAdeptPowers {
 		super.handleControllerEvent(type, param);
 		if (type==BasicControllerEvents.GENERATOR_CHANGED) {
 			logger.log(Level.INFO, "RCV " + type + " with " + Arrays.toString(param));
-			selection.setOptionCallback(new ChoiceSelectorDialog<>(charGen.getAdeptPowerController()));
+			selection.setOptionCallback(SR6JFXTools.decisionCallback(charGen.getAdeptPowerController()));
 		}
 	}
 

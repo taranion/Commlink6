@@ -244,6 +244,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			int x=0;
 			createRecomLabel(lblRec, key, x++, y);
 			createName(lblNam, key, x++, y);
@@ -423,6 +424,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		lblNam.get(ShadowrunAttribute.MAGIC).setVisible(showMagic);
 		lblNam.get(ShadowrunAttribute.RESONANCE).setVisible(showReson);
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			y++;
 			if (key==ShadowrunAttribute.MAGIC) {
 				if (!showMagic)
@@ -467,6 +469,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		lblNam.get(ShadowrunAttribute.MAGIC).setVisible(showMagic);
 		lblNam.get(ShadowrunAttribute.RESONANCE).setVisible(showReson);
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			y++;
 			if (key==ShadowrunAttribute.MAGIC) {
 				if (!showMagic)
@@ -519,6 +522,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		lblNam.get(ShadowrunAttribute.MAGIC).setVisible(showMagic);
 		lblNam.get(ShadowrunAttribute.RESONANCE).setVisible(showReson);
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			y++;
 			if (key==ShadowrunAttribute.MAGIC) {
 				if (!showMagic)
@@ -568,6 +572,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 	private void updateAttributeNames() {
 		// Eventually update names
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			Label label = lblNam.get(key);
 			if (label==null) continue;
 			if (getSkinnable().getNameMapper()!=null) {
@@ -619,6 +624,7 @@ public class PointBuyAttributeTableSkin extends SkinBase<PointBuyAttributeTable<
 		updateAttributeNames();
 
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
+			if (key==ShadowrunAttribute.QI) continue;
 			AttributeValue<ShadowrunAttribute> val = model.getAttribute(key);
 			PerAttributePoints per = settings.perAttrib.get(key);
 

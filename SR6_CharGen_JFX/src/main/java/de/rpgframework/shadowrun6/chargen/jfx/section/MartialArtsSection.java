@@ -17,9 +17,11 @@ import de.rpgframework.genericrpg.chargen.OperationResult;
 import de.rpgframework.genericrpg.chargen.Rule;
 import de.rpgframework.jfx.section.ListSection;
 import de.rpgframework.shadowrun.ShadowrunRules;
+import de.rpgframework.shadowrun6.MartialArts;
 import de.rpgframework.shadowrun6.MartialArtsValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.MartialArtsValueListCell;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.MartialArtsSelector;
 import javafx.geometry.Insets;
@@ -97,20 +99,10 @@ public class MartialArtsSection extends ListSection<MartialArtsValue> {
 	@Override
 	protected void onAdd() {
 		logger.log(Level.INFO, "ENTER: onAdd()");
-
-		MartialArtsSelector selector = new MartialArtsSelector(control.getMartialArtsController(), null);
-//		if (templateFilter!=null)
-//			selector.setBaseFilter(templateFilter);
-		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.martialarts.selector.title"), selector, ButtonType.OK, ButtonType.CANCEL);
-		ButtonType closed = FlexibleApplication.getInstance().showAndWait(dialog);
-		logger.log(Level.WARNING, "closed "+closed);
-		if (closed==ButtonType.OK) {
-			logger.log(Level.INFO, "Trying to select {0}", selector.getSelected());
-			OperationResult<MartialArtsValue> ret =  control.getMartialArtsController().select(selector.getSelected());
-			if (ret.wasSuccessful()) {
-				refresh();
-			}
-		}
+		SR6SelectAndDecide.of(control, control.getMartialArtsController(), MartialArts.class, MartialArtsValue.class)
+				.title(ResourceI18N.get(RES, "section.martialarts.selector.title"))
+				.execute();
+		refresh();
 	}
 
 	//-------------------------------------------------------------------

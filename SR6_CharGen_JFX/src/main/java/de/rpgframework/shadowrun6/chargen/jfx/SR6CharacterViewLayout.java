@@ -6,9 +6,10 @@ import java.lang.System.Logger.Level;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.scene.control.ButtonType;
+import org.prelle.javafx.ExtendedComponentBuilderFactory;
 import org.prelle.javafx.FlexibleApplication;
 import org.prelle.javafx.JavaFXConstants;
+import org.prelle.javafx.Page;
 import org.prelle.javafx.ResponsiveControlManager;
 import org.prelle.javafx.SymbolIcon;
 import org.prelle.javafx.WindowMode;
@@ -24,8 +25,6 @@ import de.rpgframework.genericrpg.chargen.CharacterGenerator;
 import de.rpgframework.genericrpg.chargen.ControllerEvent;
 import de.rpgframework.genericrpg.chargen.ControllerListener;
 import de.rpgframework.jfx.pages.CharacterViewLayout;
-import de.rpgframework.shadowrun.BodyType;
-import de.rpgframework.shadowrun.MagicOrResonanceType;
 import de.rpgframework.shadowrun.ShadowrunAttribute;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
@@ -33,27 +32,15 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
-import de.rpgframework.shadowrun6.chargen.jfx.page.AugmentationPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.BasicDataPage2;
-import de.rpgframework.shadowrun6.chargen.jfx.page.BodyPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.CareerPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.CombatPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.DrakePage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.GearPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.LifePage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.MagicPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.ResonancePage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.SR6MatrixDevicePage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.ShifterPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.SkillPage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.VehiclePage;
-import de.rpgframework.shadowrun6.chargen.jfx.page.VirtualLifePage;
 import de.rpgframework.shadowrun6.chargen.jfx.wizard.GenerationWizard;
-import de.rpgframework.shadowrun6.chargen.lvl.SR6CharacterLeveller;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
@@ -65,25 +52,12 @@ import javafx.scene.layout.VBox;
  */
 public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribute, Shadowrun6Character, SR6CharacterController> implements ControllerListener {
 
-	private final static ResourceBundle UI = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	public final static ResourceBundle UI = ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName());
+	private final static String FXML_FILE = "CharacterView.fxml";
 
 	private final static Logger logger = System.getLogger(SR6CharacterViewLayout.class.getPackageName());
 
-	private BasicDataPage2 pgBasic;
-	private SkillPage pgSkills;
-	private CombatPage pgCombat;
-	private AugmentationPage pgAugment;
-	private VirtualLifePage pgVirtual;
-	private MagicPage pgMagic;
-	private ResonancePage pgResonance;
-	private SR6MatrixDevicePage pgMatrix;
-	private VehiclePage pgVehicles;
-	private GearPage pgGear;
-	private LifePage pgLife;
-	private CareerPage pgCareer;
-	private BodyPage pgBody;
-	private DrakePage pgDrake;
-	private ShifterPage pgShifter;
+	private CharacterOverviewController uiController;
 
 	private Label lbMode;
 	private Label lbKarma, lbNuyen;
@@ -94,6 +68,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	private Button btnWizard;
 
 	private VBox bxHoverToDo;
+	private Node graphic;
+	private Page onePage;
+
+	private boolean refreshScheduled = false;
+	private boolean refreshing = false;
 
 	//-------------------------------------------------------------------
 	/**
@@ -104,11 +83,10 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		initComponents();
 		initPages();
 
-		setOnBackAction(ev -> closeRequested( ));
+		onePage = new Page("", graphic);
+		setContent(onePage);
 
-//		pages.setSecondaryContent(new Label("Zweiter Content"));
-//		pages.setSecondaryHeader(new Label("Zweiter Title"));
-//		pages.setMode(Mode.BACKDROP);
+		setOnBackAction(_ -> closeRequested());
 	}
 
 	//-------------------------------------------------------------------
@@ -136,11 +114,11 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		btnInc = new Button(null, new SymbolIcon("chevronup"));
 		btnInc.setStyle("-fx-font-size: 90%");
 		btnInc.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.conversionIncrease")));
-		btnInc.setOnAction( ev -> control.getEquipmentController().increaseConversion());
+		btnInc.setOnAction(_ -> control.getEquipmentController().increaseConversion());
 		btnDec = new Button(null, new SymbolIcon("chevrondown"));
 		btnDec.setStyle("-fx-font-size: 90%");
 		btnDec.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.conversionDecrease")));
-		btnDec.setOnAction( ev -> control.getEquipmentController().decreaseConversion());
+		btnDec.setOnAction(_ -> control.getEquipmentController().decreaseConversion());
 		bxConvert = new VBox(0, btnInc, lbConvert, btnDec);
 		bxConvert.setAlignment(Pos.CENTER);
 		VBox bxCenter = new VBox(5, lbNuyen, hdNuyen, bxConvert, lbKarma, hdKarma);
@@ -155,29 +133,24 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 
 		btnWizard = new Button(null, new SymbolIcon("undo"));
 		btnWizard.setTooltip(new Tooltip(ResourceI18N.get(UI, "action.openWizard")));
-		btnWizard.setOnAction( ev -> openWizard());
+		btnWizard.setOnAction(_ -> openWizard());
 		extraButtonsTopProperty().add(btnWizard);
 	}
 
 	//-------------------------------------------------------------------
 	public void initPages() {
-		pgBasic  = new BasicDataPage2();
-		pgSkills = new SkillPage();
-		pgCombat = new CombatPage();
-		pgAugment= new AugmentationPage();
-		pgVirtual= new VirtualLifePage();
-		pgMagic  = new MagicPage();
-		pgResonance= new ResonancePage();
-		pgMatrix = new SR6MatrixDevicePage();
-		pgVehicles = new VehiclePage();
-		pgGear   = new GearPage();
-		pgLife   = new LifePage();
-		pgCareer = new CareerPage();
-		pgCareer.setOnChange( () -> { pgLife.refresh(); refreshSidebar(); });
-		pgBody   = new BodyPage();
-		pgShifter= new ShifterPage();
-		pgDrake  = new DrakePage();
-		getPages().addAll(pgBasic, pgSkills, pgCombat, pgAugment, pgVirtual, pgMagic, pgMatrix, pgResonance, pgBody, pgVehicles, pgGear, pgLife); //, pgBody);
+		FXMLLoader.setDefaultClassLoader(FlexibleApplication.class.getClassLoader());
+		FXMLLoader loader = new FXMLLoader(
+				SR6CharacterViewLayout.class.getResource(FXML_FILE),
+				UI
+				);
+		loader.setBuilderFactory(new ExtendedComponentBuilderFactory());
+		try {
+			graphic = loader.load();
+			uiController = loader.getController();
+		} catch (IOException e) {
+			logger.log(Level.ERROR, "Failed loading CharacterView.fxml", e);
+		}
 	}
 
 	//-------------------------------------------------------------------
@@ -187,10 +160,8 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	@Override
 	public void startCreation(CharacterGenerator<?,?> charGen) {
 		logger.log(Level.WARNING, "ENTER: Start creation");
-		Label tmp = new Label(charGen.getModel().getName());
-		tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
-		super.pages.setHeader(tmp);
-		GeneratorWrapper wrapper = (GeneratorWrapper) charGen; //new GeneratorWrapper(new Shadowrun6Character(), null);
+		onePage.getHeader().setText(charGen.getModel().getName());
+		GeneratorWrapper wrapper = (GeneratorWrapper) charGen;
 
 		logger.log(Level.ERROR, "Inform "+wrapper.getWrapped());
 		handleControllerEvent(BasicControllerEvents.GENERATOR_CHANGED, wrapper);
@@ -200,20 +171,17 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		while (true) {
 			ButtonType close = FlexibleApplication.getInstance().showAndWait(wizard);
 			logger.log(Level.WARNING, "Wizard closed via "+close);
-			//		controller.refresh();
 			if (close==ButtonType.FINISH) {
 				refreshPages();
-					return;
+				return;
 			}
 			if (close==ButtonType.CANCEL) {
-				//			getApplication().closeAppLayout();
 				logger.log(Level.INFO, "call historyBack()");
 				dontShowConfirmationDialog = true;
 				getApplication().closeScreen(this);
 				return;
 			}
 		}
-
 	}
 
 	//-------------------------------------------------------------------
@@ -229,9 +197,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			throw new IllegalStateException("No controller set");
 
 		try {
-			Label tmp = new Label(model.getName());
-			tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
-			super.pages.setHeader(tmp);
+			onePage.getHeader().setText(model.getName());
 
 			control.addListener(this);
 			refreshController(true);
@@ -241,7 +207,6 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		} finally {
 			logger.log(Level.INFO, "LEAVE: Continue creation");
 		}
-
 	}
 
 	//-------------------------------------------------------------------
@@ -250,12 +215,12 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	 */
 	@Override
 	public void resetCharacter(Shadowrun6Character model, CharacterHandle handle) {
-		logger.log(Level.WARNING, "resetCharacter  with "+model.getKarmaFree());
+		logger.log(Level.WARNING, "resetCharacter with "+model.getKarmaFree());
 		Shadowrun6Tools.runProcessors(model, Locale.getDefault());
 		try {
 			handle.setCharacter(model);
 		} catch (IOException e) {
-			logger.log(Level.ERROR, "Failed setting character",e);
+			logger.log(Level.ERROR, "Failed setting character", e);
 		}
 		handle.setShortDescription(model.getShortDescription());
 	}
@@ -270,9 +235,7 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		this.handle = handle;
 		control.addListener(this);
 		extraButtonsTopProperty().remove(btnFinish);
-		Label tmp = new Label(control.getModel().getName());
-		tmp.getStyleClass().add(JavaFXConstants.STYLE_HEADING2);
-		super.pages.setHeader(tmp);
+		onePage.getHeader().setText(control.getModel().getName());
 
 		try {
 			refreshController(false);
@@ -288,32 +251,18 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 	//-------------------------------------------------------------------
 	private void refreshController(boolean runProcessors) {
 		control.setAllowRunProcessor(false);
+		refreshing = true;
 		try {
-			pgBasic.setController(control);
-			pgSkills.setController(control);
-			pgCombat.setController(control);
-			pgAugment.setController(control);
-			pgVirtual.setController(control);
-			pgMagic.setController(control);
-			pgMatrix.setController(control);
-			pgResonance.setController(control);
-			pgVehicles.setController(control);
-			pgGear.setController(control);
-			pgLife.setController(control);
-			pgCareer.setController(control);
-			pgBody.setController(control);
-			pgDrake.setController(control);
-			pgShifter.setController(control);
+			if (uiController != null) {
+				uiController.updateController(control);
+			}
+			refreshPages();
+			refreshSidebar();
 		} catch (Exception e) {
 			logger.log(Level.WARNING, "Failed setting controller", e);
-		}
-		control.setAllowRunProcessor(true);
-
-		refreshPages();
-		refreshSidebar();
-
-		if (control instanceof SR6CharacterLeveller) {
-			getPages().addAll(pgCareer);
+		} finally {
+			refreshing = false;
+			control.setAllowRunProcessor(true);
 		}
 
 		if (runProcessors)
@@ -349,53 +298,31 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 		} else {
 			lbMode.setText(ResourceI18N.get(UI, "label.mode.chargen"));
 		}
-		super.pages.getHeader().setText(control.getModel().getName());
+		onePage.getHeader().setText(control.getModel().getName());
 
-		pgBasic.refresh();
-		pgSkills.refresh();
-		pgCombat.refresh();
-		pgAugment.refresh();
-		pgVirtual.refresh();
-		pgMagic.refresh();
-		pgMatrix.refresh();
-		pgResonance.refresh();
-		pgVehicles.refresh();
-		pgGear.refresh();
-		pgLife.refresh();
-		pgCareer.refresh();
-		pgBody.refresh();
-		pgShifter.refresh();
-		pgDrake.refresh();
+		if (uiController != null) {
+			uiController.refresh();
+		}
+	}
 
-		MagicOrResonanceType mtype = control.getModel().getMagicOrResonanceType();
-		if (mtype==null) {
-			getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
-		} else {
-			if (mtype.usesMagic()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMagic, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
-			} else if (mtype.usesResonance()) {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgResonance, pgVehicles, pgGear, pgLife); //, pgBody);
-			} else {
-				getPages().setAll(pgBasic, pgSkills, pgCombat, pgAugment, pgMatrix, pgVehicles, pgGear, pgLife); //, pgBody);
+	//-------------------------------------------------------------------
+	public void requestRefresh() {
+		if (refreshScheduled || refreshing) return;
+		refreshScheduled = true;
+		Platform.runLater(() -> {
+			refreshScheduled = false;
+			if (refreshing) return;
+			refreshing = true;
+			try {
+				if (control != null) control.setAllowRunProcessor(false);
+				refreshPages();
+				refreshSidebar();
+				refreshToDos();
+			} finally {
+				if (control != null) control.setAllowRunProcessor(true);
+				refreshing = false;
 			}
-			if (control.getModel().getMetatype()!=null && control.getModel().getMetatype().isAI()) {
-				int idx = getPages().indexOf(pgAugment);
-				getPages().remove(pgAugment);
-				getPages().add(idx, pgVirtual);
-			}
-		}
-		// Eventually add page for drakes
-		if (control.getModel().getBodytype()==BodyType.DRAKE && !getPages().contains(pgDrake)) {
-			int idx = getPages().indexOf(pgAugment);
-			getPages().add(idx+1, pgDrake);
-		} else if (control.getModel().getBodytype()==BodyType.SHAPESHIFTER && !getPages().contains(pgShifter)) {
-			int idx = getPages().indexOf(pgAugment);
-			getPages().add(idx+1, pgShifter);
-		}
-		
-		if (control instanceof SR6CharacterLeveller) {
-			getPages().addAll(pgCareer);
-		}
+		});
 	}
 
 	//-------------------------------------------------------------------
@@ -409,13 +336,15 @@ public class SR6CharacterViewLayout extends CharacterViewLayout<ShadowrunAttribu
 			control = (SR6CharacterController) param[0];
 			control.addListener(this);
 			refreshController(false);
+			refreshToDos();
+		} else if (type==BasicControllerEvents.CHARACTER_CHANGED) {
+			if (refreshing) return;
+			requestRefresh();
+		} else {
+			if (refreshing) return;
+			refreshSidebar();
+			refreshToDos();
 		}
-		if (type==BasicControllerEvents.CHARACTER_CHANGED) {
-			refreshPages();
-		}
-
-		refreshSidebar();
-		refreshToDos();
 	}
 
 	//-------------------------------------------------------------------

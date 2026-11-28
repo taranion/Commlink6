@@ -16,6 +16,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6EmulatedSoftwareController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6MetamagicOrEchoController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.EmulatedProgramCell;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import javafx.geometry.Insets;
@@ -37,6 +38,11 @@ public class EmulatedProgramsSection extends ComplexDataItemListSection<ItemTemp
 	protected SR6CharacterController control;
 	private SR6EmulatedSoftwareController emulatedCtrl;
 	protected Shadowrun6Character model;
+
+	//-------------------------------------------------------------------
+	public EmulatedProgramsSection() {
+		this(ResourceI18N.get(ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName()), "page.resonance.section.emulated"));
+	}
 
 	//-------------------------------------------------------------------
 	public EmulatedProgramsSection(String title) {

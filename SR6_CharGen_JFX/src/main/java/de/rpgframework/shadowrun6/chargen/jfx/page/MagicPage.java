@@ -38,9 +38,10 @@ import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.WorldType;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AdeptPowerSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CombatSection;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.scene.control.Label;
 
 /**
@@ -98,6 +99,13 @@ public class MagicPage extends Page {
 	//-------------------------------------------------------------------
 	private void initSpells() {
 		secSpells = new SpellSection<SR6Spell>() {
+			@Override
+			protected void onAdd() {
+				SR6SelectAndDecide.of(control, control.getSpellController(), SR6Spell.class, SR6Spell.class)
+						.title(ResourceI18N.get(RES, "section.spell.selector.title"))
+						.execute();
+			}
+
 			public void refresh() {
 				super.refresh();
 
@@ -159,11 +167,7 @@ public class MagicPage extends Page {
 		secFoci = new FocusSection(Shadowrun6Tools.requirementResolver(Locale.getDefault()), Shadowrun6Tools.modificationResolver(Locale.getDefault())) {
 			@Override
 			protected Decision[] requestUserDecisions(Focus value) {
-				logger.log(Level.WARNING, "Present choice dialog");
-				ChoiceSelectorDialog<Focus, FocusValue> dialog = new ChoiceSelectorDialog<>(control.getFocusController());
-				Decision[] dec = dialog.apply(value, value.getChoices());
-				logger.log(Level.WARNING, "decisions: "+Arrays.toString(dec));
-				return dec;
+				return SR6JFXTools.askDecisions(control.getFocusController(), value);
 			}
 			public void refresh() {
 				super.refresh();
@@ -236,7 +240,7 @@ public class MagicPage extends Page {
 		secMeta.updateController(ctrl);
 		secRituals.updateController(ctrl);
 		secFoci.updateController(ctrl);
-		secMeta.setOptionCallback(new ChoiceSelectorDialog<>(control.getDisciplineController()));
+		secMeta.setOptionCallback(SR6JFXTools.decisionCallback(control.getDisciplineController()));
 		refresh();
 	}
 

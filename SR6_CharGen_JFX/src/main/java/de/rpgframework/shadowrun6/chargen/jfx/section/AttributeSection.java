@@ -22,6 +22,7 @@ import de.rpgframework.shadowrun6.chargen.gen.karma.SR6KarmaAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.pointbuy.SR6PointBuyAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.priority.SR6PriorityAttributeGenerator;
 import de.rpgframework.shadowrun6.chargen.jfx.PointBuyAttributeTable;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
 import de.rpgframework.shadowrun6.chargen.lvl.SR6AttributeLeveller;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.beans.property.IntegerProperty;
@@ -42,6 +43,11 @@ public class AttributeSection extends Section {
 
 	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
 	private Function<ShadowrunAttribute,String> nameMapperAI;
+
+	//-------------------------------------------------------------------
+	public AttributeSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName()), "page.basicdata.section.attributes.title"));
+	}
 
 	//-------------------------------------------------------------------
 	public AttributeSection(String title) {
@@ -105,6 +111,7 @@ public class AttributeSection extends Section {
 			table.setShowResonance(mor.usesResonance());
 		}
 
+		table.useExpertModeProperty().addListener( _ -> getParent().requestLayout());
 		setContent(table);
 	}
 

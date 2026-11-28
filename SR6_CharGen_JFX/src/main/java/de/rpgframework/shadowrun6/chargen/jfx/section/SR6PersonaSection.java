@@ -41,6 +41,11 @@ public class SR6PersonaSection extends PersonaSection<Shadowrun6Character> {
 	private Label lbDefensePool;
 
 	//-------------------------------------------------------------------
+	public SR6PersonaSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout.class.getName()), "page.matrix.section.persona"));
+	}
+
+	//-------------------------------------------------------------------
 	public SR6PersonaSection(String title) {
 		super(title);
 

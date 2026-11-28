@@ -34,8 +34,8 @@ import de.rpgframework.shadowrun.ShadowrunRules;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.CarriedItemListCell;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.chargen.jfx.selector.ItemTemplateSelector;
 import de.rpgframework.shadowrun6.items.ItemHook;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
@@ -71,6 +71,29 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	/* To be used from child classes, E.g. ActiveProgramsSection */
 	protected CarriedItem<ItemTemplate> addToContainer;
 	protected ItemHook addToHook;
+
+	//-------------------------------------------------------------------
+	public GearSection() {
+		this("Gear", CarryMode.CARRIED, null, null);
+	}
+
+	//-------------------------------------------------------------------
+	public GearSection(String title) {
+		this(title, CarryMode.CARRIED, null, null);
+	}
+
+	//-------------------------------------------------------------------
+	public void setFilter(CarryMode carry, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
+		this.carry = carry;
+		this.templateFilter = selectFilter;
+		this.filter = showFilter;
+		refresh();
+	}
+
+	//-------------------------------------------------------------------
+	public void setFilter(Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
+		setFilter(CarryMode.CARRIED, selectFilter, showFilter);
+	}
 
 	//-------------------------------------------------------------------
 	public GearSection(String title, CarryMode carry, Predicate<ItemTemplate> selectFilter, Predicate<CarriedItem<ItemTemplate>> showFilter) {
@@ -150,60 +173,12 @@ public class GearSection extends ComplexDataItemListSection<ItemTemplate, Carrie
 	 */
 	@Override
 	protected void onAdd() {
-		logger.log(Level.INFO, "ENTER: onAdd(carry={0}, container={1}, hook={2}, templateFilter={3}",carry,addToContainer, addToHook, templateFilter);
-
-		ItemTemplateSelector selector = new ItemTemplateSelector(control, carry, templateFilter, addToContainer, addToHook);
-//		if (templateFilter!=null)
-//			selector.setBaseFilter(templateFilter);
-		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.gear.selector.title"), selector, ButtonType.OK, ButtonType.CANCEL);
-		ButtonType closed = FlexibleApplication.getInstance().showAndWait(dialog);
-		if (closed==ButtonType.OK) {
-			ItemTemplate selected = selector.getSelected();
-			SR6PieceOfGearVariant suggestedVariant = selector.getVariant();
-			OperationResult<CarriedItem<ItemTemplate>> result = null;
-			// Eventually show decision dialog
-			boolean needToAsk = !selected.getChoices().isEmpty();
-			needToAsk |= !selected.getVariants().isEmpty();
-			if (  control.getRuleController().getRuleValueAsBoolean(ShadowrunRules.ALWAYS_ASK_FOR_FLAGS))
-				needToAsk |= !selected.getUserSelectableFlags(SR6ItemFlag.class).isEmpty();
-			if (needToAsk) {
-				logger.log(Level.DEBUG, "Select/Embed with choices or variants or flags");
-				ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>> dia2 = new ChoiceSelectorDialog<ItemTemplate, CarriedItem<ItemTemplate>>(control.getEquipmentController(), carry, addToHook, addToContainer);
-				dia2.setSuggestedVariant(suggestedVariant);
-				Decision[] dec = dia2.apply(selected, selected.getChoices());
-				if (dec!=null) {
-					// Not cancelled
-					String variantID = dia2.getSelectedVariant();
-					logger.log(Level.DEBUG, "After dialog: variant   = "+variantID);
-					logger.log(Level.DEBUG, "After dialog: decisions = "+Arrays.toString(dec));
-					if (addToContainer==null) {
-						logger.log(Level.WARNING, "Select with decisions");
-						result = control.getEquipmentController().select(selector.getSelected(), variantID, carry, dec);
-					} else {
-						logger.log(Level.WARNING, "Embed with decisions");
-						result = control.getEquipmentController().embed(addToContainer, addToHook, selector.getSelected(), variantID, dec);
-						logger.log(Level.WARNING, "Embedding returned "+result);
-					}
-				}
-			} else {
-				if (addToContainer==null) {
-					logger.log(Level.WARNING, "Select without decisions");
-					result = control.getEquipmentController().select(selector.getSelected());
-				} else {
-					logger.log(Level.INFO, "Embed without decisions");
-					result = control.getEquipmentController().embed(addToContainer, addToHook, selected, null);
-				}
-			}
-			if (result != null) {
-				if (result.wasSuccessful()) {
-					logger.log(Level.WARNING, "Successful");
-					refresh();
-				} else {
-					logger.log(Level.WARNING, "Failed: " + result.getError());
-					BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 1, result.getError());
-				}
-			}
-		}
+		logger.log(Level.INFO, "ENTER: onAdd(carry={0}, container={1}, hook={2}, templateFilter={3}", carry, addToContainer, addToHook, templateFilter);
+		var action = (addToContainer != null)
+				? SR6SelectAndDecide.gearForEmbedding(control, addToContainer, addToHook, templateFilter)
+				: SR6SelectAndDecide.gear(control, carry, templateFilter);
+		action.execute();
+		refresh();
 	}
 
 	//-------------------------------------------------------------------

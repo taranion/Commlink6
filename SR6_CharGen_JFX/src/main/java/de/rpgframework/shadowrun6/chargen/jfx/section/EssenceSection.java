@@ -60,6 +60,11 @@ public class EssenceSection extends Section {
 	private static DisciplineTechnique transhum = Shadowrun6Core.getItem(DisciplineTechnique.class, "transhumanism");
 
 	//-------------------------------------------------------------------
+	public EssenceSection() {
+		this(ResourceI18N.get(RES, "page.augmentation.section.essence"));
+	}
+
+	//-------------------------------------------------------------------
 	public EssenceSection(String title) {
 		super.setId(title);
 		setTitle(title);

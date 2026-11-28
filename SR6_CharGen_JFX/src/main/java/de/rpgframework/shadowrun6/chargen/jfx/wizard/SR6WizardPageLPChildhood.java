@@ -49,8 +49,8 @@ import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.ChildhoodGenerator.SimpleSkillController;
 import de.rpgframework.shadowrun6.chargen.gen.lifepath.SR6LifePathSettings;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SelectedSkillListCell;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -270,10 +270,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 				logger.log(Level.ERROR, "ctrl = " + ctrl);
 				if (!ctrl.getChoicesToDecide(toSelect).isEmpty()) {
 					// Yes, user must choose
-					List<Choice> options = ctrl.getChoicesToDecide(toSelect);
-					logger.log(Level.ERROR, "called getChoicesToDecide returns {0} choices", options.size());
-					ChoiceSelectorDialog<Quality, QualityValue> choiceDialog = new ChoiceSelectorDialog<Quality, QualityValue>(ctrl);
-					Decision[] decisions = choiceDialog.apply(toSelect, options);
+					Decision[] decisions = SR6JFXTools.askDecisions(ctrl, toSelect);
 					if (decisions != null) {
 						logger.log(Level.ERROR, "call select(option, decision[{0}])", decisions.length);
 						OperationResult<QualityValue> res = ctrl.select(toSelect, decisions);
@@ -424,10 +421,7 @@ public class SR6WizardPageLPChildhood extends WizardPage implements ControllerLi
 				logger.log(Level.ERROR, "ctrl = " + ctrl);
 				if (!ctrl.getChoicesToDecide(toSelect).isEmpty()) {
 					// Yes, user must choose
-					List<Choice> options = ctrl.getChoicesToDecide(toSelect);
-					logger.log(Level.ERROR, "called getChoicesToDecide returns {0} choices", options.size());
-					ChoiceSelectorDialog<Quality, QualityValue> choiceDialog = new ChoiceSelectorDialog<Quality, QualityValue>(ctrl);
-					Decision[] decisions = choiceDialog.apply(toSelect, options);
+					Decision[] decisions = SR6JFXTools.askDecisions(ctrl, toSelect);
 					if (decisions != null) {
 						logger.log(Level.ERROR, "call select(option, decision[{0}])", decisions.length);
 						OperationResult<QualityValue> res = ctrl.select(toSelect, decisions);

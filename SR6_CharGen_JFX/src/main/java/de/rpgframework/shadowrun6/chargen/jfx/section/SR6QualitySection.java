@@ -12,8 +12,9 @@ import de.rpgframework.shadowrun.chargen.jfx.listcell.QualityValueListCell;
 import de.rpgframework.shadowrun.chargen.jfx.section.QualitySection;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.SR6QualityValueListCell;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 
 /**
  * @author stefa
@@ -39,13 +40,18 @@ public class SR6QualitySection extends QualitySection {
 	}
 
 	//-------------------------------------------------------------------
+	@Override
+	protected void onAdd() {
+		SR6SelectAndDecide.of(control, control.getQualityController(), Quality.class, QualityValue.class)
+				.execute();
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @see de.rpgframework.shadowrun.chargen.jfx.section.QualitySection#handleChoices(de.rpgframework.shadowrun.Quality)
 	 */
 	@Override
 	protected Decision[] handleChoices(Quality data) {
-		ChoiceSelectorDialog<Quality, QualityValue> dialog = new ChoiceSelectorDialog<Quality, QualityValue>(control.getQualityController());
-		dialog.setModel((Shadowrun6Character) model);
-		return dialog.apply(data, data.getChoices());
+		return SR6JFXTools.askDecisions(control.getQualityController(), data);
 	}
 }

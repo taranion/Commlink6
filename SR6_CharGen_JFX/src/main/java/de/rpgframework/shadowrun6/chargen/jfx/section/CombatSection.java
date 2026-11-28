@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.WorldType;
+import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.items.SR6ItemAttribute;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -53,6 +54,34 @@ public class CombatSection extends Section {
 //	private GridPane gridAttackHead;
 	private GridPane gridIni, gridAttack, gridAttackMod;
 	private GridPane gridDefense, gridDefenseMod, gridDamage;
+	private Shadowrun6Character model;
+
+	//-------------------------------------------------------------------
+	public CombatSection() {
+		this(WorldType.PHYSICAL);
+	}
+
+	//-------------------------------------------------------------------
+	public void updateController(SR6CharacterController ctrl) {
+		if (ctrl != null && ctrl.getModel() != null) {
+			this.model = ctrl.getModel();
+			setData(model);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	public void refresh() {
+		if (model != null) {
+			setData(model);
+		}
+	}
+
+	//-------------------------------------------------------------------
+	public void setWorldType(WorldType type) {
+		this.type = type;
+		setTitle(ResourceI18N.get(RES, "section.combat." + type.name().toLowerCase()));
+		initLayout();
+	}
 
 	//-------------------------------------------------------------------
 	public CombatSection(WorldType type) {

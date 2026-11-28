@@ -65,6 +65,12 @@ public class ActiveProgramsSection extends GearSection {
 	 * @param selectFilter
 	 * @param showFilter
 	 */
+	//-------------------------------------------------------------------
+	public ActiveProgramsSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout.class.getName()), "page.matrix.section.activePrograms"), null, null);
+	}
+
+	//-------------------------------------------------------------------
 	public ActiveProgramsSection(String title, Predicate<ItemTemplate> selectFilter,
 			Predicate<CarriedItem<ItemTemplate>> showFilter) {
 		super(title, CarryMode.EMBEDDED, selectFilter, showFilter);

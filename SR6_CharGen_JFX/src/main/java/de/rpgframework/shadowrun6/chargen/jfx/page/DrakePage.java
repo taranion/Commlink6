@@ -22,9 +22,9 @@ import de.rpgframework.shadowrun6.SR6Discipline;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import de.rpgframework.shadowrun6.chargen.jfx.section.AlternateBodySection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.CritterPowerSection;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -157,7 +157,7 @@ public class DrakePage extends Page {
 		secBody.updateController(ctrl);
 		secCrit.updateController(ctrl);
 		secMeta.updateController(ctrl);
-		secMeta.setOptionCallback(new ChoiceSelectorDialog<>(ctrl.getDisciplineController()));
+		secMeta.setOptionCallback(SR6JFXTools.decisionCallback(ctrl.getDisciplineController()));
 
 		refresh();
 	}

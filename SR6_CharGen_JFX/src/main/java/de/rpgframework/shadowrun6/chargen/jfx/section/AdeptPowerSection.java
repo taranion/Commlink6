@@ -26,7 +26,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6AdeptPowerController;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -46,6 +47,11 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	private Shadowrun6Character model;
 
 	private Label lbUnspent, lbTotal;
+
+	//-------------------------------------------------------------------
+	public AdeptPowerSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout.class.getName()), "page.magic.section.adeptpowers"));
+	}
 
 	//-------------------------------------------------------------------
 	public AdeptPowerSection(String title) {
@@ -82,44 +88,14 @@ public class AdeptPowerSection extends ListSection<AdeptPowerValue> {
 	@Override
 	protected void onAdd() {
 		logger.log(Level.DEBUG, "opening power selection dialog");
-
-		Selector<AdeptPower,AdeptPowerValue> selector = new Selector<AdeptPower,AdeptPowerValue>(control.getAdeptPowerController(), null,
-				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
-				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
-				null){
-		};
-		NavigButtonControl btnCtrl = new NavigButtonControl();
-    	btnCtrl.setDisabled(ButtonType.OK, true);
-    	selector.setButtonControl(btnCtrl);
-
-    	ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES,"section.adeptpowers.selector.title"), selector, ButtonType.OK, ButtonType.CANCEL);
-    	btnCtrl.initialize(FlexibleApplication.getInstance(), dialog);
-
-		ButtonType close = (ButtonType) FlexibleApplication.getInstance().showAndWait(dialog);
-		logger.log(Level.DEBUG,"Closed with "+close);
-		if (close==ButtonType.OK) {
-			AdeptPower data = selector.getSelected();
-			logger.log(Level.DEBUG, "Selected adept power: "+data);
-			OperationResult<AdeptPowerValue> res = null;
-			if (!data.getChoices().isEmpty()) {
-				Decision[] dec = handleChoices(data);
-				if (dec==null) return;
-				res = control.getAdeptPowerController().select(data, dec);
-			} else {
-				res = control.getAdeptPowerController().select(data);
-			}
-			if (res.wasSuccessful()) {
-				logger.log(Level.INFO, "Selecting {0} was successful", data);
-			} else {
-				logger.log(Level.WARNING, "Selecting {0} failed: {1}", data, res.getError());
-				AlertManager.showAlertAndCall(javafx.scene.control.Alert.AlertType.ERROR, "Failed adding", res.getError());
-			}
-		}
+		SR6SelectAndDecide.of(control, control.getAdeptPowerController(), AdeptPower.class, AdeptPowerValue.class)
+				.title(ResourceI18N.get(RES, "section.adeptpowers.selector.title"))
+				.execute();
 	}
+
 	//-------------------------------------------------------------------
 	protected Decision[] handleChoices(AdeptPower data) {
-		ChoiceSelectorDialog<AdeptPower, AdeptPowerValue> dialog = new ChoiceSelectorDialog<AdeptPower, AdeptPowerValue>(control.getAdeptPowerController());
-		return dialog.apply(data, data.getChoices());
+		return SR6JFXTools.askDecisions(control.getAdeptPowerController(), data);
 	}
 
 	//-------------------------------------------------------------------

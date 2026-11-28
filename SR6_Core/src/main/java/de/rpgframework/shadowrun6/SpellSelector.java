@@ -4,7 +4,7 @@ package de.rpgframework.shadowrun6;
  * @author prelle
  *
  */
-public enum Selector {
+public enum SpellSelector {
 	
 	ATTRIBUTE_ANY,
 	ATTRIBUTE_PHYSICAL,

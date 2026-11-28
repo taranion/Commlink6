@@ -5,7 +5,9 @@
     textcolor-warning: brown;
     negative: #D03030;
 }
-
+.backdrop.backdrop-content-pane {
+    -fx-background-color: #101010C0;
+}
 .character-view-layout {
    -fx-background-image: url(Seattle_CRB1.jpg);
 	-fx-background-repeat: no-repeat;
@@ -125,6 +127,9 @@
 	-fx-background-radius: 16px 16px 0 0;
 	-fx-border-radius: 16px 16px 0 0;
 	-fx-padding: 0 1em 0 1em;
+}
+.section .backdrop-front {
+	-fx-alignment: top-left;
 }
 
 #header {

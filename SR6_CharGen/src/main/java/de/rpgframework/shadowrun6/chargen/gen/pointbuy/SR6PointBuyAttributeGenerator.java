@@ -61,6 +61,10 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public Possible canBeDecreasedPoints(AttributeValue<ShadowrunAttribute> value) {
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(value.getModifyable());
+		if (per==null) {
+			logger.log(Level.WARNING, "No 'PerAttributePoints' for {0}", value.getModifyable());
+			return Possible.FALSE;
+		}
 		return (per.points1>0)?Possible.TRUE:Possible.FALSE;
 	}
 
@@ -286,6 +290,10 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	public Possible canBeDecreasedPoints2(AttributeValue<ShadowrunAttribute> value) {
 		ShadowrunAttribute key = value.getModifyable();
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
+		if (per==null) {
+			logger.log(Level.WARNING, "No 'PerAttributePoints' for {0}", value.getModifyable());
+			return Possible.FALSE;
+		}
 		return (per.points2>0)?Possible.TRUE:Possible.FALSE;
 	}
 
@@ -350,6 +358,10 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	//-------------------------------------------------------------------
 	public Possible canBeDecreasedPoints3(AttributeValue<ShadowrunAttribute> value) {
 		PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(value.getModifyable());
+		if (per==null) {
+			logger.log(Level.WARNING, "No 'PerAttributePoints' for {0}", value.getModifyable());
+			return Possible.FALSE;
+		}
 		return new Possible(per.points3>0);
 	}
 
@@ -416,7 +428,10 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	private void updateAttributeValues() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
-			parent.getModel().getAttribute(key).setDistributed(per.getSum() );
+			AttributeValue<ShadowrunAttribute> attr = parent.getModel().getAttribute(key);
+			if (attr != null && per != null) {
+				attr.setDistributed(per.getSum() );
+			}
 		}
 	}
 
@@ -467,6 +482,7 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	private void validateAdjustmentpoints() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			PerAttributePoints per = parent.getModel().getCharGenSettings(SR6PointBuySettings.class).perAttrib.get(key);
+			if (per==null) continue;
 			if (per.points1>0 && !allowedAdjust.contains(key)) {
 				logger.log(Level.ERROR, "Attribute {0} has spent adjustment points, though it is not allowed - remove them", key);
 				per.points1=0;
@@ -478,8 +494,10 @@ public class SR6PointBuyAttributeGenerator extends CommonAttributeGenerator impl
 	private void ensureMaximumSet() {
 		for (ShadowrunAttribute key : ShadowrunAttribute.primaryAndSpecialValues()) {
 			AttributeValue<ShadowrunAttribute> val = getModel().getAttribute(key);
-			if (val.getMaximum()==0) {
-				val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+			if (val != null) {
+				if (val.getMaximum()==0) {
+					val.addIncomingModification(new ValueModification(ShadowrunReference.ATTRIBUTE, key.name(), 6, ApplyWhen.ALLCREATE, ValueType.MAX));
+				}
 			}
 		}
 	}

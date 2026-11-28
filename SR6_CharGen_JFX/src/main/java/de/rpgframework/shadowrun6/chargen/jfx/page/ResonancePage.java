@@ -32,10 +32,10 @@ import de.rpgframework.shadowrun6.DataStructureValue;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.CarriedItemDescriptionPane;
 import de.rpgframework.shadowrun6.chargen.jfx.section.DataStructuresSection;
 import de.rpgframework.shadowrun6.chargen.jfx.section.EmulatedProgramsSection;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import de.rpgframework.shadowrun6.items.ItemSubType;
 import de.rpgframework.shadowrun6.items.ItemTemplate;
 import de.rpgframework.shadowrun6.items.ItemType;
@@ -86,7 +86,7 @@ public class ResonancePage extends Page {
 				ResourceI18N.get(RES, "page.resonance.section.complexforms"),
 				Shadowrun6Tools.requirementResolver(Locale.getDefault()),
 				Shadowrun6Tools.modificationResolver(Locale.getDefault()),
-				item -> (new ChoiceSelectorDialog<ComplexForm,ComplexFormValue>(ctrl.getComplexFormController()).apply(item, item.getChoices())));
+				item -> SR6JFXTools.askDecisions(ctrl.getComplexFormController(), item));
 		secCplx.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secCplx, 4);
 		FlexGridPane.setMinHeight(secCplx, 6);
@@ -126,11 +126,7 @@ public class ResonancePage extends Page {
 				ResourceI18N.get(RES, "page.resonance.section.datastructures")) {
 			@Override
 			protected Decision[] requestUserDecisions(DataStructure value) {
-				logger.log(Level.WARNING, "Present choice dialog");
-				ChoiceSelectorDialog<DataStructure, DataStructureValue> dialog = new ChoiceSelectorDialog<>(ctrl.getDataStructureController());
-				Decision[] dec = dialog.apply(value, value.getChoices());
-				logger.log(Level.WARNING, "decisions: "+Arrays.toString(dec));
-				return dec;
+				return SR6JFXTools.askDecisions(ctrl.getDataStructureController(), value);
 			}};
 		secDataStruct.setMaxHeight(Double.MAX_VALUE);
 		FlexGridPane.setMinWidth(secDataStruct, 4);

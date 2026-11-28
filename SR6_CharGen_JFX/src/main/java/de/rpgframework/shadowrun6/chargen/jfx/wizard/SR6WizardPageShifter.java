@@ -38,8 +38,8 @@ import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.Shadowrun6Tools;
 import de.rpgframework.shadowrun6.chargen.gen.GeneratorWrapper;
 import de.rpgframework.shadowrun6.chargen.jfx.QualityFilterNode;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import de.rpgframework.shadowrun6.chargen.jfx.SR6ReferenceTypeConverter;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -112,7 +112,7 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 			return zelle;
 		});
 		selection.setShowHeadings(false);
-		selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+		selection.setOptionCallback(SR6JFXTools.decisionCallback(selection.getController()));
 		
 		// Pre-pane
 		Label hdAnimal = new Label(ResourceI18N.get(RES, "page.shifter.type_of_animal"));
@@ -282,7 +282,7 @@ public class SR6WizardPageShifter extends WizardPage implements ControllerListen
 //			selection.setController(charGen.getShifterGenerator());
 //		}
 		if (type==BasicControllerEvents.CHARACTER_CHANGED || type==BasicControllerEvents.GENERATOR_CHANGED) {
-			selection.setOptionCallback(new ChoiceSelectorDialog<>(selection.getController()));
+			selection.setOptionCallback(SR6JFXTools.decisionCallback(selection.getController()));
 			selection.refresh();
 			refresh();
 		}

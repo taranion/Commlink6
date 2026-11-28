@@ -148,6 +148,14 @@ public enum ShadowrunReference implements ModifiedObjectType {
 	StringValueConverter<? extends Object> converter;
 	Function<String, ? extends DataItem> resolver;
 
+	public Class<? extends DataItem> getTypeClass() {
+		return typeClass;
+	}
+
+	public Class<? extends Enum<?>> getEnumType() {
+		return enumType;
+	}
+
 	//-------------------------------------------------------------------
 	ShadowrunReference(StringValueConverter<? extends Object> conv) {
 		converter = conv;

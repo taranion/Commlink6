@@ -47,12 +47,6 @@ public class SR6PointBuySkillGenerator extends CommonSkillGenerator implements N
 	//-------------------------------------------------------------------
 	public SR6PointBuySkillGenerator(SR6CharacterGenerator parent) {
 		super(parent);
-		try {
-			throw new RuntimeException("Trace");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	//-------------------------------------------------------------------

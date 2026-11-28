@@ -42,6 +42,11 @@ public class BasicDataSection extends Section {
 	private TextField tfRep;
 
 	//-------------------------------------------------------------------
+	public BasicDataSection() {
+		this(ResourceI18N.get(RES, "page.basicdata.section.basic.title"));
+	}
+
+	//-------------------------------------------------------------------
 	public BasicDataSection(String title) {
 		super(title, null);
 
@@ -98,17 +103,32 @@ public class BasicDataSection extends Section {
 
 	//-------------------------------------------------------------------
 	private void initInteractivity() {
-		tfStreetName.textProperty().addListener( (ov,o,n) -> {control.getModel().setName(n); control.runProcessors();});
-		tfRealName.textProperty().addListener( (ov,o,n) -> {control.getModel().setRealName(n);});
-		cbGender.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> control.getModel().setGender(n));
-		tfHeat.textProperty().addListener( (ov,o,n) -> {
-			try {
-				control.getModel().getAttribute(ShadowrunAttribute.HEAT).setDistributed(Integer.parseInt(n));
-				tfHeat.getStyleClass().remove("invalid");
+		tfStreetName.textProperty().addListener( (ov,o,n) -> {
+			if (control != null) {
+				control.getModel().setName(n);
 				control.runProcessors();
-			} catch (NumberFormatException nfe) {
-				if (!tfHeat.getStyleClass().contains("invalid"))
-					tfHeat.getStyleClass().add("invalid");
+			}
+		});
+		tfRealName.textProperty().addListener( (ov,o,n) -> {
+			if (control != null) {
+				control.getModel().setRealName(n);
+			}
+		});
+		cbGender.getSelectionModel().selectedItemProperty().addListener((ov,o,n) -> {
+			if (control != null) {
+				control.getModel().setGender(n);
+			}
+		});
+		tfHeat.textProperty().addListener( (ov,o,n) -> {
+			if (control != null) {
+				try {
+					control.getModel().getAttribute(ShadowrunAttribute.HEAT).setDistributed(Integer.parseInt(n));
+					tfHeat.getStyleClass().remove("invalid");
+					control.runProcessors();
+				} catch (NumberFormatException nfe) {
+					if (!tfHeat.getStyleClass().contains("invalid"))
+						tfHeat.getStyleClass().add("invalid");
+				}
 			}
 		});
 

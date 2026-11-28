@@ -20,6 +20,7 @@ import de.rpgframework.shadowrun6.QualityPath;
 import de.rpgframework.shadowrun6.QualityPathValue;
 import de.rpgframework.shadowrun6.Shadowrun6Character;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6SelectAndDecide;
 import de.rpgframework.shadowrun6.chargen.jfx.page.QualityPathPage;
 import de.rpgframework.shadowrun6.chargen.jfx.pane.QualityPathSelector;
 
@@ -59,20 +60,10 @@ public class QualityPathsSection extends ListSection<QualityPathValue> {
 	 */
 	@Override
 	protected void onAdd() {
-		// TODO Auto-generated method stub
-		QualityPathSelector selector = new QualityPathSelector(control.getQualityPathController());
-		ManagedDialog dialog = new ManagedDialog(ResourceI18N.get(RES, "section.qualitypaths.selector.title"), selector, ButtonType.OK, ButtonType.CANCEL);
-		ButtonType closed = FlexibleApplication.getInstance().showAndWait(dialog);
-		logger.log(Level.WARNING, "closed "+closed);
-		if (closed==ButtonType.OK) {
-			// Assume there are no decisions to be made
-			OperationResult<QualityPathValue> result = control.getQualityPathController().select(selector.getSelected());
-			if (result.hasError()) {
-				BabylonEventBus.fireEvent(BabylonEventType.UI_MESSAGE, 2, result.getError());
-			} else {
-				list.refresh();
-			}
-		}
+		SR6SelectAndDecide.of(control, control.getQualityPathController(), QualityPath.class, QualityPathValue.class)
+				.title(ResourceI18N.get(RES, "section.qualitypaths.selector.title"))
+				.execute();
+		list.refresh();
 	}
 
 	//-------------------------------------------------------------------

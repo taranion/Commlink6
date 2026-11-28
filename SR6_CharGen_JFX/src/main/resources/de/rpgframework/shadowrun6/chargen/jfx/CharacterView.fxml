@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import org.prelle.javafx.Tabs?>
+
+<HBox styleClass="character-sheet" maxHeight="1.7976931348623157E308" maxWidth="1400" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.rpgframework.shadowrun6.chargen.jfx.CharacterOverviewController">
+   <Tabs fx:id="tabs" orientation="VERTICAL" >
+      <Label fx:id="tabBasic"     text="%tab.basic"/>
+      <Label fx:id="tabSkills"    text="%tab.skills"/>
+      <Label fx:id="tabCyber"     text="%tab.cyber"/>
+      <Label fx:id="tabCombat"    text="%tab.combat"/>
+      <Label fx:id="tabMatrix"    text="%tab.matrix"/>
+      <Label fx:id="tabMagic"     text="%tab.magic"/>
+      <Label fx:id="tabResonance" text="%tab.resonance"/>
+      <Label fx:id="tabVehicle"   text="%tab.vehicle"/>
+      <Label fx:id="tabGear"      text="%tab.gear"/>
+      <Label fx:id="tabSocial"    text="%tab.social"/>
+      <Label fx:id="tabRewards"   text="%tab.rewards"/>
+   </Tabs>
+   <ScrollPane fx:id="scroll" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+   <content>
+      <VBox maxWidth="1.7976931348623157E308" spacing="20.0">
+         <children>
+            <fx:include fx:id="pageBasic"     source="page/BasicPage.fxml" VBox.vgrow="ALWAYS" />
+            <fx:include fx:id="pageSkills"    source="page/SkillPage.fxml" VBox.vgrow="ALWAYS" />
+            <fx:include fx:id="pageCyber"     source="page/CyberwarePage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageCombat"    source="page/CombatPage.fxml" VBox.vgrow="ALWAYS" />
+            <fx:include fx:id="pageMatrix"    source="page/MatrixPage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageMagic"     source="page/MagicPage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageResonance" source="page/ResonancePage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageVehicles"  source="page/VehiclesPage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageGear"      source="page/GearPage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageSocial"    source="page/SocialPage.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="pageRewards"   source="page/RewardsPage.fxml" VBox.vgrow="SOMETIMES" />
+          </children>
+      </VBox>
+   </content>
+</ScrollPane>
+</HBox>

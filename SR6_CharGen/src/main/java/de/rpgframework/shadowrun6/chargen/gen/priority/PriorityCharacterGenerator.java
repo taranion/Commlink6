@@ -58,9 +58,6 @@ public class PriorityCharacterGenerator extends CommonSR6CharacterGenerator
 
 	protected BiFunction<PriorityType, Priority, PriorityTableEntry> resolver;
 
-	private boolean dontProcess;
-	private boolean recalcuateHasEnoughData;
-	private boolean hasEnoughData;
 	private boolean setupDone;
 
 	//-------------------------------------------------------------------

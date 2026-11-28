@@ -18,6 +18,11 @@ public class AccessoriesSection extends GearSection {
 	private CarriedItem<ItemTemplate> device;
 
 	//-------------------------------------------------------------------
+	public AccessoriesSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout.class.getName()), "page.matrix.section.accessories"), null, null);
+	}
+
+	//-------------------------------------------------------------------
 	/**
 	 * @param title
 	 * @param carry

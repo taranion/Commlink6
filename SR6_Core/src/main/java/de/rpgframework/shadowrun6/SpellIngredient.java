@@ -13,7 +13,7 @@ public class SpellIngredient extends DataItem {
 	@Attribute
 	private int drain;
 	@Attribute
-	private Selector select;
+	private SpellSelector select;
 	@Attribute
 	private boolean multi;
 	

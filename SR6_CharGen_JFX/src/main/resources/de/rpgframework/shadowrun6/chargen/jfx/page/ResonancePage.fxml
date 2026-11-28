@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import de.rpgframework.shadowrun6.chargen.jfx.section.EmulatedProgramsSection?>
+<?import de.rpgframework.shadowrun6.chargen.jfx.section.SR6ComplexFormSection?>
+<?import de.rpgframework.shadowrun6.chargen.jfx.section.SR6DataStructuresSection?>
+<?import de.rpgframework.shadowrun6.chargen.jfx.section.SR6EchoSection?>
+
+<GridPane id="gridResonance" hgap="20.0" vgap="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.rpgframework.shadowrun6.chargen.jfx.page.ResonancePageController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" percentWidth="50.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="300.0" percentWidth="50.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <SR6EchoSection fx:id="secMeta" />
+      <SR6DataStructuresSection fx:id="secDataStruct" GridPane.columnIndex="1" />
+      <SR6ComplexFormSection fx:id="secCplx" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <EmulatedProgramsSection fx:id="secPrograms" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+   </children>
+   <styleClass>
+      <String fx:value="charview-page" />
+      <String fx:value="page-resonance" />
+   </styleClass>
+</GridPane>

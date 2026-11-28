@@ -30,7 +30,7 @@ public class AboutPage extends PagePile {
 	//-------------------------------------------------------------------
 	public AboutPage(File[] directories, EdenClientApplication app, RoleplayingSystem rules) {
 		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage<init>");
-		pgSettings = new EdenSettingsPage(Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"));
+		pgSettings = new EdenSettingsPage(Locale.ENGLISH, Locale.GERMAN, Locale.FRENCH, Locale.forLanguageTag("pt"), Locale.forLanguageTag("ru"));
 //		pgSettings.addSettingsOneLine(ComLinkMain.RES ,"page.about.settings.style", cbStyle);
 
 		System.getLogger(AboutPage.class.getPackageName()).log(Level.INFO, "AboutPage, calling PDFage<init>");

@@ -80,6 +80,24 @@ public class SkillSection extends Section {
 	private IntegerProperty flexWidthProperty = new SimpleIntegerProperty(4);
 
 	//-------------------------------------------------------------------
+	public SkillSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout.class.getName()), "page.skills.section.normal"),
+				SkillType.COMBAT, SkillType.RESONANCE, SkillType.PHYSICAL, SkillType.SOCIAL, SkillType.TECHNICAL, SkillType.MAGIC);
+	}
+
+	//-------------------------------------------------------------------
+	public void setSkillTypes(SkillType... types) {
+		this.type = types;
+		if (types != null && types.length == 1)
+			setId("skills-" + types[0].name().toLowerCase());
+		else
+			setId("skills-multiple");
+		if (control != null) {
+			updateController(control);
+		}
+	}
+
+	//-------------------------------------------------------------------
 	public SkillSection(String title, SkillType... type) {
 		super(title, null);
 		this.type = type;

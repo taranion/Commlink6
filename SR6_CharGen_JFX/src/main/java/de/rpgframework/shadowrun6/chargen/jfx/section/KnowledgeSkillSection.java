@@ -16,8 +16,9 @@ import de.rpgframework.shadowrun6.SR6Skill;
 import de.rpgframework.shadowrun6.SR6SkillValue;
 import de.rpgframework.shadowrun6.Shadowrun6Core;
 import de.rpgframework.shadowrun6.chargen.charctrl.SR6CharacterController;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6CharacterViewLayout;
+import de.rpgframework.shadowrun6.chargen.jfx.SR6JFXTools;
 import de.rpgframework.shadowrun6.chargen.jfx.listcell.KnowledgeSkillListCell;
-import de.rpgframework.shadowrun6.chargen.jfx.selector.ChoiceSelectorDialog;
 import javafx.beans.property.ReadOnlyObjectProperty;
 
 /**
@@ -30,6 +31,11 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	protected Logger logger = System.getLogger(getClass().getPackageName());
 
 	private SR6CharacterController control;
+
+	//-------------------------------------------------------------------
+	public KnowledgeSkillSection() {
+		this(de.rpgframework.ResourceI18N.get(java.util.ResourceBundle.getBundle(SR6CharacterViewLayout.class.getName()), "page.skills.section.knowledge"));
+	}
 
 	//-------------------------------------------------------------------
 	public KnowledgeSkillSection(String title) {
@@ -51,8 +57,7 @@ public class KnowledgeSkillSection extends ListSection<SR6SkillValue> implements
 	@Override
 	protected void onAdd() {
 		SR6Skill know = Shadowrun6Core.getSkill("knowledge") ;
-		ChoiceSelectorDialog<SR6Skill, SR6SkillValue> dialog = new ChoiceSelectorDialog<SR6Skill, SR6SkillValue>(control.getSkillController());
-		Decision[] dec = dialog.apply(know, know.getChoices());
+		Decision[] dec = SR6JFXTools.askDecisions(control.getSkillController(), know);
 		if (dec!=null) {
 			OperationResult<SR6SkillValue> result = control.getSkillController().select(know, dec);
 			if (result.wasSuccessful()) {

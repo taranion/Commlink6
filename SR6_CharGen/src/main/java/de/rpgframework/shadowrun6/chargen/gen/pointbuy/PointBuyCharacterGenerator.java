@@ -54,7 +54,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 
 	private RemainingCPAreNuyenStep cpToNuyenStep;
 
-
+	private boolean controllersCreated;
 	private boolean setupDone;
 
 	//-------------------------------------------------------------------
@@ -252,6 +252,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 	 */
 	@Override
 	protected void createPartialController() {
+		if (controllersCreated) return;
 		attributes = new SR6PointBuyAttributeGenerator(this);
 		meta       = new PointBuyMetatypeController(this);
 		magicReso = new PointBuyMagicOrResonanceController(this);
@@ -273,6 +274,7 @@ public class PointBuyCharacterGenerator extends CommonSR6CharacterGenerator  imp
 		drake     = new SR6DrakeController(this, true);
 		animalism = new SR6AnimalismController(this, true);
 		dataStructures = new SR6DataStructureController(this);
+		controllersCreated=true;
 	}
 
 	// -------------------------------------------------------------------
